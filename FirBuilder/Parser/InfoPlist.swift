@@ -1,0 +1,43 @@
+//
+//  InfoPlist.swift
+//  FirBuilder
+//
+//  Created by PC on 2022/2/13.
+//
+
+import Foundation
+import KakaJSON
+
+class InfoPlist:Convertible{
+    var bundleID:String?
+    var name:String?
+    var bundleName:String?
+    var version:String?
+    var build:String?
+    var minSdkVersion:String?
+    var targetSdkVersion:String?
+
+    //icon-ios
+    var iconFiles:[String]?
+    var iconFiles_ipad:[String]?
+
+    required init(){}
+
+    func kj_modelKey(from property: Property) -> ModelPropertyKey {
+        switch property.name {
+            case "bundleID" : return "CFBundleIdentifier"
+            case "name" : return "CFBundleDisplayName"
+            case "bundleName" : return "CFBundleName"
+            case "version" : return "CFBundleShortVersionString"
+            case "build" : return "CFBundleVersion"
+            case "minSdkVersion" : return "MinimumOSVersion"
+            case "targetSdkVersion" : return "DTPlatformVersion"
+
+            case "iconFiles": return "CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"
+            case "iconFiles_ipad": return "CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconFiles"
+            default:return property.name
+        }
+    }
+
+
+}

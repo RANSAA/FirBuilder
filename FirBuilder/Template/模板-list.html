@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<meta name="format-detection" content="telephone=no">
+<title>应用下载</title>
+<link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="src/css/list.css">
+<script type="text/javascript" src="src/js/device.js"></script>
+</head>
+<body>
+<div class="list-item-space"> </div>
+
+<div name="list" class="list" >
+
+    <!-- list item begin-->
+    <div name="item" class="list-item">
+
+        <div class="list-item-left">
+            <img src="src/images/AppIcon-Test.png" class="list-img-size100 ">
+        </div>
+
+        <div name="item-center" class="list-item-center">
+
+            <div class="list-app-name">                
+                <span><img name="appTypeIcon" src="src/images/apple.png" class="list-app-img-size22"></span>
+                <span >诸葛卡包</span>
+            </div>
+
+            <div class="list-app-info">
+                <div>
+                    <span>BundleID：</span>
+                    <span>com.sayaDev.test</span>
+                </div>
+                <div>
+                    <span >版本：</span>
+                    <span>2.8.8 (Build 288)</span>
+                </div>
+                <div class="list-app-update">
+                    <span><img src="src/images/update.png" class="list-app-update-img"></span>
+                    <span >2022-02-11 13:36:04</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div name="item-right" class="list-item-right">
+            <button class="list-btn-pre", onclick="window.open('details.html')"> 预览 </button>
+        </div>
+
+        <div class="list-item-space"> 
+        </div>
+    </div>
+    <!-- list item end-->
+
+    <!-- list item begin-->
+    <div name="item" class="list-item">
+
+        <div class="list-item-left">
+            <img src="src/images/AppIcon-Test.png" class="list-img-size100 ">
+        </div>
+
+        <div name="item-center" class="list-item-center">
+
+            <div class="list-app-name">                
+                <span><img name="appTypeIcon" src="src/images/apple.png" class="list-app-img-size22"></span>
+                <span >诸葛卡包</span>
+            </div>
+
+            <div class="list-app-info">
+                <div>
+                    <span>BundleID：</span>
+                    <span>com.sayaDev.test</span>
+                </div>
+                <div>
+                    <span >版本：</span>
+                    <span>2.8.8 (Build 288)</span>
+                </div>
+                <div class="list-app-update">
+                    <span><img src="src/images/update.png" class="list-app-update-img"></span>
+                    <span >2022-02-11 13:36:04</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div name="item-right" class="list-item-right">
+            <button class="list-btn-pre", onclick="window.open('details.html')"> 预览 </button>
+        </div>
+
+        <div class="list-item-space"> 
+        </div>
+    </div>
+    <!-- list item end-->
+
+    
+</div>
+
+
+
+</body>
+</html>
+
+<script>
+    function updateLabelStyle(){
+        var list = document.getElementsByName("list")
+        list.forEach((item,index,array)=>{
+            if (isMobile()) {
+                item.className = "list-mob"
+            }else{
+                item.className = "list"
+            }
+        })
+
+        var items = document.getElementsByName("item")
+        items.forEach((item,index,array)=>{
+            if (isMobile()) {
+                item.className = "list-item-mob"
+            }else{
+                item.className = "list-item"
+            }
+        })
+
+        var centerItems = document.getElementsByName("item-center")
+        centerItems.forEach((item,index,array)=>{
+            if (isMobile()) {
+                item.className = "list-item-center-mob"
+            }else{
+                item.className = "list-item-center"
+            }
+        })
+
+        var rightItems = document.getElementsByName("item-right")
+        rightItems.forEach((item,index,array)=>{
+            if (isMobile()) {
+                item.className = "list-item-right-mob"
+            }else{
+                item.className = "list-item-right"
+            }
+        })
+    }
+
+    function updateTypeIcon(){
+        var appIcons = document.getElementsByName("appTypeIcon")
+        appIcons.forEach((item,index,array)=>{
+            if (appType == "ios") {
+                item.src = iosIcon
+            }else{
+                item.src = androidIcon
+            }
+        })
+    }
+
+    window.onload = function(){
+        window.addEventListener("resize", updateLabelStyle);
+        updateLabelStyle()
+        updateTypeIcon()
+        document.title = "列表-"+appName
+    }
+
+</script>
+
+<!-- 用于动态写入数据 -->
+<script type="text/javascript">
+    let appType = "android" // ios or android
+
+
+    let appName = "诸葛卡包"
+    let appVersion = "2.8.8 ( Build 288 ) "
+
+
+    //type icon
+    let iosIcon = "src/images/apple.png"
+    let androidIcon = "src/images/android.png"
+
+</script>
+

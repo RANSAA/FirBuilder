@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>assets</key>
+			<array>
+				<dict>
+					<key>kind</key>
+					<string>software-package</string>
+					<key>url</key>
+					<string>https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/app/2a59d996144c59cacab3fbe874816cc013cac322/ZhuGeKaBao-com.sayaDev.test/ios-1.0/app.ipa</string>
+				</dict>
+				<dict>
+					<key>kind</key>
+					<string>full-size-image</string>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/app/2a59d996144c59cacab3fbe874816cc013cac322/ZhuGeKaBao-com.sayaDev.test/ios-1.0/AppIcon512x512.png</string>
+				</dict>
+				<dict>
+					<key>kind</key>
+					<string>display-image</string>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/app/2a59d996144c59cacab3fbe874816cc013cac322/ZhuGeKaBao-com.sayaDev.test/ios-1.0/AppIcon57x57.png</string>
+				</dict>
+			</array>
+			<key>metadata</key>
+			<dict>
+				<key>bundle-identifier</key>
+				<string>com.sayaDev.test</string>
+				<key>bundle-version</key>
+				<string>1.0</string>
+				<key>kind</key>
+				<string>software</string>
+				<key>subtitle</key>
+				<string>副标题（非必填）</string>
+				<key>title</key>
+				<string>诸葛卡包</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
