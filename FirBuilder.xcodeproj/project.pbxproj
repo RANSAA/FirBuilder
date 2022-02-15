@@ -18,6 +18,7 @@
 		3F13760627B279C000266468 /* FileHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13760527B279C000266468 /* FileHash.swift */; };
 		3F15415627BBCF7D005F9A99 /* MacProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15415427BBCF7D005F9A99 /* MacProgressHUD.m */; };
 		3F15415727BBCF7D005F9A99 /* MacClickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15415527BBCF7D005F9A99 /* MacClickView.m */; };
+		3F1541B627BBFFE1005F9A99 /* NSImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1541B527BBFFE1005F9A99 /* NSImage+Resize.m */; };
 		3F20FB1827AFC38100382D08 /* AppHomeListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */; };
 		3F20FB1B27AFC40C00382D08 /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1A27AFC40C00382D08 /* EnumType.swift */; };
 		3F20FB3727AFD4D800382D08 /* AppReleaseListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */; };
@@ -66,6 +67,8 @@
 		3F15415327BBCF7D005F9A99 /* MacClickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacClickView.h; sourceTree = "<group>"; };
 		3F15415427BBCF7D005F9A99 /* MacProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacProgressHUD.m; sourceTree = "<group>"; };
 		3F15415527BBCF7D005F9A99 /* MacClickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacClickView.m; sourceTree = "<group>"; };
+		3F1541B427BBFFE0005F9A99 /* NSImage+Resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+Resize.h"; sourceTree = "<group>"; };
+		3F1541B527BBFFE1005F9A99 /* NSImage+Resize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Resize.m"; sourceTree = "<group>"; };
 		3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeListTable.swift; sourceTree = "<group>"; };
 		3F20FB1A27AFC40C00382D08 /* EnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumType.swift; sourceTree = "<group>"; };
 		3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReleaseListTable.swift; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 				3F13760227B25BEA00266468 /* Description.swift */,
 				3F65465227BA0064007EF422 /* FileManager.swift */,
 				3F0B91EA27BA4A230002BDEB /* DateFormatter.swift */,
+				3F1541B427BBFFE0005F9A99 /* NSImage+Resize.h */,
+				3F1541B527BBFFE1005F9A99 /* NSImage+Resize.m */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				3FEC711C27A0033B00234A67 /* JSONDecoder.swift in Sources */,
 				3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */,
 				3F5EDC6F27B935C000853A5D /* InfoPlist.swift in Sources */,
+				3F1541B627BBFFE1005F9A99 /* NSImage+Resize.m in Sources */,
 				3F80F75D27A02D7800A6341E /* DBService.swift in Sources */,
 				3F8A2EA627BB3179003EFFB4 /* HomeImgItem.swift in Sources */,
 				3FEC70CF279FCB5B00234A67 /* ViewController.swift in Sources */,

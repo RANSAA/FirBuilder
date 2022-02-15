@@ -4,3 +4,4 @@
 
 #import "MacProgressHUD.h"
 #import "MacClickView.h"
+#import "NSImage+Resize.h"

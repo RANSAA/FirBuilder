@@ -36,7 +36,7 @@ class BuilderManifest{
                 "bundle-identifier":item.bundleID!,
                 "bundle-version":item.version!,
                 "kind":"software",
-//                "subtitle":"sub Title",
+                "subtitle":"sub Title",
                 "title":item.name!
             ]
 
@@ -47,13 +47,13 @@ class BuilderManifest{
 
             let itemFull:[String : Any] = [
                 "kind":"full-size-image",
-//                "needs-shine":false,
+                "needs-shine":false,
                 "url":Config.serverRoot+item.appIconPath!
             ]
 
             let itemDisplay:[String : Any] = [
                 "kind":"display-image",
-//                "needs-shine":false,
+                "needs-shine":false,
                 "url":Config.serverRoot+item.appIcon57Path!
             ]
 

@@ -150,7 +150,7 @@ extension ParserManager{
             let image:NSImage = decodedImage as NSImage
 
             //512x512 png
-            if let image = image.sd_resizedImage(with: NSMakeSize(512, 512), scaleMode: .aspectFit) {
+            if let image = image.sd_resizedImage(withSizeFixed: NSMakeSize(512, 512), scaleMode: .aspectFit) {
                 if let enData = image.sd_imageData(as: .PNG) {
                     fileManager.createFile(atPath: Config.appPath+appInfo.srcRoot!+"Logo512.png", contents: enData, attributes: nil)
                     fileManager.createFile(atPath: Config.appPath+appInfo.appIconPath!, contents: enData, attributes: nil)
@@ -163,9 +163,10 @@ extension ParserManager{
 
             //57x57 png
             if appInfo.type == .ios {
-                if let image = image.sd_resizedImage(with: NSMakeSize(57, 57), scaleMode: .aspectFit) {
+                if let image = image.sd_resizedImage(withSizeFixed: NSMakeSize(57, 57), scaleMode: .aspectFit) {
+                    print("57 image:\(image)")
                     if let enData = image.sd_imageData(as: .PNG) {
-                        fileManager.createFile(atPath: Config.syncPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
+                        fileManager.createFile(atPath: Config.appPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
 
                         //sync file
                         fileManager.createFile(atPath: Config.syncPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
