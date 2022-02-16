@@ -2,24 +2,17 @@
 /* CSS Document */
 
 body{
-     background-color: #F6F6F6;
      background: white;
-
      color: #9B9B9B;
      margin-left: 0px;
      margin-right: 0px; 
-
-/*     padding-top: 44px;
-     padding-bottom: 33px;*/
-     margin-top: -50px;
+     margin-top: 0px;
 }
 
 .list{
     background:white;
     height: 100px;
     margin-left: 15%;
-    /*margin-right: 15%;*/
-    /*padding-bottom: 20px;*/
 }
 
 .list-mob{
@@ -45,7 +38,6 @@ body{
 }
 
 .list-item-mob{
-    /*background:red; */
     background: white;
     height:100px;
     width:100%;
@@ -71,10 +63,6 @@ body{
     width: 55%; 
     float: left;
     margin-left: 48px;
-    /*margin-right: 48px;*/
-    /*padding-left: 50px;*/
-
-    /*min-width: 300px;*/
 }
 
 .list-item-center-mob{
@@ -83,8 +71,6 @@ body{
     /*width: 55%; */
     float: left;
     margin-left: 0px;
-    /*margin-right: 0px;*/
-    /*padding-left: 50px;*/
 }
 
 
@@ -117,12 +103,12 @@ body{
 }
 
 .list-img-size100{
-    width: 90px;
-    height:90px
+    width: 80px;
+    height:80px
     background: white;
-    border-radius: 20px;
-    padding-top: 5px;
-    padding-left: 5px;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-top: 10px;
 }
 
 .list-app-name{
@@ -147,19 +133,11 @@ body{
 
 
 .list-app-update{
-/*    line-height: 12px;*/
-/*     margin-top:6px;*/
-/*     margin-bottom: 4px;*/
-
     line-height: 12px;
-     margin-top:2px;
+    margin-top:1px;
 }
 
 .list-app-update-img{
-/*    vertical-align:baseline;*/
-/*    width: 12px; */
-/*    height:12px;*/
-/*    margin-top:1px*/
     vertical-align: bottom;
     width: 12px;
     height:12px;

@@ -27,9 +27,15 @@ class BuilderList{
 <script type="text/javascript" src="../../../src/js/device.js"></script>
 </head>
 <body>
-<div class="list-item-space"> </div>
 
-<div name="list" class="list" >
+<div>
+    <div style="text-align: center;">
+        <h4 id="navName">列表-App分发平台</h4>
+    </div>
+    <div style="background: #F6F6F6; height: 10px;"></div>
+</div>
+
+<div id="list" name="list" class="list-mob" style="display: none;" >
 
 
 """
@@ -40,6 +46,7 @@ class BuilderList{
 </body>
 </html>
 <script>
+
     function updateLabelStyle(){
         var list = document.getElementsByName("list")
         list.forEach((item,index,array)=>{
@@ -94,11 +101,15 @@ class BuilderList{
         updateLabelStyle()
         updateTypeIcon()
         document.title = "列表-"+appName
+        document.getElementById("navName").innerHTML="列表-"+appName
+
+        showWithID("list")
     }
 
     //type icon
     let iosIcon = "../../../src/images/apple.png"
     let androidIcon = "../../../src/images/android.png"
+
 
 </script>
 
@@ -201,13 +212,13 @@ extension BuilderList{
     func dymainItem(_ item:AppReleaseListTable) -> String{
         let node:String = """
     <!-- list item begin-->
-    <div name="item" class="list-item">
+    <div name="item" class="list-item-mob">
 
         <div class="list-item-left">
             <img src="\(item.appIconPath!.fileName)" class="list-img-size100 ">
         </div>
 
-        <div name="item-center" class="list-item-center">
+        <div name="item-center" class="list-item-center-mob">
 
             <div class="list-app-name">
                 <span><img name="appTypeIcon" src="src/images/apple.png" class="list-app-img-size22"></span>
@@ -231,7 +242,7 @@ extension BuilderList{
             </div>
         </div>
 
-        <div name="item-right" class="list-item-right">
+        <div name="item-right" class="list-item-right-mob">
             <button class="list-btn-pre", onclick="window.open('\(item.detailsH5Path!.fileName)')"> 预览 </button>
         </div>
 

@@ -25,7 +25,6 @@
 		3F5EDC6527B934B700853A5D /* IPAParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6427B934B700853A5D /* IPAParser.swift */; };
 		3F5EDC6B27B9352D00853A5D /* APKParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6A27B9352D00853A5D /* APKParser.swift */; };
 		3F5EDC6F27B935C000853A5D /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6E27B935C000853A5D /* InfoPlist.swift */; };
-		3F5EDC7227B935ED00853A5D /* ParserAndroidXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC7127B935ED00853A5D /* ParserAndroidXml.swift */; };
 		3F5EDC7527B936A900853A5D /* ParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC7427B936A900853A5D /* ParserManager.swift */; };
 		3F65465327BA0064007EF422 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65465227BA0064007EF422 /* FileManager.swift */; };
 		3F80F75D27A02D7800A6341E /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F80F75C27A02D7800A6341E /* DBService.swift */; };
@@ -78,7 +77,6 @@
 		3F5EDC6427B934B700853A5D /* IPAParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAParser.swift; sourceTree = "<group>"; };
 		3F5EDC6A27B9352D00853A5D /* APKParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APKParser.swift; sourceTree = "<group>"; };
 		3F5EDC6E27B935C000853A5D /* InfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlist.swift; sourceTree = "<group>"; };
-		3F5EDC7127B935ED00853A5D /* ParserAndroidXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserAndroidXml.swift; sourceTree = "<group>"; };
 		3F5EDC7427B936A900853A5D /* ParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserManager.swift; sourceTree = "<group>"; };
 		3F65465227BA0064007EF422 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		3F80F75C27A02D7800A6341E /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 				3F5EDC6427B934B700853A5D /* IPAParser.swift */,
 				3F5EDC6A27B9352D00853A5D /* APKParser.swift */,
 				3F5EDC6E27B935C000853A5D /* InfoPlist.swift */,
-				3F5EDC7127B935ED00853A5D /* ParserAndroidXml.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -421,7 +418,6 @@
 				3F8A2EA627BB3179003EFFB4 /* HomeImgItem.swift in Sources */,
 				3FEC70CF279FCB5B00234A67 /* ViewController.swift in Sources */,
 				3F15415727BBCF7D005F9A99 /* MacClickView.m in Sources */,
-				3F5EDC7227B935ED00853A5D /* ParserAndroidXml.swift in Sources */,
 				3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */,
 				3F80F76327A0395F00A6341E /* GeneratorIDTable.swift in Sources */,
 				3F5EDC6527B934B700853A5D /* IPAParser.swift in Sources */,
