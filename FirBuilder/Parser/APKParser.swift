@@ -10,11 +10,10 @@ import SSZipArchive
 import Yaml
 import SwiftyXMLParser
 import SWXMLHash
-import KissXML
 
 import WCDBSwift
 
-import HandyJSON
+//import HandyJSON
 import KakaJSON
 
 import SDWebImage
@@ -39,9 +38,9 @@ class APKParser:NSObject{
         //OC使用NSTask
         let task = Process()
         task.launchPath = "/bin/bash"
-        task.arguments = ["-c","\(Config.apktool) d \"\(path)\" -f -o \(outPath)"]
+        task.arguments = ["-c","java -jar \(Config.apktool) d \"\(path)\" -s -f -o \(outPath)"]
         task.terminationHandler = { proce in              // 执行结束的闭包(回调)
-            print("task执行完毕 proce:\(proce)")
+//            print("task执行完毕 proce:\(proce)")
         }
 
         var lastStr = ""

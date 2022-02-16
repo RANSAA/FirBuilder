@@ -32,7 +32,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f7B-zM-BvN">
                     <rect key="frame" x="138" y="72" width="56" height="15"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="BundleID" id="Gxd-dV-piY">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -40,7 +40,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bEe-CY-5Ip">
                     <rect key="frame" x="138" y="47" width="57" height="15"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="VERSION" id="M7Y-TO-kTg">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -48,7 +48,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ogo-yc-vgO">
                     <rect key="frame" x="138" y="22" width="54" height="15"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="更新时间" id="rXm-83-blP">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -61,6 +61,28 @@
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="right" imageScaling="proportionallyDown" image="android" id="Pmu-os-RvN"/>
                 </imageView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M38-NU-691">
+                    <rect key="frame" x="746" y="77" width="107" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="9qL-CI-SRY"/>
+                        <constraint firstAttribute="width" constant="95" id="V2H-5Z-SeH"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="置顶" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BcO-to-uk0">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ud-WU-Lv5">
+                    <rect key="frame" x="745" y="26" width="109" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="ObO-uX-Yms"/>
+                        <constraint firstAttribute="width" constant="97" id="hRo-T9-hGB"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="删除" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="u9a-wd-Tx8">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="bEe-CY-5Ip" firstAttribute="top" secondItem="f7B-zM-BvN" secondAttribute="bottom" constant="10" id="00S-dI-Iem"/>
@@ -72,12 +94,18 @@
                 <constraint firstItem="gpA-jW-J35" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="17" id="Ob7-7A-Gx4"/>
                 <constraint firstItem="nVx-gw-JYC" firstAttribute="leading" secondItem="Cpe-gk-ZyZ" secondAttribute="leading" constant="20" id="R8U-jF-1wv"/>
                 <constraint firstItem="ogo-yc-vgO" firstAttribute="top" secondItem="bEe-CY-5Ip" secondAttribute="bottom" constant="10" id="RRh-rL-btw"/>
+                <constraint firstAttribute="trailing" secondItem="7Ud-WU-Lv5" secondAttribute="trailing" constant="31" id="Tdp-wH-IYw"/>
+                <constraint firstItem="7Ud-WU-Lv5" firstAttribute="top" secondItem="M38-NU-691" secondAttribute="bottom" constant="30" id="dOl-Gk-y9r"/>
                 <constraint firstItem="f7B-zM-BvN" firstAttribute="top" secondItem="gpA-jW-J35" secondAttribute="bottom" constant="16" id="hnu-nH-mmk"/>
                 <constraint firstItem="gpA-jW-J35" firstAttribute="leading" secondItem="nVx-gw-JYC" secondAttribute="trailing" constant="20" id="ief-XU-N2n"/>
+                <constraint firstItem="M38-NU-691" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="34" id="l0l-cw-KBb"/>
                 <constraint firstItem="nVx-gw-JYC" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="20" id="lnb-Sx-kWW"/>
+                <constraint firstAttribute="trailing" secondItem="M38-NU-691" secondAttribute="trailing" constant="32" id="qmM-SA-rlK"/>
                 <constraint firstItem="nVx-gw-JYC" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="20" symbolic="YES" id="vCJ-qX-BD2"/>
             </constraints>
             <connections>
+                <outlet property="btnDelete" destination="7Ud-WU-Lv5" id="pJM-dm-eTp"/>
+                <outlet property="btnTop" destination="M38-NU-691" id="D5h-iH-OSK"/>
                 <outlet property="img" destination="nVx-gw-JYC" id="8Sd-Ad-0ti"/>
                 <outlet property="imgType" destination="4Vc-fi-jih" id="axl-4d-iej"/>
                 <outlet property="labBundle" destination="f7B-zM-BvN" id="XF2-zC-b3L"/>

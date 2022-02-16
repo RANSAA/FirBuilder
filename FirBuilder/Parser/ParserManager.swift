@@ -9,12 +9,12 @@ import Foundation
 import SSZipArchive
 import Yaml
 import SwiftyXMLParser
-import SWXMLHash
-import KissXML
+//import SWXMLHash
+//import KissXML
 
 import WCDBSwift
 
-import HandyJSON
+//import HandyJSON
 import KakaJSON
 
 import SDWebImage
@@ -31,7 +31,7 @@ class ParserManager: NSObject {
     var path:String //app path
     var controller:ViewController!
 
-
+    var startParserDate:Date!
     init(path:String, controller:ViewController){
         self.path = path
         self.controller = controller
@@ -41,7 +41,7 @@ class ParserManager: NSObject {
 
     func start(){
         try? FileManager.default.removeItem(atPath: Config.outPath)
-
+        startParserDate = Date()
         if path.fileExtension.lowercased() == "ipa" {
             let ipa = IPAParser(path,manager: self)
             ipa.start()
@@ -67,6 +67,12 @@ class ParserManager: NSObject {
         controller.openNewWindow()
     }
 
+
+    func parserCountTime(){
+        let endTime = Date()
+        let count = endTime.timeIntervalSince(startParserDate!)
+        print("解析耗时：\(count)s")
+    }
 }
 
 
@@ -164,7 +170,6 @@ extension ParserManager{
             //57x57 png
             if appInfo.type == .ios {
                 if let image = image.sd_resizedImage(withSizeFixed: NSMakeSize(57, 57), scaleMode: .aspectFit) {
-                    print("57 image:\(image)")
                     if let enData = image.sd_imageData(as: .PNG) {
                         fileManager.createFile(atPath: Config.appPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
 
@@ -211,6 +216,9 @@ extension ParserManager{
 
     func parserDone(){
         try? FileManager.default.removeItem(atPath: Config.outPath)
+
+        parserCountTime()
+        MacProgressHUD.removeAllHUD()
 
         openParserSuccess(msg: "添加成功")
 

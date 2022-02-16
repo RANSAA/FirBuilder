@@ -41,7 +41,6 @@ class IPAParser:NSObject{
         let success =  SSZipArchive.unzipFile(atPath: self.path, toDestination: destinationPath)
         if success {
             print("ipa解压成功")
-//            manager.openNewWindow()
             parser()
         }else{
             print("ipa解压失败")

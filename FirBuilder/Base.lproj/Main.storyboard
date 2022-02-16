@@ -738,15 +738,15 @@
                                         <rect key="frame" x="182" y="12" width="689" height="96"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OgL-Wa-Is9">
-                                                <rect key="frame" x="6" y="69" width="84" height="15"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="coding路径：" id="q6Q-Np-dOO">
+                                                <rect key="frame" x="6" y="69" width="82" height="15"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="ServerRoot：" id="q6Q-Np-dOO">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6jQ-W3-Qdx">
-                                                <rect key="frame" x="88" y="66" width="514" height="21"/>
+                                                <rect key="frame" x="86" y="66" width="516" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/" placeholderString="用于设置Coding(也可以是github仓库下载raw主地址)仓库下载主地址，用来提供资源的云存储地址，设置后需要执行重新生成H5" drawsBackground="YES" id="x1z-5F-Xcr">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -773,6 +773,16 @@
                                                     <action selector="btnBuilderAllH5Action:" target="XfG-lQ-9wD" id="FGp-Ex-CqD"/>
                                                 </connections>
                                             </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uT0-jb-seU">
+                                                <rect key="frame" x="6" y="6" width="25" height="25"/>
+                                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="99c-8Y-0m5">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="btnHelpAction:" target="XfG-lQ-9wD" id="gnn-Ah-hi8"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Ler-fF-6LU" secondAttribute="trailing" constant="12" id="2TM-ZK-3J5"/>
@@ -785,7 +795,9 @@
                                             <constraint firstItem="Ler-fF-6LU" firstAttribute="leading" secondItem="6jQ-W3-Qdx" secondAttribute="trailing" constant="20" id="Sok-k8-1ZD"/>
                                             <constraint firstItem="OgL-Wa-Is9" firstAttribute="top" secondItem="HhN-6Y-t81" secondAttribute="top" constant="12" id="XOw-uM-Zxi"/>
                                             <constraint firstItem="6jQ-W3-Qdx" firstAttribute="leading" secondItem="OgL-Wa-Is9" secondAttribute="trailing" id="XvT-lx-9jJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="uT0-jb-seU" secondAttribute="bottom" constant="10" id="aOl-RF-bLm"/>
                                             <constraint firstItem="6jQ-W3-Qdx" firstAttribute="centerY" secondItem="OgL-Wa-Is9" secondAttribute="centerY" id="e9K-NE-YVr"/>
+                                            <constraint firstItem="uT0-jb-seU" firstAttribute="leading" secondItem="HhN-6Y-t81" secondAttribute="leading" constant="8" id="vUs-EK-tO5"/>
                                             <constraint firstAttribute="bottom" secondItem="JJC-Fw-JDP" secondAttribute="bottom" constant="10" id="xMp-tI-S5u"/>
                                         </constraints>
                                     </customView>
@@ -861,7 +873,82 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="231.5" y="876.5"/>
+            <point key="canvasLocation" x="-149" y="863"/>
+        </scene>
+        <!--FirBuilder说明-->
+        <scene sceneID="BLj-vK-eCH">
+            <objects>
+                <viewController title="FirBuilder说明" storyboardIdentifier="AboutViewController" id="ubq-fd-Zou" customClass="AboutViewController" customModule="FirBuilder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="c4h-4V-Xi8">
+                        <rect key="frame" x="0.0" y="0.0" width="727" height="497"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olv-cE-0DA">
+                                <rect key="frame" x="20" y="20" width="707" height="429"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="IoR-Nu-SMi">
+                                    <rect key="frame" x="0.0" y="0.0" width="692" height="429"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" selectable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="j9I-gd-XYd">
+                                            <rect key="frame" x="0.0" y="0.0" width="692" height="429"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="692" height="429"/>
+                                            <size key="maxSize" width="692" height="10000000"/>
+                                            <attributedString key="textStorage">
+                                                <fragment content="hgvh">
+                                                    <attributes>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" size="14" name="Helvetica"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="SH1-6O-sgo">
+                                    <rect key="frame" x="-100" y="-100" width="225" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="SCg-W6-tFp">
+                                    <rect key="frame" x="692" y="0.0" width="15" height="429"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BtA-1m-WHF">
+                                <rect key="frame" x="14" y="446" width="72" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="30Y-mL-zwo"/>
+                                    <constraint firstAttribute="width" constant="60" id="RYl-Mh-LKh"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="返回" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lnF-Ed-agS">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="btnBackAction:" target="ubq-fd-Zou" id="kUK-wo-gSE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="olv-cE-0DA" firstAttribute="leading" secondItem="c4h-4V-Xi8" secondAttribute="leading" constant="20" id="4fO-IV-bIG"/>
+                            <constraint firstItem="BtA-1m-WHF" firstAttribute="leading" secondItem="c4h-4V-Xi8" secondAttribute="leading" constant="20" id="HA4-Fi-RMB"/>
+                            <constraint firstAttribute="bottom" secondItem="olv-cE-0DA" secondAttribute="bottom" constant="20" id="b3f-6p-80m"/>
+                            <constraint firstAttribute="trailing" secondItem="olv-cE-0DA" secondAttribute="trailing" id="bz7-am-ZWK"/>
+                            <constraint firstItem="BtA-1m-WHF" firstAttribute="top" secondItem="c4h-4V-Xi8" secondAttribute="top" id="syb-fH-8aG"/>
+                            <constraint firstItem="olv-cE-0DA" firstAttribute="top" secondItem="c4h-4V-Xi8" secondAttribute="top" constant="48" id="wfQ-xo-pOO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="j9I-gd-XYd" id="bO3-aJ-ZB1"/>
+                    </connections>
+                </viewController>
+                <customObject id="kiA-Jn-7uA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="684.5" y="862.5"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="j3M-Yd-dQ7">
@@ -943,14 +1030,30 @@
                                     <action selector="backAction:" target="Tjg-Kd-ayp" id="tJB-VO-ift"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="edL-hT-aor">
+                                <rect key="frame" x="736" y="260" width="107" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="AD7-Ov-0CU"/>
+                                    <constraint firstAttribute="width" constant="95" id="bJx-ip-i1s"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="删除该应用" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Hg-oO-3cd">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="btnDeleteApp:" target="Tjg-Kd-ayp" id="Leu-ES-i2T"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="cwS-7p-rsT" secondAttribute="trailing" constant="24" id="3R9-Q8-baM"/>
                             <constraint firstItem="cwS-7p-rsT" firstAttribute="leading" secondItem="mxS-Dr-4CK" secondAttribute="leading" constant="24" id="5aO-FW-rxs"/>
                             <constraint firstItem="ah6-JF-t6e" firstAttribute="leading" secondItem="mxS-Dr-4CK" secondAttribute="leading" constant="24" id="AHe-HZ-HAP"/>
+                            <constraint firstItem="edL-hT-aor" firstAttribute="top" secondItem="mxS-Dr-4CK" secondAttribute="top" constant="12" id="Jzi-JM-xKa"/>
                             <constraint firstItem="cwS-7p-rsT" firstAttribute="top" secondItem="mxS-Dr-4CK" secondAttribute="top" constant="48" id="Q73-N2-9jf"/>
                             <constraint firstItem="ah6-JF-t6e" firstAttribute="top" secondItem="mxS-Dr-4CK" secondAttribute="top" id="fKV-TW-Nbt"/>
                             <constraint firstAttribute="bottom" secondItem="cwS-7p-rsT" secondAttribute="bottom" constant="24" id="jFF-ZY-GmZ"/>
+                            <constraint firstAttribute="trailing" secondItem="edL-hT-aor" secondAttribute="trailing" constant="24" id="jxA-EG-eRb"/>
                         </constraints>
                     </view>
                     <connections>

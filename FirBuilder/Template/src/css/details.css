@@ -35,6 +35,14 @@ body{
     vertical-align: bottom;
 }
 
+.size36-details-apple{
+    width: 36px;
+    height: 36px;
+    vertical-align: bottom;
+    margin-bottom:2px
+}
+
+
 .info-button-down{
     border: 0px solid;
     background-color: #53b3a8;

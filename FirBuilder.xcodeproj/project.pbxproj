@@ -39,6 +39,9 @@
 		3F8A2EB527BB905E003EFFB4 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A2EB427BB905E003EFFB4 /* ListCell.swift */; };
 		3F8A2EBF27BB955E003EFFB4 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A2EBE27BB955E003EFFB4 /* ListCell.xib */; };
 		3F9E1B8027B004EC00A99391 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9E1B7F27B004EC00A99391 /* AddViewController.swift */; };
+		3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */; };
+		3FA8A5AB27BCC3AE004B3E9D /* jar in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8A5AA27BCC3AE004B3E9D /* jar */; };
+		3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */; };
 		3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */; };
 		3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */; };
 		3FE9033827B0D036000BDEFE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033727B0D036000BDEFE /* Data.swift */; };
@@ -89,6 +92,9 @@
 		3F8A2EB427BB905E003EFFB4 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		3F8A2EBE27BB955E003EFFB4 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		3F9E1B7F27B004EC00A99391 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletaButton.swift; sourceTree = "<group>"; };
+		3FA8A5AA27BCC3AE004B3E9D /* jar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = jar; sourceTree = "<group>"; };
+		3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAndroidXml.swift; sourceTree = "<group>"; };
 		3FE9033727B0D036000BDEFE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -155,12 +161,12 @@
 		3F20FB3A27AFDE9600382D08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3F15415127BBCF7D005F9A99 /* MacProgressHUD */,
 				3FEC70CE279FCB5B00234A67 /* ViewController.swift */,
 				3F8A2EAA27BB7FBE003EFFB4 /* ListViewController.swift */,
 				3F8A2EAF27BB87BB003EFFB4 /* DetatalsViewController.swift */,
 				3F8A2EB027BB87BB003EFFB4 /* DetatalsViewController.xib */,
 				3F9E1B7F27B004EC00A99391 /* AddViewController.swift */,
+				3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -168,10 +174,12 @@
 		3F8A2EA327BB3148003EFFB4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3F15415127BBCF7D005F9A99 /* MacProgressHUD */,
 				3F8A2EA427BB3179003EFFB4 /* HomeImgItem.swift */,
 				3F8A2EA527BB3179003EFFB4 /* HomeImgItem.xib */,
 				3F8A2EB427BB905E003EFFB4 /* ListCell.swift */,
 				3F8A2EBE27BB955E003EFFB4 /* ListCell.xib */,
+				3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +218,7 @@
 		3FEC70CB279FCB5B00234A67 /* FirBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				3FA8A5AA27BCC3AE004B3E9D /* jar */,
 				3F0B91FD27BA864B0002BDEB /* Template */,
 				3F20FB1D27AFC42700382D08 /* Model */,
 				3FEC712827A00FB700234A67 /* db */,
@@ -347,6 +356,7 @@
 				3F8A2EB227BB87BB003EFFB4 /* DetatalsViewController.xib in Resources */,
 				3F8A2EBF27BB955E003EFFB4 /* ListCell.xib in Resources */,
 				3FEC70D1279FCB6400234A67 /* Assets.xcassets in Resources */,
+				3FA8A5AB27BCC3AE004B3E9D /* jar in Resources */,
 				3F8A2EA727BB3179003EFFB4 /* HomeImgItem.xib in Resources */,
 				3F0B91FE27BA864B0002BDEB /* Template in Resources */,
 				3FEC70D4279FCB6400234A67 /* Main.storyboard in Resources */,
@@ -426,12 +436,14 @@
 				3F80F76B27A03E6700A6341E /* AppDetailsTable.swift in Sources */,
 				3F5EDC7527B936A900853A5D /* ParserManager.swift in Sources */,
 				3FEC70E7279FDA8400234A67 /* String.swift in Sources */,
+				3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */,
 				3F9E1B8027B004EC00A99391 /* AddViewController.swift in Sources */,
 				3F20FB1827AFC38100382D08 /* AppHomeListTable.swift in Sources */,
 				3F0B91E527BA0C720002BDEB /* BuilderAppHome.swift in Sources */,
 				3F8A2EB127BB87BB003EFFB4 /* DetatalsViewController.swift in Sources */,
 				3FEC70E3279FD50B00234A67 /* Config.swift in Sources */,
 				3F65465327BA0064007EF422 /* FileManager.swift in Sources */,
+				3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */,
 				3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */,
 				3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */,
 				3F0B91EB27BA4A230002BDEB /* DateFormatter.swift in Sources */,
@@ -593,21 +605,13 @@
 					"-l\"iconv\"",
 					"-l\"z\"",
 					"-framework",
-					"\"CleanJSON\"",
-					"-framework",
 					"\"CoreFoundation\"",
 					"-framework",
 					"\"Foundation\"",
 					"-framework",
-					"\"HandyJSON\"",
-					"-framework",
-					"\"KakaJSON\"",
-					"-framework",
 					"\"SSZipArchive\"",
 					"-framework",
 					"\"Security\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-framework",
 					"\"sqlcipher\"",
 					"-framework",
@@ -643,21 +647,13 @@
 					"-l\"iconv\"",
 					"-l\"z\"",
 					"-framework",
-					"\"CleanJSON\"",
-					"-framework",
 					"\"CoreFoundation\"",
 					"-framework",
 					"\"Foundation\"",
 					"-framework",
-					"\"HandyJSON\"",
-					"-framework",
-					"\"KakaJSON\"",
-					"-framework",
 					"\"SSZipArchive\"",
 					"-framework",
 					"\"Security\"",
-					"-framework",
-					"\"SwiftyJSON\"",
 					"-framework",
 					"\"sqlcipher\"",
 					"-framework",

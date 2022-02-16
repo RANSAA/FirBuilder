@@ -89,7 +89,8 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
     //应用coding url路径
     @IBAction func btnApplyCondingAction(_ sender: Any) {
         let alert = NSAlert()
-        alert.messageText = "修改coding路径"
+
+        alert.messageText = "修改ServerRoot路径"
         alert.informativeText = "修改地址后需要运行【重新生成H5】才会更改已经生成的静态文件"
         alert.addButton(withTitle: "确定")
         alert.addButton(withTitle: "取消")
@@ -112,11 +113,12 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
             if hexf == "https" {
                 if path.last == "/" {
                     Config.resetServerRoot(serverRoot: path)
+                    openParserSuccess(msg: "资源根路劲修改成功")
                 }else{
-                    openErrorAlert(msg: "coding路径必须以\"/\"结尾")
+                    openErrorAlert(msg: "ServerRoot路径必须以\"/\"结尾")
                 }
             }else{
-                openErrorAlert(msg: "coding路径必须为https类型")
+                openErrorAlert(msg: "ServerRoot路径必须为https类型")
             }
         }else{
             openErrorAlert(msg: "输入的地址错误")
@@ -133,7 +135,16 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         BuilderDetails().builderAll()
 
         BuilderManifest().builderAll()
+
+        openParserSuccess(msg: "H5重新生成完成")
     }
+
+
+    @IBAction func btnHelpAction(_ sender: Any) {
+        let vc = AboutViewController.createVC(self)
+        vc.push()
+    }
+
 }
 
 
@@ -163,7 +174,7 @@ extension ViewController{
         defer {
             db.close()
         }
-        let list:[AppHomeListTable]? = try? db.getObjects(fromTable: AppHomeListTable.tableName)
+        let list:[AppHomeListTable]? = try? db.getObjects(fromTable: AppHomeListTable.tableName,orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
         if list != nil {
             dataArray = list!
         }
@@ -222,7 +233,7 @@ extension ViewController{
     func jumpTo(row:Int){
         let model = self.dataArray[row]
         let vc = ListViewController.createVC(self)
-        vc.homeItem = model
+        vc.pushItem = model
         vc.push()
     }
 
@@ -264,6 +275,7 @@ extension ViewController{
             alert.addButton(withTitle: "知道了")
             alert.alertStyle = .critical
             alert.runModal()
+            MacProgressHUD.removeAllHUD()
         }
     }
 

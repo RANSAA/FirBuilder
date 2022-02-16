@@ -64,7 +64,7 @@ extension BuilderAppHome{
             defer {
                 db.close()
             }
-            let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName)
+            let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName,orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
             if let list = release {
                 h5 += bodyBagin
                 for item in list {

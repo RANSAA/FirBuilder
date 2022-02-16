@@ -6,7 +6,7 @@
 //
 import Cocoa
 import WCDBSwift
-import HandyJSON
+//import HandyJSON
 import KakaJSON
 
 //指定APP分发项目记录表

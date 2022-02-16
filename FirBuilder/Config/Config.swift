@@ -12,7 +12,7 @@ struct Config {
 //    static let appPath:String = "/Users/kimi/Desktop/Fir/"
     static let configPath = appPath + "FirBuilderConfig.plist"
     static let dbPath = appPath + "FirBuilderData.db"
-    static var apktool = "/usr/local/Cellar/apktool/2.6.0/bin/apktool"
+    static let apktool = ApkToolPath()
     static private(set) var serverRoot:String = "" //coding git 资源路径
     static let outPath = "/Users/kimi/Desktop/Fir/Unzip/"   //app资源解压路径
     static let syncPath:String = appPath + "/sync/"    //h5同步仓库目录
@@ -25,7 +25,18 @@ struct Config {
         checkSrcTemplate()
 
         DBService.createTable()
-    }    
+
+        print("apktool:\(apktool)")
+
+    }
+
+    private static func ApkToolPath() -> String{
+        var apkJar:String = "apktool.jar"
+        if let path = Bundle.main.path(forResource: "apktool", ofType: "jar", inDirectory: "jar") {
+            apkJar = path
+        }
+        return apkJar;
+    }
 }
 
 
@@ -57,15 +68,9 @@ extension Config{
                 }
             }
 
-            if let apktool = config?["apktool"] as? String {
-                Config.apktool = apktool
-            }
-
         }else{
             config = NSMutableDictionary(dictionaryLiteral: ("url",orgUrl),
-                                  ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径"),
-                                  ("apktool",Config.apktool),
-                                  ("apktoolMark","apktool工具的路径，可设置为自己的位置")
+                                  ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径")
                                   )
             tmpUrl = orgUrl
         }
@@ -96,9 +101,7 @@ extension Config{
         var config:NSMutableDictionary?
         if !FileManager.default.fileExists(atPath: Config.configPath) {
             config = NSMutableDictionary(dictionaryLiteral: ("url",serverRoot),
-                                  ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径"),
-                                  ("apktool",Config.apktool),
-                                  ("apktoolMark","apktool工具的路径，可设置为自己的位置")
+                                  ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径")
                                   )
         }else{
             config = NSMutableDictionary(contentsOfFile: configPath)

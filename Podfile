@@ -19,21 +19,20 @@ target 'FirBuilder' do
   pod 'WCDB.swift'
 
   pod 'KakaJSON'
-  pod 'HandyJSON', '~> 5.0.2'
-  pod 'SwiftyJSON', '~> 4.0'
-  pod 'CleanJSON'
+#  pod 'HandyJSON', '~> 5.0.2'
+#  pod 'SwiftyJSON', '~> 4.0'
+#  pod 'CleanJSON'
 #  pod 'ObjectMapper'
 
-  pod 'Alamofire'
+#  pod 'Alamofire'
 
   pod 'SDWebImage'
   pod 'SDWebImageWebPCoder'
 
 
   pod 'Yaml'
-  pod 'KissXML'
-  pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
   pod 'SWXMLHash', '~> 6.0.0'
+  pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
 
 
 end
