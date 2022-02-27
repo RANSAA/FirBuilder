@@ -29,6 +29,8 @@ target 'FirBuilder' do
   pod 'SDWebImage'
   pod 'SDWebImageWebPCoder'
 
+  pod 'LYBProgressHUD'
+
 
   pod 'Yaml'
   pod 'SWXMLHash', '~> 6.0.0'

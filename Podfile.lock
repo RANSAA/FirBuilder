@@ -9,6 +9,7 @@ PODS:
   - libwebp/mux (1.2.1):
     - libwebp/demux
   - libwebp/webp (1.2.1)
+  - LYBProgressHUD (1.1.0)
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
@@ -28,6 +29,7 @@ PODS:
 
 DEPENDENCIES:
   - KakaJSON
+  - LYBProgressHUD
   - SDWebImage
   - SDWebImageWebPCoder
   - SSZipArchive
@@ -40,6 +42,7 @@ SPEC REPOS:
   trunk:
     - KakaJSON
     - libwebp
+    - LYBProgressHUD
     - SDWebImage
     - SDWebImageWebPCoder
     - SQLiteRepairKit
@@ -61,6 +64,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
+  LYBProgressHUD: 14119492a4f377b1fc76f1119043c9842dbe1c2d
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
@@ -71,6 +75,6 @@ SPEC CHECKSUMS:
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
   Yaml: 52831fc1d9ac2db4ddf6d7562993457127256ca6
 
-PODFILE CHECKSUM: 19adbabc348690eadb2ee6a8bf6157a7944445da
+PODFILE CHECKSUM: 6a5ee05f68e8a6aac6de1dcbc72df0fcff08269a
 
 COCOAPODS: 1.10.1

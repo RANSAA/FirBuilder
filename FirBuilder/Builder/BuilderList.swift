@@ -30,7 +30,7 @@ class BuilderList{
 
 <div>
     <div style="text-align: center;">
-        <h4 id="navName">列表-App分发平台</h4>
+        <h4 id="navName">   </h4>
     </div>
     <div style="background: #F6F6F6; height: 10px;"></div>
 </div>

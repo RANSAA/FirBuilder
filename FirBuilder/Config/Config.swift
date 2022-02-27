@@ -55,6 +55,12 @@ extension Config{
         return path
     }
 
+    //获取资源配置文件路径
+    private static func getConfigPath() -> String{
+        let path = Bundle.main.resourcePath!
+        return path
+    }
+
     //FirBuilder.plist配置文件解析
     private static func checkCofigFile(){
         let orgUrl = "https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/"

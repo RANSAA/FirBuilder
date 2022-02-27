@@ -33,7 +33,7 @@ class BuilderAppHome{
     <br><br><br><br>
     <h1>App分发平台</h1>
     <br>
-    <h4>当前设备类型类型：<span id="deviceType" style="color: red;">other</span></h4>
+    <h4>当前设备类型类型：<span id="deviceType" style="color: red;">  </span></h4>
     <br>
 </div>
 
