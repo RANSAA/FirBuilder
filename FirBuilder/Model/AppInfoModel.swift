@@ -47,7 +47,7 @@ class AppInfoModel: Convertible{
     var appIcon57Path:String? = nil
     var appManifestPath:String? = nil
 
-    var releaseName:String  = "Release.html"
+    var releaseName:String  = "list.html"
     var releasePath:String? = nil
 
 

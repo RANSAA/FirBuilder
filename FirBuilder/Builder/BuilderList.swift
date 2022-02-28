@@ -184,7 +184,7 @@ extension BuilderList{
             h5 += bodyEnd
             h5 += dymaninJS(list.first!)
 
-            htmlPath = list.first!.srcRoot!+"Release.html"
+            htmlPath = list.first!.srcRoot!+"list.html"
             return h5
         }else{
             return nil

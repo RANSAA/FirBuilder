@@ -122,56 +122,69 @@ class APKParser:NSObject{
             }
         }
 
+
         if let xmlStr = try? String(contentsOfFile: xmlPath) {
             let xml = XMLHash.parse(xmlStr)
             if let bundleID = xml["manifest"][0].element?.attribute(by: "package")?.text {
                 appInfo.bundleID = bundleID
             }
 
-            //app name
+            //解析APP name ，icon
             if let node = xml["manifest"]["application"][0].element  {
+                //app name
+                var name:String! = nil;
+                if let tmpName = node.attribute(by: "android:label")?.text {
+                    name = tmpName
+                }else if let tmpName = node.attribute(by: "n1:label")?.text {
+                    name = tmpName
+                }else{
+                    name = "unknown"
+                }
+                print("name:\(name!)")
+
                 //@string/a4 -> res/values/strig.xml->a4
-                if let name = node.attribute(by: "android:label")?.text {
-                    if name.contains("@string") {
-                        let namePath = Config.outPath + "res/values/strings.xml"
-                        if let nameXmlStr = try? String(contentsOfFile: namePath) {
-                            let nameXML = XMLHash.parse(nameXmlStr)
-                            let value = name.components(separatedBy: "/").last
-                            if let name = try? nameXML["resources"]["string"].withAttribute("name", value!).element?.text {
-                                appInfo.name = name
-                            }
+                if name.contains("@string") {
+                    let namePath = Config.outPath + "res/values/strings.xml"
+                    if let nameXmlStr = try? String(contentsOfFile: namePath) {
+                        let nameXML = XMLHash.parse(nameXmlStr)
+                        let value = name.components(separatedBy: "/").last
+                        if let name = try? nameXML["resources"]["string"].withAttribute("name", value!).element?.text {
+                            appInfo.name = name
                         }
-                    }else{
-                        appInfo.name = name
                     }
-                    print("name:\(name)")
+                }else{
+                    appInfo.name = name
                 }
 
+
+                //app icon
+                var icon: String! = nil;
+                if let iconName = node.attribute(by: "android:icon")?.text{
+                    icon = iconName
+                }else if let iconName = node.attribute(by: "n1:icon")?.text{
+                    icon = iconName
+                }else{
+                    icon = "unknown"
+                }
+                print("icon:\(icon!)")
 
                 //icon资源路径
                 //@mipmap/ic_launcher -> res/mipmap-xxxhdpi/ic_launcher.png
                 //@drawable/icon -> res/drawable/icon.png
-                let icon = node.attribute(by: "android:icon")?.text ?? ""
-                if let icon = node.attribute(by: "android:icon")?.text{
-                    if icon.contains("@mipmap") {
-                        var iconPath = icon.replacingOccurrences(of: "@mipmap", with: "mipmap-xxxhdpi")
-                        iconPath = Config.outPath + "res/" + iconPath + ".png"
-                        appInfo.iconOriginalPath  = iconPath
-                        print("iconpath:\(iconPath)")
-                    }else if icon.contains("@drawable") {
-                        var iconPath = icon.replacingOccurrences(of: "@drawable", with: "drawable")
-                        iconPath = Config.outPath + "res/" + iconPath + ".png"
-                        appInfo.iconOriginalPath  = iconPath
-                        print("iconpath:\(iconPath)")
-                    }
+                if icon.contains("@mipmap") {
+                    var iconPath = icon.replacingOccurrences(of: "@mipmap", with: "mipmap-xxxhdpi")
+                    iconPath = Config.outPath + "res/" + iconPath + ".png"
+                    appInfo.iconOriginalPath  = iconPath
+                }else if icon.contains("@drawable") {
+                    var iconPath = icon.replacingOccurrences(of: "@drawable", with: "drawable")
+                    iconPath = Config.outPath + "res/" + iconPath + ".png"
+                    appInfo.iconOriginalPath  = iconPath
                 }
+                print("iconOriginalPath:\(String(describing: appInfo.iconOriginalPath))")
 
-                print("icon:\(icon)")
             }
         }
 
-
-        print(appInfo)
         //处理info内部属性,必须执行
 //        appInfo.parse()
         manager.updateAppInfo(appInfo)

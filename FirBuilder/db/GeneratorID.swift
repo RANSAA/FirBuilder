@@ -32,7 +32,6 @@ class GeneratorID: NSObject {
                 id = self.UUID()
             }
             insert(uuid: id)
-//            print("bindIDSets:\(bindIDSets)")
         }
         return id
     }

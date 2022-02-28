@@ -81,8 +81,8 @@ extension BuilderAppHome{
     private func save(string:String){
         let appHomeData = string.data(using: .utf8)
         let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.appPath+"Home.html", contents: appHomeData, attributes: nil)
-        fileManager.createFile(atPath: Config.syncPath+"Home.html", contents: appHomeData, attributes: nil)
+        fileManager.createFile(atPath: Config.appPath+"index.html", contents: appHomeData, attributes: nil)
+        fileManager.createFile(atPath: Config.syncPath+"index.html", contents: appHomeData, attributes: nil)
     }
 }
 

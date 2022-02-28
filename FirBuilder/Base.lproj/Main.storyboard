@@ -818,7 +818,7 @@
                                 <subviews>
                                     <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaM-Iu-y2q">
                                         <rect key="frame" x="24" y="24" width="835" height="321"/>
-                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="ZVa-7f-OU6">
+                                        <clipView key="contentView" copiesOnScroll="NO" id="ZVa-7f-OU6">
                                             <rect key="frame" x="0.0" y="0.0" width="835" height="321"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -828,10 +828,9 @@
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="1Jh-bP-MAk">
                                                         <size key="itemSize" width="50" height="50"/>
                                                     </collectionViewFlowLayout>
-                                                    <color key="primaryBackgroundColor" red="0.39962863922119141" green="0.87228852510452271" blue="0.93574154376983643" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </collectionView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.48782724142074585" green="0.95505338907241821" blue="0.14122608304023743" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="8wI-G5-E9B">
                                             <rect key="frame" x="-100" y="-100" width="233" height="15"/>
@@ -895,7 +894,7 @@
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="692" height="429"/>
-                                            <size key="maxSize" width="692" height="10000000"/>
+                                            <size key="maxSize" width="707" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="hgvh">
                                                     <attributes>
