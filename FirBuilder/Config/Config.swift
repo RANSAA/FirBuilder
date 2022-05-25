@@ -8,13 +8,14 @@
 import Cocoa
 
 struct Config {
-    static let appPath:String = getAppPath()
+    //测试目录
 //    static let appPath:String = "/Users/kimi/Desktop/Fir/"
+
+    static let appPath:String = getAppPath()
     static let configPath = appPath + "FirBuilderConfig.plist"
     static let dbPath = appPath + "FirBuilderData.db"
     static let apktool = ApkToolPath()
     static private(set) var serverRoot:String = "" //coding git 资源路径
-//    static let outPath = "/Users/kimi/Desktop/Fir/Unzip/"   //app资源解压路径
     static let outPath = appPath+"Unzip/"   //app资源解压路径
     static let syncPath:String = appPath + "/sync/"    //h5同步仓库目录
 

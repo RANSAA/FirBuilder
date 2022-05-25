@@ -102,7 +102,12 @@ class APKParser:NSObject{
 
         if let yamlStr = try? String(contentsOfFile: ymlPath) {
             do {
-                let yamlStr = "#" + yamlStr
+//                let yamlStr = "#" + yamlStr
+
+                //将不规则的yml文件裁剪，PS：Yaml框架有bug
+                let find = yamlStr.findFirst("isFrameworkApk")
+                let yamlStr = yamlStr.subStringFrom(find)
+
                 let yaml = try Yaml.load(yamlStr)
                 if let version = yaml["versionInfo"]["versionName"].string {
                     appInfo.version = version
@@ -121,7 +126,6 @@ class APKParser:NSObject{
                 print("YAML ERROR:\(error)")
             }
         }
-
 
         if let xmlStr = try? String(contentsOfFile: xmlPath) {
             let xml = XMLHash.parse(xmlStr)
@@ -171,22 +175,25 @@ class APKParser:NSObject{
                 //icon资源路径
                 //@mipmap/ic_launcher -> res/mipmap-xxxhdpi/ic_launcher.png
                 //@drawable/icon -> res/drawable/icon.png
+                // xxxx/xxx -> 图片名不带后缀
+                var iconPath = ""
                 if icon.contains("@mipmap") {
-                    var iconPath = icon.replacingOccurrences(of: "@mipmap", with: "mipmap-xxxhdpi")
-                    iconPath = Config.outPath + "res/" + iconPath + ".png"
-                    appInfo.iconOriginalPath  = iconPath
+                    iconPath = icon.replacingOccurrences(of: "@mipmap", with: "mipmap-xxxhdpi")
                 }else if icon.contains("@drawable") {
-                    var iconPath = icon.replacingOccurrences(of: "@drawable", with: "drawable")
-                    iconPath = Config.outPath + "res/" + iconPath + ".png"
-                    appInfo.iconOriginalPath  = iconPath
+                    iconPath = icon.replacingOccurrences(of: "@drawable", with: "drawable")
                 }
+
+                iconPath = Config.outPath + "res/" + iconPath //+ ".png"
+                if !FileManager.default.fileExists(atPath: iconPath) {
+                    iconPath += ".png"
+                }
+                appInfo.iconOriginalPath  = iconPath
+
                 print("iconOriginalPath:\(String(describing: appInfo.iconOriginalPath))")
 
             }
         }
 
-        //处理info内部属性,必须执行
-//        appInfo.parse()
         manager.updateAppInfo(appInfo)
     }
 }
