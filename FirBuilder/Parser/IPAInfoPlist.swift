@@ -8,7 +8,7 @@
 import Foundation
 import KakaJSON
 
-class InfoPlist:Convertible{
+class IPAInfoPlist:Convertible{
     var bundleID:String?
     var name:String?
     var bundleName:String?

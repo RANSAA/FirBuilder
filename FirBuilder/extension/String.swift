@@ -14,6 +14,7 @@ extension String {
     // - Returns: 子字符串
     func subStringFrom(_ index: Int) -> String {
         let theIndex = self.index(self.endIndex, offsetBy: index - self.count)
+
         return String(self[theIndex..<endIndex])
     }
 
@@ -173,14 +174,15 @@ extension String{
              let lineS = fgets(ln, 10, fp)!
              print(String(cString: lineS))
      */
-    public init(binaryFilePath path:String){
+
+    public static func read(filePath path:String) -> String? {
         var resultStr = ""
         let fp = fopen(path, "r")
         if fp == nil {
-            print("Open File fail!  file:\(path)")
-            self = resultStr
-            return
+            print("文件打开失败！ \(path)")
+            return nil
         }
+
 
         var ch: Int32 = fgetc(fp)
         while ch != EOF {
@@ -189,6 +191,6 @@ extension String{
             ch = fgetc(fp)
         }
         fclose(fp)
-        self = resultStr
+        return resultStr
     }
 }

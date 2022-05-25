@@ -79,7 +79,7 @@ class IPAParser:NSObject{
         let plistPath = appPath+"Info.plist"
         if FileManager.default.fileExists(atPath: plistPath) {
             if let plist =  NSDictionary(contentsOfFile: plistPath){
-                let obj:InfoPlist = KakaJSON.model(from: plist, type: InfoPlist.self) as! InfoPlist
+                let obj:IPAInfoPlist = KakaJSON.model(from: plist, type: IPAInfoPlist.self) as! IPAInfoPlist
                 printAny(obj)
 
                 appInfo.bundleID = obj.bundleID

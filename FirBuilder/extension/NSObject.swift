@@ -39,21 +39,84 @@ extension NSObject{
         }
     }
 
+    
+
     /**
      获取对象的所有属性名称
-     - returns: 属性名称数组
+     PS:注意无法获取值为nil的属性名称
      */
-    func getAllPropertys()->[String]{
+    func getAllPropertys() -> [String] {
         var result = [String]()
         let count = UnsafeMutablePointer<UInt32>.allocate(capacity: 0)
         let buff = class_copyPropertyList(object_getClass(self), count)
         let countInt = Int(count[0])
         for i in 0..<countInt {
-            let temp = buff![i]
-            let tempPro = property_getName(temp)
-            let proper = String.init(utf8String: tempPro)
-            result.append(proper!)
+            if let temp = buff?[i] {
+                let cname = property_getName(temp)
+                let proper = String(cString: cname)
+                result.append(proper)
+            }
         }
+        free(count)
+        free(buff)
         return result
     }
+
+    /**
+     获取对象的所有成员变量名称
+     */
+    func getAllIvarList() -> [String] {
+        var result = [String]()
+        let count = UnsafeMutablePointer<UInt32>.allocate(capacity: 0)
+        let buff = class_copyIvarList(object_getClass(self), count)
+        let countInt = Int(count[0])
+        for i in 0..<countInt {
+            if let temp = buff?[i],let cname = ivar_getName(temp) {
+                let proper = String(cString: cname)
+                result.append(proper)
+            }
+        }
+        free(count)
+        free(buff)
+        return result
+    }
+
+
+    /**
+     打印所有属性及其值
+     PS:注意需要重载value(forUndefinedKey)方法，否则无法处理值为nil的变量
+     */
+    func printAllIvarList(){
+        let tag = "\(self)"
+        var res = "\(tag)\n"
+        for proper in self.getAllIvarList() {
+            if let value = self.value(forKey: proper) {
+                res += "\(proper): \(value)\n"
+            }else{
+                res += "\(proper): nil\n"
+            }
+        }
+        res += "\(tag)\n"
+        print(res)
+    }
+
+
+    /**
+     打印所有变量及其值
+     PS:注意不会打印值为nil的属性
+     */
+    func printAllPropertys(){
+        let tag = "\(self)"
+        var res = "\(tag)\n"
+        for proper in self.getAllPropertys() {
+            if let value = self.value(forKey: proper) {
+                res += "\(proper): \(value)\n"
+            }else{
+                res += "\(proper): nil\n"
+            }
+        }
+        res += "\(tag)\n"
+        print(res)
+    }
 }
+

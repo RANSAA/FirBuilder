@@ -1,4 +1,5 @@
 PODS:
+  - HandyJSON (5.0.2)
   - KakaJSON (1.1.2)
   - libwebp (1.2.1):
     - libwebp/demux (= 1.2.1)
@@ -28,6 +29,7 @@ PODS:
   - Yaml (3.4.4)
 
 DEPENDENCIES:
+  - HandyJSON (~> 5.0.2)
   - KakaJSON
   - LYBProgressHUD
   - SDWebImage
@@ -40,6 +42,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - HandyJSON
     - KakaJSON
     - libwebp
     - LYBProgressHUD
@@ -62,6 +65,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   LYBProgressHUD: 14119492a4f377b1fc76f1119043c9842dbe1c2d
@@ -75,6 +79,6 @@ SPEC CHECKSUMS:
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
   Yaml: 52831fc1d9ac2db4ddf6d7562993457127256ca6
 
-PODFILE CHECKSUM: 6a5ee05f68e8a6aac6de1dcbc72df0fcff08269a
+PODFILE CHECKSUM: 34748bcc16cfad8a3e9d1d3cc9f2c7ab7b5136f4
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

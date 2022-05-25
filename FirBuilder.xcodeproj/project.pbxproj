@@ -22,9 +22,10 @@
 		3F20FB1827AFC38100382D08 /* AppHomeListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */; };
 		3F20FB1B27AFC40C00382D08 /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1A27AFC40C00382D08 /* EnumType.swift */; };
 		3F20FB3727AFD4D800382D08 /* AppReleaseListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */; };
+		3F2FB9F9283E5306005102AF /* ParserEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */; };
 		3F5EDC6527B934B700853A5D /* IPAParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6427B934B700853A5D /* IPAParser.swift */; };
 		3F5EDC6B27B9352D00853A5D /* APKParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6A27B9352D00853A5D /* APKParser.swift */; };
-		3F5EDC6F27B935C000853A5D /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6E27B935C000853A5D /* InfoPlist.swift */; };
+		3F5EDC6F27B935C000853A5D /* IPAInfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */; };
 		3F5EDC7527B936A900853A5D /* ParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC7427B936A900853A5D /* ParserManager.swift */; };
 		3F65465327BA0064007EF422 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65465227BA0064007EF422 /* FileManager.swift */; };
 		3F80F75D27A02D7800A6341E /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F80F75C27A02D7800A6341E /* DBService.swift */; };
@@ -74,9 +75,10 @@
 		3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeListTable.swift; sourceTree = "<group>"; };
 		3F20FB1A27AFC40C00382D08 /* EnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumType.swift; sourceTree = "<group>"; };
 		3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReleaseListTable.swift; sourceTree = "<group>"; };
+		3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserEmbedded.swift; sourceTree = "<group>"; };
 		3F5EDC6427B934B700853A5D /* IPAParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAParser.swift; sourceTree = "<group>"; };
 		3F5EDC6A27B9352D00853A5D /* APKParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APKParser.swift; sourceTree = "<group>"; };
-		3F5EDC6E27B935C000853A5D /* InfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlist.swift; sourceTree = "<group>"; };
+		3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAInfoPlist.swift; sourceTree = "<group>"; };
 		3F5EDC7427B936A900853A5D /* ParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserManager.swift; sourceTree = "<group>"; };
 		3F65465227BA0064007EF422 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		3F80F75C27A02D7800A6341E /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
@@ -185,11 +187,12 @@
 		3F9E1B7327AFF99A00A99391 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */,
-				3F5EDC7427B936A900853A5D /* ParserManager.swift */,
-				3F5EDC6427B934B700853A5D /* IPAParser.swift */,
 				3F5EDC6A27B9352D00853A5D /* APKParser.swift */,
-				3F5EDC6E27B935C000853A5D /* InfoPlist.swift */,
+				3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */,
+				3F5EDC6427B934B700853A5D /* IPAParser.swift */,
+				3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */,
+				3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */,
+				3F5EDC7427B936A900853A5D /* ParserManager.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -412,7 +415,7 @@
 				3F8A2EAB27BB7FBE003EFFB4 /* ListViewController.swift in Sources */,
 				3FEC711C27A0033B00234A67 /* JSONDecoder.swift in Sources */,
 				3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */,
-				3F5EDC6F27B935C000853A5D /* InfoPlist.swift in Sources */,
+				3F5EDC6F27B935C000853A5D /* IPAInfoPlist.swift in Sources */,
 				3F1541B627BBFFE1005F9A99 /* NSImage+Resize.m in Sources */,
 				3F80F75D27A02D7800A6341E /* DBService.swift in Sources */,
 				3F8A2EA627BB3179003EFFB4 /* HomeImgItem.swift in Sources */,
@@ -437,6 +440,7 @@
 				3F20FB1827AFC38100382D08 /* AppHomeListTable.swift in Sources */,
 				3F0B91E527BA0C720002BDEB /* BuilderAppHome.swift in Sources */,
 				3F8A2EB127BB87BB003EFFB4 /* DetatalsViewController.swift in Sources */,
+				3F2FB9F9283E5306005102AF /* ParserEmbedded.swift in Sources */,
 				3FEC70E3279FD50B00234A67 /* Config.swift in Sources */,
 				3F65465327BA0064007EF422 /* FileManager.swift in Sources */,
 				3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */,

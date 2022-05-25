@@ -29,6 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print(Config.serverRoot)
 
 
+        ParserEmbedded.test()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

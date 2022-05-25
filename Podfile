@@ -19,7 +19,7 @@ target 'FirBuilder' do
   pod 'WCDB.swift'
 
   pod 'KakaJSON'
-#  pod 'HandyJSON', '~> 5.0.2'
+  pod 'HandyJSON', '~> 5.0.2'
 #  pod 'SwiftyJSON', '~> 4.0'
 #  pod 'CleanJSON'
 #  pod 'ObjectMapper'
