@@ -255,7 +255,7 @@ extension BuilderDetails{
         var devices:String = ""
         if item.type == .ios {
             if let deviceList = item.devices {
-                devices = deviceList.joined(separator: ";\n")
+                devices = deviceList.joined(separator: ";\\n")
             }
         }
 
@@ -295,7 +295,7 @@ extension BuilderDetails{
         var devices:String = ""
         if item.type == .ios {
             if let deviceList = item.devices {
-                devices = deviceList.joined(separator: ";\n")
+                devices = deviceList.joined(separator: ";\\n")
             }
         }
 
