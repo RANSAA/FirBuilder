@@ -66,7 +66,7 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         cell.img.sd_setImage(with: URL.init(fileURLWithPath: Config.appPath+model.appIconPath!), completed: nil)
         cell.labName.stringValue = model.name!
         cell.labBundle.stringValue = model.bundleID!
-        cell.labVersion.stringValue = model.version!+" (Build \(model.build!) )"
+        cell.labVersion.stringValue = model.version!+" (Build \(model.build!))"
         cell.labUpdate.stringValue = "创建时间：\( DateFormatter.dateStringWith(date: model.createDate))      更新时间\( DateFormatter.dateStringWith(date: model.updateDate))"
         cell.imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/android.png")
         if model.type == .ios {
@@ -79,7 +79,7 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
 
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
          let rowView = NSTableRowView()
-         rowView.isEmphasized = false
+         rowView.isEmphasized = true
          return rowView
      }
 
@@ -91,10 +91,7 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         vc.pushItem = model
         vc.push()
 
-
         tableView.reloadData()
-
-
         print("tableViewSelectionDidChange row:\(row)")
     }
 

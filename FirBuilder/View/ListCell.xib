@@ -73,7 +73,7 @@
                     </buttonCell>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ud-WU-Lv5">
-                    <rect key="frame" x="745" y="26" width="109" height="32"/>
+                    <rect key="frame" x="744" y="26" width="109" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="ObO-uX-Yms"/>
                         <constraint firstAttribute="width" constant="97" id="hRo-T9-hGB"/>
@@ -91,15 +91,16 @@
                 <constraint firstItem="4Vc-fi-jih" firstAttribute="leading" secondItem="gpA-jW-J35" secondAttribute="trailing" constant="6" id="6X3-20-JaV"/>
                 <constraint firstItem="bEe-CY-5Ip" firstAttribute="leading" secondItem="nVx-gw-JYC" secondAttribute="trailing" constant="20" id="IPY-Kh-qM1"/>
                 <constraint firstItem="ogo-yc-vgO" firstAttribute="leading" secondItem="nVx-gw-JYC" secondAttribute="trailing" constant="20" id="Kxg-78-8t6"/>
+                <constraint firstAttribute="trailing" secondItem="M38-NU-691" secondAttribute="trailing" constant="32" id="NnA-jT-F2v"/>
                 <constraint firstItem="gpA-jW-J35" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="17" id="Ob7-7A-Gx4"/>
                 <constraint firstItem="nVx-gw-JYC" firstAttribute="leading" secondItem="Cpe-gk-ZyZ" secondAttribute="leading" constant="20" id="R8U-jF-1wv"/>
                 <constraint firstItem="ogo-yc-vgO" firstAttribute="top" secondItem="bEe-CY-5Ip" secondAttribute="bottom" constant="10" id="RRh-rL-btw"/>
-                <constraint firstAttribute="trailing" secondItem="7Ud-WU-Lv5" secondAttribute="trailing" constant="31" id="Tdp-wH-IYw"/>
                 <constraint firstItem="7Ud-WU-Lv5" firstAttribute="top" secondItem="M38-NU-691" secondAttribute="bottom" constant="30" id="dOl-Gk-y9r"/>
                 <constraint firstItem="f7B-zM-BvN" firstAttribute="top" secondItem="gpA-jW-J35" secondAttribute="bottom" constant="16" id="hnu-nH-mmk"/>
                 <constraint firstItem="gpA-jW-J35" firstAttribute="leading" secondItem="nVx-gw-JYC" secondAttribute="trailing" constant="20" id="ief-XU-N2n"/>
                 <constraint firstItem="M38-NU-691" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="34" id="l0l-cw-KBb"/>
                 <constraint firstItem="nVx-gw-JYC" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="20" id="lnb-Sx-kWW"/>
+                <constraint firstAttribute="trailing" secondItem="7Ud-WU-Lv5" secondAttribute="trailing" constant="32" id="mgL-zP-tcb"/>
                 <constraint firstAttribute="trailing" secondItem="M38-NU-691" secondAttribute="trailing" constant="32" id="qmM-SA-rlK"/>
                 <constraint firstItem="nVx-gw-JYC" firstAttribute="top" secondItem="Cpe-gk-ZyZ" secondAttribute="top" constant="20" symbolic="YES" id="vCJ-qX-BD2"/>
             </constraints>

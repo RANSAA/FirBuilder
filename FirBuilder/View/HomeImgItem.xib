@@ -41,58 +41,58 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ig4-9G-eFb">
-                    <rect key="frame" x="22" y="87" width="64" height="15"/>
+                    <rect key="frame" x="22" y="87" width="40" height="15"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="jDj-UK-fkr"/>
+                        <constraint firstAttribute="width" constant="36" id="jDj-UK-fkr"/>
                     </constraints>
                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="包名：" id="hVU-42-BGe">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" red="0.51690009719999996" green="0.51690009719999996" blue="0.51690009719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N84-NO-rNx">
-                    <rect key="frame" x="86" y="87" width="38" height="15"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="包名：" id="e9g-FG-Lqx">
-                        <font key="font" metaFont="system" size="12"/>
+                    <rect key="frame" x="62" y="87" width="52" height="15"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="package" id="e9g-FG-Lqx">
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" red="0.51690009719999996" green="0.51690009719999996" blue="0.51690009719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bvA-c9-2sK">
-                    <rect key="frame" x="22" y="54" width="64" height="15"/>
+                    <rect key="frame" x="22" y="54" width="40" height="15"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="77E-Wt-AcS"/>
+                        <constraint firstAttribute="width" constant="36" id="77E-Wt-AcS"/>
                     </constraints>
                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="版本：" id="SV4-es-2kd">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" red="0.51690009719999996" green="0.51690009719999996" blue="0.51690009719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="grR-s2-TcR">
-                    <rect key="frame" x="86" y="54" width="51" height="15"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="版本号：" id="qk8-DH-s9z">
-                        <font key="font" metaFont="system" size="12"/>
+                    <rect key="frame" x="62" y="54" width="45" height="15"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="version" id="qk8-DH-s9z">
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" red="0.51690009719999996" green="0.51690009719999996" blue="0.51690009719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OlG-26-Yj5">
-                    <rect key="frame" x="86" y="21" width="51" height="15"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="版本号：" id="gp9-o6-JyL">
-                        <font key="font" metaFont="system" size="12"/>
+                    <rect key="frame" x="86" y="21" width="72" height="15"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="update date" id="gp9-o6-JyL">
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" red="0.51690009719999996" green="0.51690009719999996" blue="0.51690009719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XNf-er-MC1">
-                    <rect key="frame" x="225" y="304" width="40" height="40"/>
+                    <rect key="frame" x="221" y="300" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="XNf-er-MC1" secondAttribute="height" multiplier="1:1" id="8fF-TA-vwz"/>
                         <constraint firstAttribute="width" constant="40" id="KXG-Y5-1m4"/>
                     </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="android1" id="6yw-h4-zCp"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="apple" id="6yw-h4-zCp"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uTk-KT-RiP">
                     <rect key="frame" x="22" y="21" width="64" height="15"/>
@@ -100,7 +100,7 @@
                         <constraint firstAttribute="width" constant="60" id="PGt-MU-Hj9"/>
                     </constraints>
                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="更新时间：" id="4Bn-Hs-00J">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" red="0.51690009719999996" green="0.51690009719999996" blue="0.51690009719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -115,9 +115,9 @@
                 <constraint firstItem="N84-NO-rNx" firstAttribute="centerY" secondItem="Ig4-9G-eFb" secondAttribute="centerY" id="9fm-Ua-2Ey"/>
                 <constraint firstItem="tFP-jY-t2w" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="AAs-1G-Sgp"/>
                 <constraint firstItem="JWY-PX-tAj" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Aex-b8-3Mi"/>
-                <constraint firstItem="XNf-er-MC1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="BDz-I3-5Oz"/>
+                <constraint firstItem="XNf-er-MC1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="BDz-I3-5Oz"/>
                 <constraint firstItem="N84-NO-rNx" firstAttribute="leading" secondItem="Ig4-9G-eFb" secondAttribute="trailing" constant="4" id="Et5-xZ-d9k"/>
-                <constraint firstAttribute="trailing" secondItem="XNf-er-MC1" secondAttribute="trailing" id="QI5-vZ-FBh"/>
+                <constraint firstAttribute="trailing" secondItem="XNf-er-MC1" secondAttribute="trailing" constant="4" id="QI5-vZ-FBh"/>
                 <constraint firstItem="Ig4-9G-eFb" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="24" id="QhD-f5-ETa"/>
                 <constraint firstItem="JWY-PX-tAj" firstAttribute="top" secondItem="tFP-jY-t2w" secondAttribute="bottom" constant="26" id="ScS-UD-mAP"/>
                 <constraint firstItem="OlG-26-Yj5" firstAttribute="centerY" secondItem="uTk-KT-RiP" secondAttribute="centerY" id="XAf-Df-tFJ"/>
@@ -132,6 +132,6 @@
     </objects>
     <resources>
         <image name="AppIcon-Test" width="192" height="192"/>
-        <image name="android1" width="40" height="40"/>
+        <image name="apple" width="64" height="64"/>
     </resources>
 </document>

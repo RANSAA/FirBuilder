@@ -62,9 +62,12 @@ class IPAParser:NSObject{
             }
             if let sub = subDir {
                 let appPath = unZipPath+sub+"/"
-                //先解析描述文件,成功后再解析infoplist文件
+                //解析.mobileprovision文件
+                parserEmbedded(appPath: appPath)
 
+                //先解析描述文件,成功后再解析infoplist文件
                 parserInfoPlist(appPath:appPath)
+
             }else{
                 //error
                 self.manager.openErrorAlert(msg: "错误：这不是一个正确的ipa文件")
@@ -80,7 +83,7 @@ class IPAParser:NSObject{
         if FileManager.default.fileExists(atPath: plistPath) {
             if let plist =  NSDictionary(contentsOfFile: plistPath){
                 let obj:IPAInfoPlist = KakaJSON.model(from: plist, type: IPAInfoPlist.self) as! IPAInfoPlist
-                printAny(obj)
+                printAllIvars(obj)
 
                 appInfo.bundleID = obj.bundleID
                 appInfo.name = obj.name
@@ -121,10 +124,23 @@ class IPAParser:NSObject{
 
     }
 
-    func parserPlist(appPath:String){
-        let crtPath = appPath+"embedded.mobileprovision"
-        appInfo.signType = .adHoc
-
+    func parserEmbedded(appPath:String){
+        let mobPath = appPath+"embedded.mobileprovision"
+        let obj = ParserEmbedded(filePath: mobPath)
+        if obj.hasValid == true {
+            if obj.localProvision == true {
+                appInfo.signType = .localTest
+            }else if obj.provisionsAllDevices == true{
+                appInfo.signType = .enterprise
+            }else{
+                appInfo.signType = .adHoc
+                appInfo.devices = obj.provisionedDevices
+            }
+        }else{
+            appInfo.signType = .simulator
+        }
     }
+
+
 
 }

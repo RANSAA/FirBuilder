@@ -27,6 +27,7 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
 
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var scrollTableView: NSScrollView!
+    @IBOutlet var tableHeaderView: NSTableHeaderView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,10 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
             self.tableView.delegate = self
             self.tableView.dataSource = self
         }else{
-            scrollTableView.isHidden = true
+//            scrollTableView.isHidden = true
+            for sub in scrollTableView.subviews {
+                sub.isHidden = true
+            }
         }
 
     }
@@ -65,7 +69,7 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
             imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/apple.png")
         }
         labName.stringValue = pushItem.name!
-        labVersion.stringValue = "版本：\(pushItem.version!) (Build \(pushItem.build!)     大小：\(pushItem.fileSize!)"
+        labVersion.stringValue = "版本：\(pushItem.version!) (Build \(pushItem.build!))    大小：\(pushItem.fileSize!)"
         labUpdate.stringValue = DateFormatter.dateStringWith(date: pushItem.updateDate)
         labSigType.stringValue = pushItem.signType.rawValue
     }
@@ -76,6 +80,10 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
 
     func numberOfRows(in tableView: NSTableView) -> Int {
         return pushItem.devices?.count ?? 0
+    }
+
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        26
     }
 
     func tableView(_ tableView1: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

@@ -194,7 +194,7 @@ extension ViewController{
         let view = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HomeImgItem"), for: indexPath) as! HomeImgItem
         let model = self.dataArray[indexPath.item]
         view.imgVIew.sd_setImage(with: URL(fileURLWithPath: Config.appPath+model.logoPath!), completed: nil)
-        view.appName.stringValue = model.name!
+        view.appName.stringValue = model.name ?? "unknown"
         view.bundleID.stringValue = model.bundleID
         view.version.stringValue = model.version!+" (Build \(model.build!))"
         view.updateDate.stringValue = DateFormatter.dateStringWith(date: model.updateDate)
@@ -219,8 +219,7 @@ extension ViewController{
         jumpTo(row: row)
 
 
-        let view = collectionView.item(at: indexPaths.first!) as! HomeImgItem
-
+//        let view = collectionView.item(at: indexPaths.first!) as! HomeImgItem
 //        view.updateStatus()
     }
 

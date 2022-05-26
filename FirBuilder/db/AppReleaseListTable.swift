@@ -103,7 +103,7 @@ class AppReleaseListTable:TableCodable,CustomStringConvertible,Convertible {
     
     //CustomStringConvertible
     var description:String {
-        descriptionAny(self)
+        return printAllIvars(self, false)
     }
 
     //HandyJSON

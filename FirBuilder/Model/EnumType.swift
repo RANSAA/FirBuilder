@@ -51,8 +51,10 @@ enum FileExtension:String,ColumnJSONCodable,ConvertibleEnum{
 
 
 enum SignatureType:String, ColumnJSONCodable,ConvertibleEnum {
-    case release    = "release"
-    case adHoc      = "Ad-hoc"
-    case inHouse    = "In-house"
-    case AppStore   = "App-Store"
+    case release    = "Release"
+    case adHoc      = "Ad-Hoc"
+    case enterprise = "Enterprise"
+    case localTest  = "Local-Test"
+    case simulator  = "Simulator"
+
 }

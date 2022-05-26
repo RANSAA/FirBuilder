@@ -53,6 +53,7 @@
 		3FEC70E7279FDA8400234A67 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70E6279FDA8400234A67 /* String.swift */; };
 		3FEC70EE279FED6C00234A67 /* GeneratorID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70ED279FED6C00234A67 /* GeneratorID.swift */; };
 		3FEC711C27A0033B00234A67 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC711B27A0033B00234A67 /* JSONDecoder.swift */; };
+		3FF7341A283F5BCF0033FE03 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF73419283F5BCF0033FE03 /* Test.swift */; };
 		8A7A69A79111929CCE11B8BD /* Pods_FirBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45B817BB912C90C38DA26EE /* Pods_FirBuilder.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		3FEC70ED279FED6C00234A67 /* GeneratorID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorID.swift; sourceTree = "<group>"; };
 		3FEC711B27A0033B00234A67 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		3FEC713327A011DA00234A67 /* FirBuilder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirBuilder-Bridging-Header.h"; sourceTree = "<group>"; };
+		3FF73419283F5BCF0033FE03 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		89108214971A3B7B506503F2 /* Pods-FirBuilder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirBuilder.debug.xcconfig"; path = "Target Support Files/Pods-FirBuilder/Pods-FirBuilder.debug.xcconfig"; sourceTree = "<group>"; };
 		949DA545FBBC669B950957A7 /* Pods-FirBuilder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirBuilder.release.xcconfig"; path = "Target Support Files/Pods-FirBuilder/Pods-FirBuilder.release.xcconfig"; sourceTree = "<group>"; };
 		C45B817BB912C90C38DA26EE /* Pods_FirBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 				3F5EDC6427B934B700853A5D /* IPAParser.swift */,
 				3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */,
 				3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */,
+				3FF73419283F5BCF0033FE03 /* Test.swift */,
 				3F5EDC7427B936A900853A5D /* ParserManager.swift */,
 			);
 			path = Parser;
@@ -449,6 +452,7 @@
 				3F0B91EB27BA4A230002BDEB /* DateFormatter.swift in Sources */,
 				3F5EDC6B27B9352D00853A5D /* APKParser.swift in Sources */,
 				3F0B91E027BA0C430002BDEB /* BuilderDetails.swift in Sources */,
+				3FF7341A283F5BCF0033FE03 /* Test.swift in Sources */,
 				3F0B91E827BA0C860002BDEB /* BuilderList.swift in Sources */,
 				3FE9033827B0D036000BDEFE /* Data.swift in Sources */,
 			);

@@ -130,7 +130,7 @@ extension ParserManager{
 
 
 
-            printAny(appInfo)
+            printAllIvars(appInfo)
             updateSuccess(appInfo)
 
         } catch {
