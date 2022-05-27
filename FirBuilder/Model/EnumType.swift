@@ -56,5 +56,6 @@ enum SignatureType:String, ColumnJSONCodable,ConvertibleEnum {
     case enterprise = "Enterprise"
     case localTest  = "Local-Test"
     case simulator  = "Simulator"
+    case appStore   = "AppStore"
 
 }

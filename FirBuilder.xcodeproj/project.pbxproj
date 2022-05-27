@@ -45,6 +45,7 @@
 		3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */; };
 		3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */; };
 		3FE9033827B0D036000BDEFE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033727B0D036000BDEFE /* Data.swift */; };
+		3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */; };
 		3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */; };
 		3FEC70CF279FCB5B00234A67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70CE279FCB5B00234A67 /* ViewController.swift */; };
 		3FEC70D1279FCB6400234A67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC70D0279FCB6400234A67 /* Assets.xcassets */; };
@@ -99,6 +100,7 @@
 		3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAndroidXml.swift; sourceTree = "<group>"; };
 		3FE9033727B0D036000BDEFE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Exit.swift"; sourceTree = "<group>"; };
 		3FEC70C9279FCB5B00234A67 /* FirBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FEC70CE279FCB5B00234A67 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				3F20FB3A27AFDE9600382D08 /* Controller */,
 				3F8A2EA327BB3148003EFFB4 /* View */,
 				3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */,
+				3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */,
 				3FEC70D0279FCB6400234A67 /* Assets.xcassets */,
 				3FEC70D2279FCB6400234A67 /* Main.storyboard */,
 				3FEC70D5279FCB6400234A67 /* Info.plist */,
@@ -450,6 +453,7 @@
 				3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */,
 				3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */,
 				3F0B91EB27BA4A230002BDEB /* DateFormatter.swift in Sources */,
+				3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */,
 				3F5EDC6B27B9352D00853A5D /* APKParser.swift in Sources */,
 				3F0B91E027BA0C430002BDEB /* BuilderDetails.swift in Sources */,
 				3FF7341A283F5BCF0033FE03 /* Test.swift in Sources */,

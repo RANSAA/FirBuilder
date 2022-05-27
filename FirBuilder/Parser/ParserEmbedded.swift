@@ -89,7 +89,12 @@ import HandyJSON
                 //处理，并判断类型
             }else{
                 self.hasValid = false
+                print("不是标准的smobileprovision文件")
             }
+
+        }else{
+            self.hasValid = false
+            print("mobileprovision文件不存在")
 
         }
     }

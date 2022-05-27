@@ -137,7 +137,7 @@ class IPAParser:NSObject{
                 appInfo.devices = obj.provisionedDevices
             }
         }else{
-            appInfo.signType = .simulator
+            appInfo.signType = .appStore
         }
     }
 

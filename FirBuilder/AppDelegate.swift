@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         print("注意：该程序的ViewController的viewDidLoad方法要比applicationDidFinishLaunching方法先执行")
+        self.addQuitActions()
 
         // Insert code here to initialize your application
 //        Config.setup()
@@ -30,6 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
         test()
+
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -37,7 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
 
-    func test(){
+    @objc func test(){
 //        printAny(C())
 //        printAny(B())
 //        printAny(A())
@@ -75,7 +78,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 //        FirBuilder.printAllPropertys(object: obj2)
 
+
+//        let application = NSApplication.shared
+//        _ = application.mainMenu
+//        let items = application.mainMenu?.items.first?.submenu?.items.first
+//        print(items)
+////        print(items?.numberOfItems)
+//        print(items)
+//
+//
+//
+//        items?.target = self
+//        items?.action = #selector(testAction)
+
+
     }
 
+
+//    @objc func testAction(){
+//       print("item action...")
+//   }
+
+
 }
+
+
 
