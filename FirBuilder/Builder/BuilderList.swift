@@ -28,7 +28,7 @@ class BuilderList{
 </head>
 <body>
 
-<div>
+<div id="headerID" style="display: none;">
     <div style="text-align: center;">
         <h4 id="navName">   </h4>
     </div>
@@ -103,6 +103,8 @@ class BuilderList{
         document.title = "列表-"+appName
         document.getElementById("navName").innerHTML="列表-"+appName
 
+
+        showWithID("headerID")
         showWithID("list")
     }
 

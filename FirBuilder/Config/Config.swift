@@ -24,7 +24,7 @@ struct Config {
         print(Config.appPath)
 
         checkCofigFile()
-        checkSrcTemplate()
+        BuilderTemplateFile.builder()
 
         DBService.createTable()
 
@@ -121,24 +121,3 @@ extension Config{
     }
 }
 
-
-
-extension Config{
-    static func checkSrcTemplate(){
-        if let path =  Bundle.main.path(forResource: "Template", ofType: nil){
-            let srcPath = path + "/src/"
-            print("srcPath:\(srcPath)")
-            let toPath1:String = Config.appPath+"/src/"
-            let toPath2:String = Config.syncPath+"/src/"
-
-            if !FileManager.default.fileExists(atPath: toPath1) {
-                try? FileManager.default.copyItem(atPath: srcPath, toPath: toPath1)
-            }
-
-            if !FileManager.default.fileExists(atPath: toPath2) {
-                try? FileManager.default.createDirectory(atPath: Config.syncPath, withIntermediateDirectories: true, attributes: nil)
-                try? FileManager.default.copyItem(atPath: srcPath, toPath: toPath2)
-            }
-        }
-    }
-}

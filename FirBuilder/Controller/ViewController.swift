@@ -127,7 +127,9 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
 
     //重新生成所有的H5网页
     @IBAction func btnBuilderAllH5Action(_ sender: Any) {
-        //保存文件
+
+        BuilderTemplateFile.builder()
+
         BuilderAppHome().builder()
 
         BuilderList().builderAll()

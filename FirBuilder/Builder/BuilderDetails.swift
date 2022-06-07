@@ -32,7 +32,7 @@ class BuilderDetails{
 <img src="../../../src/images/download_pattern_left.png" class="pattern left">
 <img src="../../../src/images/download_pattern_right.png" class="pattern right">
 
-<div style="text-align: center; margin-top: 80px">
+<div id="appInfo" style="text-align: center; margin-top: 80px">
 
     <!-- app icon, name -->
     <div>
@@ -42,7 +42,7 @@ class BuilderDetails{
     <div style="margin-top: 36px; font-size: 22px; color: #333333; line-height: 36px;">
         <div>
             <img id="appTypeIconPath" class="size36-details">
-            <span id="appName"> 诸葛卡包</span>
+            <span id="appName">  App Name  </span>
         </div>
     </div>
 
@@ -50,9 +50,9 @@ class BuilderDetails{
     <div style="font-size: 14px; color: #788090; margin-top: 20px;">
         <div>
             <span >版本:</span>
-            <span id="appVersion">2.8.8 ( Build 288 )</span>
+            <span id="appVersion"> 1.0 </span>
             <span >&emsp; 大小:</span>
-            <span id="appSize">15.6 MB</span>
+            <span id="appSize">   1M  </span>
         </div>
         <div>
             <span >更新时间:</span>
@@ -147,8 +147,11 @@ class BuilderDetails{
                 showWithID("btn4")
             }
         }else{
-            if (devideType == "android") {
-            showWithID("btn0")
+            // if (devideType == "android") {
+            //     showWithID("btn0")
+            // }
+            if (devideType != "ios") {
+                showWithID("btn0")
             }
         }
      }
@@ -181,15 +184,17 @@ class BuilderDetails{
         window.addEventListener("resize", resize);
         dispalyButton()
 
-         //当前网页二维码
-        appDownMakeQRCode(window.location.href)
+        //当前网页二维码
+        buildQRCodeWithImg(window.location.href, "appIcon")
         console.log(window.location.href)
         //root path
         // console.log(window.location.origin)
 
 
+        showWithID("appInfo")
     }
 
+    hiddenWithID("appInfo")
 
     window.onload = function(){
        load()
@@ -245,7 +250,11 @@ extension BuilderDetails{
 
 
 extension BuilderDetails{
-    
+    //https://www.mfpud.com/topics/302/
+    //ipa 安装示例
+    //ios "itms-services://?action=download-manifest&url=https://127.0.0.1/ipa/manifest.plist"
+
+
     func dymaninJS(_ item:AppReleaseListTable) -> String{
         var install:String = Config.serverRoot+item.saveAppPath!
         if item.type == .ios {
@@ -272,13 +281,12 @@ extension BuilderDetails{
     let appSize = "\(item.fileSize!)"
     let appUpdateTime = "\(DateFormatter.dateStringWith(date: item.updateDate))"
 
-    //app url
-    //ios "itms-services://?action=download-manifest&amp;url=https%3A%2F%2F127.0.0.1%3A8080%2Fm%2Fff8080817ee744b8017ee746e5810011"
+    //app install url
     let installURL = "\(install)"
-
 
     //动态记入设备列表
     let deivces = "\(devices)"
+
 </script>
 
 """
@@ -312,13 +320,13 @@ extension BuilderDetails{
     let appSize = "\(item.fileSize!)"
     let appUpdateTime = "\(DateFormatter.dateStringWith(date: item.updateDate))"
 
-    //app url
-    //ios "itms-services://?action=download-manifest&amp;url=https%3A%2F%2F127.0.0.1%3A8080%2Fm%2Fff8080817ee744b8017ee746e5810011"
+    //app install url
     let installURL = "\(install)"
 
 
     //动态记入设备列表
     let deivces = "\(devices)"
+
 </script>
 
 """

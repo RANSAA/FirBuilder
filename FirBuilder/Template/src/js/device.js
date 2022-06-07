@@ -65,9 +65,17 @@ function watchWindowSize() {
 
 
 
-// https://github.com/555chy/qrcodejs
-function appDownMakeQRCode(qrcodeText) {
-       new QRCode("qrcode", {
+/**
+ *  功能：生成二维码，中心图片可选
+ *  qrcodeText：二维码编码内容
+ *  imgID: 提供image图片地址的IMG标签ID，如果不存在则不生成中心图片
+ *  PS: https://github.com/555chy/qrcodejs
+ **/
+function buildQRCodeWithImg(qrcodeText, imgID) {
+    var img = document.getElementById(imgID)
+    // console.log(qrcodeText)
+    // console.log(img.src)
+    var qr = new QRCode("qrcode", {
             //二维码内容
             text: qrcodeText,
             width: 170,
@@ -83,10 +91,43 @@ function appDownMakeQRCode(qrcodeText) {
             */
             //容错级别天地可能会失败
             correctLevel: QRCode.CorrectLevel.M,
-            //二维码中心图片
-            iconSrc:document.getElementById("appIcon").src,
+            //二维码中心图片地址
+            iconSrc:img.src,
             iconRadius: 10,
     });
+    return qr
 }
 
 
+/**
+ *  功能：生成二维码，中心图片可选
+ *  qrcodeText：二维码编码内容
+ *  url: 二维码中心图片的资源地址，如果不存在则不生成中心图片
+ *  PS: https://github.com/555chy/qrcodejs
+ **/
+function buildQRCodeWithUrl(qrcodeText, url) {
+    var img = document.getElementById(imgID)
+    // console.log(qrcodeText)
+    // console.log(img.src)
+    var qr = new QRCode("qrcode", {
+            //二维码内容
+            text: qrcodeText,
+            width: 170,
+            height: 170,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            /*!
+            容错级别，可设置为：
+            QRCode.CorrectLevel.L
+            QRCode.CorrectLevel.M
+            QRCode.CorrectLevel.Q
+            QRCode.CorrectLevel.H
+            */
+            //容错级别天地可能会失败
+            correctLevel: QRCode.CorrectLevel.M,
+            //二维码中心图片地址
+            iconSrc:url,
+            iconRadius: 10,
+    });
+    return qr
+}
