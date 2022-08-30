@@ -40,7 +40,7 @@ class ParserManager: NSObject {
 
 
     func start(){
-        try? FileManager.default.removeItem(atPath: Config.outPath)
+        try? FileManager.default.removeItem(atPath: Config.unzipPath)
         startParserDate = Date()
         if path.fileExtension.lowercased() == "ipa" {
             let ipa = IPAParser(path,manager: self)
@@ -85,18 +85,17 @@ extension ParserManager{
         appInfo.parse()
 
         let fileManager = FileManager.default
-        let appPath = Config.appPath + appInfo.srcRoot!
         do {
-            if fileManager.fileExists(atPath: appPath) == false {
-                try fileManager.createDirectory(atPath: appPath, withIntermediateDirectories: true, attributes: nil)
+            if fileManager.fileExists(atPath: Config.htmlPath + appInfo.srcRoot!) == false {
+                try fileManager.createDirectory(atPath: Config.htmlPath + appInfo.srcRoot!, withIntermediateDirectories: true, attributes: nil)
             }
 
-            if fileManager.fileExists(atPath: Config.syncPath + appInfo.srcRoot!) == false {
-                try fileManager.createDirectory(atPath: Config.syncPath + appInfo.srcRoot!, withIntermediateDirectories: true, attributes: nil)
+            if fileManager.fileExists(atPath: Config.htmlSyncPath + appInfo.srcRoot!) == false {
+                try fileManager.createDirectory(atPath: Config.htmlSyncPath + appInfo.srcRoot!, withIntermediateDirectories: true, attributes: nil)
             }
 
             let atPath = appInfo.appOriginalPath!
-            let toPath = Config.appPath + appInfo.saveAppPath!
+            let toPath = Config.htmlPath + appInfo.saveAppPath!
 
             //保存app
             try? fileManager.removeItem(atPath: toPath)
@@ -119,7 +118,7 @@ extension ParserManager{
                 query.build = appInfo.build;
                 query.name = appInfo.name
                 query.updateDate = appInfo.updateDate
-                query.selectedVerPath = appInfo.detailsH5Path
+//                query.selectedVerPath = appInfo.selectedVerPath //new.html
                 try db.insertOrReplace(objects: query, intoTable: AppHomeListTable.tableName)
             }else{
                 try db.insertOrReplace(objects: homeModel, intoTable: AppHomeListTable.tableName)
@@ -158,12 +157,10 @@ extension ParserManager{
             //512x512 png
             if let image = image.sd_resizedImage(withSizeFixed: NSMakeSize(512, 512), scaleMode: .aspectFit) {
                 if let enData = image.sd_imageData(as: .PNG) {
-                    fileManager.createFile(atPath: Config.appPath+appInfo.srcRoot!+"Logo512.png", contents: enData, attributes: nil)
-                    fileManager.createFile(atPath: Config.appPath+appInfo.appIconPath!, contents: enData, attributes: nil)
+                    fileManager.createFile(atPath: Config.htmlPath+appInfo.appIconPath!, contents: enData, attributes: nil)
 
                     //sync file
-                    fileManager.createFile(atPath: Config.syncPath+appInfo.srcRoot!+"Logo512.png", contents: enData, attributes: nil)
-                    fileManager.createFile(atPath: Config.syncPath+appInfo.appIconPath!, contents: enData, attributes: nil)
+                    fileManager.createFile(atPath: Config.htmlSyncPath+appInfo.appIconPath!, contents: enData, attributes: nil)
                 }
             }
 
@@ -171,10 +168,10 @@ extension ParserManager{
             if appInfo.type == .ios {
                 if let image = image.sd_resizedImage(withSizeFixed: NSMakeSize(57, 57), scaleMode: .aspectFit) {
                     if let enData = image.sd_imageData(as: .PNG) {
-                        fileManager.createFile(atPath: Config.appPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
+                        fileManager.createFile(atPath: Config.htmlPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
 
                         //sync file
-                        fileManager.createFile(atPath: Config.syncPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
+                        fileManager.createFile(atPath: Config.htmlSyncPath+appInfo.appIcon57Path!, contents: enData, attributes: nil)
                     }
                 }
             }
@@ -200,9 +197,13 @@ extension ParserManager{
         BuilderManifest().builder(appInfo)
     }
 
+
     func builderHTML(_ appInfo:AppInfoModel){
         //生成下载页面
         BuilderDetails().builder(appInfo)
+
+        //new.html
+        BuilderDetails().builderNewHTML(appInfo)
 
         //生成list页面
         BuilderList().builder(bundleID: appInfo.bundleID!, appType: appInfo.type)
@@ -215,7 +216,11 @@ extension ParserManager{
 
 
     func parserDone(){
-        try? FileManager.default.removeItem(atPath: Config.outPath)
+        //删除生成的解压目录
+        if Config.deleteUnzipDir{
+            try? FileManager.default.removeItem(atPath: Config.unzipPath)
+        }
+
 
         parserCountTime()
         MacProgressHUD.removeAllHUD()

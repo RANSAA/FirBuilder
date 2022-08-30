@@ -13,7 +13,6 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
     @IBOutlet var bottomView: NSView!
     @IBOutlet var addAreaView: NSView!
     @IBOutlet var infoView: NSView!
-//    @IBOutlet var collectionView: NSCollectionView!
     @IBOutlet var collectionView: NSCollectionView!
 
     @IBOutlet var textFieldCoding: NSTextField!
@@ -25,14 +24,22 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.3) {
+            self.afterSetupUI()
+        }
+    }
+
+    // MARK: afterSetupUI
+    /**
+     由于不知道是什么原因viewDidLoad()要比AppDlegate中的applicationDidFinishLaunching：方法先调用
+     所以这儿的临时解决方案是延迟执行viewDidLoad中的setupUI操作
+     */
+    func afterSetupUI(){
         print("viewDidLoad")
-        Config.setup()
         self.title = titleStr
         self.title = "123"
 
 
-        //        self.view.wantsLayer = true
-        //        self.view.layer?.backgroundColor  = NSColor.gray.cgColor
         self.topView.wantsLayer = true
         self.topView.layer?.backgroundColor = NSColor.white.cgColor
         self.bottomView.wantsLayer = true
@@ -42,17 +49,13 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         self.addAreaView.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
         self.infoView.wantsLayer = true
         self.infoView.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
-        
+
         self.collectionView.wantsLayer = true
         self.collectionView.layer?.backgroundColor = NSColor.white.cgColor
 
-
         self.textFieldCoding.stringValue = Config.serverRoot
-        print("load:\(Config.serverRoot)")
-
 
         loadCollectionView()
-
     }
 
     override var representedObject: Any? {
@@ -195,7 +198,8 @@ extension ViewController{
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let view = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HomeImgItem"), for: indexPath) as! HomeImgItem
         let model = self.dataArray[indexPath.item]
-        view.imgVIew.sd_setImage(with: URL(fileURLWithPath: Config.appPath+model.logoPath!), completed: nil)
+        view.imgVIew.sd_setImage(with: URL.init(fileURLWithPath: Config.htmlPath+model.logoPath!), placeholderImage: nil, options:.refreshCached  , completed: nil)
+
         view.appName.stringValue = model.name ?? "unknown"
         view.bundleID.stringValue = model.bundleID
         view.version.stringValue = model.version!+" (Build \(model.build!))"
@@ -244,6 +248,7 @@ extension ViewController{
 
 //Alert
 extension ViewController{
+
     func openErrorAlert(type:String){
         MacProgressHUD.removeAllHUD()
         DispatchQueue.main.async {
@@ -274,7 +279,7 @@ extension ViewController{
             let alert = NSAlert()
             alert.messageText = msg
             alert.addButton(withTitle: "知道了")
-            alert.alertStyle = .critical
+            alert.alertStyle = .informational
             alert.runModal()
             MacProgressHUD.removeAllHUD()
         }

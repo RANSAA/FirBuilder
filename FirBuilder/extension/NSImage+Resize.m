@@ -50,13 +50,13 @@ static inline CGRect SDCGRectFitWithScaleModeFixed(CGRect rect, CGSize size, SDI
 }
 
 
-@interface SDGraphicsImageRenderer ()
+@interface SDGraphicsImageRendererReview: SDGraphicsImageRenderer
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, strong) SDGraphicsImageRendererFormat *format;
 @end
 
 
-@implementation SDGraphicsImageRenderer
+@implementation SDGraphicsImageRendererReview
 
 - (instancetype)initWithSize:(CGSize)size format:(SDGraphicsImageRendererFormat *)format {
     NSParameterAssert(format);
@@ -111,7 +111,7 @@ static inline CGRect SDCGRectFitWithScaleModeFixed(CGRect rect, CGSize size, SDI
     if (size.width <= 0 || size.height <= 0) return nil;
     SDGraphicsImageRendererFormat *format = [[SDGraphicsImageRendererFormat alloc] init];
     format.scale = self.scale;
-    SDGraphicsImageRenderer *renderer = [[SDGraphicsImageRenderer alloc] initWithSize:size format:format];
+    SDGraphicsImageRendererReview *renderer = [[SDGraphicsImageRendererReview alloc] initWithSize:size format:format];
     UIImage *image = [renderer imageWithActionsFixed:^(CGContextRef  _Nonnull context) {
         [self sd_drawInRectFixed:CGRectMake(0, 0, size.width, size.height) context:context scaleMode:scaleMode clipsToBounds:NO];
     }];

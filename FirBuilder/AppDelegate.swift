@@ -11,13 +11,14 @@ import SDWebImageWebPCoder
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var keyWindow:NSWindow?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print("注意：该程序的ViewController的viewDidLoad方法要比applicationDidFinishLaunching方法先执行")
-        self.addQuitActions()
+//        print("注意：该程序的ViewController的viewDidLoad方法要比applicationDidFinishLaunching方法先执行")
 
         // Insert code here to initialize your application
-//        Config.setup()
+        print("Config setup")
+        Config.setup()
 
 
         // Add coder
@@ -25,14 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         SDImageCodersManager.shared.addCoder(WebPCoder)
 
 
-
-        print("setup:")
-        print(Config.serverRoot)
-
-
-        test()
-
-        
+        self.addQuitActions()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -44,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        printAny(C())
 //        printAny(B())
 //        printAny(A())
-        let objC = C()
+//        let objC = C()
 //        objC.test()
 //
 //        print("objC:\(objC)")

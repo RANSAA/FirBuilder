@@ -35,6 +35,14 @@ class BuilderAppHome{
     <br>
     <h4>当前设备类型类型：<span id="deviceType" style="color: red;">  </span></h4>
     <br>
+    <div style="padding-bottom:12px;">
+        <!-- <button type="button" onclick="window.open('ios.html')" class ="home-button-right">iOS</button> -->
+        <button type="button" onclick="javascript:location.href='index.html'" class ="home-button-right">Home</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" onclick="javascript:location.href='ios.html'" class ="home-button-right">iOS</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" onclick="javascript:location.href='android.html'" class ="home-button-right">Android</button>
+    </div>
 </div>
 
 
@@ -53,10 +61,71 @@ class BuilderAppHome{
 </script>
 """
     var success = false
+
+
+    private func listBodyBagin(_ type:AppType) -> String{
+    let listBodyBagin:String = """
+    <!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="format-detection" content="telephone=no">
+    <title>\(type.rawValue) List</title>
+    <link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
+    <script type="text/javascript" src="src/js/device.js"></script>
+    </head>
+
+    <body style="margin: 0px ;">
+
+    <div class="nav-bar">
+        <br><br><br><br>
+        <h1>\(type.rawValue) List</h1>
+        <br>
+        <h4>当前设备类型类型：<span id="deviceType" style="color: red;">  </span></h4>
+        <br>
+        <div style="padding-bottom:12px;">
+            <!-- <button type="button" onclick="window.open('ios.html')" class ="home-button-right">iOS</button> -->
+            <button type="button" onclick="javascript:location.href='index.html'" class ="home-button-right">Home</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" onclick="javascript:location.href='ios.html'" class ="home-button-right">iOS</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" onclick="javascript:location.href='android.html'" class ="home-button-right">Android</button>
+        </div>
+    </div>
+
+
+
+    <!-- grid开始 -->
+    <div class="home-grid-container" >
+
+    """
+        return listBodyBagin
+    }
+
 }
 
 
 extension BuilderAppHome{
+
+    private func save(string:String){
+        let appHomeData = string.data(using: .utf8)
+        let fileManager = FileManager.default
+        fileManager.createFile(atPath: Config.htmlPath+"index.html", contents: appHomeData, attributes: nil)
+        fileManager.createFile(atPath: Config.htmlSyncPath+"index.html", contents: appHomeData, attributes: nil)
+    }
+
+    private func save(string:String, name:String){
+        let appHomeData = string.data(using: .utf8)
+        let fileManager = FileManager.default
+        fileManager.createFile(atPath: Config.htmlPath+name, contents: appHomeData, attributes: nil)
+        fileManager.createFile(atPath: Config.htmlSyncPath+name, contents: appHomeData, attributes: nil)
+    }
+
     func builder(){
         do {
             var h5:String = ""
@@ -66,23 +135,69 @@ extension BuilderAppHome{
             }
             let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName,orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
             if let list = release {
+
                 h5 += bodyBagin
                 for item in list {
                     h5 += dymaincItem(item)
                 }
                 h5 += bodyEnd
-                save(string: h5)
+                save(string: h5, name: "index.html")
+            }
+        } catch  {
+            print(error)
+        }
+
+        //生成iOS和Android的单独列表
+        builderIosList()
+        builderAndroidList()
+    }
+
+
+    func builderIosList(){
+        do {
+            var h5:String = ""
+            let db = DBService.shared.db
+            defer {
+                db.close()
+            }
+            let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName,
+                                                                where:AppHomeListTable.Properties.type == AppType.ios,
+                                                                orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
+            if let list = release {
+
+                h5 += listBodyBagin(.ios)
+                for item in list {
+                    h5 += dymaincItem(item)
+                }
+                h5 += bodyEnd
+                save(string: h5, name: "ios.html")
             }
         } catch  {
             print(error)
         }
     }
 
-    private func save(string:String){
-        let appHomeData = string.data(using: .utf8)
-        let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.appPath+"index.html", contents: appHomeData, attributes: nil)
-        fileManager.createFile(atPath: Config.syncPath+"index.html", contents: appHomeData, attributes: nil)
+    func builderAndroidList(){
+        do {
+            var h5:String = ""
+            let db = DBService.shared.db
+            defer {
+                db.close()
+            }
+            let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName,
+                                                                where:AppHomeListTable.Properties.type == AppType.android,
+                                                                orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
+            if let list = release {
+                h5 += listBodyBagin(.android)
+                for item in list {
+                    h5 += dymaincItem(item)
+                }
+                h5 += bodyEnd
+                save(string: h5, name: "android.html")
+            }
+        } catch  {
+            print(error)
+        }
     }
 }
 

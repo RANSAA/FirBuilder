@@ -54,18 +54,22 @@ class AppInfoModel: Convertible{
     var selectedVerPath:String? = nil   //选中版本路径
     var detailsH5Path:String? = nil     //当前新生成的H5路径
 
+
     //合成内置资源路径
     func parse(){
         srcRoot = "app/\(self.type.rawValue)/\(self.bundleID ?? "")/"
-        logoPath = srcRoot! + "Logo512.png"
         saveAppName = builderAppName()
         saveAppPath = srcRoot! + saveAppName!
         releasePath = srcRoot! + releaseName
         detailsH5Path   = srcRoot! + randomFileName + ".html"
-//        selectedVerPath = srcRoot! + "details.html"
-        selectedVerPath = detailsH5Path
+        
+//        selectedVerPath = detailsH5Path
+        selectedVerPath =  srcRoot! + "new.html"
 
         appIconPath = srcRoot! + randomFileName + "_512x512.png"
+        logoPath = appIconPath
+
+
         if self.type == .ios {
             appIcon57Path = srcRoot! + randomFileName + "_57x57.png"
             appManifestPath = srcRoot! + randomFileName + "_manifest.plist"

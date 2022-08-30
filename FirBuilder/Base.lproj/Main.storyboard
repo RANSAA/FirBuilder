@@ -747,7 +747,7 @@
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6jQ-W3-Qdx">
                                                 <rect key="frame" x="86" y="66" width="516" height="21"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/" placeholderString="用于设置Coding(也可以是github仓库下载raw主地址)仓库下载主地址，用来提供资源的云存储地址，设置后需要执行重新生成H5" drawsBackground="YES" id="x1z-5F-Xcr">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="用于设置Coding(也可以是github仓库下载raw主地址)仓库下载主地址，用来提供资源的云存储地址，设置后需要执行重新生成H5" drawsBackground="YES" id="x1z-5F-Xcr">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -863,7 +863,6 @@
                     <connections>
                         <outlet property="addAreaView" destination="suJ-TR-9Dp" id="5kb-jI-fxN"/>
                         <outlet property="bottomView" destination="c5W-vE-rN1" id="V9j-hc-3v1"/>
-                        <outlet property="btn" destination="MoZ-ZX-WGq" id="jrZ-UR-J1r"/>
                         <outlet property="collectionView" destination="W98-sj-mgv" id="a5x-7X-F0H"/>
                         <outlet property="infoView" destination="HhN-6Y-t81" id="onL-wg-GNR"/>
                         <outlet property="textFieldCoding" destination="6jQ-W3-Qdx" id="Uig-r0-DPW"/>

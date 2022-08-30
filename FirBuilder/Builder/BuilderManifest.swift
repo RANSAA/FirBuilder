@@ -102,7 +102,7 @@ class BuilderManifest{
                  "metadata":metadata
                 ]
             ]]
-            manifest.write(toFile: Config.appPath+item.appManifestPath!, atomically: true)
+            manifest.write(toFile: Config.htmlPath+item.appManifestPath!, atomically: true)
         }
     }
 }

@@ -273,7 +273,7 @@ NSInteger classSpeed;
             NSString *key = [NSString stringWithFormat:@"positionStart %i",i];
             [animation setValue:key forKey:@"animType"];
             [pointImgViewx.layer addAnimation:animation forKey:key];
-            NSLog(@"key ===  %@",key);
+//            NSLog(@"key ===  %@",key);
             
         }
         

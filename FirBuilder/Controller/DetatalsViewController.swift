@@ -63,10 +63,11 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
     }
 
     func laodData(){
-        self.imgLogo.sd_setImage(with: URL.init(fileURLWithPath: Config.appPath+pushItem.appIconPath!), completed: nil)
-        imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/android.png")
+        self.imgLogo.sd_setImage(with: URL.init(fileURLWithPath: Config.htmlPath+pushItem.appIconPath!), placeholderImage: nil, options:.refreshCached  , completed: nil)
+
+        imgType.image = NSImage(byReferencingFile: Config.htmlPath+"src/images/android.png")
         if pushItem.type == .ios {
-            imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/apple.png")
+            imgType.image = NSImage(byReferencingFile: Config.htmlPath+"src/images/apple.png")
         }
         labName.stringValue = pushItem.name!
         labVersion.stringValue = "版本：\(pushItem.version!) (Build \(pushItem.build!))    大小：\(pushItem.fileSize!)"

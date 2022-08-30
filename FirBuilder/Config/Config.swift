@@ -10,39 +10,82 @@ import Cocoa
 struct Config {
     //测试目录
 //    static let appPath:String = "/Users/kimi/Desktop/Fir/"
-
     static let appPath:String = getAppPath()
-    static let configPath = appPath + "FirBuilderConfig.plist"
-    static let dbPath = appPath + "FirBuilderData.db"
-    static let apktool = ApkToolPath()
-    static private(set) var serverRoot:String = "" //coding git 资源路径
-    static let outPath = appPath+"Unzip/"   //app资源解压路径
-    static let syncPath:String = appPath + "/sync/"    //h5同步仓库目录
+
+    static let configPath = appPath + "config/FirBuilderConfig.plist"
+    static let dbPath = appPath + "config/FirBuilderData.db"
+
+
+    static let apktool = getApkToolPath()
+    static let templatePath = getTemplatePath()
+    static private(set) var serverRoot:String = getServerRoot() //coding git 资源路径
+
+
+    static var deleteUnzipDir = true  //标记在解析成功之后是否删除Unzip目录
+    static let unzipPath = appPath+"Unzip/"   //app资源解压路径
+    static let htmlPath = appPath + "html/"   //生成的静态HTML资源路径
+    static let htmlSyncPath = appPath + "html-sync/" //HTML 同步目录
 
 
     public static func setup(){
-        print(Config.appPath)
-
-        checkCofigFile()
-        BuilderTemplateFile.builder()
-
-        DBService.createTable()
-
-        print("apktool:\(apktool)")
-
+        environment()
     }
 
-    private static func ApkToolPath() -> String{
+
+    private static func environment(){
+        //配置输出目录
+        if !FileManager.default.fileExists(atPath: htmlPath) {
+            try? FileManager.default.createDirectory(atPath: htmlPath, withIntermediateDirectories: true, attributes: nil)
+        }
+        if !FileManager.default.fileExists(atPath: htmlSyncPath) {
+            try? FileManager.default.createDirectory(atPath: htmlSyncPath, withIntermediateDirectories: true, attributes: nil)
+        }
+
+        //拷贝模板中的资源文件
+        BuilderTemplateFile.builder()
+
+        //配置服务器资源存储路径
+//        configPlist()
+
+        //初始化数据库存储信息
+        DBService.createTable()
+
+
+
+        print("appPath:"+appPath)
+        print("htmlPath:"+htmlPath)
+        print("htmlSyncPath:"+htmlSyncPath)
+        print("unzipPath:\(unzipPath)")
+        print("serverRoot:"+serverRoot)
+        print("..........\n\n")
+    }
+
+
+
+
+}
+
+
+extension Config{
+    private static func getApkToolPath() -> String{
         var apkJar:String = "apktool.jar"
         if let path = Bundle.main.path(forResource: "apktool", ofType: "jar", inDirectory: "jar") {
             apkJar = path
         }
         return apkJar;
     }
-}
 
+    private static func getTemplatePath() -> String{
+        var template:String = "Template"
+        if let path = Bundle.main.path(forResource: "Template", ofType: nil) {
+            template = path
+        }
+        if template.last != "/" {
+            template += "/"
+        }
+        return template;
+    }
 
-extension Config{
     //获取当前APP的路径
     private static func getAppPath() -> String{
         var path = CommandLine.arguments[0]
@@ -57,52 +100,33 @@ extension Config{
         return path
     }
 
-    //获取资源配置文件路径
-    private static func getConfigPath() -> String{
-        let path = Bundle.main.resourcePath!
-        return path
-    }
 
-    //FirBuilder.plist配置文件解析
-    private static func checkCofigFile(){
+    private static func getServerRoot() -> String{
         let orgUrl = "https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/"
-        var tmpUrl:String = ""
-        var config:NSMutableDictionary?
+        let orgConfig = NSMutableDictionary(dictionaryLiteral: ("url",orgUrl),
+                                            ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径")
+                                            )
         if FileManager.default.fileExists(atPath: Config.configPath) {
-            config = NSMutableDictionary(contentsOfFile: configPath)
-            if let url = config?["url"] as? String {
-                if url.count > 7 {
-                    tmpUrl = url
+            if let config = NSMutableDictionary(contentsOfFile: configPath) {
+                print("config:\(config)")
+                if let url = config["url"] as? String {
+                    print("has:\(url.hasPrefix("https"))")
+                    if url.hasPrefix("https") {
+                        return url
+                    }
                 }
+                let tmpConfig = config
+                tmpConfig["url"] = orgUrl
+                tmpConfig.write(toFile: Config.configPath, atomically: true)
+            }else{
+                orgConfig.write(toFile: Config.configPath, atomically: true)
             }
-
+            return orgUrl
         }else{
-            config = NSMutableDictionary(dictionaryLiteral: ("url",orgUrl),
-                                  ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径")
-                                  )
-            tmpUrl = orgUrl
+            orgConfig.write(toFile: Config.configPath, atomically: true)
+            return orgUrl
         }
-
-
-        var valid = false
-        if tmpUrl.count > 7 {
-            let endIndex =  tmpUrl.index(tmpUrl.startIndex, offsetBy: 4)
-            let hexf:String = String(tmpUrl[...endIndex])
-            if hexf == "https" && tmpUrl.last == "/" {
-                valid = true
-            }
-        }
-
-        if valid == false {
-            tmpUrl = orgUrl
-            print("FirBuilderConfig.plist url配置不正确，直接读取默认值：\(orgUrl)")
-        }
-
-        config?.setValue(tmpUrl, forKey: "url")
-        config!.write(toFile: Config.configPath, atomically: true)
-        Config.serverRoot = tmpUrl
     }
-
 
     //重新设置serverRoot地址
     static func resetServerRoot(serverRoot:String){
@@ -118,6 +142,8 @@ extension Config{
         Config.serverRoot = serverRoot
         config!.write(toFile: Config.configPath, atomically: true)
         print("serverRoot:\(serverRoot)")
+
+        print("save config:\(config)")
     }
 }
 

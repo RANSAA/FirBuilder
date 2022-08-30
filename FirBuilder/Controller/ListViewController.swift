@@ -7,6 +7,7 @@
 
 import Cocoa
 import WCDBSwift
+import SDWebImage
 
 class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource,ListCellDelegate {
     var lastVC:NSViewController!
@@ -63,17 +64,19 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
     func tableView(_ tableView1: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell:ListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ListCell"), owner: self) as! ListCell
         let model = self.dataAry[row]
-        cell.img.sd_setImage(with: URL.init(fileURLWithPath: Config.appPath+model.appIconPath!), completed: nil)
+        cell.img.sd_setImage(with: URL.init(fileURLWithPath: Config.htmlPath+model.appIconPath!), placeholderImage: nil, options:.refreshCached  , completed: nil)
         cell.labName.stringValue = model.name!
         cell.labBundle.stringValue = model.bundleID!
         cell.labVersion.stringValue = model.version!+" (Build \(model.build!))"
         cell.labUpdate.stringValue = "创建时间：\( DateFormatter.dateStringWith(date: model.createDate))      更新时间\( DateFormatter.dateStringWith(date: model.updateDate))"
-        cell.imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/android.png")
+        cell.imgType.image = NSImage(byReferencingFile: Config.htmlPath+"src/images/android.png")
         if model.type == .ios {
-            cell.imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/apple.png")
+            cell.imgType.image = NSImage(byReferencingFile: Config.htmlPath+"src/images/apple.png")
         }
         cell.row = row
         cell.delegate = self
+
+        print(Config.htmlPath+model.appIconPath!)
         return cell
     }
 
@@ -93,6 +96,8 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
 
         tableView.reloadData()
         print("tableViewSelectionDidChange row:\(row)")
+
+
     }
 
     @IBAction func backAction(_ sender: NSButton) {
@@ -154,8 +159,8 @@ extension ListViewController{
             BuilderAppHome().builder()
 
             let fileManager = FileManager.default
-            try? fileManager.removeItem(atPath: Config.appPath+pushItem.srcRoot!)
-            try? fileManager.removeItem(atPath: Config.syncPath+pushItem.srcRoot!)
+            try? fileManager.removeItem(atPath: Config.htmlPath+pushItem.srcRoot!)
+            try? fileManager.removeItem(atPath: Config.htmlSyncPath+pushItem.srcRoot!)
 
         }catch{
             print(error)
@@ -197,21 +202,7 @@ extension ListViewController
             }
         }else{
             print("cancel")
-        }
-
-
-
-
-//        if btnIndex == 0 {
-//            topCellActin(model)
-//        }else{
-//            deleteCellAction(model)
-//        }
-//        loadData()
-//        if self.dataAry.count < 1 {
-//            deleteApp()
-//        }
-    }
+        }    }
 
     func topCellActin(_ model:AppReleaseListTable){
         do{
@@ -227,7 +218,11 @@ extension ListViewController
 
             BuilderList().builderAll()
 
+            //生成new.html
+            BuilderDetails().builderNewHTML(model)
+
             updateAppHomeList(model, update: update)
+
         }catch{
 
         }
@@ -250,20 +245,20 @@ extension ListViewController
         }
 
         let fileManager = FileManager.default
-        try? fileManager.removeItem(atPath: Config.appPath+model.saveAppPath!)
-        try? fileManager.removeItem(atPath: Config.appPath+model.detailsH5Path!)
-        try? fileManager.removeItem(atPath: Config.appPath+model.appIconPath!)
+        try? fileManager.removeItem(atPath: Config.htmlPath+model.saveAppPath!)
+        try? fileManager.removeItem(atPath: Config.htmlPath+model.detailsH5Path!)
+        try? fileManager.removeItem(atPath: Config.htmlPath+model.appIconPath!)
 
-        try? fileManager.removeItem(atPath: Config.syncPath+model.saveAppPath!)
-        try? fileManager.removeItem(atPath: Config.syncPath+model.detailsH5Path!)
-        try? fileManager.removeItem(atPath: Config.syncPath+model.appIconPath!)
+        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.saveAppPath!)
+        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.detailsH5Path!)
+        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.appIconPath!)
 
         if model.type == .ios {
-            try? fileManager.removeItem(atPath: Config.appPath+model.appIcon57Path!)
-            try? fileManager.removeItem(atPath: Config.appPath+model.appManifestPath!)
+            try? fileManager.removeItem(atPath: Config.htmlPath+model.appIcon57Path!)
+            try? fileManager.removeItem(atPath: Config.htmlPath+model.appManifestPath!)
 
-            try? fileManager.removeItem(atPath: Config.syncPath+model.appIcon57Path!)
-            try? fileManager.removeItem(atPath: Config.syncPath+model.appManifestPath!)
+            try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.appIcon57Path!)
+            try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.appManifestPath!)
         }
 
         if self.dataAry.count < 1 {
@@ -280,8 +275,12 @@ extension ListViewController
             defer {
                 db.close()
             }
-            let properties = [AppHomeListTable.Properties.name,AppHomeListTable.Properties.version,AppHomeListTable.Properties.build,AppHomeListTable.Properties.selectedVerPath,AppHomeListTable.Properties.updateDate]
-            let row:[ColumnEncodable] = [model.name!,model.version!,model.build!,model.detailsH5Path!,update]
+            let properties = [AppHomeListTable.Properties.name,
+                              AppHomeListTable.Properties.version,
+                              AppHomeListTable.Properties.build,
+                              AppHomeListTable.Properties.logoPath,
+                              AppHomeListTable.Properties.updateDate]
+            let row:[ColumnEncodable] = [model.name!,model.version!,model.build!,model.appIconPath!,update]
             try db.update(table: AppHomeListTable.tableName, on: properties, with: row, where: AppHomeListTable.Properties.bundleID == model.bundleID! && AppHomeListTable.Properties.type == model.type)
 
             BuilderAppHome().builder()

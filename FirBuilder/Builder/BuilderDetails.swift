@@ -219,10 +219,12 @@ extension BuilderDetails{
             defer {
                 db.close()
             }
-            let release:[AppReleaseListTable]? = try db.getObjects(fromTable: AppReleaseListTable.tableName)
+            let release:[AppReleaseListTable]? = try db.getObjects(fromTable: AppReleaseListTable.tableName, orderBy:[AppReleaseListTable.Properties.updateDate.asOrder(by: .ascending)])
             if let list = release {
                 for item in list {
                     builder(item)
+                    //new.html 每一条记录都生成，但是直接覆盖旧的new.html
+                    builderNewHTML(item)
                 }
             }
         } catch  {
@@ -235,16 +237,37 @@ extension BuilderDetails{
         let h5String:String = h5Headder+dymaninJS(item)
         let detailsData = h5String.data(using: .utf8)
         let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.appPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
-        fileManager.createFile(atPath: Config.syncPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
+        fileManager.createFile(atPath: Config.htmlPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
+        fileManager.createFile(atPath: Config.htmlSyncPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
     }
 
     func builder(_ item:AppReleaseListTable){
         let h5String:String = h5Headder+dymaninJS(item)
         let detailsData = h5String.data(using: .utf8)
         let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.appPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
-        fileManager.createFile(atPath: Config.syncPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
+        fileManager.createFile(atPath: Config.htmlPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
+        fileManager.createFile(atPath: Config.htmlSyncPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
+    }
+
+
+    //生成new.html
+    func builderNewHTML(_ info:Any){
+        if let item = info as? AppInfoModel {
+            let h5String:String = h5Headder+dymaninJS(item)
+            let detailsData = h5String.data(using: .utf8)
+            let fileManager = FileManager.default
+            fileManager.createFile(atPath: Config.htmlPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
+            fileManager.createFile(atPath: Config.htmlSyncPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
+        }
+        if let item = info as? AppReleaseListTable {
+            print("Config.serverRoot:   \(Config.serverRoot)");
+            print("new.html: \(Config.htmlPath+item.srcRoot!+"new.html")")
+            let h5String:String = h5Headder+dymaninJS(item)
+            let detailsData = h5String.data(using: .utf8)
+            let fileManager = FileManager.default
+            fileManager.createFile(atPath: Config.htmlPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
+            fileManager.createFile(atPath: Config.htmlSyncPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
+        }
     }
 }
 
@@ -253,7 +276,6 @@ extension BuilderDetails{
     //https://www.mfpud.com/topics/302/
     //ipa 安装示例
     //ios "itms-services://?action=download-manifest&url=https://127.0.0.1/ipa/manifest.plist"
-
 
     func dymaninJS(_ item:AppReleaseListTable) -> String{
         var install:String = Config.serverRoot+item.saveAppPath!

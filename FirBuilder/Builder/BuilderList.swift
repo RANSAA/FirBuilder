@@ -167,8 +167,8 @@ extension BuilderList{
         if success {
             let detailsData = h5String.data(using: .utf8)
             let fileManager = FileManager.default
-            fileManager.createFile(atPath: Config.appPath+htmlPath, contents: detailsData, attributes: nil)
-            fileManager.createFile(atPath: Config.syncPath+htmlPath, contents: detailsData, attributes: nil)
+            fileManager.createFile(atPath: Config.htmlPath+htmlPath, contents: detailsData, attributes: nil)
+            fileManager.createFile(atPath: Config.htmlSyncPath+htmlPath, contents: detailsData, attributes: nil)
         }
     }
 

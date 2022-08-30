@@ -33,7 +33,7 @@ class APKParser:NSObject{
     }
 
     func upzip(){
-        let outPath = Config.outPath
+        let outPath = Config.unzipPath
 
         //OC使用NSTask
         let task = Process()
@@ -84,8 +84,8 @@ class APKParser:NSObject{
 
 
     func parser(){
-        let ymlPath = Config.outPath + "apktool.yml"
-        let xmlPath = Config.outPath + "AndroidManifest.xml"
+        let ymlPath = Config.unzipPath + "apktool.yml"
+        let xmlPath = Config.unzipPath + "AndroidManifest.xml"
 
         if FileManager.default.fileExists(atPath: xmlPath) == false{
             manager.openErrorAlert(msg: xmlPath + "文件不存在")
@@ -148,7 +148,7 @@ class APKParser:NSObject{
 
                 //@string/a4 -> res/values/strig.xml->a4
                 if name.contains("@string") {
-                    let namePath = Config.outPath + "res/values/strings.xml"
+                    let namePath = Config.unzipPath + "res/values/strings.xml"
                     if let nameXmlStr = try? String(contentsOfFile: namePath) {
                         let nameXML = XMLHash.parse(nameXmlStr)
                         let value = name.components(separatedBy: "/").last
@@ -183,7 +183,7 @@ class APKParser:NSObject{
                     iconPath = icon.replacingOccurrences(of: "@drawable", with: "drawable")
                 }
 
-                iconPath = Config.outPath + "res/" + iconPath //+ ".png"
+                iconPath = Config.unzipPath + "res/" + iconPath //+ ".png"
                 if !FileManager.default.fileExists(atPath: iconPath) {
                     iconPath += ".png"
                 }

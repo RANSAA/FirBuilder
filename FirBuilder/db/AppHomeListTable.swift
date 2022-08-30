@@ -26,7 +26,7 @@ class AppHomeListTable: TableCodable,Convertible {
     var srcRoot:String? = nil   //APP存储位置的根目录地址，如app/ios/com.sayaDev.test/
     var logoPath:String? = nil  //logo地址,如Logo512x512.png文件的路径
     var releasePath:String? = nil   //releaseList.html文件地址
-    var selectedVerPath:String? = nil   //选中版本的details.html文件路径
+    var selectedVerPath:String? = "new.html"   //选中版本的details.html文件路径
 
     var createDate:Date = Date()
     var updateDate:Date = Date()

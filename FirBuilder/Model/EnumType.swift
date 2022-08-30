@@ -16,8 +16,8 @@ import KakaJSON
 //ExpressionConvertible -> AppReleaseListTable.Properties.type == model.type
 enum AppType:String,ColumnCodable,ExpressionConvertible,ConvertibleEnum {
 
-    case ios = "ios"
-    case android = "android"
+    case ios = "iOS"
+    case android = "Android"
 
 
     //ExpressionConvertible WCDB 自定义属性 where ==
@@ -51,7 +51,7 @@ enum FileExtension:String,ColumnJSONCodable,ConvertibleEnum{
 
 
 enum SignatureType:String, ColumnJSONCodable,ConvertibleEnum {
-    case release    = "Release"
+    case release    = "正式版"
     case adHoc      = "Ad-Hoc"
     case enterprise = "Enterprise"
     case localTest  = "Local-Test"

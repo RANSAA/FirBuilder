@@ -37,7 +37,7 @@ class IPAParser:NSObject{
     }
 
     func unzip(){
-        let destinationPath = Config.outPath
+        let destinationPath = Config.unzipPath
         let success =  SSZipArchive.unzipFile(atPath: self.path, toDestination: destinationPath)
         if success {
             print("ipa解压成功")
@@ -49,7 +49,7 @@ class IPAParser:NSObject{
     }
 
     func parser(){
-        let unZipPath = Config.outPath+"Payload/"
+        let unZipPath = Config.unzipPath+"Payload/"
         do {
             let items = try FileManager.default.contentsOfDirectory(atPath: unZipPath)
             print(items)
