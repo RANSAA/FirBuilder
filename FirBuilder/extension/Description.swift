@@ -9,7 +9,7 @@ import Foundation
 
 
 
-// MARK: 获取变量内存地址
+// MARK: - 获取变量内存地址
 func address<T: AnyObject>(o: T) -> String {
 //    let res = "\(Unmanaged<AnyObject>.passUnretained(o).toOpaque())"
     let res = String.init(format: "%018p", unsafeBitCast(o, to: Int.self))
@@ -22,7 +22,7 @@ func address(o: UnsafeRawPointer) -> String {
 
 
 
-// MARK: 使对象自动支持description的解决方法
+// MARK: - Swift：使对象自动支持description的解决方法
 /**
  要求：需要继承NSObject或者实现CustomStringConvertible，CustomDebugStringConvertible协议
  并在 var description:String{ get }协议中实现下列操作
@@ -33,25 +33,28 @@ func address(o: UnsafeRawPointer) -> String {
 
 
 
-// MARK: 获取class对象中的所有属性名称，利用objc runtime特性获取
 
+// MARK: - 获取class中的所有属性名称，变量名称， 利用objc runtime 特性获取
 
-//// 获取指定class对象的变量名，PS:不包括父类变量
-//public func getAllIvars(class cls:AnyClass?) -> [String]{
-//    var result = [String]()
-//    let count = UnsafeMutablePointer<UInt32>.allocate(capacity: 0)
-//    let buff = class_copyIvarList(cls, count)
-//    let countInt = Int(count[0])
-//    for i in 0..<countInt {
-//        if let temp = buff?[i],let cname = ivar_getName(temp) {
-//            let proper = String(cString: cname)
-//            result.append(proper)
-//        }
-//    }
-//    free(count)
-//    free(buff)
-//    return result
-//}
+/**
+ 获取指定class对象的变量名，PS:不包括父类变量
+ */
+public func getAllIvars(class cls:AnyClass?) -> [String]{
+    var result = [String]()
+    let count = UnsafeMutablePointer<UInt32>.allocate(capacity: 0)
+    let buff = class_copyIvarList(cls, count)
+    let countInt = Int(count[0])
+    for i in 0..<countInt {
+        if let temp = buff?[i],let cname = ivar_getName(temp) {
+            let proper = String(cString: cname)
+            result.append(proper)
+        }
+    }
+    free(count)
+    free(buff)
+    return result
+}
+
 
 
 /**
@@ -109,7 +112,7 @@ public func printAllPropertys(object:AnyObject?, _ hasSuper:Bool = true) {
 
 
 
-// MARK: 获取任何类型对象中的所有变量名称 -- 使用Mirror反射获取（推荐使用）
+// MARK: - Swift:获取任何类型对象中的所有变量名称 -- 使用Mirror反射获取（推荐使用）
 
 
 /**
@@ -194,4 +197,5 @@ public func printAllIvars(_ any: Any?, _ hasSuper:Bool = true, _ hasAddress:Bool
     }
     return res
 }
+
 

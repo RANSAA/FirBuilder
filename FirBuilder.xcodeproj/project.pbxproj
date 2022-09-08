@@ -43,6 +43,7 @@
 		3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */; };
 		3FA8A5AB27BCC3AE004B3E9D /* jar in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8A5AA27BCC3AE004B3E9D /* jar */; };
 		3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */; };
+		3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */; };
 		3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */; };
 		3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */; };
 		3FE9033827B0D036000BDEFE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033727B0D036000BDEFE /* Data.swift */; };
@@ -99,6 +100,7 @@
 		3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletaButton.swift; sourceTree = "<group>"; };
 		3FA8A5AA27BCC3AE004B3E9D /* jar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = jar; sourceTree = "<group>"; };
 		3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KakaJSON.swift; path = FirBuilder/extension/KakaJSON.swift; sourceTree = SOURCE_ROOT; };
 		3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAndroidXml.swift; sourceTree = "<group>"; };
 		3FE9033727B0D036000BDEFE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				3F0B91EA27BA4A230002BDEB /* DateFormatter.swift */,
 				3F1541B427BBFFE0005F9A99 /* NSImage+Resize.h */,
 				3F1541B527BBFFE1005F9A99 /* NSImage+Resize.m */,
+				3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				3F2FB9F9283E5306005102AF /* ParserEmbedded.swift in Sources */,
 				3FEC70E3279FD50B00234A67 /* Config.swift in Sources */,
 				3F65465327BA0064007EF422 /* FileManager.swift in Sources */,
+				3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */,
 				3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */,
 				3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */,
 				3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */,

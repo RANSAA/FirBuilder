@@ -7,6 +7,8 @@
 
 import Foundation
 import WCDBSwift
+import KakaJSON
+
 
 class BuilderManifest{
 
@@ -36,7 +38,7 @@ class BuilderManifest{
                 "bundle-identifier":item.bundleID!,
                 "bundle-version":item.version!,
                 "kind":"software",
-//                "subtitle":"sub Title",
+                "subtitle":item.name!,
                 "title":item.name!
             ]
 
@@ -47,51 +49,13 @@ class BuilderManifest{
 
             let itemFull:[String : Any] = [
                 "kind":"full-size-image",
-//                "needs-shine":false,
+                "needs-shine":false,
                 "url":Config.serverRoot+item.appIconPath!
             ]
 
             let itemDisplay:[String : Any] = [
                 "kind":"display-image",
-//                "needs-shine":false,
-                "url":Config.serverRoot+item.appIcon57Path!
-            ]
-
-
-            //manifest file
-            let manifest:NSDictionary = ["items":[
-                ["assets":[itemApp,itemFull,itemDisplay],
-                 "metadata":metadata
-                ]
-            ]]
-            manifest.write(toFile: Config.appPath+item.appManifestPath!, atomically: true)
-        }
-    }
-
-    func builder(_ item: AppReleaseListTable){
-        if item.type == .ios {
-            let metadata:[String:String] = [
-                "bundle-identifier":item.bundleID!,
-                "bundle-version":item.version!,
-                "kind":"software",
-//                "subtitle":"sub Title",
-                "title":item.name!
-            ]
-
-            let itemApp = [
-                "kind":"software-package",
-                "url":Config.serverRoot+item.saveAppPath!
-            ]
-
-            let itemFull:[String : Any] = [
-                "kind":"full-size-image",
-//                "needs-shine":false,
-                "url":Config.serverRoot+item.appIconPath!
-            ]
-
-            let itemDisplay:[String : Any] = [
-                "kind":"display-image",
-//                "needs-shine":false,
+                "needs-shine":false,
                 "url":Config.serverRoot+item.appIcon57Path!
             ]
 
@@ -103,6 +67,16 @@ class BuilderManifest{
                 ]
             ]]
             manifest.write(toFile: Config.htmlPath+item.appManifestPath!, atomically: true)
+        }
+
+
+    }
+
+
+    func builder(_ item: AppReleaseListTable){
+        if let model = item.kj.modelToModel(AppInfoModel.self) {
+//            print("info json:\(printAllIvars(model))")
+            builder(model)
         }
     }
 }

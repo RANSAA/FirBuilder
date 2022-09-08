@@ -88,7 +88,7 @@ class BuilderList{
     function updateTypeIcon(){
         var appIcons = document.getElementsByName("appTypeIcon")
         appIcons.forEach((item,index,array)=>{
-            if (appType == "ios") {
+            if (appType == "\(AppType.ios.rawValue)") {
                 item.src = iosIcon
             }else{
                 item.src = androidIcon

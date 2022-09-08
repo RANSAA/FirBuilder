@@ -14,7 +14,7 @@ function getDeviceName(){
     } else if (/mac/.test(agent)) {
         return 'Mac';
     } else {
-        return 'other';
+        return 'Other';
     }
 }
 
@@ -23,13 +23,13 @@ function getDeviceType(){
     let agent = navigator.userAgent.toLowerCase();
     console.log(agent)
     if (/iphone|ipod/.test(agent) && /mobile/.test(agent)) {
-        return 'ios';
+        return 'iOS';
     } else if (/ipad/.test(agent) && /mobile/.test(agent)) {
-        return 'ios';
+        return 'iOS';
     } else if (/android/.test(agent) && /mobile/.test(agent)) {
         return 'android';
     } else {
-        return 'other';
+        return 'Other';
     } 
 }
 

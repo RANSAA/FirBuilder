@@ -10,7 +10,6 @@ import Foundation
 
 
 class BuilderDetails{
-
     let h5Headder:String = """
 <!DOCTYPE html>
 <html lang="en-US">
@@ -138,8 +137,8 @@ class BuilderDetails{
         hiddenWithID("btn3")
         hiddenWithID("btn4")
         var devideType = getDeviceType()
-        if (appType == "ios") {
-            if(devideType == "ios"){
+        if (appType == "\(AppType.ios.rawValue)") {
+            if(devideType == "\(AppType.ios.rawValue)"){
                 showWithID("btn0")
                 // showWithID("btn1")
                 showWithID("btn2")
@@ -150,7 +149,7 @@ class BuilderDetails{
             // if (devideType == "android") {
             //     showWithID("btn0")
             // }
-            if (devideType != "ios") {
+            if (devideType != "\(AppType.ios.rawValue)") {
                 showWithID("btn0")
             }
         }
@@ -174,7 +173,7 @@ class BuilderDetails{
         document.getElementById("appSize").innerHTML = appSize
         document.getElementById("appUpdateTime").innerHTML = appUpdateTime
 
-        if (appType == "ios") {
+        if (appType == "\(AppType.ios.rawValue)" ) {
             document.getElementById("appTypeIconPath").src = iosIcon
         }else{
             document.getElementById("appTypeIconPath").src = androidIcon
@@ -306,7 +305,7 @@ extension BuilderDetails{
     //app install url
     let installURL = "\(install)"
 
-    //动态记入设备列表
+    //动态写入设备列表
     let deivces = "\(devices)"
 
 </script>
@@ -346,7 +345,7 @@ extension BuilderDetails{
     let installURL = "\(install)"
 
 
-    //动态记入设备列表
+    //动态写入设备列表
     let deivces = "\(devices)"
 
 </script>
