@@ -12,7 +12,6 @@
 		3F0B91E827BA0C860002BDEB /* BuilderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0B91E727BA0C860002BDEB /* BuilderList.swift */; };
 		3F0B91EB27BA4A230002BDEB /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0B91EA27BA4A230002BDEB /* DateFormatter.swift */; };
 		3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0B91F027BA7F140002BDEB /* BuilderManifest.swift */; };
-		3F0B91FE27BA864B0002BDEB /* Template in Resources */ = {isa = PBXBuildFile; fileRef = 3F0B91FD27BA864B0002BDEB /* Template */; };
 		3F13760027B256C400266468 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1375FF27B256C400266468 /* NSObject.swift */; };
 		3F13760327B25BEA00266468 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13760227B25BEA00266468 /* Description.swift */; };
 		3F13760627B279C000266468 /* FileHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13760527B279C000266468 /* FileHash.swift */; };
@@ -22,6 +21,9 @@
 		3F20FB1827AFC38100382D08 /* AppHomeListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */; };
 		3F20FB1B27AFC40C00382D08 /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1A27AFC40C00382D08 /* EnumType.swift */; };
 		3F20FB3727AFD4D800382D08 /* AppReleaseListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */; };
+		3F27E4C22924BE3F0035DC53 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C12924BE3F0035DC53 /* main.swift */; };
+		3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C62924D2970035DC53 /* ImageTool.swift */; };
+		3F27E4D82924F0F20035DC53 /* libs in Resources */ = {isa = PBXBuildFile; fileRef = 3F27E4D72924F0F20035DC53 /* libs */; };
 		3F2FB9F9283E5306005102AF /* ParserEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */; };
 		3F5EDC6527B934B700853A5D /* IPAParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6427B934B700853A5D /* IPAParser.swift */; };
 		3F5EDC6B27B9352D00853A5D /* APKParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6A27B9352D00853A5D /* APKParser.swift */; };
@@ -41,7 +43,6 @@
 		3F9E1B8027B004EC00A99391 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9E1B7F27B004EC00A99391 /* AddViewController.swift */; };
 		3FA2023328B9D08500DD6390 /* BuilderTemplateFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA2023228B9D08500DD6390 /* BuilderTemplateFile.swift */; };
 		3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */; };
-		3FA8A5AB27BCC3AE004B3E9D /* jar in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8A5AA27BCC3AE004B3E9D /* jar */; };
 		3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */; };
 		3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */; };
 		3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */; };
@@ -66,7 +67,6 @@
 		3F0B91E727BA0C860002BDEB /* BuilderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderList.swift; sourceTree = "<group>"; };
 		3F0B91EA27BA4A230002BDEB /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		3F0B91F027BA7F140002BDEB /* BuilderManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderManifest.swift; sourceTree = "<group>"; };
-		3F0B91FD27BA864B0002BDEB /* Template */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Template; sourceTree = "<group>"; };
 		3F1375FF27B256C400266468 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		3F13760227B25BEA00266468 /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		3F13760527B279C000266468 /* FileHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHash.swift; sourceTree = "<group>"; };
@@ -79,6 +79,9 @@
 		3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeListTable.swift; sourceTree = "<group>"; };
 		3F20FB1A27AFC40C00382D08 /* EnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumType.swift; sourceTree = "<group>"; };
 		3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReleaseListTable.swift; sourceTree = "<group>"; };
+		3F27E4C12924BE3F0035DC53 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		3F27E4C62924D2970035DC53 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
+		3F27E4D72924F0F20035DC53 /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libs; sourceTree = "<group>"; };
 		3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserEmbedded.swift; sourceTree = "<group>"; };
 		3F5EDC6427B934B700853A5D /* IPAParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAParser.swift; sourceTree = "<group>"; };
 		3F5EDC6A27B9352D00853A5D /* APKParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APKParser.swift; sourceTree = "<group>"; };
@@ -98,7 +101,6 @@
 		3F9E1B7F27B004EC00A99391 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		3FA2023228B9D08500DD6390 /* BuilderTemplateFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuilderTemplateFile.swift; sourceTree = "<group>"; };
 		3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletaButton.swift; sourceTree = "<group>"; };
-		3FA8A5AA27BCC3AE004B3E9D /* jar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = jar; sourceTree = "<group>"; };
 		3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KakaJSON.swift; path = FirBuilder/extension/KakaJSON.swift; sourceTree = SOURCE_ROOT; };
 		3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
@@ -228,8 +230,7 @@
 		3FEC70CB279FCB5B00234A67 /* FirBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				3FA8A5AA27BCC3AE004B3E9D /* jar */,
-				3F0B91FD27BA864B0002BDEB /* Template */,
+				3F27E4D72924F0F20035DC53 /* libs */,
 				3F20FB1D27AFC42700382D08 /* Model */,
 				3FEC712827A00FB700234A67 /* db */,
 				3FEC70E5279FDA6B00234A67 /* extension */,
@@ -240,6 +241,7 @@
 				3F8A2EA327BB3148003EFFB4 /* View */,
 				3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */,
 				3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */,
+				3F27E4C12924BE3F0035DC53 /* main.swift */,
 				3FEC70D0279FCB6400234A67 /* Assets.xcassets */,
 				3FEC70D2279FCB6400234A67 /* Main.storyboard */,
 				3FEC70D5279FCB6400234A67 /* Info.plist */,
@@ -271,6 +273,7 @@
 				3F1541B427BBFFE0005F9A99 /* NSImage+Resize.h */,
 				3F1541B527BBFFE1005F9A99 /* NSImage+Resize.m */,
 				3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */,
+				3F27E4C62924D2970035DC53 /* ImageTool.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -368,9 +371,8 @@
 				3F8A2EB227BB87BB003EFFB4 /* DetatalsViewController.xib in Resources */,
 				3F8A2EBF27BB955E003EFFB4 /* ListCell.xib in Resources */,
 				3FEC70D1279FCB6400234A67 /* Assets.xcassets in Resources */,
-				3FA8A5AB27BCC3AE004B3E9D /* jar in Resources */,
 				3F8A2EA727BB3179003EFFB4 /* HomeImgItem.xib in Resources */,
-				3F0B91FE27BA864B0002BDEB /* Template in Resources */,
+				3F27E4D82924F0F20035DC53 /* libs in Resources */,
 				3FEC70D4279FCB6400234A67 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,10 +440,12 @@
 				3F5EDC6527B934B700853A5D /* IPAParser.swift in Sources */,
 				3F8A2EB527BB905E003EFFB4 /* ListCell.swift in Sources */,
 				3FEC70EE279FED6C00234A67 /* GeneratorID.swift in Sources */,
+				3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */,
 				3F13760327B25BEA00266468 /* Description.swift in Sources */,
 				3F13760627B279C000266468 /* FileHash.swift in Sources */,
 				3F15415627BBCF7D005F9A99 /* MacProgressHUD.m in Sources */,
 				3F13760027B256C400266468 /* NSObject.swift in Sources */,
+				3F27E4C22924BE3F0035DC53 /* main.swift in Sources */,
 				3F20FB3727AFD4D800382D08 /* AppReleaseListTable.swift in Sources */,
 				3FA2023328B9D08500DD6390 /* BuilderTemplateFile.swift in Sources */,
 				3F20FB1B27AFC40C00382D08 /* EnumType.swift in Sources */,

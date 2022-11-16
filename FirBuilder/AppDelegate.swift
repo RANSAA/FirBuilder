@@ -9,18 +9,19 @@ import Cocoa
 import SDWebImageWebPCoder
 
 
-@main
+//使用自定义main函数，具体查看main.swfit
+//@main
 class AppDelegate: NSObject, NSApplicationDelegate {
     var keyWindow:NSWindow?
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 //        print("注意：该程序的ViewController的viewDidLoad方法要比applicationDidFinishLaunching方法先执行")
 
         // Insert code here to initialize your application
-        print("Config setup")
-        Config.setup()
 
-
+        //配置
+//        Config.setup()
+        
         // Add coder
         let WebPCoder = SDImageWebPCoder.shared
         SDImageCodersManager.shared.addCoder(WebPCoder)

@@ -10,7 +10,7 @@ import Cocoa
 struct Config {
     //测试目录
 //    static let appPath:String = "/Users/kimi/Desktop/Fir/"
-    static let appPath:String = getAppPath()
+    static var appPath:String = getAppPath()
 
     static let configPath = appPath + "config/FirBuilderConfig.plist"
     static let dbPath = appPath + "config/FirBuilderData.db"
@@ -27,10 +27,16 @@ struct Config {
     static let htmlSyncPath = appPath + "html-sync/" //HTML 同步目录
 
 
-    public static func setup(){
+
+    public static func setup(buildPath:String? = nil, serverRoot:String? = nil){
+        if let buildPath = buildPath {
+            appPath = buildPath
+        }
+        if let serverRoot = serverRoot {
+            self.serverRoot = serverRoot
+        }
         environment()
     }
-
 
     private static func environment(){
         //配置输出目录
@@ -44,40 +50,36 @@ struct Config {
         //拷贝模板中的资源文件
         BuilderTemplateFile.builder()
 
-        //配置服务器资源存储路径
-//        configPlist()
-
+        
         //初始化数据库存储信息
         DBService.createTable()
 
 
-
+        print("..........")
         print("appPath:"+appPath)
         print("htmlPath:"+htmlPath)
         print("htmlSyncPath:"+htmlSyncPath)
         print("unzipPath:\(unzipPath)")
         print("serverRoot:"+serverRoot)
-        print("..........\n\n")
+        print("..........")
     }
-
-
-
 
 }
 
 
 extension Config{
+    
     private static func getApkToolPath() -> String{
         var apkJar:String = "apktool.jar"
-        if let path = Bundle.main.path(forResource: "apktool", ofType: "jar", inDirectory: "jar") {
+        if let path = Bundle.main.path(forResource: "apktool", ofType: "jar", inDirectory: "libs/jar") {
             apkJar = path
         }
         return apkJar;
     }
 
     private static func getTemplatePath() -> String{
-        var template:String = "Template"
-        if let path = Bundle.main.path(forResource: "Template", ofType: nil) {
+        var template:String = "libs/Template"
+        if let path = Bundle.main.path(forResource: template, ofType: nil) {
             template = path
         }
         if template.last != "/" {
@@ -97,6 +99,7 @@ extension Config{
         path = String(path[..<index!])
         index = path.lastIndex(of: "/")
         path = String(path[...index!])
+        path += "FirBuilder/"
         return path
     }
 
@@ -108,9 +111,7 @@ extension Config{
                                             )
         if FileManager.default.fileExists(atPath: Config.configPath) {
             if let config = NSMutableDictionary(contentsOfFile: configPath) {
-                print("config:\(config)")
                 if let url = config["url"] as? String {
-                    print("has:\(url.hasPrefix("https"))")
                     if url.hasPrefix("https") {
                         return url
                     }
@@ -143,7 +144,6 @@ extension Config{
         config!.write(toFile: Config.configPath, atomically: true)
         print("serverRoot:\(serverRoot)")
 
-        print("save config:\(config)")
     }
 }
 
