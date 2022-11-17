@@ -8,25 +8,44 @@
 import Foundation
 import Cocoa
 import KakaJSON
-import HandyJSON
+//import HandyJSON
 
 
 
 // 解析ipa的embedded.mobileprovision文件
-@objcMembers class ParserEmbedded{
-
+@objcMembers class ParserEmbedded:Convertible{
     var localProvision:Bool = false         //true = 本地签名标记
     var provisionsAllDevices:Bool = false   //true = Enterprise
-    var provisionedDevices:[String] = []    //count>0 = ad-Hot
-    var creationDate:Date = Date()
-    var cxpirationDate:Date = Date()
-    var platform:[String] = []
-
+    var provisionedDevices:[String] = []    //count>0 = ad-Hoc
+    var creationDate:Date = Date() //证书创建时间
+    var cxpirationDate:Date = Date() //证书过期时间
+    var platform:[String] = [] //平台类型
     var hasValid:Bool = true //mobileprovision文件是否有效或存在
+    
+    /**
+     签名类型：
+     0: 未知
+     1: XCode 测试签名(7天)
+     2: 企业签名
+     3: Ad-Hoc签名
+     */
+    var signType:Int{
+        if hasValid == false {
+            return 0
+        }
+        if localProvision == true {
+            return 1
+        }
+        if provisionsAllDevices == true {
+            return 2
+        }
+        if localProvision == false && provisionsAllDevices == false {
+            return 3
+        }
+        return 0
+    }
 
-    var test:Bool?
-
-    required   init(){}
+    required  init(){}
 
 
     /**
@@ -36,7 +55,6 @@ import HandyJSON
         if let resultStr = String.read(filePath: path) {
             let startInt = resultStr.findFirst("<?xml")
             let lastIndex = resultStr.findLast("</plist>")
-
             if  startInt == -1 || lastIndex == -1 {
                 print("mobileprovision文件解析失败！")
                 return nil
@@ -61,11 +79,15 @@ import HandyJSON
         if let str = self.readEmbeddedFile(path: path) {
             try? str.write(toFile: toPlistPath, atomically: true, encoding: .utf8)
             if let dic = NSDictionary(contentsOfFile: toPlistPath) {
+                
+//                print("embedded filePath:\(path)")
+//                print("embedded toPlistPath:\(toPlistPath)")
+//                print("embedded:\n\(dic)\nembedded:")
+                
                 if let localProvision = dic["LocalProvision"] as? Bool  {
                     self.localProvision = localProvision
                     print("本地签名，不可上传")
                 }
-
                 if let provisionsAllDevices = dic["ProvisionsAllDevices"] as? Bool{ //Enterprise
                     self.provisionsAllDevices = provisionsAllDevices
                 }
@@ -91,25 +113,22 @@ import HandyJSON
                 self.hasValid = false
                 print("不是标准的smobileprovision文件")
             }
-
         }else{
             self.hasValid = false
             print("mobileprovision文件不存在")
-
         }
     }
 
-//    override func value(forUndefinedKey key: String) -> Any?{
-//        return nil
-//    }
-
     
     init(filePath path:String){
-//        super.init()
-        let fileName = path.fileName
-        let index = path.findLast(fileName)
-        let dir = path.subStringTo(index)
-        let plistPath = dir + "embedded.plist"
+
+//        let fileName = path.fileName
+//        let index = path.findLast(fileName)
+//        let dir = path.subStringTo(index)
+//        let plistPath = dir + "embedded.plist"
+        
+//        let path = "/Users/kimi/资料/ipa/AdHoc.mobileprovision"
+        let plistPath = Config.unzipPath + "\(arc4random()%1000)-" + "embedded.plist"
         self.readToSavePlist(filePath: path, toPlistPath: plistPath)
     }
 

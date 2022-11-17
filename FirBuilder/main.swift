@@ -25,8 +25,11 @@ private let argc = CommandLine.argc
 if arguments.contains("-h") || arguments.contains("-help"){
     let msg = """
 -h,-help           :帮助
+-win               :强制使用窗口模式运行程序
 -buildPath         :自定义FirBuilder资源输出路径，示例：-buildPath=/Users/kimi/Downloads/FirBuilder
 -serverRoot        :自定义服务器资源存储路径，示例：-serverRoot=https://fir.netlify.app
+-inputPath         :自定义需要解析app的文件路径，示例：-inputPath=/Users/kimi/Desktop/AnLinux-App-v6.50.apk
+-buildAllHTML      :重新构建所有HTML页面
 """
     print(msg)
     exit(0)
@@ -36,34 +39,44 @@ if arguments.contains("-h") || arguments.contains("-help"){
 //MARK: - 自定义输出目录
 private var buildPath:String? = nil
 private var serverRoot:String? = nil
-private var block:(String,String)->String = { (string, findStr) in
+private var inputPath:String? = nil
+private var buildAllHTML = false
+private var block:(String,String,Bool)->String = { (string, findStr,append) in
     let index = string.index(string.startIndex, offsetBy: findStr.count)
     let end = string.endIndex
     var subStr = String(string[index..<end])
-    if subStr.last != "/" {
-        subStr += "/"
+    if append == true {
+        if subStr.last != "/" {
+            subStr += "/"
+        }
     }
     return subStr
 }
 for item in arguments {
-    let _buildPath = "-buildPath="
-    let _serverRoot = "-serverRoot="
-    if item.hasPrefix(_buildPath) {
-        let subStr = block(item, _buildPath)
+    
+    if item == "-buildAllHTML" {
+        buildAllHTML = true
+        print("构建所有的HTML页面")
+    }else if item.hasPrefix("-buildPath=") {
+        let subStr = block(item, "-buildPath=",true)
         do {
             try FileManager.default.createDirectory(atPath: subStr, withIntermediateDirectories: true, attributes: nil)
             buildPath = subStr
         } catch  {
             print("\(error)")
         }
-        print("自定义输出目录:\(subStr)")
-    }else if item.hasPrefix(_serverRoot){
-        let subStr = block(item, _serverRoot)
+        print("自定义解析资源输出目录:\(subStr)")
+    }else if item.hasPrefix("-serverRoot="){
+        let subStr = block(item, "-serverRoot=",false)
         serverRoot = subStr
         print("自定义serverRoot:\(subStr)")
+    }else if item.hasPrefix("-inputPath=") {
+        let subStr = block(item, "-inputPath=",false)
+        inputPath = subStr
+        print("解析文件路径:\(inputPath!)")
     }
-}
 
+}
 
 
 
@@ -72,18 +85,47 @@ Config.setup(buildPath: buildPath, serverRoot: serverRoot)
 
 
 //MARK: - 判断APP启动模式
-private var isWin = false
+var winMode = false
 if argc == 1 || arguments.contains("-NSDocumentRevisionsDebugMode") || arguments.contains("YES") {
-    isWin = true
+    winMode = true
+}
+if arguments.contains("-win") {
+    winMode = true
 }
 
 //MARK: 窗口模式启动 或者 Command模式启动
-if isWin {
+if winMode {
     print("使用窗口模式启动程序!")
     _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 } else{
     print("使用Command模式启动程序!")
     print("CLI 模式处理解析任务...")
+    let semaphore = DispatchSemaphore(value: 0)
+
+    //开始解析
+    if let path = inputPath {
+        ParserTool.shared.blockStart = {msg in
+            print(msg)
+        }
+        ParserTool.shared.blockFail = { msg in
+            print(msg)
+            
+            semaphore.signal()
+        }
+        ParserTool.shared.blockSuccess = {msg in
+            print(msg)
+            
+            semaphore.signal()
+        }
+        ParserTool.shared.parserStart(path: path)
+        semaphore.wait()
+    }
+    
+    // 构建全部HTML页面
+    if buildAllHTML == true {
+        
+    }
+    
 }
 
 
@@ -110,11 +152,11 @@ func testLoadImage(){
 
 
 
-//MARK: - 模拟程序状态等待操作
-private let seam = DispatchSemaphore(value: 0)
-DispatchQueue.global().asyncAfter(deadline: .now() + 1 ) {
-    print("after 2")
-    seam.signal()
-}
-seam.wait()
-print("seam.wait done.")
+////MARK: - 模拟程序状态等待操作
+//private let seam = DispatchSemaphore(value: 0)
+//DispatchQueue.global().asyncAfter(deadline: .now() + 0.3 ) {
+//    print("after 2")
+//    seam.signal()
+//}
+//seam.wait()
+//print("seam.wait done.")

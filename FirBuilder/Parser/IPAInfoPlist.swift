@@ -8,6 +8,9 @@
 import Foundation
 import KakaJSON
 
+/**
+ 解析info.plist中的字段
+ */
 class IPAInfoPlist:Convertible{
     var bundleID:String?
     var name:String?
@@ -38,6 +41,5 @@ class IPAInfoPlist:Convertible{
             default:return property.name
         }
     }
-
 
 }
