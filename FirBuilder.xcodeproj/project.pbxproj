@@ -18,21 +18,17 @@
 		3F15415627BBCF7D005F9A99 /* MacProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15415427BBCF7D005F9A99 /* MacProgressHUD.m */; };
 		3F15415727BBCF7D005F9A99 /* MacClickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15415527BBCF7D005F9A99 /* MacClickView.m */; };
 		3F1541B627BBFFE1005F9A99 /* NSImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1541B527BBFFE1005F9A99 /* NSImage+Resize.m */; };
-		3F20FB1827AFC38100382D08 /* AppHomeListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */; };
-		3F20FB1B27AFC40C00382D08 /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB1A27AFC40C00382D08 /* EnumType.swift */; };
-		3F20FB3727AFD4D800382D08 /* AppReleaseListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */; };
 		3F27E4C22924BE3F0035DC53 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C12924BE3F0035DC53 /* main.swift */; };
 		3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C62924D2970035DC53 /* ImageTool.swift */; };
 		3F27E4D82924F0F20035DC53 /* libs in Resources */ = {isa = PBXBuildFile; fileRef = 3F27E4D72924F0F20035DC53 /* libs */; };
-		3F2FB9F9283E5306005102AF /* ParserEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */; };
-		3F5EDC6527B934B700853A5D /* IPAParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6427B934B700853A5D /* IPAParser.swift */; };
-		3F5EDC6B27B9352D00853A5D /* APKParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6A27B9352D00853A5D /* APKParser.swift */; };
 		3F5EDC6F27B935C000853A5D /* IPAInfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */; };
-		3F5EDC7527B936A900853A5D /* ParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC7427B936A900853A5D /* ParserManager.swift */; };
 		3F65465327BA0064007EF422 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65465227BA0064007EF422 /* FileManager.swift */; };
+		3F7B9905292759B6005ABA5F /* MobileprovisionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */; };
+		3F7B9908292777B6005ABA5F /* BuilderAppRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7B9907292777B6005ABA5F /* BuilderAppRes.swift */; };
+		3F7B990B2927882F005ABA5F /* AppHomeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7B990A2927882F005ABA5F /* AppHomeTable.swift */; };
+		3F7B990E29278BE4005ABA5F /* AppListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7B990D29278BE4005ABA5F /* AppListTable.swift */; };
 		3F80F75D27A02D7800A6341E /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F80F75C27A02D7800A6341E /* DBService.swift */; };
 		3F80F76327A0395F00A6341E /* GeneratorIDTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F80F76227A0395F00A6341E /* GeneratorIDTable.swift */; };
-		3F80F76B27A03E6700A6341E /* AppDetailsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F80F76A27A03E6700A6341E /* AppDetailsTable.swift */; };
 		3F8A2EA627BB3179003EFFB4 /* HomeImgItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A2EA427BB3179003EFFB4 /* HomeImgItem.swift */; };
 		3F8A2EA727BB3179003EFFB4 /* HomeImgItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A2EA527BB3179003EFFB4 /* HomeImgItem.xib */; };
 		3F8A2EAB27BB7FBE003EFFB4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A2EAA27BB7FBE003EFFB4 /* ListViewController.swift */; };
@@ -45,12 +41,10 @@
 		3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */; };
 		3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */; };
 		3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */; };
-		3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */; };
 		3FE153E529264FC1007D738D /* ParserTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153E429264FC1007D738D /* ParserTool.swift */; };
 		3FE153E9292658CE007D738D /* UnZipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153E8292658CE007D738D /* UnZipApp.swift */; };
 		3FE153ED29266DA7007D738D /* ParserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153EC29266DA7007D738D /* ParserType.swift */; };
-		3FE153F029268974007D738D /* AppInfoModel123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153EF29268974007D738D /* AppInfoModel123.swift */; };
-		3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */; };
+		3FE153F029268974007D738D /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153EF29268974007D738D /* AppInfoModel.swift */; };
 		3FE9033827B0D036000BDEFE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033727B0D036000BDEFE /* Data.swift */; };
 		3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */; };
 		3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */; };
@@ -60,8 +54,6 @@
 		3FEC70E3279FD50B00234A67 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70E2279FD50B00234A67 /* Config.swift */; };
 		3FEC70E7279FDA8400234A67 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70E6279FDA8400234A67 /* String.swift */; };
 		3FEC70EE279FED6C00234A67 /* GeneratorID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70ED279FED6C00234A67 /* GeneratorID.swift */; };
-		3FEC711C27A0033B00234A67 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC711B27A0033B00234A67 /* JSONDecoder.swift */; };
-		3FF7341A283F5BCF0033FE03 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF73419283F5BCF0033FE03 /* Test.swift */; };
 		8A7A69A79111929CCE11B8BD /* Pods_FirBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45B817BB912C90C38DA26EE /* Pods_FirBuilder.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,21 +72,17 @@
 		3F15415527BBCF7D005F9A99 /* MacClickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacClickView.m; sourceTree = "<group>"; };
 		3F1541B427BBFFE0005F9A99 /* NSImage+Resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+Resize.h"; sourceTree = "<group>"; };
 		3F1541B527BBFFE1005F9A99 /* NSImage+Resize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Resize.m"; sourceTree = "<group>"; };
-		3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeListTable.swift; sourceTree = "<group>"; };
-		3F20FB1A27AFC40C00382D08 /* EnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumType.swift; sourceTree = "<group>"; };
-		3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReleaseListTable.swift; sourceTree = "<group>"; };
 		3F27E4C12924BE3F0035DC53 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3F27E4C62924D2970035DC53 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
 		3F27E4D72924F0F20035DC53 /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libs; sourceTree = "<group>"; };
-		3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserEmbedded.swift; sourceTree = "<group>"; };
-		3F5EDC6427B934B700853A5D /* IPAParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAParser.swift; sourceTree = "<group>"; };
-		3F5EDC6A27B9352D00853A5D /* APKParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APKParser.swift; sourceTree = "<group>"; };
 		3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAInfoPlist.swift; sourceTree = "<group>"; };
-		3F5EDC7427B936A900853A5D /* ParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserManager.swift; sourceTree = "<group>"; };
 		3F65465227BA0064007EF422 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileprovisionFile.swift; sourceTree = "<group>"; };
+		3F7B9907292777B6005ABA5F /* BuilderAppRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderAppRes.swift; sourceTree = "<group>"; };
+		3F7B990A2927882F005ABA5F /* AppHomeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeTable.swift; sourceTree = "<group>"; };
+		3F7B990D29278BE4005ABA5F /* AppListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListTable.swift; sourceTree = "<group>"; };
 		3F80F75C27A02D7800A6341E /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		3F80F76227A0395F00A6341E /* GeneratorIDTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorIDTable.swift; sourceTree = "<group>"; };
-		3F80F76A27A03E6700A6341E /* AppDetailsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsTable.swift; sourceTree = "<group>"; };
 		3F8A2EA427BB3179003EFFB4 /* HomeImgItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImgItem.swift; sourceTree = "<group>"; };
 		3F8A2EA527BB3179003EFFB4 /* HomeImgItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeImgItem.xib; sourceTree = "<group>"; };
 		3F8A2EAA27BB7FBE003EFFB4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -107,12 +95,10 @@
 		3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletaButton.swift; sourceTree = "<group>"; };
 		3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KakaJSON.swift; path = FirBuilder/extension/KakaJSON.swift; sourceTree = SOURCE_ROOT; };
-		3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		3FE153E429264FC1007D738D /* ParserTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTool.swift; sourceTree = "<group>"; };
 		3FE153E8292658CE007D738D /* UnZipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnZipApp.swift; sourceTree = "<group>"; };
 		3FE153EC29266DA7007D738D /* ParserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserType.swift; sourceTree = "<group>"; };
-		3FE153EF29268974007D738D /* AppInfoModel123.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel123.swift; sourceTree = "<group>"; };
-		3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAndroidXml.swift; sourceTree = "<group>"; };
+		3FE153EF29268974007D738D /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		3FE9033727B0D036000BDEFE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Exit.swift"; sourceTree = "<group>"; };
 		3FEC70C9279FCB5B00234A67 /* FirBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,9 +111,7 @@
 		3FEC70E2279FD50B00234A67 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		3FEC70E6279FDA8400234A67 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3FEC70ED279FED6C00234A67 /* GeneratorID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorID.swift; sourceTree = "<group>"; };
-		3FEC711B27A0033B00234A67 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		3FEC713327A011DA00234A67 /* FirBuilder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirBuilder-Bridging-Header.h"; sourceTree = "<group>"; };
-		3FF73419283F5BCF0033FE03 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		89108214971A3B7B506503F2 /* Pods-FirBuilder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirBuilder.debug.xcconfig"; path = "Target Support Files/Pods-FirBuilder/Pods-FirBuilder.debug.xcconfig"; sourceTree = "<group>"; };
 		949DA545FBBC669B950957A7 /* Pods-FirBuilder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirBuilder.release.xcconfig"; path = "Target Support Files/Pods-FirBuilder/Pods-FirBuilder.release.xcconfig"; sourceTree = "<group>"; };
 		C45B817BB912C90C38DA26EE /* Pods_FirBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +132,7 @@
 		3F0B91DE27BA0C180002BDEB /* Builder */ = {
 			isa = PBXGroup;
 			children = (
+				3F7B9907292777B6005ABA5F /* BuilderAppRes.swift */,
 				3F0B91DF27BA0C430002BDEB /* BuilderDetails.swift */,
 				3F0B91E427BA0C720002BDEB /* BuilderAppHome.swift */,
 				3F0B91E727BA0C860002BDEB /* BuilderList.swift */,
@@ -171,8 +156,7 @@
 		3F20FB1D27AFC42700382D08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3F20FB1A27AFC40C00382D08 /* EnumType.swift */,
-				3FD12FEA27B503E0008001B6 /* AppInfoModel.swift */,
+				3FE153EF29268974007D738D /* AppInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,29 +187,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		3F9E1B7327AFF99A00A99391 /* Parser */ = {
-			isa = PBXGroup;
-			children = (
-				3F5EDC6A27B9352D00853A5D /* APKParser.swift */,
-				3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */,
-				3F5EDC6427B934B700853A5D /* IPAParser.swift */,
-				3FE9033427B0C3D9000BDEFE /* ParseAndroidXml.swift */,
-				3F2FB9F8283E5306005102AF /* ParserEmbedded.swift */,
-				3FF73419283F5BCF0033FE03 /* Test.swift */,
-				3F5EDC7427B936A900853A5D /* ParserManager.swift */,
-			);
-			path = Parser;
-			sourceTree = "<group>";
-		};
-		3FE153E729265881007D738D /* Parser-new */ = {
+		3FE153E729265881007D738D /* Parser */ = {
 			isa = PBXGroup;
 			children = (
 				3FE153E429264FC1007D738D /* ParserTool.swift */,
 				3FE153EC29266DA7007D738D /* ParserType.swift */,
 				3FE153E8292658CE007D738D /* UnZipApp.swift */,
-				3FE153EF29268974007D738D /* AppInfoModel123.swift */,
+				3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */,
+				3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */,
 			);
-			path = "Parser-new";
+			path = Parser;
 			sourceTree = "<group>";
 		};
 		3FEC70C0279FCB5B00234A67 = {
@@ -251,11 +222,10 @@
 			children = (
 				3F27E4D72924F0F20035DC53 /* libs */,
 				3F20FB1D27AFC42700382D08 /* Model */,
-				3FEC712827A00FB700234A67 /* db */,
-				3FEC70E5279FDA6B00234A67 /* extension */,
+				3FEC712827A00FB700234A67 /* DB */,
+				3FEC70E5279FDA6B00234A67 /* Extension */,
 				3FEC70E0279FD4BA00234A67 /* Config */,
-				3FE153E729265881007D738D /* Parser-new */,
-				3F9E1B7327AFF99A00A99391 /* Parser */,
+				3FE153E729265881007D738D /* Parser */,
 				3F0B91DE27BA0C180002BDEB /* Builder */,
 				3F20FB3A27AFDE9600382D08 /* Controller */,
 				3F8A2EA327BB3148003EFFB4 /* View */,
@@ -280,11 +250,10 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		3FEC70E5279FDA6B00234A67 /* extension */ = {
+		3FEC70E5279FDA6B00234A67 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				3FEC70E6279FDA8400234A67 /* String.swift */,
-				3FEC711B27A0033B00234A67 /* JSONDecoder.swift */,
 				3FE9033727B0D036000BDEFE /* Data.swift */,
 				3F1375FF27B256C400266468 /* NSObject.swift */,
 				3F13760227B25BEA00266468 /* Description.swift */,
@@ -295,20 +264,19 @@
 				3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */,
 				3F27E4C62924D2970035DC53 /* ImageTool.swift */,
 			);
-			path = extension;
+			path = Extension;
 			sourceTree = "<group>";
 		};
-		3FEC712827A00FB700234A67 /* db */ = {
+		3FEC712827A00FB700234A67 /* DB */ = {
 			isa = PBXGroup;
 			children = (
 				3F80F75C27A02D7800A6341E /* DBService.swift */,
 				3FEC70ED279FED6C00234A67 /* GeneratorID.swift */,
 				3F80F76227A0395F00A6341E /* GeneratorIDTable.swift */,
-				3F20FB1727AFC38100382D08 /* AppHomeListTable.swift */,
-				3F20FB3627AFD4D800382D08 /* AppReleaseListTable.swift */,
-				3F80F76A27A03E6700A6341E /* AppDetailsTable.swift */,
+				3F7B990A2927882F005ABA5F /* AppHomeTable.swift */,
+				3F7B990D29278BE4005ABA5F /* AppListTable.swift */,
 			);
-			path = db;
+			path = DB;
 			sourceTree = "<group>";
 		};
 		5B636B8040913DEEABFB2CEC /* Pods */ = {
@@ -447,19 +415,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F8A2EAB27BB7FBE003EFFB4 /* ListViewController.swift in Sources */,
-				3FEC711C27A0033B00234A67 /* JSONDecoder.swift in Sources */,
-				3FD12FEB27B503E0008001B6 /* AppInfoModel.swift in Sources */,
+				3F7B9905292759B6005ABA5F /* MobileprovisionFile.swift in Sources */,
 				3F5EDC6F27B935C000853A5D /* IPAInfoPlist.swift in Sources */,
 				3F1541B627BBFFE1005F9A99 /* NSImage+Resize.m in Sources */,
 				3F80F75D27A02D7800A6341E /* DBService.swift in Sources */,
 				3F8A2EA627BB3179003EFFB4 /* HomeImgItem.swift in Sources */,
+				3F7B9908292777B6005ABA5F /* BuilderAppRes.swift in Sources */,
 				3FEC70CF279FCB5B00234A67 /* ViewController.swift in Sources */,
+				3F7B990E29278BE4005ABA5F /* AppListTable.swift in Sources */,
 				3F15415727BBCF7D005F9A99 /* MacClickView.m in Sources */,
 				3FE153E9292658CE007D738D /* UnZipApp.swift in Sources */,
 				3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */,
 				3F80F76327A0395F00A6341E /* GeneratorIDTable.swift in Sources */,
-				3F5EDC6527B934B700853A5D /* IPAParser.swift in Sources */,
-				3FE153F029268974007D738D /* AppInfoModel123.swift in Sources */,
+				3FE153F029268974007D738D /* AppInfoModel.swift in Sources */,
 				3F8A2EB527BB905E003EFFB4 /* ListCell.swift in Sources */,
 				3FEC70EE279FED6C00234A67 /* GeneratorID.swift in Sources */,
 				3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */,
@@ -468,31 +436,23 @@
 				3F15415627BBCF7D005F9A99 /* MacProgressHUD.m in Sources */,
 				3F13760027B256C400266468 /* NSObject.swift in Sources */,
 				3F27E4C22924BE3F0035DC53 /* main.swift in Sources */,
-				3F20FB3727AFD4D800382D08 /* AppReleaseListTable.swift in Sources */,
 				3FA2023328B9D08500DD6390 /* BuilderTemplateFile.swift in Sources */,
-				3F20FB1B27AFC40C00382D08 /* EnumType.swift in Sources */,
-				3F80F76B27A03E6700A6341E /* AppDetailsTable.swift in Sources */,
 				3FE153E529264FC1007D738D /* ParserTool.swift in Sources */,
-				3F5EDC7527B936A900853A5D /* ParserManager.swift in Sources */,
 				3FEC70E7279FDA8400234A67 /* String.swift in Sources */,
+				3F7B990B2927882F005ABA5F /* AppHomeTable.swift in Sources */,
 				3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */,
 				3F9E1B8027B004EC00A99391 /* AddViewController.swift in Sources */,
-				3F20FB1827AFC38100382D08 /* AppHomeListTable.swift in Sources */,
 				3F0B91E527BA0C720002BDEB /* BuilderAppHome.swift in Sources */,
 				3F8A2EB127BB87BB003EFFB4 /* DetatalsViewController.swift in Sources */,
-				3F2FB9F9283E5306005102AF /* ParserEmbedded.swift in Sources */,
 				3FEC70E3279FD50B00234A67 /* Config.swift in Sources */,
 				3F65465327BA0064007EF422 /* FileManager.swift in Sources */,
 				3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */,
 				3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */,
-				3FE9033527B0C3D9000BDEFE /* ParseAndroidXml.swift in Sources */,
 				3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */,
 				3F0B91EB27BA4A230002BDEB /* DateFormatter.swift in Sources */,
 				3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */,
 				3FE153ED29266DA7007D738D /* ParserType.swift in Sources */,
-				3F5EDC6B27B9352D00853A5D /* APKParser.swift in Sources */,
 				3F0B91E027BA0C430002BDEB /* BuilderDetails.swift in Sources */,
-				3FF7341A283F5BCF0033FE03 /* Test.swift in Sources */,
 				3F0B91E827BA0C860002BDEB /* BuilderList.swift in Sources */,
 				3FE9033827B0D036000BDEFE /* Data.swift in Sources */,
 			);

@@ -22,8 +22,8 @@ struct Config {
 
 
     static var deleteUnzipDir = true  //标记在解析成功之后是否删除Unzip目录
-//    static let unzipPath = appPath+"Unzip/\(arc4random()%1000000)/"   //app资源解压路径
-    static let unzipPath = appPath+"Unzip/"   
+    static let unzipPath = appPath+"Unzip/\(arc4random()%1000000)/"   //app资源解压路径
+//    static let unzipPath = appPath+"Unzip/"   
     static let htmlPath = appPath + "html/"   //生成的静态HTML资源路径
     static let htmlSyncPath = appPath + "html-sync/" //HTML 同步目录
 
@@ -53,7 +53,7 @@ struct Config {
 
         
         //初始化数据库存储信息
-        DBService.createTable()
+        DBService.shared.setup()
 
 
         print("..........")

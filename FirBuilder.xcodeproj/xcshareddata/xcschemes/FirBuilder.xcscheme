@@ -52,12 +52,20 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-buildPath=/Users/kimi/Downloads/FirBuilder"
+            argument = "-cli"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-buildPath=/Users/kimi/Downloads/FirBuilder"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-serverRoot=https://fir.netlify.app"
-            isEnabled = "NO">
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-inputPath=/Users/kimi/Desktop/AdultLP.ipa"
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

@@ -8,10 +8,11 @@
 import Cocoa
 import WCDBSwift
 import SDWebImage
+import KakaJSON
 
 class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource,ListCellDelegate {
     var lastVC:NSViewController!
-    var pushItem:AppHomeListTable!
+    var pushItem:AppHomeTable!
 
     @IBOutlet var tableView: NSTableView!
     override func viewDidLoad() {
@@ -39,13 +40,13 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         tableView.dataSource = self
     }
 
-    var dataAry:[AppReleaseListTable] = []
+    var dataAry:[AppListTable] = []
     func loadData(){
         let db = DBService.shared.db
         defer {
             db.close()
         }
-        let list:[AppReleaseListTable]? = try? db.getObjects(fromTable: AppReleaseListTable.tableName, where: AppReleaseListTable.Properties.bundleID == pushItem.bundleID && AppReleaseListTable.Properties.type == pushItem.type, orderBy:[AppReleaseListTable.Properties.updateDate.asOrder(by: .descending)])
+        let list:[AppListTable]? = try? db.getObjects(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == pushItem.bundleID! && AppListTable.Properties.type == pushItem.type, orderBy:[AppListTable.Properties.updateDate.asOrder(by: .descending)])
         if let list = list {
             dataAry = list
         }
@@ -64,7 +65,8 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
     func tableView(_ tableView1: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell:ListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ListCell"), owner: self) as! ListCell
         let model = self.dataAry[row]
-        cell.img.sd_setImage(with: URL.init(fileURLWithPath: Config.htmlPath+model.appIconPath!), placeholderImage: nil, options:.refreshCached  , completed: nil)
+        let imgPath = Config.htmlPath+model.srcRoot!+model.logo512Path!
+        cell.img.image = ImageTool.loadImageFrom(path: imgPath)
         cell.labName.stringValue = model.name!
         cell.labBundle.stringValue = model.bundleID!
         cell.labVersion.stringValue = model.version!+" (Build \(model.build!))"
@@ -75,8 +77,7 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         }
         cell.row = row
         cell.delegate = self
-
-        print(Config.htmlPath+model.appIconPath!)
+        print(Config.htmlPath+model.srcRoot!+model.logo512Path!)
         return cell
     }
 
@@ -93,11 +94,8 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         let vc:DetatalsViewController = DetatalsViewController.createVC(self)
         vc.pushItem = model
         vc.push()
-
         tableView.reloadData()
         print("tableViewSelectionDidChange row:\(row)")
-
-
     }
 
     @IBAction func backAction(_ sender: NSButton) {
@@ -154,8 +152,9 @@ extension ListViewController{
             defer {
                 db.close()
             }
-            try db.delete(fromTable: AppHomeListTable.tableName, where: AppHomeListTable.Properties.bundleID == pushItem.bundleID && AppHomeListTable.Properties.type == pushItem.type)
-            try db.delete(fromTable: AppReleaseListTable.tableName, where: AppReleaseListTable.Properties.bundleID == pushItem.bundleID && AppReleaseListTable.Properties.type == pushItem.type)
+            try db.delete(fromTable: AppHomeTable.tableName, where: AppHomeTable.Properties.bundleID == pushItem.bundleID! && AppHomeTable.Properties.type == pushItem.type)
+            try db.delete(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == pushItem.bundleID! && AppListTable.Properties.type == pushItem.type)
+            
             BuilderAppHome().builder()
 
             let fileManager = FileManager.default
@@ -180,7 +179,7 @@ extension ListViewController
 
     func listCell(clickButton btn: NSButton, btnIndex: Int, cellRow: Int) {
         print("click... index:\(btnIndex)   row:\(cellRow)")
-        let model:AppReleaseListTable = self.dataAry[cellRow]
+        let model:AppListTable = self.dataAry[cellRow]
         let alert = NSAlert()
         alert.alertStyle = .critical
         if btnIndex == 0 {
@@ -204,23 +203,26 @@ extension ListViewController
             print("cancel")
         }    }
 
-    func topCellActin(_ model:AppReleaseListTable){
+    func topCellActin(_ model:AppListTable){
         do{
             let db = DBService.shared.db
             defer {
                 db.close()
             }
-
             let update = Date()
-            try db.update(table: AppReleaseListTable.tableName, on: AppReleaseListTable.Properties.updateDate, with: [update], where: AppReleaseListTable.Properties.bundleID == model.bundleID! && AppReleaseListTable.Properties.type == model.type && AppReleaseListTable.Properties.updateDate == model.updateDate)
+            try db.update(table: AppListTable.tableName, on: AppListTable.Properties.updateDate, with: [update], where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.updateDate == model.updateDate)
 
             loadData()
+            
+            let jsonString = model.kj.JSONString()
+            let appInfo:AppInfoModel = KakaJSON.model(from: jsonString, type: AppInfoModel.self) as! AppInfoModel
+            
+            //重新生成new.html
+            BuilderDetails().builderNewHTML(appInfo)
 
-            BuilderList().builderAll()
-
-            //生成new.html
-            BuilderDetails().builderNewHTML(model)
-
+            //重新生成list.html
+            BuilderList().builder(appInfo)
+            
             updateAppHomeList(model, update: update)
 
         }catch{
@@ -228,60 +230,66 @@ extension ListViewController
         }
     }
 
-    func deleteCellAction(_ model:AppReleaseListTable){
+    func deleteCellAction(_ model:AppListTable){
         do{
             let db = DBService.shared.db
             defer {
                 db.close()
             }
-            try db.delete(fromTable: AppReleaseListTable.tableName, where: AppReleaseListTable.Properties.bundleID == model.bundleID! && AppReleaseListTable.Properties.type == model.type && AppReleaseListTable.Properties.updateDate == model.updateDate)
+            try db.delete(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.updateDate == model.updateDate)
 
             loadData()
-
-            BuilderList().builderAll()
+            
+            let jsonString = model.kj.JSONString()
+            let appInfo:AppInfoModel = KakaJSON.model(from: jsonString, type: AppInfoModel.self) as! AppInfoModel
+            
+            //重新生成list.html
+            BuilderList().builder(appInfo)
 
         }catch{
             print(error)
         }
 
         let fileManager = FileManager.default
-        try? fileManager.removeItem(atPath: Config.htmlPath+model.saveAppPath!)
-        try? fileManager.removeItem(atPath: Config.htmlPath+model.detailsH5Path!)
-        try? fileManager.removeItem(atPath: Config.htmlPath+model.appIconPath!)
+        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.appSavePath!)
+        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.detailsPath!)
+        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.logo512Path!)
+        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.logo57Path!)
 
-        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.saveAppPath!)
-        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.detailsH5Path!)
-        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.appIconPath!)
+        
+//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.appSavePath!)
+//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.detailsPath!)
+//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.logo512Path!)
+//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.logo57Path!)
+
 
         if model.type == .ios {
-            try? fileManager.removeItem(atPath: Config.htmlPath+model.appIcon57Path!)
-            try? fileManager.removeItem(atPath: Config.htmlPath+model.appManifestPath!)
-
-            try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.appIcon57Path!)
-            try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.appManifestPath!)
+            try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.manifestPath!)
+            
+//            try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.manifestPath!)
         }
 
         if self.dataAry.count < 1 {
             deleteApp()
         }else{
-            let model: AppReleaseListTable = dataAry[0]
+            let model: AppListTable = dataAry[0]
             updateAppHomeList(model,update: Date())
         }
     }
 
-    func updateAppHomeList(_ model: AppReleaseListTable, update:Date){
+    func updateAppHomeList(_ model: AppListTable, update:Date){
         do{
             let db = DBService.shared.db
             defer {
                 db.close()
             }
-            let properties = [AppHomeListTable.Properties.name,
-                              AppHomeListTable.Properties.version,
-                              AppHomeListTable.Properties.build,
-                              AppHomeListTable.Properties.logoPath,
-                              AppHomeListTable.Properties.updateDate]
-            let row:[ColumnEncodable] = [model.name!,model.version!,model.build!,model.appIconPath!,update]
-            try db.update(table: AppHomeListTable.tableName, on: properties, with: row, where: AppHomeListTable.Properties.bundleID == model.bundleID! && AppHomeListTable.Properties.type == model.type)
+            let properties = [AppHomeTable.Properties.name,
+                              AppHomeTable.Properties.version,
+                              AppHomeTable.Properties.build,
+                              AppHomeTable.Properties.logo512Path,
+                              AppHomeTable.Properties.updateDate]
+            let row:[ColumnEncodable] = [model.name!,model.version!,model.build!,model.logo512Path!,update]
+            try db.update(table: AppHomeTable.tableName, on: properties, with: row, where: AppHomeTable.Properties.bundleID == model.bundleID! && AppHomeTable.Properties.type == model.type)
 
             BuilderAppHome().builder()
         }catch{

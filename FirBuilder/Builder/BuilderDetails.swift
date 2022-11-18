@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KakaJSON
 
 
 
@@ -137,8 +138,8 @@ class BuilderDetails{
         hiddenWithID("btn3")
         hiddenWithID("btn4")
         var devideType = getDeviceType()
-        if (appType == "\(AppType.ios.rawValue)") {
-            if(devideType == "\(AppType.ios.rawValue)"){
+        if (appType == "\(ParserType.ios)") {
+            if(devideType == "\(ParserType.ios)"){
                 showWithID("btn0")
                 // showWithID("btn1")
                 showWithID("btn2")
@@ -149,7 +150,7 @@ class BuilderDetails{
             // if (devideType == "android") {
             //     showWithID("btn0")
             // }
-            if (devideType != "\(AppType.ios.rawValue)") {
+            if (devideType != "\(ParserType.ios)") {
                 showWithID("btn0")
             }
         }
@@ -173,7 +174,7 @@ class BuilderDetails{
         document.getElementById("appSize").innerHTML = appSize
         document.getElementById("appUpdateTime").innerHTML = appUpdateTime
 
-        if (appType == "\(AppType.ios.rawValue)" ) {
+        if (appType == "\(ParserType.ios)" ) {
             document.getElementById("appTypeIconPath").src = iosIcon
         }else{
             document.getElementById("appTypeIconPath").src = androidIcon
@@ -211,147 +212,84 @@ class BuilderDetails{
 
 
 extension BuilderDetails{
-    /** 生成所有APP下载页面*/
+    /** 生成所有APP下载页面 */
     func builderAll(){
         do {
             let db = DBService.shared.db
             defer {
                 db.close()
             }
-            let release:[AppReleaseListTable]? = try db.getObjects(fromTable: AppReleaseListTable.tableName, orderBy:[AppReleaseListTable.Properties.updateDate.asOrder(by: .ascending)])
-            if let list = release {
-                for item in list {
-                    builder(item)
-                    //new.html 每一条记录都生成，但是直接覆盖旧的new.html
-                    builderNewHTML(item)
-                }
+            let list:[AppListTable] = try db.getObjects(fromTable: AppListTable.tableName, orderBy:[AppListTable.Properties.updateDate.asOrder(by: .ascending)])
+            let appInfoList = list.compactMap({ (model) -> AppInfoModel in
+                let jsonString = model.kj.JSONString()
+                let appInfo:AppInfoModel = KakaJSON.model(from: jsonString, type: AppInfoModel.self) as! AppInfoModel
+                return appInfo
+            })
+            
+            for item in appInfoList {
+                builderNewHTML(item)
+                builderDetailsHTML(item)
             }
         } catch  {
             print(error)
         }
     }
 
-    //生成自定item的下载页面
-    func builder(_ item:AppInfoModel){
-        let h5String:String = h5Headder+dymaninJS(item)
-        let detailsData = h5String.data(using: .utf8)
-        let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.htmlPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
-        fileManager.createFile(atPath: Config.htmlSyncPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
-    }
-
-    func builder(_ item:AppReleaseListTable){
-        let h5String:String = h5Headder+dymaninJS(item)
-        let detailsData = h5String.data(using: .utf8)
-        let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.htmlPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
-        fileManager.createFile(atPath: Config.htmlSyncPath+item.detailsH5Path!, contents: detailsData, attributes: nil)
-    }
-
-
-    //生成new.html
-    func builderNewHTML(_ info:Any){
-        if let item = info as? AppInfoModel {
-            let h5String:String = h5Headder+dymaninJS(item)
-            let detailsData = h5String.data(using: .utf8)
-            let fileManager = FileManager.default
-            fileManager.createFile(atPath: Config.htmlPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
-            fileManager.createFile(atPath: Config.htmlSyncPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
-        }
-        if let item = info as? AppReleaseListTable {
-            print("Config.serverRoot:   \(Config.serverRoot)");
-            print("new.html: \(Config.htmlPath+item.srcRoot!+"new.html")")
-            let h5String:String = h5Headder+dymaninJS(item)
-            let detailsData = h5String.data(using: .utf8)
-            let fileManager = FileManager.default
-            fileManager.createFile(atPath: Config.htmlPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
-            fileManager.createFile(atPath: Config.htmlSyncPath+item.srcRoot!+"new.html", contents: detailsData, attributes: nil)
-        }
-    }
 }
-
 
 extension BuilderDetails{
-    //https://www.mfpud.com/topics/302/
-    //ipa 安装示例
-    //ios "itms-services://?action=download-manifest&url=https://127.0.0.1/ipa/manifest.plist"
-
-    func dymaninJS(_ item:AppReleaseListTable) -> String{
-        var install:String = Config.serverRoot+item.saveAppPath!
-        if item.type == .ios {
-            install = "itms-services://?action=download-manifest&url=\(Config.serverRoot)\(item.appManifestPath!)"
-        }
-
-        var devices:String = ""
-        if item.type == .ios {
-            if let deviceList = item.devices {
-                devices = deviceList.joined(separator: ";\\n")
-            }
-        }
-
-        let imagePath = item.appIconPath?.fileName
-
-        let dymanic:String = """
-<!-- 用于动态写入数据 -->
-<script type="text/javascript">
-    let appType = "\(item.type.rawValue)" // ios or android
-
-    let appIconPath = "\(imagePath!)"
-    let appName = "\(item.name!)"
-    let appVersion = "\(item.version!) ( Build \(item.build!) ) "
-    let appSize = "\(item.fileSize!)"
-    let appUpdateTime = "\(DateFormatter.dateStringWith(date: item.updateDate))"
-
-    //app install url
-    let installURL = "\(install)"
-
-    //动态写入设备列表
-    let deivces = "\(devices)"
-
-</script>
-
-"""
-        return dymanic
+//MARK: - 使用AppInfoModel 生成下载页面
+     func builder(_ appInfo:AppInfoModel, name:String){
+        let h5String:String = h5Headder+dymaninJS(appInfo)
+        let detailsData = h5String.data(using: .utf8)
+        let fileManager = FileManager.default
+        fileManager.createFile(atPath: Config.htmlPath + appInfo.srcRoot! + name, contents: detailsData, attributes: nil)
+        fileManager.createFile(atPath: Config.htmlSyncPath + appInfo.srcRoot! + name, contents: detailsData, attributes: nil)
     }
-
-
-    func dymaninJS(_ item:AppInfoModel) -> String{
-        var install:String = Config.serverRoot+item.saveAppPath!
-        if item.type == .ios {
-            install = "itms-services://?action=download-manifest&url=\(Config.serverRoot)\(item.appManifestPath!)"
-        }
-
-        var devices:String = ""
-        if item.type == .ios {
-            if let deviceList = item.devices {
-                devices = deviceList.joined(separator: ";\\n")
-            }
-        }
-
-        let imagePath = item.appIconPath?.fileName
-
-        let dymanic:String = """
-<!-- 用于动态写入数据 -->
-<script type="text/javascript">
-    let appType = "\(item.type.rawValue)" // ios or android
-
-    let appIconPath = "\(imagePath!)"
-    let appName = "\(item.name!)"
-    let appVersion = "\(item.version!) ( Build \(item.build!) ) "
-    let appSize = "\(item.fileSize!)"
-    let appUpdateTime = "\(DateFormatter.dateStringWith(date: item.updateDate))"
-
-    //app install url
-    let installURL = "\(install)"
-
-
-    //动态写入设备列表
-    let deivces = "\(devices)"
-
-</script>
-
-"""
-        return dymanic
+    
+    func builderDetailsHTML(_ appInfo:AppInfoModel){
+        builder(appInfo, name:appInfo.detailsPath!)
     }
-
+    
+    //生成new.html
+    func builderNewHTML(_ appInfo:AppInfoModel){
+        builder(appInfo, name: appInfo.newPath!)
+    }
 }
+
+extension BuilderDetails{
+    
+    func dymaninJS(_ appInfo:AppInfoModel) -> String{
+        var install:String = Config.serverRoot+appInfo.srcRoot!+appInfo.appSavePath!
+        if appInfo.type == .ios {
+            install = "itms-services://?action=download-manifest&url=\(Config.serverRoot)\(appInfo.srcRoot!)\(appInfo.manifestPath!)"
+        }
+
+        var devices:String = ""
+        if appInfo.type == .ios {
+            if let deviceList = appInfo.devices {
+                devices = deviceList.joined(separator: "\\n")
+            }
+        }
+        let imagePath = appInfo.logo512Path!
+
+        let dymanic:String = """
+<!-- 用于动态写入数据 -->
+<script type="text/javascript">
+    let appType = "\(appInfo.type)" // ios or android
+    let appIconPath = "\(imagePath)"
+    let appName = "\(appInfo.name!)"
+    let appVersion = "\(appInfo.version!) ( Build \(appInfo.build!) ) "
+    let appSize = "\(appInfo.fileSize!)"
+    let appUpdateTime = "\(DateFormatter.dateStringWith(date: appInfo.updateDate))"
+
+    //app install url
+    let installURL = "\(install)"
+    //动态写入设备列表
+    let deivces = "\(devices)"
+</script>
+"""
+        return dymanic
+    }
+}
+

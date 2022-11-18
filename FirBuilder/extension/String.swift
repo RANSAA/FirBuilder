@@ -9,18 +9,22 @@ import Cocoa
 
 //MARK: subString
 extension String {
-    // 截取字符串：从index到结束处
-    // - Parameter index: 开始索引
-    // - Returns: 子字符串
+
+    /**
+     截取字符串：从index到结束处
+     - Parameter index: 开始索引
+     - Returns: 子字符串
+     */
     func subStringFrom(_ index: Int) -> String {
         let theIndex = self.index(self.endIndex, offsetBy: index - self.count)
-
         return String(self[theIndex..<endIndex])
     }
 
-    // 截取字符串：从开始到index处
-    // - Parameter index: 索引结束位置
-    // - Returns: 子字符串
+    /**
+     截取字符串：从开始到index处
+     - Parameter index: 索引结束位置
+     - Returns: 子字符串
+     */
     func subStringTo(_ index:Int) -> String{
         let toIndex = self.index(self.startIndex, offsetBy: index)
         return String(self[startIndex..<toIndex])
@@ -33,13 +37,6 @@ extension String {
     func getOneCharacterWith(_ index:Int) -> Character{
         let subIndex = self.index(self.startIndex, offsetBy: index)
         return self[subIndex]
-//        let loc = self.distance(from: subIndex, to: self.endIndex)
-//        if loc > 0 {
-//            return self[subIndex]
-//        }else{
-//            print("Error: getCharacterWith(_ index:Int) 越界")
-//            return " "
-//        }
     }
 
     /**
@@ -52,8 +49,10 @@ extension String {
     }
 
 
-     //从0索引处开始查找是否包含指定的字符串，返回Int类型的索引
-     //返回第一次出现的指定子字符串在此字符串中的索引
+    /**
+     功能:从0索引处开始向后查找第一次出现subString的位置
+     return -1:表示没有找到。
+     */
      func findFirst(_ sub:String)->Int {
          var pos = -1
          if let range = range(of:sub, options: .literal ) {
@@ -64,8 +63,10 @@ extension String {
          return pos
      }
 
-     //从0索引处开始查找是否包含指定的字符串，返回Int类型的索引
-     //返回最后出现的指定子字符串在此字符串中的索引
+    /**
+     功能:从结尾处开始向前查找第一次出现subString的位置
+     return -1:表示没有找到。
+     */
      func findLast(_ sub:String)->Int {
          var pos = -1
          if let range = range(of:sub, options: .backwards ) {
@@ -76,16 +77,20 @@ extension String {
          return pos
      }
 
-     //从指定索引处开始查找是否包含指定的字符串，返回Int类型的索引
-     //返回第一次出现的指定子字符串在此字符串中的索引
+    /**
+     功能:从指定索引(begin)处向后查找第一次出现subString的位置
+     return -1:表示没有找到。
+     */
      func findFirst(_ sub:String,_ begin:Int)->Int {
         let str:String = self.subStringFrom(begin)
         let pos:Int = str.findFirst(sub)
          return pos == -1 ? -1 : (pos + begin)
      }
 
-     //从指定索引处开始查找是否包含指定的字符串，返回Int类型的索引
-     //返回最后出现的指定子字符串在此字符串中的索引
+    /**
+     功能:从指定索引(begin)处向前开始查找第一次出现subString的位置
+     return -1:表示没有找到。
+     */
      func findLast(_ sub:String,_ begin:Int)->Int {
         let str:String = self.subStringFrom(begin)
         let pos:Int = str.findLast(sub)
@@ -97,7 +102,7 @@ extension String {
 // MARK: NSRange 与 Range互相转换
 extension String{
 
-    //Range转换为NSRange
+    /**  Range转换为NSRange */
     func toNSRange(_ range: Range<String.Index>) -> NSRange {
           guard let from = range.lowerBound.samePosition(in: utf16), let to = range.upperBound.samePosition(in: utf16) else {
               return NSMakeRange(0, 0)
@@ -106,7 +111,7 @@ extension String{
       }
 
 
-    //NSRange转换为Range
+    /** NSRange转换为Range */
     func toRange(_ range: NSRange) -> Range<String.Index>? {
         guard let from16 = utf16.index(utf16.startIndex, offsetBy: range.location, limitedBy: utf16.endIndex) else { return nil }
         guard let to16 = utf16.index(from16, offsetBy: range.length, limitedBy: utf16.endIndex) else { return nil }
@@ -177,21 +182,19 @@ extension String{
      */
 
     public static func read(filePath path:String) -> String? {
-        var resultStr = ""
-        let fp = fopen(path, "r")
-        if fp == nil {
-            print("文件打开失败！ \(path)")
+        guard let fp = fopen(path, "r") else {
             return nil
         }
-
-
+        defer {
+            fclose(fp)
+        }
+        var resultStr = ""
         var ch: Int32 = fgetc(fp)
         while ch != EOF {
             //NSMutableString.appendFormat("%c", ch)
             resultStr.append(Character(UnicodeScalar(UInt32(ch))!))
             ch = fgetc(fp)
         }
-        fclose(fp)
         return resultStr
     }
 }
@@ -255,7 +258,6 @@ extension String{
             base64String = base64String.replacingOccurrences(of: "/", with: "_")
         }else{
             print("⚠️ Base64 Url Safe 编码失败!")
-//            LogManager.log("⚠️ Base64 Url Safe 编码失败!")
         }
         return base64String
     }
@@ -276,7 +278,6 @@ extension String{
             decodeString = String(data: data, encoding: .utf8) ?? decodeString
         }else{
             print("⚠️ Base64 Url Safe 解码失败!     original:\(self)")
-//            LogManager.log("⚠️ Base64 Url Safe 解码失败!     original:\(self)")
         }
         return decodeString
     }

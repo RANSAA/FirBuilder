@@ -9,22 +9,15 @@ import Cocoa
 
 class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource {
      var lastVC:NSViewController!
-    var pushItem:AppReleaseListTable!
+    var pushItem:AppListTable!
 
     @IBOutlet var infoView: NSView!
-
     @IBOutlet var imgLogo: NSImageView!
     @IBOutlet var imgType: NSImageView!
-
-
     @IBOutlet var labSigType: NSTextField!
-
     @IBOutlet var labName: NSTextField!
-
     @IBOutlet var labVersion: NSTextField!
-
     @IBOutlet var labUpdate: NSTextField!
-
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var scrollTableView: NSScrollView!
     @IBOutlet var tableHeaderView: NSTableHeaderView!
@@ -35,7 +28,6 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
 
         setupUI()
         laodData()
-
     }
 
     func setupUI(){
@@ -47,8 +39,6 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
 //        firstCol.title = "第一列"
 //        tableView.addTableColumn(firstCol)
 
-
-
         if pushItem.type == .ios {
             self.tableView.rowHeight = 40
             self.tableView.delegate = self
@@ -59,12 +49,11 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
                 sub.isHidden = true
             }
         }
-
     }
 
     func laodData(){
-        self.imgLogo.sd_setImage(with: URL.init(fileURLWithPath: Config.htmlPath+pushItem.appIconPath!), placeholderImage: nil, options:.refreshCached  , completed: nil)
-
+        let imgPath = Config.htmlPath+pushItem.srcRoot!+pushItem.logo512Path!
+        self.imgLogo.image = ImageTool.loadImageFrom(path: imgPath)
         imgType.image = NSImage(byReferencingFile: Config.htmlPath+"src/images/android.png")
         if pushItem.type == .ios {
             imgType.image = NSImage(byReferencingFile: Config.htmlPath+"src/images/apple.png")
@@ -72,7 +61,7 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
         labName.stringValue = pushItem.name!
         labVersion.stringValue = "版本：\(pushItem.version!) (Build \(pushItem.build!))    大小：\(pushItem.fileSize!)"
         labUpdate.stringValue = DateFormatter.dateStringWith(date: pushItem.updateDate)
-        labSigType.stringValue = pushItem.signType.rawValue
+        labSigType.stringValue = "\(pushItem.signType)"
     }
 
     @IBAction func backAction(_ sender: NSButton) {
@@ -105,7 +94,6 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
         cell.addConstraint(NSLayoutConstraint(item: text, attribute: .left, relatedBy: .equal, toItem: cell, attribute: .left, multiplier: 1, constant: 13))
         cell.addConstraint(NSLayoutConstraint(item: text, attribute: .right, relatedBy: .equal, toItem: cell, attribute: .right, multiplier: 1, constant: -13))
         return cell
-
     }
 }
 
@@ -127,6 +115,5 @@ extension DetatalsViewController{
         lastVC.view.frame = self.view.frame
         NSApplication.shared.keyWindow?.contentViewController = lastVC
     }
-
 
 }

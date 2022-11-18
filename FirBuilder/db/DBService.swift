@@ -17,25 +17,20 @@ class DBService: NSObject {
         db = Database(withPath:Config.dbPath)
     }
 
-    static func createTable(){
-        let database = Database(withPath:Config.dbPath)
-        if (try? database.isTableExists(GeneratorIDTable.tableName)) == false {
-            try? database.create(table: GeneratorIDTable.tableName, of: GeneratorIDTable.self)
-        }
-
-        if (try? database.isTableExists(AppHomeListTable.tableName)) == false {
-            try? database.create(table: AppHomeListTable.tableName, of: AppHomeListTable.self)
-        }
-
-        if (try? database.isTableExists(AppReleaseListTable.tableName)) == false {
-            try? database.create(table: AppReleaseListTable.tableName, of: AppReleaseListTable.self)
-        }
-
-//        if (try? database.isTableExists(AppDetailsTable.tableName)) == false {
-//            try? database.create(table: AppDetailsTable.tableName, of: AppDetailsTable.self)
+    func setup(){
+//        if (try? db.isTableExists(GeneratorIDTable.tableName)) == false {
+//            try? db.create(table: GeneratorIDTable.tableName, of: GeneratorIDTable.self)
 //        }
-
-        database.close()
+        
+        if (try? db.isTableExists(AppHomeTable.tableName)) == false {
+            try? db.create(table: AppHomeTable.tableName, of: AppHomeTable.self)
+        }
+        
+        if (try? db.isTableExists(AppListTable.tableName)) == false {
+            try? db.create(table: AppListTable.tableName, of: AppListTable.self)
+        }
+        
+        close()
     }
 
     func close(){

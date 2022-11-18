@@ -7,7 +7,7 @@
 
 import Foundation
 import WCDBSwift
-
+import KakaJSON
 
 
 class BuilderList{
@@ -88,7 +88,7 @@ class BuilderList{
     function updateTypeIcon(){
         var appIcons = document.getElementsByName("appTypeIcon")
         appIcons.forEach((item,index,array)=>{
-            if (appType == "\(AppType.ios.rawValue)") {
+            if (appType == "\(ParserType.ios)") {
                 item.src = iosIcon
             }else{
                 item.src = androidIcon
@@ -131,32 +131,61 @@ extension BuilderList{
             defer {
                 db.close()
             }
-            let apps:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName)
-            if let list = apps {
-                for item in list {
-                    let bundleID:String = item.bundleID
-                    let type  = item.type
-                    builder(bundleID: bundleID, appType: type)
+            var filters:[String:[AppListTable]] = [:]
+            let array:[AppListTable] = try db.getObjects(fromTable: AppListTable.tableName)
+            for item in array {
+                let key = item.build! + "\(item.type)"
+                var value = filters[key]
+                if value == nil {
+                    value = [];
                 }
+                value?.append(item)
+                filters[key] = value
             }
+            for item in filters.values {
+                builder(list: item)
+            }
+
         } catch  {
             print(error)
         }
     }
+    
+    
+    func builder(list:[AppListTable]){
+        if list.count > 0 {
+            var h5String:String = ""
+            if let h5 = builderListItem(list: list) {
+                h5String = h5
+            }
+            
+            let model = list.first!
+            let detailsData = h5String.data(using: .utf8)
+            let fileManager = FileManager.default
+            fileManager.createFile(atPath: Config.htmlPath+model.srcRoot!+model.listPath!, contents: detailsData, attributes: nil)
+            fileManager.createFile(atPath: Config.htmlSyncPath+model.srcRoot!+model.listPath!, contents: detailsData, attributes: nil)
+        }
+    }
 
+}
 
-    //生成指定具体的APP列表页面
-    func builder(bundleID:String, appType:AppType){
-        success = false
+extension BuilderList{
+//MARK: - AppInfoModel
+    
+    /** 生成list.html */
+    func builder(_ appInfo:AppInfoModel){
+        var success = false
+        let bundleID = appInfo.bundleID!
+        let type = appInfo.type
         var h5String:String = ""
         do {
             let db = DBService.shared.db
             defer {
                 db.close()
             }
-            let list:[AppReleaseListTable]? = try db.getObjects(fromTable: AppReleaseListTable.tableName, where: AppReleaseListTable.Properties.bundleID == bundleID && AppReleaseListTable.Properties.type == appType, orderBy: [AppReleaseListTable.Properties.updateDate.asOrder(by: .descending)])
+            let list:[AppListTable]? = try db.getObjects(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == bundleID && AppListTable.Properties.type == type, orderBy: [AppListTable.Properties.updateDate.asOrder(by: .descending)])
 
-            if let h5 = parser(list: list) {
+            if let h5 = builderListItem(list: list) {
                 h5String = h5
                 success = true
             }
@@ -167,41 +196,37 @@ extension BuilderList{
         if success {
             let detailsData = h5String.data(using: .utf8)
             let fileManager = FileManager.default
-            fileManager.createFile(atPath: Config.htmlPath+htmlPath, contents: detailsData, attributes: nil)
-            fileManager.createFile(atPath: Config.htmlSyncPath+htmlPath, contents: detailsData, attributes: nil)
+            fileManager.createFile(atPath: Config.htmlPath+appInfo.srcRoot!+appInfo.listPath!, contents: detailsData, attributes: nil)
+            fileManager.createFile(atPath: Config.htmlSyncPath+appInfo.srcRoot!+appInfo.listPath!, contents: detailsData, attributes: nil)
         }
     }
-
-    private func parser(list:[AppReleaseListTable]?) -> String?{
+    
+    private func builderListItem(list:[AppListTable]?) -> String?{
         if list != nil && list?.first != nil {
-            let list:[AppReleaseListTable] = list!
+            let list:[AppListTable] = list!
             var h5:String = bodyBegin;
             var node:String = ""
-
             for item in list {
                 node += dymainItem(item)
             }
-
             h5 += node
             h5 += bodyEnd
             h5 += dymaninJS(list.first!)
-
-            htmlPath = list.first!.srcRoot!+"list.html"
             return h5
         }else{
             return nil
         }
     }
+        
 }
 
-
 extension BuilderList{
-
-    func dymaninJS(_ item:AppReleaseListTable) -> String{
+    
+    func dymaninJS(_ item:AppListTable) -> String{
         let str:String = """
 <!-- 用于动态写入数据 -->
 <script type="text/javascript">
-    let appType = "\(item.type.rawValue)" // ios or android
+    let appType = "\(item.type)" // ios or android
 
     let appName = "\(item.name!)"
     let appVersion = "\(item.version!) ( Build \(item.build!) ) "
@@ -211,13 +236,13 @@ extension BuilderList{
         return str
     }
 
-    func dymainItem(_ item:AppReleaseListTable) -> String{
+    func dymainItem(_ item:AppListTable) -> String{
         let node:String = """
     <!-- list item begin-->
     <div name="item" class="list-item-mob">
 
         <div class="list-item-left">
-            <img src="\(item.appIconPath!.fileName)" class="list-img-size100 ">
+            <img src="\(item.logo512Path!)" class="list-img-size100 ">
         </div>
 
         <div name="item-center" class="list-item-center-mob">
@@ -245,16 +270,16 @@ extension BuilderList{
         </div>
 
         <div name="item-right" class="list-item-right-mob">
-            <button class="list-btn-pre", onclick="window.open('\(item.detailsH5Path!.fileName)')"> 预览 </button>
+            <button class="list-btn-pre", onclick="window.open('\(item.detailsPath!)')"> 预览 </button>
         </div>
 
         <div class="list-item-space">
         </div>
     </div>
     <!-- list item end-->
-
 """
         return node
     }
 
 }
+

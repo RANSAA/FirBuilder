@@ -26,6 +26,7 @@ if arguments.contains("-h") || arguments.contains("-help"){
     let msg = """
 -h,-help           :帮助
 -win               :强制使用窗口模式运行程序
+-cli               :强制使用Command模式运行程序
 -buildPath         :自定义FirBuilder资源输出路径，示例：-buildPath=/Users/kimi/Downloads/FirBuilder
 -serverRoot        :自定义服务器资源存储路径，示例：-serverRoot=https://fir.netlify.app
 -inputPath         :自定义需要解析app的文件路径，示例：-inputPath=/Users/kimi/Desktop/AnLinux-App-v6.50.apk
@@ -67,7 +68,7 @@ for item in arguments {
         }
         print("自定义解析资源输出目录:\(subStr)")
     }else if item.hasPrefix("-serverRoot="){
-        let subStr = block(item, "-serverRoot=",false)
+        let subStr = block(item, "-serverRoot=",true)
         serverRoot = subStr
         print("自定义serverRoot:\(subStr)")
     }else if item.hasPrefix("-inputPath=") {
@@ -92,6 +93,10 @@ if argc == 1 || arguments.contains("-NSDocumentRevisionsDebugMode") || arguments
 if arguments.contains("-win") {
     winMode = true
 }
+if arguments.contains("-cli") {
+    winMode = false
+}
+
 
 //MARK: 窗口模式启动 或者 Command模式启动
 if winMode {
@@ -99,33 +104,32 @@ if winMode {
     _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 } else{
     print("使用Command模式启动程序!")
-    print("CLI 模式处理解析任务...")
     let semaphore = DispatchSemaphore(value: 0)
 
     //开始解析
     if let path = inputPath {
         ParserTool.shared.blockStart = {msg in
+            ParserTool.shared.parsing = true
             print(msg)
         }
         ParserTool.shared.blockFail = { msg in
             print(msg)
-            
+            ParserTool.shared.parsing = false
+            ParserTool.clean()
             semaphore.signal()
         }
         ParserTool.shared.blockSuccess = {msg in
             print(msg)
-            
+            ParserTool.shared.parsing = false
+            ParserTool.clean()
             semaphore.signal()
         }
         ParserTool.shared.parserStart(path: path)
         semaphore.wait()
-    }
-    
-    // 构建全部HTML页面
-    if buildAllHTML == true {
-        
-    }
-    
+    }else if buildAllHTML == true { //重新构建所有HTML页面
+        BuilderAppRes.rebuilderAllHTML()
+        print("H5重新生成完成")
+    }    
 }
 
 

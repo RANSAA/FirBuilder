@@ -14,13 +14,10 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
     @IBOutlet var addAreaView: NSView!
     @IBOutlet var infoView: NSView!
     @IBOutlet var collectionView: NSCollectionView!
-
     @IBOutlet var textFieldCoding: NSTextField!
 
-
     var titleStr:String = "App分发平台-静态H5生成器"
-    var dataArray:[AppHomeListTable] = []
-
+    var dataArray:[AppHomeTable] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +34,6 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
     func afterSetupUI(){
         print("viewDidLoad")
         self.title = titleStr
-        self.title = "123"
-
 
         self.topView.wantsLayer = true
         self.topView.layer?.backgroundColor = NSColor.white.cgColor
@@ -54,7 +49,7 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         self.collectionView.layer?.backgroundColor = NSColor.white.cgColor
 
         self.textFieldCoding.stringValue = Config.serverRoot
-
+        
         loadCollectionView()
     }
 
@@ -79,11 +74,31 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
             if result == .OK{
                 let path = panel.url!.path
                 print("file path:\(path)")
-                DispatchQueue.global().async {
-                    let manager = ParserManager(path: path, controller: self)
-                    manager.start()
+                if ParserTool.shared.parsing == false {
+                    DispatchQueue.global().async {
+                        ParserTool.shared.blockStart = {msg in
+                            ParserTool.shared.parsing = true
+                            print(msg)
+                            self.showLoadHUD()
+                        }
+                        ParserTool.shared.blockFail = { msg in
+                            print(msg)
+                            ParserTool.shared.parsing = false
+                            ParserTool.clean()
+                            self.openErrorAlert(msg: msg)
+                        }
+                        ParserTool.shared.blockSuccess = {msg in
+                            print(msg)
+                            ParserTool.shared.parsing = false
+                            ParserTool.clean()
+                            self.loadDataArray()
+                            self.openParserSuccess(msg: msg)
+                        }
+                        ParserTool.shared.parserStart(path: path)
+                    }
+                }else{
+                    self.openErrorAlert(msg: "已经存在一个解析任务!")
                 }
-                self.showLoadHUD()
             }
             panel.close()
         }
@@ -130,20 +145,9 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
 
     //重新生成所有的H5网页
     @IBAction func btnBuilderAllH5Action(_ sender: Any) {
-
-        BuilderTemplateFile.builder()
-
-        BuilderAppHome().builder()
-
-        BuilderList().builderAll()
-
-        BuilderDetails().builderAll()
-
-        BuilderManifest().builderAll()
-
+        BuilderAppRes.rebuilderAllHTML()
         openParserSuccess(msg: "H5重新生成完成")
     }
-
 
     @IBAction func btnHelpAction(_ sender: Any) {
         let vc = AboutViewController.createVC(self)
@@ -159,7 +163,6 @@ extension ViewController{
         self.collectionView.dataSource = self
         self.collectionView.isSelectable = true
 
-        //
         let nib = NSNib.init(nibNamed: NSNib.Name("HomeImgItem"), bundle: nil)
         self.collectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HomeImgItem"))
 
@@ -179,11 +182,14 @@ extension ViewController{
         defer {
             db.close()
         }
-        let list:[AppHomeListTable]? = try? db.getObjects(fromTable: AppHomeListTable.tableName,orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
+        let list:[AppHomeTable]? = try? db.getObjects(fromTable: AppHomeTable.tableName,orderBy: [AppHomeTable.Properties.updateDate.asOrder(by: .descending)])
         if list != nil {
             dataArray = list!
         }
-        self.collectionView .reloadData()
+        DispatchQueue.main.async {
+            self.collectionView .reloadData()
+        }
+        
     }
 
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
@@ -198,17 +204,16 @@ extension ViewController{
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let view = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HomeImgItem"), for: indexPath) as! HomeImgItem
         let model = self.dataArray[indexPath.item]
-        view.imgVIew.sd_setImage(with: URL.init(fileURLWithPath: Config.htmlPath+model.logoPath!), placeholderImage: nil, options:.refreshCached  , completed: nil)
-
+        let imgPath = Config.htmlPath+model.srcRoot!+model.logo512Path!
+        view.imgVIew.image = ImageTool.loadImageFrom(path: imgPath)
         view.appName.stringValue = model.name ?? "unknown"
-        view.bundleID.stringValue = model.bundleID
+        view.bundleID.stringValue = model.bundleID!
         view.version.stringValue = model.version!+" (Build \(model.build!))"
         view.updateDate.stringValue = DateFormatter.dateStringWith(date: model.updateDate)
         view.imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/android.png")
         if model.type == .ios {
             view.imgType.image = NSImage(byReferencingFile: Config.appPath+"src/images/apple.png")
         }
-
         return view
     }
 
@@ -250,8 +255,8 @@ extension ViewController{
 extension ViewController{
 
     func openErrorAlert(type:String){
-        MacProgressHUD.removeAllHUD()
         DispatchQueue.main.async {
+            MacProgressHUD.removeAllHUD()
             let alert = NSAlert()
             alert.messageText = "警告,当前选中的不是标准的\(type)文件！"
             alert.addButton(withTitle: "知道了")
@@ -262,8 +267,8 @@ extension ViewController{
 
 
     func openErrorAlert(msg:String){
-        MacProgressHUD.removeAllHUD()
         DispatchQueue.main.async {
+            MacProgressHUD.removeAllHUD()
             let alert = NSAlert()
             alert.messageText = msg
             alert.addButton(withTitle: "知道了")
@@ -272,31 +277,31 @@ extension ViewController{
         }
     }
 
-
     func openParserSuccess(msg: String){
-        MacProgressHUD.removeAllHUD()
         DispatchQueue.main.async {
+            MacProgressHUD.removeAllHUD()
             let alert = NSAlert()
             alert.messageText = msg
             alert.addButton(withTitle: "知道了")
             alert.alertStyle = .informational
             alert.runModal()
-            MacProgressHUD.removeAllHUD()
         }
     }
 
-     func openNewWindow(){
+    func showLoadHUD(){
+        DispatchQueue.main.async {
+            MacProgressHUD.showWaiting(withPointColor: NSColor.white)
+            //MacProgressHUD.showWaiting(withTitle: "2324", time: 3)
+        }
+    }
+    
+    func openNewWindow(){
         MacProgressHUD.removeAllHUD()
         DispatchQueue.main.async {
             let vc = AddViewController()
-    //        self.controller.presentAsSheet(vc)
+            //self.controller.presentAsSheet(vc)
             self.presentAsModalWindow(vc)
         }
     }
-
-
-    func showLoadHUD(){
-        MacProgressHUD.showWaiting(withPointColor: NSColor.white)
-//        MacProgressHUD.showWaiting(withTitle: "2324", time: 3)
-    }
+    
 }

@@ -62,8 +62,7 @@ class BuilderAppHome{
 """
     var success = false
 
-
-    private func listBodyBagin(_ type:AppType) -> String{
+    private func listBodyBagin(_ type:ParserType) -> String{
     let listBodyBagin:String = """
     <!DOCTYPE html>
     <html lang="en-US">
@@ -74,7 +73,7 @@ class BuilderAppHome{
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="white">
     <meta name="format-detection" content="telephone=no">
-    <title>\(type.rawValue) List</title>
+    <title>\(type) List</title>
     <link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="src/css/index.css">
     <script type="text/javascript" src="src/js/device.js"></script>
@@ -84,7 +83,7 @@ class BuilderAppHome{
 
     <div class="nav-bar">
         <br><br><br><br>
-        <h1>\(type.rawValue) List</h1>
+        <h1>\(type) List</h1>
         <br>
         <h4>当前设备类型类型：<span id="deviceType" style="color: red;">  </span></h4>
         <br>
@@ -116,16 +115,22 @@ extension BuilderAppHome{
         let appHomeData = string.data(using: .utf8)
         let fileManager = FileManager.default
         fileManager.createFile(atPath: Config.htmlPath+"index.html", contents: appHomeData, attributes: nil)
-        fileManager.createFile(atPath: Config.htmlSyncPath+"index.html", contents: appHomeData, attributes: nil)
+//        fileManager.createFile(atPath: Config.htmlSyncPath+"index.html", contents: appHomeData, attributes: nil)
     }
 
     private func save(string:String, name:String){
         let appHomeData = string.data(using: .utf8)
         let fileManager = FileManager.default
         fileManager.createFile(atPath: Config.htmlPath+name, contents: appHomeData, attributes: nil)
-        fileManager.createFile(atPath: Config.htmlSyncPath+name, contents: appHomeData, attributes: nil)
+//        fileManager.createFile(atPath: Config.htmlSyncPath+name, contents: appHomeData, attributes: nil)
     }
 
+}
+
+
+
+extension BuilderAppHome{
+    
     func builder(){
         do {
             var h5:String = ""
@@ -133,78 +138,49 @@ extension BuilderAppHome{
             defer {
                 db.close()
             }
-            let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName,orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
-            if let list = release {
-
-                h5 += bodyBagin
-                for item in list {
-                    h5 += dymaincItem(item)
-                }
-                h5 += bodyEnd
-                save(string: h5, name: "index.html")
+            let list:[AppHomeTable] = try db.getObjects(fromTable: AppHomeTable.tableName,orderBy: [AppHomeTable.Properties.updateDate.asOrder(by: .descending)])
+           
+            h5 += bodyBagin
+            for item in list {
+                h5 += dymaincItem(item)
             }
-        } catch  {
-            print(error)
-        }
-
-        //生成iOS和Android的单独列表
-        builderIosList()
-        builderAndroidList()
-    }
-
-
-    func builderIosList(){
-        do {
-            var h5:String = ""
-            let db = DBService.shared.db
-            defer {
-                db.close()
-            }
-            let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName,
-                                                                where:AppHomeListTable.Properties.type == AppType.ios,
-                                                                orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
-            if let list = release {
-
-                h5 += listBodyBagin(.ios)
-                for item in list {
-                    h5 += dymaincItem(item)
-                }
-                h5 += bodyEnd
-                save(string: h5, name: "ios.html")
-            }
+            h5 += bodyEnd
+            save(string: h5, name: "index.html")
+            
+            //生成iOS和Android的单独列表
+            builderIosList(list: list.filter({$0.type == .ios}) )
+            builderAndroidList(list: list.filter({$0.type == .android}) )
         } catch  {
             print(error)
         }
     }
-
-    func builderAndroidList(){
-        do {
-            var h5:String = ""
-            let db = DBService.shared.db
-            defer {
-                db.close()
-            }
-            let release:[AppHomeListTable]? = try db.getObjects(fromTable: AppHomeListTable.tableName,
-                                                                where:AppHomeListTable.Properties.type == AppType.android,
-                                                                orderBy: [AppHomeListTable.Properties.updateDate.asOrder(by: .descending)])
-            if let list = release {
-                h5 += listBodyBagin(.android)
-                for item in list {
-                    h5 += dymaincItem(item)
-                }
-                h5 += bodyEnd
-                save(string: h5, name: "android.html")
-            }
-        } catch  {
-            print(error)
+    
+    func builderIosList(list:[AppHomeTable]){
+        var h5:String = ""
+        h5 += listBodyBagin(.ios)
+        for item in list {
+            h5 += dymaincItem(item)
         }
+        h5 += bodyEnd
+        save(string: h5, name: "ios.html")
+    }
+
+    func builderAndroidList(list:[AppHomeTable]){
+        var h5:String = ""
+        h5 += listBodyBagin(.android)
+        for item in list {
+            h5 += dymaincItem(item)
+        }
+        h5 += bodyEnd
+        save(string: h5, name: "android.html")
     }
 }
 
 
 extension BuilderAppHome{
-    func dymaincItem(_ item:AppHomeListTable) ->String{
-        let iconTypePath:String = item.type == AppType.ios ? "src/images/apple.png" : "src/images/android.png"
+    
+    func dymaincItem(_ item:AppHomeTable) ->String{
+        let iconTypePath:String = item.type == .ios ? "src/images/apple.png" : "src/images/android.png"
 
         let h5:String = """
     <!-- 一个item开始 -->
@@ -217,7 +193,7 @@ extension BuilderAppHome{
         <div class="margin48">
             <!-- logo icon -->
              <div class="home-nav-logo-height">
-                <img src="\(item.logoPath!)" class="size100">
+                <img src="\(item.srcRoot!+item.logo512Path!)" class="size100">
             </div>
             <!-- app name -->
             <div class="home-nav-name-height">
@@ -227,7 +203,7 @@ extension BuilderAppHome{
             <!-- text info -->
             <div class="home-nav-line-height">
                 <span class="home-line-label ">包名：</span>
-                <span class="home-line-text">\(item.bundleID)</span>
+                <span class="home-line-text">\(item.bundleID!)</span>
             </div>
             <div class="home-nav-line-height">
                 <span class="home-line-label ">版本：</span>
@@ -240,8 +216,8 @@ extension BuilderAppHome{
             <!-- button -->
             <div style="margin-top:62px;">
                 <div>
-                    <button type="button" onclick="window.open('\(item.releasePath!)')" class ="home-button-left">列表</button>
-                    <button type="button" onclick="window.open('\(item.selectedVerPath!)')" class ="home-button-right">预览</button>
+                    <button type="button" onclick="window.open('\(item.srcRoot!+item.listPath!)')" class ="home-button-left">列表</button>
+                    <button type="button" onclick="window.open('\(item.srcRoot!+item.newPath!)')" class ="home-button-right">预览</button>
                 </div>
             </div>
         </div>
@@ -252,3 +228,4 @@ extension BuilderAppHome{
         return h5
     }
 }
+

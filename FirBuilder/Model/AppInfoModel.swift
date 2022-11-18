@@ -9,84 +9,83 @@ import Foundation
 import KakaJSON
 
 //app 应用信息
-//注意
 class AppInfoModel: Convertible{
-    var type:AppType = .ios
+    var type:ParserType = .ios
     var name:String? = nil
     var bundleID:String? = nil;
     var version:String? = nil
     var build:String? = nil
-
-    var isSelected:Bool = false
-    var md5:String? = nil
-    var signType:SignatureType = .release
-
-
+    
     var minSdkVersion:String? = nil
     var targetSdkVersion:String? = nil
-
+    
+    var signType:ParserBuildType = .release
+    /** 过期时间 */
+    var signExpiration:String? = "永久有效" 
+    
     var devices:[String]? = nil //ios devices
+    
 
-    //
-    var iconOriginalPath:String? = nil
-    var appOriginalPath:String? = nil
+    /** 原始图标路径 */
+    var originalIconPath:String? = nil
+    /** 原始app路径 */
+    var originalAppPath:String? = nil
     var fileSize:String?  = nil
 
     //时间，如果修改了需要重新执行parse()
     var createDate:Date = Date()
     var updateDate:Date = Date()
-
-
-    var srcRoot:String? = nil   //指定版本APP的资源根路径
-    var logoPath:String? = nil
-
-    var saveAppName:String? = nil
-    var saveAppPath:String? = nil
-
-    var appIconPath:String? = nil   //512x512 png
-    var appIcon57Path:String? = nil
-    var appManifestPath:String? = nil
-
-    var releaseName:String  = "list.html"
-    var releasePath:String? = nil
-
-
-    var selectedVerPath:String? = nil   //选中版本路径
-    var detailsH5Path:String? = nil     //当前新生成的H5路径
-
-
-    //合成内置资源路径
-    func parse(){
-        srcRoot = "app/\(self.type.rawValue)/\(self.bundleID ?? "")/"
-        saveAppName = builderAppName()
-        saveAppPath = srcRoot! + saveAppName!
-        releasePath = srcRoot! + releaseName
-        detailsH5Path   = srcRoot! + randomFileName + ".html"
+    
+    var srcRoot:String? = nil   //指定版本APP的资源路径名称
+    
+    var logo512Path:String? = nil
+    var logo57Path:String? = nil
+    var manifestPath:String? = nil
+    
+    var newPath:String? = nil
+    var detailsPath:String? = nil
+    var listPath:String? = nil
+    
+    var appSavePath:String? = nil
         
-//        selectedVerPath = detailsH5Path
-        selectedVerPath =  srcRoot! + "new.html"
-
-        appIconPath = srcRoot! + randomFileName + "_512x512.png"
-        logoPath = appIconPath
+    var isSelected:Bool = false
 
 
-        if self.type == .ios {
-            appIcon57Path = srcRoot! + randomFileName + "_57x57.png"
-            appManifestPath = srcRoot! + randomFileName + "_manifest.plist"
+    /**
+     合成内部资源
+     */
+    func parseInfo(){
+        let random = randomFileName
+        srcRoot = "app/\(self.type)/\(self.bundleID ?? "")/".lowercased()
+        srcRoot = srcRoot?.replacingOccurrences(of: " ", with: "")
+        logo512Path = random + "_512x512.png"
+        logo57Path = random + "_57x57.png"
+        if type == .ios {
+            manifestPath = random + "_manifest.plist"
         }
+        
+        newPath = "new.html"
+        listPath = "list.html"
+        detailsPath = random + ".html"
+         
+        appSavePath = random + "." + originalAppPath!.fileExtension
     }
-
-    func builderAppName() -> String{
-        let type = self.type == AppType.ios ? FileExtension.ipa.rawValue : FileExtension.apk.rawValue
-        return randomFileName +  "." + type
-    }
-
+    
     //随机生成的文件名称
     var randomFileName:String{
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMddHHmmss"
-        return formatter.string(from: self.createDate)+"_"+version!+"_"+build!
+        var res = formatter.string(from: self.createDate)+"_"+version!+"_"+build!
+        res = res.replacingOccurrences(of: " ", with: "").lowercased()
+        return res
     }
 
     required init() {}
+}
+
+
+extension AppInfoModel:CustomStringConvertible{
+    var description:String {
+        return printAllIvars(self, false)
+    }
 }

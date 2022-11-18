@@ -23,8 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        Config.setup()
         
         // Add coder
-        let WebPCoder = SDImageWebPCoder.shared
-        SDImageCodersManager.shared.addCoder(WebPCoder)
+//        let WebPCoder = SDImageWebPCoder.shared
+//        SDImageCodersManager.shared.addCoder(WebPCoder)
 
 
         self.addQuitActions()

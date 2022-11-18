@@ -21,7 +21,8 @@ struct ParserTool {
     typealias ParserBlock = (_ msg:String) -> Void
     var blockStart:ParserBlock?
     var blockFail:ParserBlock?
-    var blockSuccess:ParserBlock?    
+    var blockSuccess:ParserBlock?
+    var blockMsg:ParserBlock?
     
     func parserStart(path:String){
         blockStart?("开始解析:\(path)")
@@ -40,4 +41,8 @@ struct ParserTool {
         print(msg)
     }
     
+    /** 清除解析垃圾*/
+    static func clean(){
+       try? FileManager.default.removeItem(atPath: Config.unzipPath)
+    }
 }

@@ -20,43 +20,50 @@ class BuilderManifest{
                 db.close()
             }
 
-            let list:[AppReleaseListTable]? = try db.getObjects(fromTable: AppReleaseListTable.tableName, where: AppReleaseListTable.Properties.type == AppType.ios, orderBy: [AppReleaseListTable.Properties.updateDate.asOrder(by: .descending)])
-
-            if let list = list {
-                for item in list {
-                    builder(item)
-                }
+            let list:[AppListTable] = try db.getObjects(fromTable: AppListTable.tableName, where: AppListTable.Properties.type == ParserType.ios, orderBy: [AppListTable.Properties.updateDate.asOrder(by: .descending)])
+            
+            let appInfoList = list.compactMap({ (model) -> AppInfoModel in
+                let jsonString = model.kj.JSONString()
+                let appInfo:AppInfoModel = KakaJSON.model(from: jsonString, type: AppInfoModel.self) as! AppInfoModel
+                return appInfo
+            })
+            for item in appInfoList {
+                Self.builder(item)
             }
         } catch {
             print(error)
         }
     }
 
-    func builder(_ item: AppInfoModel){
-        if item.type == .ios {
+
+    /**
+     通过AppInfoModel构建manifestPath文件
+     */
+    static func builder(_ appInfo:AppInfoModel){
+        if appInfo.type == .ios {
             let metadata:[String:String] = [
-                "bundle-identifier":item.bundleID!,
-                "bundle-version":item.version!,
+                "bundle-identifier":appInfo.bundleID!,
+                "bundle-version":appInfo.version!,
                 "kind":"software",
-                "subtitle":item.name!,
-                "title":item.name!
+                "subtitle":appInfo.name!,
+                "title":appInfo.name!
             ]
 
             let itemApp = [
                 "kind":"software-package",
-                "url":Config.serverRoot+item.saveAppPath!
+                "url":Config.serverRoot+appInfo.srcRoot!+appInfo.appSavePath!
             ]
 
             let itemFull:[String : Any] = [
                 "kind":"full-size-image",
                 "needs-shine":false,
-                "url":Config.serverRoot+item.appIconPath!
+                "url":Config.serverRoot+appInfo.srcRoot!+appInfo.logo512Path!
             ]
 
             let itemDisplay:[String : Any] = [
                 "kind":"display-image",
                 "needs-shine":false,
-                "url":Config.serverRoot+item.appIcon57Path!
+                "url":Config.serverRoot+appInfo.srcRoot!+appInfo.logo57Path!
             ]
 
 
@@ -66,17 +73,11 @@ class BuilderManifest{
                  "metadata":metadata
                 ]
             ]]
-            manifest.write(toFile: Config.htmlPath+item.appManifestPath!, atomically: true)
-        }
-
-
-    }
-
-
-    func builder(_ item: AppReleaseListTable){
-        if let model = item.kj.modelToModel(AppInfoModel.self) {
-//            print("info json:\(printAllIvars(model))")
-            builder(model)
+            manifest.write(toFile: Config.htmlPath+appInfo.srcRoot!+appInfo.manifestPath!, atomically: true)
         }
     }
+
 }
+
+
+
