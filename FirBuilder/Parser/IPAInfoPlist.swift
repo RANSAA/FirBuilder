@@ -43,3 +43,10 @@ class IPAInfoPlist:Convertible{
     }
 
 }
+
+
+extension IPAInfoPlist:CustomStringConvertible{
+    var description:String {
+        return printAllIvars(self, false,isPrint: false)
+    }
+}

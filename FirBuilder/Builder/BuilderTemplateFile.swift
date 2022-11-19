@@ -19,29 +19,21 @@ struct BuilderTemplateFile {
 
 
         try? FileManager.default.removeItem(atPath: toPath1)
-        try? FileManager.default.removeItem(atPath: toPath2)
+        if Config.isSync {
+            try? FileManager.default.removeItem(atPath: toPath2)
+        }
 
-        if !FileManager.default.fileExists(atPath: Config.htmlPath) {
-            try? FileManager.default.createDirectory(atPath: Config.htmlPath, withIntermediateDirectories: true, attributes: nil)
-        }
-        if !FileManager.default.fileExists(atPath: Config.htmlSyncPath) {
-            try? FileManager.default.createDirectory(atPath: Config.htmlSyncPath, withIntermediateDirectories: true, attributes: nil)
-        }
+        ParserTool.createDirectory(atPath: Config.htmlPath)
 
         try? FileManager.default.copyItem(atPath: srcPath, toPath: toPath1)
-        try? FileManager.default.copyItem(atPath: srcPath, toPath: toPath2)
+        if Config.isSync {
+            try? FileManager.default.copyItem(atPath: srcPath, toPath: toPath2)
+        }
 
-        
         let app = Config.htmlPath + "app"
-        let appSync = Config.htmlSyncPath + "app"
-        if !FileManager.default.fileExists(atPath: app) {
-            try? FileManager.default.createDirectory(atPath: app, withIntermediateDirectories: true, attributes: nil)
-        }
-        if !FileManager.default.fileExists(atPath: appSync) {
-            try? FileManager.default.createDirectory(atPath: appSync, withIntermediateDirectories: true, attributes: nil)
-        }
-
-
+//        let appSync = Config.htmlSyncPath + "app"
+        
+        ParserTool.createDirectory(atPath: app)
     }
 
 }

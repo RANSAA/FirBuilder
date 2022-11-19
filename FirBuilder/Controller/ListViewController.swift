@@ -7,7 +7,6 @@
 
 import Cocoa
 import WCDBSwift
-import SDWebImage
 import KakaJSON
 
 class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource,ListCellDelegate {
@@ -77,7 +76,6 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         }
         cell.row = row
         cell.delegate = self
-        print(Config.htmlPath+model.srcRoot!+model.logo512Path!)
         return cell
     }
 
@@ -136,40 +134,24 @@ extension ListViewController{
 
     func goBack(){
         lastVC.view.frame = self.view.frame
-        NSApplication.shared.keyWindow?.contentViewController = lastVC
         let vc:ViewController = lastVC as! ViewController
         vc.loadDataArray()
+        NSApplication.shared.keyWindow?.contentViewController = lastVC
     }
-
-
 }
 
 
 extension ListViewController{
+    
+    //删除整个APP
     func deleteApp(){
-        do{
-            let db = DBService.shared.db
-            defer {
-                db.close()
-            }
-            try db.delete(fromTable: AppHomeTable.tableName, where: AppHomeTable.Properties.bundleID == pushItem.bundleID! && AppHomeTable.Properties.type == pushItem.type)
-            try db.delete(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == pushItem.bundleID! && AppListTable.Properties.type == pushItem.type)
-            
-            BuilderAppHome().builder()
-
-            let fileManager = FileManager.default
-            try? fileManager.removeItem(atPath: Config.htmlPath+pushItem.srcRoot!)
-            try? fileManager.removeItem(atPath: Config.htmlSyncPath+pushItem.srcRoot!)
-
-        }catch{
-            print(error)
-        }
-
-
+        
+        DBService.shared.deleteAppWith(bundleID: pushItem.bundleID!, type: pushItem.type)
+        
         goBack()
         let homeVC:ViewController = lastVC as! ViewController
         homeVC.loadDataArray()
-
+        
     }
 }
 
@@ -214,8 +196,7 @@ extension ListViewController
 
             loadData()
             
-            let jsonString = model.kj.JSONString()
-            let appInfo:AppInfoModel = KakaJSON.model(from: jsonString, type: AppInfoModel.self) as! AppInfoModel
+            let appInfo:AppInfoModel = model.kj_modelToModel(AppInfoModel.self)!
             
             //重新生成new.html
             BuilderDetails().builderNewHTML(appInfo)
@@ -231,42 +212,12 @@ extension ListViewController
     }
 
     func deleteCellAction(_ model:AppListTable){
-        do{
-            let db = DBService.shared.db
-            defer {
-                db.close()
-            }
-            try db.delete(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.updateDate == model.updateDate)
 
-            loadData()
-            
-            let jsonString = model.kj.JSONString()
-            let appInfo:AppInfoModel = KakaJSON.model(from: jsonString, type: AppInfoModel.self) as! AppInfoModel
-            
-            //重新生成list.html
-            BuilderList().builder(appInfo)
-
-        }catch{
-            print(error)
-        }
-
-        let fileManager = FileManager.default
-        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.appSavePath!)
-        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.detailsPath!)
-        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.logo512Path!)
-        try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.logo57Path!)
-
-        
-//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.appSavePath!)
-//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.detailsPath!)
-//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.logo512Path!)
-//        try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.logo57Path!)
-
+        DBService.shared.deleteAppCell(model: model)
+        loadData()
 
         if model.type == .ios {
-            try? fileManager.removeItem(atPath: Config.htmlPath+model.srcRoot!+model.manifestPath!)
-            
-//            try? fileManager.removeItem(atPath: Config.htmlSyncPath+model.srcRoot!+model.manifestPath!)
+            ParserTool.delete(atPath: Config.htmlPath+model.srcRoot!+model.manifestPath!)
         }
 
         if self.dataAry.count < 1 {
@@ -278,22 +229,10 @@ extension ListViewController
     }
 
     func updateAppHomeList(_ model: AppListTable, update:Date){
-        do{
-            let db = DBService.shared.db
-            defer {
-                db.close()
-            }
-            let properties = [AppHomeTable.Properties.name,
-                              AppHomeTable.Properties.version,
-                              AppHomeTable.Properties.build,
-                              AppHomeTable.Properties.logo512Path,
-                              AppHomeTable.Properties.updateDate]
-            let row:[ColumnEncodable] = [model.name!,model.version!,model.build!,model.logo512Path!,update]
-            try db.update(table: AppHomeTable.tableName, on: properties, with: row, where: AppHomeTable.Properties.bundleID == model.bundleID! && AppHomeTable.Properties.type == model.type)
-
-            BuilderAppHome().builder()
-        }catch{
-            print(error)
-        }
+        DBService.shared.updateAppHomeList(model: model, update: update)
     }
+    
+    
+    
+    
 }

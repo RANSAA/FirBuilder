@@ -45,7 +45,14 @@ class AboutViewController: NSViewController {
         如果没有可以使用将html推送到git仓库，html-sync同步到静态托管网站即可
 
 
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
+
+    1.目前coding已经不能使用了，直接切换到Netlify即可。
+    2.目前已经支持CLI模式，直接在终端执行程序，并输入：-h，即可查询使用方法
+
+
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 """
         return info

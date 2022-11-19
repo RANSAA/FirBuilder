@@ -31,7 +31,7 @@ class BuilderManifest{
                 Self.builder(item)
             }
         } catch {
-            print(error)
+            ParserTool.log(error)
         }
     }
 
@@ -72,8 +72,9 @@ class BuilderManifest{
                 ["assets":[itemApp,itemFull,itemDisplay],
                  "metadata":metadata
                 ]
-            ]]
-            manifest.write(toFile: Config.htmlPath+appInfo.srcRoot!+appInfo.manifestPath!, atomically: true)
+            ]]            
+            let path = Config.htmlPath+appInfo.srcRoot!+appInfo.manifestPath!
+            ParserTool.save(manifest, path: path)
         }
     }
 

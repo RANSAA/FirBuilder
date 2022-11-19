@@ -111,18 +111,10 @@ class BuilderAppHome{
 
 extension BuilderAppHome{
 
-    private func save(string:String){
-        let appHomeData = string.data(using: .utf8)
-        let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.htmlPath+"index.html", contents: appHomeData, attributes: nil)
-//        fileManager.createFile(atPath: Config.htmlSyncPath+"index.html", contents: appHomeData, attributes: nil)
-    }
-
     private func save(string:String, name:String){
-        let appHomeData = string.data(using: .utf8)
-        let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.htmlPath+name, contents: appHomeData, attributes: nil)
-//        fileManager.createFile(atPath: Config.htmlSyncPath+name, contents: appHomeData, attributes: nil)
+        let appHomeData = string.data(using: .utf8)        
+        let path = Config.htmlPath+name
+        ParserTool.save(appHomeData, path: path)
     }
 
 }
@@ -151,7 +143,7 @@ extension BuilderAppHome{
             builderIosList(list: list.filter({$0.type == .ios}) )
             builderAndroidList(list: list.filter({$0.type == .android}) )
         } catch  {
-            print(error)
+            ParserTool.log(error)
         }
     }
     

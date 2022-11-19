@@ -73,22 +73,22 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         panel.beginSheetModal(for: self.view.window!) { (result) in
             if result == .OK{
                 let path = panel.url!.path
-                print("file path:\(path)")
+                ParserTool.log("file path:\(path)")
                 if ParserTool.shared.parsing == false {
                     DispatchQueue.global().async {
                         ParserTool.shared.blockStart = {msg in
                             ParserTool.shared.parsing = true
-                            print(msg)
+                            ParserTool.log(msg)
                             self.showLoadHUD()
                         }
                         ParserTool.shared.blockFail = { msg in
-                            print(msg)
+                            ParserTool.log(msg)
                             ParserTool.shared.parsing = false
                             ParserTool.clean()
                             self.openErrorAlert(msg: msg)
                         }
                         ParserTool.shared.blockSuccess = {msg in
-                            print(msg)
+                            ParserTool.log(msg)
                             ParserTool.shared.parsing = false
                             ParserTool.clean()
                             self.loadDataArray()

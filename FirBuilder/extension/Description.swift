@@ -158,7 +158,7 @@ public func getAllIvars(_ any: Any?, _ hasSuper:Bool = true) -> [String]{
  - return 返回打印信息
  */
 @discardableResult
-public func printAllIvars(_ any: Any?, _ hasSuper:Bool = true, _ hasAddress:Bool = true, _ isPrint:Bool = true) -> String{
+public func printAllIvars(_ any: Any?, _ hasSuper:Bool = true, hasAddress:Bool = true, isPrint:Bool = true) -> String{
     var res = ""
     if let model = any {
         let mirror = Mirror(reflecting: model)

@@ -10,6 +10,7 @@ target 'FirBuilder' do
 
   # Pods for FirBuilder
   pod 'SSZipArchive'
+  pod 'Zip', '~> 2.1'   # swift
   # pod 'DataCompression'
   # pod 'GzipSwift'
   # pod 'GZIP'
@@ -19,22 +20,23 @@ target 'FirBuilder' do
   pod 'WCDB.swift'
 
   pod 'KakaJSON'
-  pod 'HandyJSON', '~> 5.0.2'
+ # pod 'HandyJSON', '~> 5.0.2'
+  
 #  pod 'SwiftyJSON', '~> 4.0'
 #  pod 'CleanJSON'
 #  pod 'ObjectMapper'
 
 #  pod 'Alamofire'
 
-  pod 'SDWebImage'
-  pod 'SDWebImageWebPCoder'
+#  pod 'SDWebImage'
+#  pod 'SDWebImageWebPCoder'
 
   pod 'LYBProgressHUD'
 
 
   pod 'Yaml'
   pod 'SWXMLHash', '~> 6.0.0'
-  pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
+ # pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
 
 
 end

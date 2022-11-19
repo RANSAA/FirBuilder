@@ -51,7 +51,7 @@ class MobileprovisionFile {
             let startInt = resultStr.findFirst("<?xml")
             let lastIndex = resultStr.findLast("</plist>")
             if  startInt == -1 || lastIndex == -1 {
-                print("mobileprovision文件解析失败！")
+                ParserTool.log("mobileprovision文件解析失败！")
                 return nil
             }else{
                 let start = resultStr.index(resultStr.startIndex, offsetBy: startInt)
@@ -60,7 +60,7 @@ class MobileprovisionFile {
                 return str
             }
         }else{
-            print("mobileprovision文件解析失败！")
+            ParserTool.log("mobileprovision文件解析失败！")
             return nil
         }
     }
@@ -73,13 +73,13 @@ class MobileprovisionFile {
             try? str.write(toFile: toPlistPath, atomically: true, encoding: .utf8)
             if let dic = NSDictionary(contentsOfFile: toPlistPath) {
                 
-//                print("embedded filePath:\(path)")
-//                print("embedded toPlistPath:\(toPlistPath)")
-//                print("embedded:\n\(dic)\nembedded:")
+                ParserTool.log("embedded filePath:\(path)")
+                ParserTool.log("embedded toPlistPath:\(toPlistPath)")
+                ParserTool.log("embedded:\n\(dic)\nembedded:")
                 
                 if let localProvision = dic["LocalProvision"] as? Bool  {
                     self.localProvision = localProvision
-                    print("本地签名，不可上传")
+                    ParserTool.log("本地签名，不可上传")
                 }
                 if let provisionsAllDevices = dic["ProvisionsAllDevices"] as? Bool{ //Enterprise
                     self.provisionsAllDevices = provisionsAllDevices
@@ -104,23 +104,17 @@ class MobileprovisionFile {
                 //处理，并判断类型
             }else{
                 self.hasValid = false
-                print("不是标准的smobileprovision文件")
+                ParserTool.log("不是标准的smobileprovision文件")
             }
         }else{
             self.hasValid = false
-            print("mobileprovision文件不存在")
+            ParserTool.log("mobileprovision文件不存在")
         }
     }
     
     
     init(filePath path:String){
-//        let fileName = path.fileName
-//        let index = path.findLast(fileName)
-//        let dir = path.subStringTo(index)
-//        let plistPath = dir + "embedded.plist"
-        
-//        let path = "/Users/kimi/资料/ipa/AdHoc.mobileprovision"
-        let plistPath = Config.unzipPath + "\(arc4random()%1000)-" + "embedded.plist"
+        let plistPath = Config.unzipPath + "embedded.plist"
         self.readToSavePlist(filePath: path, toPlistPath: plistPath)
     }
     

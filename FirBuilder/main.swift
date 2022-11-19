@@ -8,13 +8,11 @@
 import Foundation
 
 
-#if DEBUG
 
-print("argc:\(CommandLine.argc)")
-print("arguments:\(CommandLine.arguments)")
-print("unsafeArgv:\(CommandLine.unsafeArgv)")
+//print("argc:\(CommandLine.argc)")
+//print("arguments:\(CommandLine.arguments)")
+//print("unsafeArgv:\(CommandLine.unsafeArgv)")
 
-#endif
 
 
 private let arguments = CommandLine.arguments
@@ -30,7 +28,10 @@ if arguments.contains("-h") || arguments.contains("-help"){
 -buildPath         :自定义FirBuilder资源输出路径，示例：-buildPath=/Users/kimi/Downloads/FirBuilder
 -serverRoot        :自定义服务器资源存储路径，示例：-serverRoot=https://fir.netlify.app
 -inputPath         :自定义需要解析app的文件路径，示例：-inputPath=/Users/kimi/Desktop/AnLinux-App-v6.50.apk
--buildAllHTML      :重新构建所有HTML页面
+-html              :重新构建所有HTML页面
+-sync              :生成同步目录,同步目录不含应用包
+-d                 :删除指定BundleID对应的App，示例：-d=com.package.name
+-ios,-android      :删除应用时指定App的类型，如果没有该参数表示删除所有符合-d的应用，只有指定-d时该参数才有效。
 """
     print(msg)
     exit(0)
@@ -42,6 +43,10 @@ private var buildPath:String? = nil
 private var serverRoot:String? = nil
 private var inputPath:String? = nil
 private var buildAllHTML = false
+private var isSync = false
+private var delBundleID:String? = nil;
+private var delType:ParserType? = nil
+
 private var block:(String,String,Bool)->String = { (string, findStr,append) in
     let index = string.index(string.startIndex, offsetBy: findStr.count)
     let end = string.endIndex
@@ -54,35 +59,54 @@ private var block:(String,String,Bool)->String = { (string, findStr,append) in
     return subStr
 }
 for item in arguments {
-    
-    if item == "-buildAllHTML" {
+    switch item {
+    case "-html":
         buildAllHTML = true
-        print("构建所有的HTML页面")
-    }else if item.hasPrefix("-buildPath=") {
+        print("cli- 构建所有的HTML页面")
+    case "-sync":
+        isSync = true
+        print("cli- 生成同步目录")
+    case let item where item.hasPrefix("-buildPath="):
         let subStr = block(item, "-buildPath=",true)
         do {
             try FileManager.default.createDirectory(atPath: subStr, withIntermediateDirectories: true, attributes: nil)
             buildPath = subStr
         } catch  {
-            print("\(error)")
+            print("cli- \(error)")
         }
-        print("自定义解析资源输出目录:\(subStr)")
-    }else if item.hasPrefix("-serverRoot="){
+        print("cli- 自定义解析资源输出目录:\(subStr)")
+        
+        
+    case let item where item.hasPrefix("-serverRoot="):
         let subStr = block(item, "-serverRoot=",true)
         serverRoot = subStr
-        print("自定义serverRoot:\(subStr)")
-    }else if item.hasPrefix("-inputPath=") {
+        print("cli- 自定义serverRoot:\(subStr)")
+        
+        
+    case let item where item.hasPrefix("-inputPath="):
         let subStr = block(item, "-inputPath=",false)
         inputPath = subStr
-        print("解析文件路径:\(inputPath!)")
+        print("cli- 解析文件路径:\(inputPath!)")
+        
+    case let item where item.hasPrefix("-d="):
+        let subStr = block(item, "-d=",false)
+        delBundleID = subStr
+        print("cli- 删除BundleID为:\(delBundleID!)的应用")
+    case let item where item.lowercased() == "-android":
+        delType = .android
+        print("cli- 删除应用类型:Android")
+        
+    case let item where item.lowercased() == "-ios":
+        delType = .ios
+        print("cli- 删除应用类型:iOS")
+    default:
+        break
     }
-
 }
 
 
-
 //配置信息
-Config.setup(buildPath: buildPath, serverRoot: serverRoot)
+Config.setup(buildPath: buildPath, serverRoot: serverRoot, isSync:isSync)
 
 
 //MARK: - 判断APP启动模式
@@ -100,37 +124,51 @@ if arguments.contains("-cli") {
 
 //MARK: 窗口模式启动 或者 Command模式启动
 if winMode {
-    print("使用窗口模式启动程序!")
+    ParserTool.log("使用窗口模式启动程序!")
     _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 } else{
-    print("使用Command模式启动程序!")
+    ParserTool.log("使用Command模式启动程序!")
     let semaphore = DispatchSemaphore(value: 0)
 
     //开始解析
     if let path = inputPath {
         ParserTool.shared.blockStart = {msg in
             ParserTool.shared.parsing = true
-            print(msg)
+            ParserTool.log(msg)
         }
         ParserTool.shared.blockFail = { msg in
-            print(msg)
+            ParserTool.log(msg)
             ParserTool.shared.parsing = false
             ParserTool.clean()
+            ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
+            ParserTool.log("CLI-ParserTool Parser Fail.")
             semaphore.signal()
         }
         ParserTool.shared.blockSuccess = {msg in
-            print(msg)
+            ParserTool.log(msg)
             ParserTool.shared.parsing = false
             ParserTool.clean()
+            ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
+            ParserTool.log("CLI-ParserTool Parser Success.")
             semaphore.signal()
         }
         ParserTool.shared.parserStart(path: path)
         semaphore.wait()
     }else if buildAllHTML == true { //重新构建所有HTML页面
         BuilderAppRes.rebuilderAllHTML()
-        print("H5重新生成完成")
-    }    
+        ParserTool.log("H5重新生成完成")
+        ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
+        ParserTool.log("CLI-ParserTool Parser Success.")
+    }else if let bundleID = delBundleID {
+        DBService.shared.deleteAppWith(bundleID: bundleID, type: delType)
+        ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
+        ParserTool.log("CLI-ParserTool Parser Success.")
+    }
 }
+
+
+
+
 
 
 
@@ -154,13 +192,3 @@ func testLoadImage(){
     ImageTool.JPGRepresentation(image: reImage, path: savePath4)
 }
 
-
-
-////MARK: - 模拟程序状态等待操作
-//private let seam = DispatchSemaphore(value: 0)
-//DispatchQueue.global().asyncAfter(deadline: .now() + 0.3 ) {
-//    print("after 2")
-//    seam.signal()
-//}
-//seam.wait()
-//print("seam.wait done.")

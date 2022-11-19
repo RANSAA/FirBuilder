@@ -86,6 +86,6 @@ class AppInfoModel: Convertible{
 
 extension AppInfoModel:CustomStringConvertible{
     var description:String {
-        return printAllIvars(self, false)
+        return printAllIvars(self, false,isPrint: false)
     }
 }

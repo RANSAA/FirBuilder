@@ -1,84 +1,49 @@
 PODS:
-  - HandyJSON (5.0.2)
   - KakaJSON (1.1.2)
-  - libwebp (1.2.1):
-    - libwebp/demux (= 1.2.1)
-    - libwebp/mux (= 1.2.1)
-    - libwebp/webp (= 1.2.1)
-  - libwebp/demux (1.2.1):
-    - libwebp/webp
-  - libwebp/mux (1.2.1):
-    - libwebp/demux
-  - libwebp/webp (1.2.1)
   - LYBProgressHUD (1.1.0)
-  - SDWebImage (5.12.2):
-    - SDWebImage/Core (= 5.12.2)
-  - SDWebImage/Core (5.12.2)
-  - SDWebImageWebPCoder (0.8.4):
-    - libwebp (~> 1.0)
-    - SDWebImage/Core (~> 5.10)
   - SQLiteRepairKit (1.2.2):
     - WCDBOptimizedSQLCipher (~> 1.2.0)
   - SSZipArchive (2.4.2)
-  - SwiftyXMLParser (5.5.0)
   - SWXMLHash (6.0.0)
   - WCDB.swift (1.0.8.2):
     - SQLiteRepairKit (~> 1.2.0)
     - WCDBOptimizedSQLCipher (~> 1.2.0)
   - WCDBOptimizedSQLCipher (1.2.1)
   - Yaml (3.4.4)
+  - Zip (2.1.2)
 
 DEPENDENCIES:
-  - HandyJSON (~> 5.0.2)
   - KakaJSON
   - LYBProgressHUD
-  - SDWebImage
-  - SDWebImageWebPCoder
   - SSZipArchive
-  - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
   - SWXMLHash (~> 6.0.0)
   - WCDB.swift
   - Yaml
+  - Zip (~> 2.1)
 
 SPEC REPOS:
   trunk:
-    - HandyJSON
     - KakaJSON
-    - libwebp
     - LYBProgressHUD
-    - SDWebImage
-    - SDWebImageWebPCoder
     - SQLiteRepairKit
     - SSZipArchive
     - SWXMLHash
     - WCDB.swift
     - WCDBOptimizedSQLCipher
     - Yaml
-
-EXTERNAL SOURCES:
-  SwiftyXMLParser:
-    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
-
-CHECKOUT OPTIONS:
-  SwiftyXMLParser:
-    :commit: d7a1d23f04c86c1cd2e8f19247dd15d74e0ea8be
-    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
+    - Zip
 
 SPEC CHECKSUMS:
-  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
-  libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   LYBProgressHUD: 14119492a4f377b1fc76f1119043c9842dbe1c2d
-  SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
-  SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
   SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
-  SwiftyXMLParser: 027d9e6fb54a38d95dccec025bcea9693f699c47
   SWXMLHash: 9d851ed3edf48ec2bd0db98f0cda0ad4136d75e3
   WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
   Yaml: 52831fc1d9ac2db4ddf6d7562993457127256ca6
+  Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 34748bcc16cfad8a3e9d1d3cc9f2c7ab7b5136f4
+PODFILE CHECKSUM: b0890bda74ed3e6589572fe0701c475e83d3b1aa
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

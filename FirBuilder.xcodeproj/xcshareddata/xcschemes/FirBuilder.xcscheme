@@ -67,6 +67,10 @@
             argument = "-inputPath=/Users/kimi/Desktop/AdultLP.ipa"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-html"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
    <ProfileAction

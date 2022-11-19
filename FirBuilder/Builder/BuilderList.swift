@@ -147,7 +147,7 @@ extension BuilderList{
             }
 
         } catch  {
-            print(error)
+            ParserTool.log(error)
         }
     }
     
@@ -161,16 +161,15 @@ extension BuilderList{
             
             let model = list.first!
             let detailsData = h5String.data(using: .utf8)
-            let fileManager = FileManager.default
-            fileManager.createFile(atPath: Config.htmlPath+model.srcRoot!+model.listPath!, contents: detailsData, attributes: nil)
-            fileManager.createFile(atPath: Config.htmlSyncPath+model.srcRoot!+model.listPath!, contents: detailsData, attributes: nil)
+
+            let path = Config.htmlPath+model.srcRoot!+model.listPath!
+            ParserTool.save(detailsData, path: path)
         }
     }
 
 }
 
 extension BuilderList{
-//MARK: - AppInfoModel
     
     /** 生成list.html */
     func builder(_ appInfo:AppInfoModel){
@@ -190,14 +189,15 @@ extension BuilderList{
                 success = true
             }
         } catch  {
-            print(error)
+            ParserTool.log(error)
         }
 
         if success {
             let detailsData = h5String.data(using: .utf8)
-            let fileManager = FileManager.default
-            fileManager.createFile(atPath: Config.htmlPath+appInfo.srcRoot!+appInfo.listPath!, contents: detailsData, attributes: nil)
-            fileManager.createFile(atPath: Config.htmlSyncPath+appInfo.srcRoot!+appInfo.listPath!, contents: detailsData, attributes: nil)
+            
+            let path = Config.htmlPath+appInfo.srcRoot!+appInfo.listPath!
+            ParserTool.save(detailsData, path: path)
+
         }
     }
     

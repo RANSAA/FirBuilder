@@ -176,34 +176,26 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KakaJSON/KakaJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LYBProgressHUD/LYBProgressHUD.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImageWebPCoder/SDWebImageWebPCoder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyXMLParser/SwiftyXMLParser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WCDB.swift/WCDBSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Yaml/Yaml.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KakaJSON/KakaJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LYBProgressHUD/LYBProgressHUD.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImageWebPCoder/SDWebImageWebPCoder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyXMLParser/SwiftyXMLParser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WCDB.swift/WCDBSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Yaml/Yaml.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

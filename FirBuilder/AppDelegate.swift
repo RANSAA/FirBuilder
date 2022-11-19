@@ -6,7 +6,6 @@
 //
 
 import Cocoa
-import SDWebImageWebPCoder
 
 
 //使用自定义main函数，具体查看main.swfit

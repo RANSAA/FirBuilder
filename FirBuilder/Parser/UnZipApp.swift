@@ -11,6 +11,7 @@ import KakaJSON
 import Yaml
 import SWXMLHash
 //import SwiftyXMLParser
+import Zip
 
 
 
@@ -38,10 +39,10 @@ struct UnZipApp {
         //appinfo内部数据合成
         appInfo.parseInfo()
         
-        print("UnZipApp info:")
-        printAllIvars(appInfo)
+        ParserTool.log("UnZipApp info:")
+        ParserTool.log(appInfo)
         
-
+ 
         //构建资源
         let builderRes = BuilderAppRes(appInfo: appInfo)
         builderRes.start()
@@ -59,13 +60,13 @@ extension UnZipApp{
                 let subpaths = try FileManager.default.contentsOfDirectory(atPath: unZipPath).filter{
                     $0.fileExtension.lowercased() == "app" ? true : false
                 }
-                print(subpaths)
+                ParserTool.log(subpaths)
                 if subpaths.count == 0 {
                     ParserTool.shared.blockFail?("解析错误:\(unZipPath) 中不存在app")
                     return
                 }
                 let appPath = unZipPath+subpaths.first!+"/"
-                print("ios unzip path: \(appPath)")
+                ParserTool.log("ios unzip path: \(appPath)")
                 
                 parserInfoPlist(appPath:appPath)
                 
@@ -86,7 +87,7 @@ extension UnZipApp{
                 return
             }
             let obj:IPAInfoPlist = KakaJSON.model(from: plist, type: IPAInfoPlist.self) as! IPAInfoPlist
-            printAllIvars(obj)
+            ParserTool.log(obj)
             
             appInfo.bundleID = obj.bundleID
             appInfo.name = obj.name
@@ -109,13 +110,13 @@ extension UnZipApp{
                 for item in items {
                     if item.contains(icon) || item.contains(icon+"@") {
                         appInfo.originalIconPath = appPath+item
-                        print("originalIconPath:\(appInfo.originalIconPath!)")
+                        ParserTool.log("originalIconPath:\(appInfo.originalIconPath!)")
                         break
                     }
                 }
             }
             if appInfo.originalIconPath == nil {
-                print("警告：图标未找到，直接使用一张空的占位图。")
+                ParserTool.log("警告：图标未找到，直接使用一张空的占位图。")
             }
         }else{
             ParserTool.shared.blockFail?("解析错误，info.plist文件不存在。")
@@ -124,9 +125,9 @@ extension UnZipApp{
         
         
         let embedded = parserEmbedded(appPath:appPath)
-        print("签名类型:\(embedded.type)")
-        print("到期时间:\(embedded.lastTime)")
-        print("设备列表:\(embedded.devices)")
+        ParserTool.log("签名类型:\(embedded.type)")
+        ParserTool.log("到期时间:\(embedded.lastTime)")
+        ParserTool.log("设备列表:\(embedded.devices)")
         
         appInfo.devices = embedded.devices
         appInfo.signType = embedded.type
@@ -165,6 +166,13 @@ extension UnZipApp{
 }
 
 //解压Android
+//MARK: - yaml 文件解析注意
+/**
+ pod 'Yaml'库有bug，
+ 可以直接通过下面的工具在shell中执行并获取结果
+ js-yaml: https://github.com/nodeca/js-yaml
+ :先使用js-yaml将yaml文件转换成json，然后在获取数据
+ */
 extension UnZipApp{
     
     func unZipAndroid(path:String){
@@ -178,7 +186,7 @@ extension UnZipApp{
         task.executableURL = url
         task.arguments = arguments
         task.terminationHandler = { proce in              // 执行结束的闭包(回调)
-            print("apktool task执行完毕 proce:\(proce)")
+            ParserTool.log("apktool task执行完毕 proce:\(proce)")
         }
         
         let outputPipe = Pipe()
@@ -193,7 +201,7 @@ extension UnZipApp{
                 lastStr = outputString
                 //5. 在主线程处理UI
                 DispatchQueue.main.async(execute: {
-                    print("pipe:\(outputString)")
+                    ParserTool.log("pipe:\(outputString)")
                 })
             }
             //6. 继续等待新数据和通知
@@ -202,7 +210,7 @@ extension UnZipApp{
         do {
             try task.run()
         } catch  {
-            print("apktool error:\(error)")
+            ParserTool.log("apktool error:\(error)")
             ParserTool.shared.blockFail?("apktool.jar 调用失败! error:\(error)")
             return
         }
@@ -213,7 +221,7 @@ extension UnZipApp{
                    "I: Copying META-INF/services directory\n"
         ];
         if msgInfo.contains(lastStr) {
-            print("android unzip path: \(unZipPath)")
+            ParserTool.log("android unzip path: \(unZipPath)")
             parserAndroidXML()
         }else{
             ParserTool.shared.blockFail?("解压失败")
@@ -283,7 +291,7 @@ extension UnZipApp{
             }else if let tmpName = node.attribute(by: "n1:label")?.text {
                 appName = tmpName
             }
-            print("AndroidManifest.xml -> app name:\(appName)")
+            ParserTool.log("AndroidManifest.xml -> app name:\(appName)")
             
             //@string/a4 -> res/values/strig.xml->a4
             if appName.contains("@string") {
@@ -293,7 +301,7 @@ extension UnZipApp{
                     let value = appName.components(separatedBy: "/").last
                     if let name = try? nameXML["resources"]["string"].withAttribute("name", value!).element?.text {
                         appInfo.name = name
-                        print("res/values/strings.xml -> app name:\(appName)")
+                        ParserTool.log("res/values/strings.xml -> app name:\(appName)")
                     }
                 }
             }else{
@@ -308,7 +316,7 @@ extension UnZipApp{
             }else if let iconName = node.attribute(by: "n1:icon")?.text{
                 icon = iconName
             }
-            print("icon:\(icon)")
+            ParserTool.log("icon:\(icon)")
             
             //icon资源路径
             //@mipmap/ic_launcher -> res/mipmap-xxxhdpi/ic_launcher.png
@@ -337,7 +345,7 @@ extension UnZipApp{
                 return
             }
             appInfo.originalIconPath  = iconPath
-            print("originalIconPath:\(appInfo.originalIconPath!)")
+            ParserTool.log("originalIconPath:\(appInfo.originalIconPath!)")
             unZipDone()
         }else{
             ParserTool.shared.blockFail?("AndroidManifest.xml文件解析失败, 没有正确解析到: manifest.application 节点")

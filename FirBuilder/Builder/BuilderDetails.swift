@@ -231,7 +231,7 @@ extension BuilderDetails{
                 builderDetailsHTML(item)
             }
         } catch  {
-            print(error)
+            ParserTool.log(error)
         }
     }
 
@@ -241,10 +241,9 @@ extension BuilderDetails{
 //MARK: - 使用AppInfoModel 生成下载页面
      func builder(_ appInfo:AppInfoModel, name:String){
         let h5String:String = h5Headder+dymaninJS(appInfo)
-        let detailsData = h5String.data(using: .utf8)
-        let fileManager = FileManager.default
-        fileManager.createFile(atPath: Config.htmlPath + appInfo.srcRoot! + name, contents: detailsData, attributes: nil)
-        fileManager.createFile(atPath: Config.htmlSyncPath + appInfo.srcRoot! + name, contents: detailsData, attributes: nil)
+        let detailsData = h5String.data(using: .utf8)        
+        let path = Config.htmlPath + appInfo.srcRoot! + name
+        ParserTool.save(detailsData, path: path)
     }
     
     func builderDetailsHTML(_ appInfo:AppInfoModel){

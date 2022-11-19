@@ -31,10 +31,8 @@ struct BuilderAppRes {
     func updateAppInfo(){
         let fileManager = FileManager.default
         do {
-            let srcPath = (Config.htmlPath + appInfo.srcRoot!).lowercased()
-//            let srcSyncPath = (Config.htmlSyncPath + appInfo.srcRoot!).lowercased()
-            try fileManager.createDirectory(atPath: srcPath, withIntermediateDirectories: true, attributes: nil)
-//            try fileManager.createDirectory(atPath: srcSyncPath, withIntermediateDirectories: true, attributes: nil)
+            let srcPath = Config.htmlPath + appInfo.srcRoot!.lowercased()
+            ParserTool.createDirectory(atPath: srcPath)
             
             let atPath = appInfo.originalAppPath!
             let toPath = Config.htmlPath + appInfo.srcRoot! + appInfo.appSavePath!
@@ -68,11 +66,11 @@ struct BuilderAppRes {
             try db.insertOrReplace(objects: releseModel, intoTable: AppListTable.tableName)
             
         } catch  {
-            print("updateAppInfo error:\(error)")
+            ParserTool.log("updateAppInfo error:\(error)")
             ParserTool.shared.blockFail?("updateAppInfo error:\(error)")
             return
         }
-        print("数据库信息更新成功!")
+        ParserTool.log("数据库信息更新成功!")
         
         builderRes()
     }
@@ -81,6 +79,8 @@ struct BuilderAppRes {
         builderImage()
         builderManifest()
         builderHTML()
+        
+        ParserTool.log("HTML构建完成!")
         ParserTool.shared.blockSuccess?("App 解析完毕!")
     }
     

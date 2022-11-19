@@ -22,31 +22,37 @@ struct Config {
 
 
     static var deleteUnzipDir = true  //标记在解析成功之后是否删除Unzip目录
-    static let unzipPath = appPath+"Unzip/\(arc4random()%1000000)/"   //app资源解压路径
-//    static let unzipPath = appPath+"Unzip/"   
+    static let unzipPath = appPath+".unzip/"+random+"/"   //app资源解压路径
+//    static let unzipPath = appPath+".unzip/"
     static let htmlPath = appPath + "html/"   //生成的静态HTML资源路径
     static let htmlSyncPath = appPath + "html-sync/" //HTML 同步目录
+    static var isSync = false // 是否生成同步目录
+    
+    private static var _random:String?
+    static var random:String{
+        if _random == nil {
+            _random = "\(arc4random()%1000000)"
+        }
+       return _random!
+//        return "test"
+    }
 
 
-
-    public static func setup(buildPath:String? = nil, serverRoot:String? = nil){
+    public static func setup(buildPath:String? = nil, serverRoot:String? = nil, isSync:Bool = false){
         if let buildPath = buildPath {
             appPath = buildPath
         }
         if let serverRoot = serverRoot {
             self.serverRoot = serverRoot
         }
+        self.isSync = isSync
+        ParserTool.resetLogPath()
         environment()
     }
 
     private static func environment(){
         //配置输出目录
-        if !FileManager.default.fileExists(atPath: htmlPath) {
-            try? FileManager.default.createDirectory(atPath: htmlPath, withIntermediateDirectories: true, attributes: nil)
-        }
-        if !FileManager.default.fileExists(atPath: htmlSyncPath) {
-            try? FileManager.default.createDirectory(atPath: htmlSyncPath, withIntermediateDirectories: true, attributes: nil)
-        }
+        ParserTool.createDirectory(atPath: htmlPath)
 
         //拷贝模板中的资源文件
         BuilderTemplateFile.builder()
@@ -56,13 +62,13 @@ struct Config {
         DBService.shared.setup()
 
 
-        print("..........")
-        print("appPath:"+appPath)
-        print("htmlPath:"+htmlPath)
-        print("htmlSyncPath:"+htmlSyncPath)
-        print("unzipPath:\(unzipPath)")
-        print("serverRoot:"+serverRoot)
-        print("..........")
+        ParserTool.log("Config begin")
+        ParserTool.log("buildPath   :"+appPath)
+        ParserTool.log("htmlPath    :"+htmlPath)
+        ParserTool.log("htmlSyncPath:"+htmlSyncPath)
+        ParserTool.log("unzipPath   :\(unzipPath)")
+        ParserTool.log("serverRoot  :"+serverRoot)
+        ParserTool.log("Config end")
     }
 
 }
@@ -91,15 +97,14 @@ extension Config{
 
     //获取当前APP的路径
     private static func getAppPath() -> String{
-        var path = CommandLine.arguments[0]
-        var index = path.lastIndex(of: "/")
-        path = String(path[..<index!])
-        index = path.lastIndex(of: "/")
-        path = String(path[..<index!])
-        index = path.lastIndex(of: "/")
-        path = String(path[..<index!])
-        index = path.lastIndex(of: "/")
-        path = String(path[...index!])
+        var path = Bundle.main.bundlePath
+        if let index = path.lastIndex(of: "/") {
+            let startIndex = path.startIndex
+            path = String(path[startIndex...index])
+        }
+        if path.last != "/" {
+            path += "/"
+        }
         path += "FirBuilder/"
         return path
     }
@@ -143,7 +148,7 @@ extension Config{
         config?.setValue(serverRoot, forKey: "url")
         Config.serverRoot = serverRoot
         config!.write(toFile: Config.configPath, atomically: true)
-        print("serverRoot:\(serverRoot)")
+        ParserTool.log("serverRoot:\(serverRoot)")
 
     }
 }
