@@ -56,7 +56,7 @@
                             <rect key="frame" x="287" y="116" width="72" height="19"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="appname" id="AfW-06-VIK">
                                 <font key="font" metaFont="system" size="16"/>
-                                <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="1" green="0.57647058823529407" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>

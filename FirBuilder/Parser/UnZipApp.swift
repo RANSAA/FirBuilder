@@ -154,7 +154,8 @@ extension UnZipApp{
                     singType = .unknown
                 }
             }
-            return (singType,obj.provisionedDevices,"\(obj.cxpirationDate)")
+            let dateStr = DateFormatter.dateStringWith(date: obj.cxpirationDate)
+            return (singType,obj.provisionedDevices,dateStr)
         }else{
             let metaInf = Config.unzipPath+"META-INF"
             if FileManager.default.fileExists(atPath: metaInf) {

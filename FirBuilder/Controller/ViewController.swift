@@ -154,6 +154,11 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         vc.push()
     }
 
+    
+    @IBAction func btnPreviewAction(_ sender: Any) {
+        openBrowser()
+    }
+    
 }
 
 
@@ -301,6 +306,15 @@ extension ViewController{
             let vc = AddViewController()
             //self.controller.presentAsSheet(vc)
             self.presentAsModalWindow(vc)
+        }
+    }
+    
+
+    func openBrowser(){
+        let path = Config.htmlPath + "index.html"
+        if FileManager.default.fileExists(atPath: path) {
+            let url = URL(fileURLWithPath: path)
+            NSWorkspace.shared.open(url)
         }
     }
     

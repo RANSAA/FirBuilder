@@ -39,11 +39,17 @@ class BuilderDetails{
         <!-- 手动设置 -->
         <img id="appIcon"  class="size125">
     </div>
-    <div style="margin-top: 36px; font-size: 22px; color: #333333; line-height: 36px;">
+    <!--  line-height: 36px; -->
+    <div style="margin-top: 36px; font-size: 22px; color: #333333;">
         <div>
             <img id="appTypeIconPath" class="size36-details">
-            <span id="appName">  App Name  </span>
+            <span style="color:#FF9300;" id="appName"> </span>
+            <span style="font-size:15px; color: #5AC5F8;" id="signType"> </span>
         </div>
+    </div>
+
+    <div style="margin-top:18px;color: red; display:none;" id="expirationDateDIV">
+        <span id="expirationDate"> </span>
     </div>
 
      <!-- app info text -->
@@ -146,6 +152,8 @@ class BuilderDetails{
                 showWithID("btn3")
                 showWithID("btn4")
             }
+            //显示过期时间
+            showWithID("expirationDateDIV")
         }else{
             // if (devideType == "android") {
             //     showWithID("btn0")
@@ -167,6 +175,8 @@ class BuilderDetails{
         //logo path
         document.getElementById("appIcon").src = appIconPath
         document.getElementById("appName").innerHTML = appName
+        document.getElementById("signType").innerHTML = appSignType
+        document.getElementById("expirationDate").innerHTML = appExpDate
 
         document.title = appName
         document.getElementById("appName").innerHTML = appName
@@ -277,10 +287,12 @@ extension BuilderDetails{
 <script type="text/javascript">
     let appType = "\(appInfo.type)" // ios or android
     let appIconPath = "\(imagePath)"
-    let appName = "\(appInfo.name!)"
+    let appName = "\(appInfo.name!) "
     let appVersion = "\(appInfo.version!) ( Build \(appInfo.build!) ) "
     let appSize = "\(appInfo.fileSize!)"
     let appUpdateTime = "\(DateFormatter.dateStringWith(date: appInfo.updateDate))"
+    let appSignType = "\(appInfo.signType)"
+    let appExpDate = "过期时间:&nbsp; \(appInfo.signExpiration!)"
 
     //app install url
     let installURL = "\(install)"

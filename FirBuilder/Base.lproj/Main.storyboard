@@ -783,12 +783,28 @@
                                                     <action selector="btnHelpAction:" target="XfG-lQ-9wD" id="gnn-Ah-hi8"/>
                                                 </connections>
                                             </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9em-8F-ipY">
+                                                <rect key="frame" x="408" y="3" width="110" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="5RS-s5-U7M"/>
+                                                    <constraint firstAttribute="width" constant="98" id="5Wv-2b-rTH"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="push" title="预览" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dxN-is-A46">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="btnPreviewAction:" target="XfG-lQ-9wD" id="VcM-pB-RNG"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Ler-fF-6LU" secondAttribute="trailing" constant="12" id="2TM-ZK-3J5"/>
                                             <constraint firstItem="Ler-fF-6LU" firstAttribute="centerY" secondItem="OgL-Wa-Is9" secondAttribute="centerY" id="5b2-zU-bCR"/>
                                             <constraint firstItem="OgL-Wa-Is9" firstAttribute="leading" secondItem="HhN-6Y-t81" secondAttribute="leading" constant="8" id="65d-f7-rJY"/>
                                             <constraint firstItem="JJC-Fw-JDP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HhN-6Y-t81" secondAttribute="leading" constant="20" symbolic="YES" id="Cgg-nE-WDK"/>
+                                            <constraint firstItem="9em-8F-ipY" firstAttribute="centerY" secondItem="JJC-Fw-JDP" secondAttribute="centerY" id="Cql-nc-S16"/>
+                                            <constraint firstItem="JJC-Fw-JDP" firstAttribute="leading" secondItem="9em-8F-ipY" secondAttribute="trailing" constant="64" id="D5j-Ua-OOk"/>
                                             <constraint firstAttribute="bottom" secondItem="6jQ-W3-Qdx" secondAttribute="bottom" constant="66" id="ICS-P8-oZG"/>
                                             <constraint firstAttribute="trailing" secondItem="JJC-Fw-JDP" secondAttribute="trailing" constant="12" id="MkX-BO-gsW"/>
                                             <constraint firstItem="6jQ-W3-Qdx" firstAttribute="top" secondItem="HhN-6Y-t81" secondAttribute="top" constant="9" id="Opy-UV-PRd"/>
