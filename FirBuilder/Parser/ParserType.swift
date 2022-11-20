@@ -100,7 +100,7 @@ enum ParserBuildType:Int,CustomStringConvertible,ConvertibleEnum {
         case .simulator:
             des = "Simulator"
         case .xcodeTest:
-            des = "XCode测试"
+            des = "Xcode测试"
         case .adHoc:
             des = "Ad-Hoc"
         case .enterprise:
