@@ -68,7 +68,14 @@ class AppInfoModel: Convertible{
         listPath = "list.html"
         detailsPath = random + ".html"
          
-        appSavePath = random + "." + originalAppPath!.fileExtension
+        if  type == .ios {
+            /**
+             对于 iOS 16 以上的 设备，你需要将 ipa 文件命名为：原文件名@bundle-identifier.ipa，即需要在原来的基础上加入@bundle-identifier，其中的 bundle-identifier 即 IPA 包中 Info.plist 的 CFBundleIdentifier
+             */
+            appSavePath = random + "@\(self.bundleID!)" + "." + originalAppPath!.fileExtension
+        }else{
+            appSavePath = random + "." + originalAppPath!.fileExtension
+        }
     }
     
     //随机生成的文件名称

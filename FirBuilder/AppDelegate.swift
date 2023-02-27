@@ -27,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
         self.addQuitActions()
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

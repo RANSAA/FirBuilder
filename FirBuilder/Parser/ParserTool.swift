@@ -39,9 +39,23 @@ struct ParserTool {
 }
 
 extension ParserTool{
-    /** 清除解析垃圾*/
+    
+    /** 一个解析任务完成时: 清除解析垃圾*/
     static func clean(){
        try? FileManager.default.removeItem(atPath: Config.unzipPath)
+    }
+    
+    /** 退出时：清理.unzip目录 */
+    static func exitClean(){
+        let path = Config.appPath + ".unzip"
+        do {
+            if FileManager.default.fileExists(atPath: path) {
+                try FileManager.default.removeItem(atPath: path)
+            }
+            print(".unzip清除成功!")
+        } catch  {
+            print(".unzip清除失败， error:\(error)")
+        }
     }
     
     private static var logPath:String{

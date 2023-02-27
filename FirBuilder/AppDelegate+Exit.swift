@@ -55,6 +55,12 @@ extension AppDelegate{
     private func terminateApp(){
         if ExitHolder.once {
             ExitHolder.once = false
+            
+            //清理log
+            if ConfigPlist.shared.isExitClean {
+                print("清理log.....")
+                ParserTool.exitClean()
+            }
             print("清理正在运行的任务....")
 
 

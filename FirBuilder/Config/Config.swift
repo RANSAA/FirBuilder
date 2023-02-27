@@ -9,11 +9,12 @@ import Cocoa
 
 struct Config {
     //测试目录
-//    static let appPath:String = "/Users/kimi/Desktop/Fir/"
     static var appPath:String = getAppPath()
 
-    static let configPath = appPath + "config/FirBuilderConfig.plist"
-    static let dbPath = appPath + "config/FirBuilderData.db"
+//    static let configPath = appPath + "config/FirBuilderConfig.plist"
+//    static let dbPath = appPath + "config/FirBuilderData.db"
+    static let configPath = appPath + "config/FirBuilder.plist"
+    static let dbPath = appPath + "config/FirBuilder.db"
 
 
     static let apktool = getApkToolPath()
@@ -34,7 +35,6 @@ struct Config {
             _random = "\(arc4random()%1000000)"
         }
        return _random!
-//        return "test"
     }
 
 
@@ -67,6 +67,7 @@ struct Config {
         ParserTool.log("htmlPath    :"+htmlPath)
         ParserTool.log("htmlSyncPath:"+htmlSyncPath)
         ParserTool.log("unzipPath   :\(unzipPath)")
+        ParserTool.log("configPath  :\(configPath)")
         ParserTool.log("serverRoot  :"+serverRoot)
         ParserTool.log("Config end")
     }
@@ -106,50 +107,21 @@ extension Config{
             path += "/"
         }
         path += "FirBuilder/"
+        print("AppPath:\(path)")
         return path
     }
 
 
     private static func getServerRoot() -> String{
-        let orgUrl = "https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/"
-        let orgConfig = NSMutableDictionary(dictionaryLiteral: ("url",orgUrl),
-                                            ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径")
-                                            )
-        if FileManager.default.fileExists(atPath: Config.configPath) {
-            if let config = NSMutableDictionary(contentsOfFile: configPath) {
-                if let url = config["url"] as? String {
-                    if url.hasPrefix("https") {
-                        return url
-                    }
-                }
-                let tmpConfig = config
-                tmpConfig["url"] = orgUrl
-                tmpConfig.write(toFile: Config.configPath, atomically: true)
-            }else{
-                orgConfig.write(toFile: Config.configPath, atomically: true)
-            }
-            return orgUrl
-        }else{
-            orgConfig.write(toFile: Config.configPath, atomically: true)
-            return orgUrl
-        }
+        return ConfigPlist.shared.url;
     }
 
     //重新设置serverRoot地址
     static func resetServerRoot(serverRoot:String){
-        var config:NSMutableDictionary?
-        if !FileManager.default.fileExists(atPath: Config.configPath) {
-            config = NSMutableDictionary(dictionaryLiteral: ("url",serverRoot),
-                                  ("urlMark","腾讯Coding仓库主地址，用来提供资源存储路径，可设置为知己的coding仓库路径")
-                                  )
-        }else{
-            config = NSMutableDictionary(contentsOfFile: configPath)
-        }
-        config?.setValue(serverRoot, forKey: "url")
+        ConfigPlist.shared.url = serverRoot;
+        ConfigPlist.shared.save()
         Config.serverRoot = serverRoot
-        config!.write(toFile: Config.configPath, atomically: true)
         ParserTool.log("serverRoot:\(serverRoot)")
-
     }
 }
 

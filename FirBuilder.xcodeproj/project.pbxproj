@@ -19,6 +19,7 @@
 		3F27E4C22924BE3F0035DC53 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C12924BE3F0035DC53 /* main.swift */; };
 		3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C62924D2970035DC53 /* ImageTool.swift */; };
 		3F27E4D82924F0F20035DC53 /* libs in Resources */ = {isa = PBXBuildFile; fileRef = 3F27E4D72924F0F20035DC53 /* libs */; };
+		3F31AFF629ACE39B0055624A /* ConfigPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AFF529ACE39B0055624A /* ConfigPlist.swift */; };
 		3F5EDC6F27B935C000853A5D /* IPAInfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */; };
 		3F65465327BA0064007EF422 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65465227BA0064007EF422 /* FileManager.swift */; };
 		3F7B9905292759B6005ABA5F /* MobileprovisionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */; };
@@ -70,6 +71,7 @@
 		3F27E4C12924BE3F0035DC53 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3F27E4C62924D2970035DC53 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
 		3F27E4D72924F0F20035DC53 /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libs; sourceTree = "<group>"; };
+		3F31AFF529ACE39B0055624A /* ConfigPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlist.swift; sourceTree = "<group>"; };
 		3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAInfoPlist.swift; sourceTree = "<group>"; };
 		3F65465227BA0064007EF422 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileprovisionFile.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				3FEC70E2279FD50B00234A67 /* Config.swift */,
+				3F31AFF529ACE39B0055624A /* ConfigPlist.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				3F8A2EB127BB87BB003EFFB4 /* DetatalsViewController.swift in Sources */,
 				3FEC70E3279FD50B00234A67 /* Config.swift in Sources */,
 				3F65465327BA0064007EF422 /* FileManager.swift in Sources */,
+				3F31AFF629ACE39B0055624A /* ConfigPlist.swift in Sources */,
 				3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */,
 				3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */,
 				3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */,
