@@ -55,6 +55,10 @@ class BuilderDetails{
      <!-- app info text -->
     <div style="font-size: 14px; color: #788090; margin-top: 20px;">
         <div>
+            <span >BundleID:</span>
+            <span id="bundleID"> </span>
+        </div>
+        <div>
             <span >版本:</span>
             <span id="appVersion"> 1.0 </span>
             <span >&emsp; 大小:</span>
@@ -183,6 +187,7 @@ class BuilderDetails{
         document.getElementById("appVersion").innerHTML = appVersion
         document.getElementById("appSize").innerHTML = appSize
         document.getElementById("appUpdateTime").innerHTML = appUpdateTime
+        document.getElementById("bundleID").innerHTML = bundleID
 
         if (appType == "\(ParserType.ios)" ) {
             document.getElementById("appTypeIconPath").src = iosIcon
@@ -288,6 +293,7 @@ extension BuilderDetails{
     let appType = "\(appInfo.type)" // ios or android
     let appIconPath = "\(imagePath)"
     let appName = "\(appInfo.name!) "
+    let bundleID = "\(appInfo.bundleID!) "
     let appVersion = "\(appInfo.version!) ( Build \(appInfo.build!) ) "
     let appSize = "\(appInfo.fileSize!)"
     let appUpdateTime = "\(DateFormatter.dateStringWith(date: appInfo.updateDate))"
