@@ -105,6 +105,8 @@ extension UnZipApp{
                 iconName = obj.iconFiles!.last!
             }else if(obj.iconFiles_ipad?.first != nil){
                 iconName = obj.iconFiles_ipad!.last!
+            }else if (obj.iconFiles_1?.first != nil){
+                iconName = obj.iconFiles_1!.last!
             }
             if let icon = iconName, let items = try? FileManager.default.contentsOfDirectory(atPath: appPath){
                 for item in items {

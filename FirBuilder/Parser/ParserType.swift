@@ -93,14 +93,16 @@ enum ParserBuildType:Int,CustomStringConvertible,ConvertibleEnum {
     
     
     var description: String{
-        var des = ""
+        var des = "unknown"
         switch self {
         case .release:
             des = "正式版"
         case .simulator:
             des = "Simulator"
+            des = "未签名"
         case .xcodeTest:
-            des = "Xcode测试"
+            des = "Xcode测试版"
+            des = "Free Developer测试版"
         case .adHoc:
             des = "Ad-Hoc"
         case .enterprise:
@@ -108,7 +110,7 @@ enum ParserBuildType:Int,CustomStringConvertible,ConvertibleEnum {
         case .appStore:
             des = "App Store"
         default:
-            des = "unknown"
+            break;
         }
         return des
     }

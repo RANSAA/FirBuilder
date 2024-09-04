@@ -132,13 +132,13 @@ class BuilderDetails{
 
     //查看信任证书教程
     function showTutorial(){
-        window.open("https://www.betaqr.com/support/articles/faq/ios9_certificate")
+        window.open("https://www.betaqr.com.cn/support/articles/faq/ios9_certificate")
     }
 
     //获取UUID
     function getUUID(){
-        // window.open("http://betaqr.com/udid","_self")
-        window.open("http://betaqr.com/udid")
+        // window.open("https://www.betaqr.com.cn/udid","_self")
+        window.open("https://www.betaqr.com.cn/udid")
     }
 
     function dispalyButton(){
