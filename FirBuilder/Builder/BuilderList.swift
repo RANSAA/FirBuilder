@@ -248,7 +248,7 @@ extension BuilderList{
         <div name="item-center" class="list-item-center-mob">
 
             <div class="list-app-name">
-                <span><img name="appTypeIcon" src="src/images/apple.png" class="list-app-img-size22"></span>
+                <span><img name="appTypeIcon" src="../../../src/images/apple.png" class="list-app-img-size22"></span>
                 <span >\(item.name!)</span>
             </div>
 

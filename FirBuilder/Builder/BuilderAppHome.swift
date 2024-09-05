@@ -36,15 +36,11 @@ class BuilderAppHome{
     <h4>当前设备类型类型：<span id="deviceType" style="color: red;">  </span></h4>
     <br>
     <div style="padding-bottom:12px;">
-        <!-- <button type="button" onclick="window.open('ios.html')" class ="home-button-right">iOS</button> -->
-        <button type="button" onclick="javascript:location.href='index.html'" class ="home-button-right">Home</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" onclick="javascript:location.href='ios.html'" class ="home-button-right">iOS</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" onclick="javascript:location.href='android.html'" class ="home-button-right">Android</button>
+        <button type="button" class="home-button-selected" onclick="window.location.href='index.html'">Home</button>
+        <button type="button" class="home-button-normal" onclick="window.location.href='ios.html'">iOS</button>
+        <button type="button" class="home-button-normal" onclick="window.location.href='android.html'">Android</button>
     </div>
 </div>
-
 
 <!-- grid开始 -->
 <div class="home-grid-container" >
@@ -63,6 +59,8 @@ class BuilderAppHome{
     var success = false
 
     private func listBodyBagin(_ type:ParserType) -> String{
+    let iosClass = type == .ios ? "home-button-selected" : "home-button-normal"
+    let androidClass = type == .android ? "home-button-selected" : "home-button-normal"
     let listBodyBagin:String = """
     <!DOCTYPE html>
     <html lang="en-US">
@@ -88,16 +86,11 @@ class BuilderAppHome{
         <h4>当前设备类型类型：<span id="deviceType" style="color: red;">  </span></h4>
         <br>
         <div style="padding-bottom:12px;">
-            <!-- <button type="button" onclick="window.open('ios.html')" class ="home-button-right">iOS</button> -->
-            <button type="button" onclick="javascript:location.href='index.html'" class ="home-button-right">Home</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" onclick="javascript:location.href='ios.html'" class ="home-button-right">iOS</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" onclick="javascript:location.href='android.html'" class ="home-button-right">Android</button>
+            <button type="button" class="home-button-normal" onclick="window.location.href='index.html'">Home</button>
+            <button type="button" class="\(iosClass)" onclick="window.location.href='ios.html'">iOS</button>
+            <button type="button" class="\(androidClass)" onclick="window.location.href='android.html'">Android</button>
         </div>
     </div>
-
-
 
     <!-- grid开始 -->
     <div class="home-grid-container" >

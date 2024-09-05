@@ -138,7 +138,8 @@ class BuilderDetails{
     //获取UUID
     function getUUID(){
         // window.open("https://www.betaqr.com.cn/udid","_self")
-        window.open("https://www.betaqr.com.cn/udid")
+//        window.open("https://www.betaqr.com.cn/udid")
+        window.open("https://www.neicexia.com/UDID")
     }
 
     function dispalyButton(){

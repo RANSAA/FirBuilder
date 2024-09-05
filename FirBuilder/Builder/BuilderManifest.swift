@@ -72,7 +72,8 @@ class BuilderManifest{
                 ["assets":[itemApp,itemFull,itemDisplay],
                  "metadata":metadata
                 ]
-            ]]            
+            ]]
+            
             let path = Config.htmlPath+appInfo.srcRoot!+appInfo.manifestPath!
             ParserTool.save(manifest, path: path)
         }

@@ -103,6 +103,7 @@ enum ParserBuildType:Int,CustomStringConvertible,ConvertibleEnum {
         case .xcodeTest:
             des = "Xcode测试版"
             des = "Free Developer测试版"
+            des = "Free测试版"
         case .adHoc:
             des = "Ad-Hoc"
         case .enterprise:

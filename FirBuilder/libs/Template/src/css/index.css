@@ -67,11 +67,43 @@ body{
     height: 36px;
     border-radius: 18px;
 }
+.home-button-left:active ,
+.home-button-left:hover{
+    background-color: #53b3a8;
+    color: white;
+}
 
 .home-button-right{
     border: 1px solid;
     background-color: white;
     color: #9B9B9B;
+    font-size: 15px;
+    width: 100px;
+    height: 36px;
+    border-radius: 18px;
+    margin-left: 18px;
+}
+.home-button-right:active ,
+.home-button-right:hover{
+    background-color: #53b3a8;
+    color: white;
+}
+
+
+.home-button-normal{
+    border: 1px solid;
+    background-color: white;
+    color: #9B9B9B;
+    font-size: 15px;
+    width: 100px;
+    height: 36px;
+    border-radius: 18px;
+    margin-left: 18px;
+}
+.home-button-selected{
+    border: 1px solid;
+    background-color: #53b3a8;
+    color: white;
     font-size: 15px;
     width: 100px;
     height: 36px;
@@ -89,7 +121,7 @@ body{
 .home-nav-name-height{
     line-height: 30px;
     color:#9b9b9b;
-    font-size: 18px; 
+    font-size: 18px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
