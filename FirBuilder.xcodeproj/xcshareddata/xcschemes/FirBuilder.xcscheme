@@ -64,7 +64,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-inputPath=/Users/kimi/Desktop/AdultLP.ipa"
+            argument = "-inputPath=/Users/kimi/Desktop/AppsDump2.ipa"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

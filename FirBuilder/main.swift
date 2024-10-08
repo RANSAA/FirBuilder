@@ -124,45 +124,43 @@ if arguments.contains("-cli") {
 
 //MARK: 窗口模式启动 或者 Command模式启动
 if winMode {
-    ParserTool.log("使用窗口模式启动程序!")
+    ProcessTask.log("使用窗口模式启动程序!")
     _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 } else{
-    ParserTool.log("使用Command模式启动程序!")
+    ProcessTask.log("使用Command模式启动程序!")
     let semaphore = DispatchSemaphore(value: 0)
 
     //开始解析
     if let path = inputPath {
         ParserTool.shared.blockStart = {msg in
             ParserTool.shared.parsing = true
-            ParserTool.log(msg)
+            ProcessTask.log(msg)
         }
         ParserTool.shared.blockFail = { msg in
-            ParserTool.log(msg)
             ParserTool.shared.parsing = false
-            ParserTool.clean()
-            ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
-            ParserTool.log("CLI-ParserTool Parser Fail.")
+            ProcessTask.log(msg)
+            ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
+            ProcessTask.log("CLI-ParserTool Parser Fail.")
             semaphore.signal()
         }
         ParserTool.shared.blockSuccess = {msg in
-            ParserTool.log(msg)
             ParserTool.shared.parsing = false
-            ParserTool.clean()
-            ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
-            ParserTool.log("CLI-ParserTool Parser Success.")
+            ProcessTask.log(msg)
+            ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
+            ProcessTask.log("CLI-ParserTool Parser Success.")
             semaphore.signal()
         }
         ParserTool.shared.parserStart(path: path)
         semaphore.wait()
     }else if buildAllHTML == true { //重新构建所有HTML页面
         BuilderAppRes.rebuilderAllHTML()
-        ParserTool.log("H5重新生成完成")
-        ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
-        ParserTool.log("CLI-ParserTool Parser Success.")
+        ProcessTask.log("H5重新生成完成")
+        ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
+        ProcessTask.log("CLI-ParserTool Parser Success.")
     }else if let bundleID = delBundleID {
         DBService.shared.deleteAppWith(bundleID: bundleID, type: delType)
-        ParserTool.log("CLI-ParserTool Parser ID:\(Config.random)")
-        ParserTool.log("CLI-ParserTool Parser Success.")
+        ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
+        ProcessTask.log("CLI-ParserTool Parser Success.")
     }
 }
 

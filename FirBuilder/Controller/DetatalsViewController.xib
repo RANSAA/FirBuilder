@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FFo-DW-c5I">
-                    <rect key="frame" x="14" y="743" width="72" height="55"/>
+                    <rect key="frame" x="13" y="743" width="74" height="56"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="ABX-Cx-aMc"/>
                         <constraint firstAttribute="height" constant="44" id="g8J-eq-FAN"/>
@@ -122,7 +122,7 @@
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="firstCol" width="642" minWidth="40" maxWidth="1000" id="a9p-gu-9Oz">
+                                    <tableColumn identifier="firstCol" width="613" minWidth="40" maxWidth="1000" id="a9p-gu-9Oz">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="设备列表">
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -135,11 +135,11 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView id="tpA-cJ-Lmj">
-                                                <rect key="frame" x="1" y="1" width="642" height="17"/>
+                                                <rect key="frame" x="11" y="1" width="622" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8cd-da-0M7">
-                                                        <rect key="frame" x="0.0" y="0.0" width="642" height="16"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="622" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="02R-eL-Frg">
                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -166,22 +166,39 @@
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <tableHeaderView key="headerView" id="Glm-1A-VBl">
+                    <tableHeaderView key="headerView" wantsLayer="YES" id="Glm-1A-VBl">
                         <rect key="frame" x="0.0" y="0.0" width="645" height="25"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DZI-HD-DKz">
+                    <rect key="frame" x="602" y="743" width="74" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="CrS-SG-rNY"/>
+                        <constraint firstAttribute="height" constant="44" id="IVc-vf-kbD"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="导出" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ft2-Ur-7a6">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="btnExportAction:" target="-2" id="Mez-2Z-D4A"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="fMW-uM-S24" firstAttribute="top" secondItem="tsF-91-Qvx" secondAttribute="bottom" id="4p9-uM-ptb"/>
                 <constraint firstAttribute="bottom" secondItem="fMW-uM-S24" secondAttribute="bottom" constant="24" id="5iQ-RN-EOX"/>
                 <constraint firstAttribute="trailing" secondItem="tsF-91-Qvx" secondAttribute="trailing" constant="24" id="Bqm-CU-pcJ"/>
                 <constraint firstItem="FFo-DW-c5I" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="HtY-wv-2dw"/>
+                <constraint firstItem="DZI-HD-DKz" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Iag-aP-gcp"/>
                 <constraint firstItem="FFo-DW-c5I" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="IfD-Hc-2ar"/>
                 <constraint firstItem="tsF-91-Qvx" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="44" id="Uax-mM-XBR"/>
+                <constraint firstItem="tsF-91-Qvx" firstAttribute="top" secondItem="DZI-HD-DKz" secondAttribute="bottom" id="Ue3-dT-g8g"/>
                 <constraint firstAttribute="trailing" secondItem="fMW-uM-S24" secondAttribute="trailing" constant="24" id="esn-19-KRJ"/>
                 <constraint firstItem="tsF-91-Qvx" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="24" id="fHL-r9-Vsh"/>
                 <constraint firstItem="fMW-uM-S24" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="24" id="fht-qd-Az6"/>
+                <constraint firstAttribute="trailing" secondItem="DZI-HD-DKz" secondAttribute="trailing" constant="24" id="s9B-Io-013"/>
             </constraints>
             <point key="canvasLocation" x="-138.5" y="316"/>
         </customView>

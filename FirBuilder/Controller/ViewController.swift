@@ -66,34 +66,33 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
         panel.canChooseFiles = true
-        panel.allowedFileTypes = ["apk","ipa"]
+        panel.allowedFileTypes = ["apk","ipa","tipa"]
         panel.allowsOtherFileTypes = true
         panel.canSelectHiddenExtension = true
         //panel.begin
         panel.beginSheetModal(for: self.view.window!) { (result) in
             if result == .OK{
                 let path = panel.url!.path
-                ParserTool.log("file path:\(path)")
+                ProcessTask.log("file path:\(path)")
                 if ParserTool.shared.parsing == false {
                     DispatchQueue.global().async {
                         ParserTool.shared.blockStart = {msg in
                             ParserTool.shared.parsing = true
-                            ParserTool.log(msg)
                             self.showLoadHUD()
                         }
                         ParserTool.shared.blockFail = { msg in
-                            ParserTool.log(msg)
                             ParserTool.shared.parsing = false
-                            ParserTool.clean()
                             self.openErrorAlert(msg: msg)
                         }
                         ParserTool.shared.blockSuccess = {msg in
-                            ParserTool.log(msg)
                             ParserTool.shared.parsing = false
-                            ParserTool.clean()
                             self.loadDataArray()
                             self.openParserSuccess(msg: msg)
                         }
+                        ParserTool.shared.blockPrompt = { msg in
+                            self.openPromptAlert(msg: msg)
+                        }
+                        //开始解析任务
                         ParserTool.shared.parserStart(path: path)
                     }
                 }else{
@@ -107,7 +106,6 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
     //应用coding url路径
     @IBAction func btnApplyCondingAction(_ sender: Any) {
         let alert = NSAlert()
-
         alert.messageText = "修改ServerRoot路径"
         alert.informativeText = "修改地址后需要运行【重新生成H5】才会更改已经生成的静态文件"
         alert.addButton(withTitle: "确定")
@@ -171,7 +169,6 @@ extension ViewController{
         let nib = NSNib.init(nibNamed: NSNib.Name("HomeImgItem"), bundle: nil)
         self.collectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HomeImgItem"))
 
-
         //设置item的大小以及间距
         let layout = self.collectionView.collectionViewLayout as! NSCollectionViewFlowLayout
         layout.itemSize = .init(width: 265, height: 343)
@@ -194,7 +191,6 @@ extension ViewController{
         DispatchQueue.main.async {
             self.collectionView .reloadData()
         }
-        
     }
 
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
@@ -281,6 +277,16 @@ extension ViewController{
             alert.runModal()
         }
     }
+    
+    func openPromptAlert(msg:String){
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText = msg
+            alert.addButton(withTitle: "知道了")
+            alert.alertStyle = .warning
+            alert.runModal()
+        }
+    }
 
     func openParserSuccess(msg: String){
         DispatchQueue.main.async {
@@ -293,6 +299,9 @@ extension ViewController{
         }
     }
 
+    
+    
+    
     func showLoadHUD(){
         DispatchQueue.main.async {
             MacProgressHUD.showWaiting(withPointColor: NSColor.white)

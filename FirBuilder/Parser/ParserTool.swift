@@ -20,23 +20,66 @@ struct ParserTool {
 
     typealias ParserBlock = (_ msg:String) -> Void
     var blockStart:ParserBlock?
-    var blockFail:ParserBlock?
     var blockSuccess:ParserBlock?
-    var blockMsg:ParserBlock?
+        
+    var blockFail:ParserBlock? // ⚠️：新版本中使用
+    var blockPrompt:ParserBlock? //只提示，不中断 ⚠️：新版本中使用
     
     func parserStart(path:String){
-        blockStart?("开始解析:\(path)")
-        
+        let msg = "开始解析:\(path)"
+        ProcessTask.log(msg)
+        blockStart?(msg)
         let type = ParserType.checkType(path: path)
         switch type {
         case .unknown:
-            blockFail?("解析错误，文件不存在或者不支持改格式。 file：\(path)")
+            let msg = "解析错误，文件不存在或者不支持该格式。 file：\(path)"
+            ProcessTask.log(msg)
+            blockFail?(msg)
         case .ios, .android:
-            let unzip = UnZipApp()
-            unzip.start(path:path, type:type)
+            parserApp(type: type, filePath: path)
         }
     }
 }
+
+
+extension ParserTool{
+    
+    private func parserApp(type:ParserType, filePath:String){
+        var isSuccess = false
+        var appInfoModel:AppInfoModel? = nil
+        if type == .ios {
+            let ios = DecompileIOS(filePath: filePath)
+            ios.start()
+            ios.done()
+            isSuccess = ios.verifyAppInfoModel()
+            appInfoModel = ios.appInfoModel
+        }else{
+            let anroid = DecompileAndroid(filePath: filePath)
+            anroid.start()
+            anroid.done()
+            isSuccess = anroid.verifyAppInfoModel()
+            appInfoModel = anroid.appInfoModel
+        }
+        
+        if isSuccess {
+            //构建资源
+            let builderRes = BuilderAppRes(appInfo: appInfoModel!)
+            builderRes.start()
+            
+            //清除垃圾
+            ProcessTask.shared.clear()
+        }else{
+            let msg = "App添加失败!!！"
+            ProcessTask.log(msg)
+            ParserTool.shared.blockFail?(msg)
+        }
+        ProcessTask.log("\n\n\n")
+        //整个App添加流程完毕
+    }
+    
+}
+
+
 
 extension ParserTool{
     
@@ -58,40 +101,7 @@ extension ParserTool{
         }
     }
     
-    private static var logPath:String{
-        let path = Config.appPath + ".unzip/"
-        return path+Config.random+"-parser.log"
-    }
-    
-    static func resetLogPath(){
-        let path = Config.appPath + ".unzip/"
-        if !FileManager.default.fileExists(atPath: path) {
-            try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-        }
-        try? FileManager.default.removeItem(atPath: logPath)
-        FileManager.default.createFile(atPath: logPath, contents: Data(), attributes: nil)
-    }
-    
-    static func log(_ msg:String...){
-        let info = msg.joined(separator: " ")
-        print(info)
-        let handle = FileHandle(forWritingAtPath: logPath)
-        let data = info.data(using: .utf8)!
-        handle?.seekToEndOfFile()
-        handle?.write(data)
-        handle?.seekToEndOfFile()
-        handle?.write("\n".data(using: .utf8)!)
-    }
-    
-    static func log(_ msg:[Any]){
-        let info = "\(msg)"
-        log(info)
-    }
-    
-    static func log(_ msg:Any){
-        let info = "\(msg)"
-        log(info)
-    }
+
     
     //Config.htmlPath
     //Config.htmlSyncPath
@@ -144,7 +154,7 @@ extension ParserTool{
                 try FileManager.default.createDirectory(atPath: syncPath, withIntermediateDirectories: true, attributes: nil)
             }
         } catch  {
-            log(error)
+            ProcessTask.log(error)
         }
     }
     
@@ -156,7 +166,47 @@ extension ParserTool{
                 try FileManager.default.removeItem(atPath: syncPath)
             }
         } catch  {
-            log(error)
+            ProcessTask.log(error)
         }
     }
 }
+
+
+//弃用
+extension ParserTool{
+    private static var logPath:String{
+        let path = Config.appPath + ".unzip/"
+        return path+Config.random+"-parser.log"
+    }
+    
+    static func resetLogPath(){
+        let path = Config.appPath + ".unzip/"
+        if !FileManager.default.fileExists(atPath: path) {
+            try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+        }
+        try? FileManager.default.removeItem(atPath: logPath)
+        FileManager.default.createFile(atPath: logPath, contents: Data(), attributes: nil)
+    }
+    
+    static func log(_ msg:String...){
+        let info = msg.joined(separator: " ")
+        print(info)
+        let handle = FileHandle(forWritingAtPath: logPath)
+        let data = info.data(using: .utf8)!
+        handle?.seekToEndOfFile()
+        handle?.write(data)
+        handle?.seekToEndOfFile()
+        handle?.write("\n".data(using: .utf8)!)
+    }
+    
+    static func log(_ msg:[Any]){
+        let info = "\(msg)"
+        log(info)
+    }
+    
+    static func log(_ msg:Any){
+        let info = "\(msg)"
+        log(info)
+    }
+}
+

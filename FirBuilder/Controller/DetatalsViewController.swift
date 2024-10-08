@@ -8,7 +8,7 @@
 import Cocoa
 
 class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource {
-     var lastVC:NSViewController!
+    var lastVC:NSViewController!
     var pushItem:AppListTable!
 
     @IBOutlet var infoView: NSView!
@@ -25,6 +25,7 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        print(self.className)
 
         setupUI()
         laodData()
@@ -67,7 +68,12 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
     @IBAction func backAction(_ sender: NSButton) {
         goBack()
     }
-
+    
+    //将当前App导出到指定路径
+    @IBAction func btnExportAction(_ sender: NSButton) {
+        export()
+    }
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
         return pushItem.devices?.count ?? 0
     }
@@ -116,4 +122,15 @@ extension DetatalsViewController{
         NSApplication.shared.keyWindow?.contentViewController = lastVC
     }
 
+}
+
+
+extension DetatalsViewController{
+    
+    func export(){
+        print("将当前App导出到指定路径.....")
+        print(self.pushItem.srcRoot ?? "error")
+        print(self.pushItem.appSavePath ?? "error")
+    }
+    
 }

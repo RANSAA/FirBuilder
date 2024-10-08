@@ -78,10 +78,16 @@ class BuilderDetails{
     </div>
 
     <!-- Button area -->
-    <div style=" margin-bottom: 12px; margin-top: 48px; text-align: center; ">
+    <div style=" margin-bottom: 24px; margin-top: 48px; text-align: center; ">
         <div id="btn0" style="display:none;">
-            <button type="button" onclick="installApp()" class ="info-button-down" id="installApp">下载安装</button>
+            <button type="button" onclick="installApp()" class ="info-button-down" id="installApp">安装</button>
         </div>
+
+        <div id="btn-download" style="display:none;">
+            <br>
+            <button type="button" onclick="downloadApp()" class ="info-button-down" id="downloadApp">下载</button>
+        </div>
+
         <div id="btn1" style="display:none;">
             <br>
             <button type="button" onclick="installCrt()" class ="info-button-down" id="installCrt">安装证书</button>
@@ -110,14 +116,34 @@ class BuilderDetails{
 
 
 <script type="application/javascript">
-    //下载安装APP
+    //安装APP
     function installApp(){
         // ios value="itms-services://?action=download-manifest&amp;url=https%3A%2F%2F127.0.0.1%3A8080%2Fm%2Fff8080817ee744b8017ee746e5810011"
         // window.location.href = document.getElementById("installApp").value
         window.location.href = installURL
     }
 
-    //安装证书
+    //下载
+    function downloadApp(){
+        // 创建一个a元素
+        const link = document.createElement('a');
+        
+        // 设置文件的URL（这里用的是示例URL，换成你自己的文件路径）
+        link.href = downloadURL;
+        
+        // 自定义下载的文件名
+        link.download = downloadFileName;
+        
+        // 将a元素添加到页面并触发点击事件下载文件
+        document.body.appendChild(link);
+        link.click();
+        
+        // 下载完成后移除该a元素
+        document.body.removeChild(link);
+
+    }
+
+    //安装证书 - 未使用
     function installCrt(){
         var crt = "xxx.crt"
         alert("安装证书")
@@ -138,40 +164,52 @@ class BuilderDetails{
     //获取UUID
     function getUUID(){
         // window.open("https://www.betaqr.com.cn/udid","_self")
-//        window.open("https://www.betaqr.com.cn/udid")
+        // window.open("https://www.betaqr.com.cn/udid")
         window.open("https://www.neicexia.com/UDID")
     }
 
     function dispalyButton(){
         hiddenWithID("btn0")
+        hiddenWithID("btn-download")
         hiddenWithID("btn1")
         hiddenWithID("btn2")
         hiddenWithID("btn3")
         hiddenWithID("btn4")
-        var devideType = getDeviceType()
-        if (appType == "\(ParserType.ios)") {
-            if(devideType == "\(ParserType.ios)"){
-                showWithID("btn0")
-                // showWithID("btn1")
-                showWithID("btn2")
-                showWithID("btn3")
-                showWithID("btn4")
-            }
-            //显示过期时间
-            showWithID("expirationDateDIV")
-        }else{
-            // if (devideType == "android") {
-            //     showWithID("btn0")
-            // }
-            if (devideType != "\(ParserType.ios)") {
-                showWithID("btn0")
-            }
-        }
-     }
+        let devideType = getDeviceType()
+
+        console.log(devideType)
+        console.log(appType)
+
+       //当前App类型为iOS
+       if ( appType == "\(ParserType.ios)" )  {
+           //当前设备类型为iOS系列
+           if ( devideType == "\(ParserType.ios)" ) {
+               showWithID("btn0")
+               showWithID("btn2")
+               showWithID("btn3")
+               showWithID("btn4")
+           }
+           //显示下载按钮
+           showWithID("btn-download")
+
+           //显示应用过期时间
+           showWithID("expirationDateDIV")
+           document.getElementById("downloadApp").innerHTML = "下载IPA";
+       } else {
+           //当前App类型为Android或者其他非iOS平台
+
+           //显示安装按钮
+           //showWithID("btn0");
+
+           //显示下载按钮
+           showWithID("btn-download")
+           document.getElementById("downloadApp").innerHTML = "下载";
+       }
+    }
 
     function resize(){
         dispalyButton()
-     }
+    }
 
     // window.addEventListener("resize", resize);
     // dispalyButton()
@@ -204,8 +242,7 @@ class BuilderDetails{
         buildQRCodeWithImg(window.location.href, "appIcon")
         console.log(window.location.href)
         //root path
-        // console.log(window.location.origin)
-
+        //console.log(window.location.origin)
 
         showWithID("appInfo")
     }
@@ -276,6 +313,7 @@ extension BuilderDetails{
     
     func dymaninJS(_ appInfo:AppInfoModel) -> String{
         var install:String = Config.serverRoot+appInfo.srcRoot!+appInfo.appSavePath!
+        let downloadURL:String = install
         if appInfo.type == .ios {
             install = "itms-services://?action=download-manifest&url=\(Config.serverRoot)\(appInfo.srcRoot!)\(appInfo.manifestPath!)"
         }
@@ -287,6 +325,8 @@ extension BuilderDetails{
             }
         }
         let imagePath = appInfo.logo512Path!
+        
+        let downloadFileName = appInfo.name! + "_" + appInfo.version! + "." + appInfo.appSavePath!.fileExtension
 
         let dymanic:String = """
 <!-- 用于动态写入数据 -->
@@ -296,6 +336,7 @@ extension BuilderDetails{
     let appName = "\(appInfo.name!) "
     let bundleID = "\(appInfo.bundleID!) "
     let appVersion = "\(appInfo.version!) ( Build \(appInfo.build!) ) "
+    let appShortVersion = "\(appInfo.version!)"
     let appSize = "\(appInfo.fileSize!)"
     let appUpdateTime = "\(DateFormatter.dateStringWith(date: appInfo.updateDate))"
     let appSignType = "\(appInfo.signType)"
@@ -303,6 +344,14 @@ extension BuilderDetails{
 
     //app install url
     let installURL = "\(install)"
+
+    //app package download url
+    let downloadURL = "\(downloadURL)"
+
+    //下载时的文件路径
+    let downloadFileName = "\(downloadFileName)"
+
+
     //动态写入设备列表
     let deivces = "\(devices)"
 </script>

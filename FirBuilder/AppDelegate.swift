@@ -25,8 +25,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        let WebPCoder = SDImageWebPCoder.shared
 //        SDImageCodersManager.shared.addCoder(WebPCoder)
 
-
+        //自定义工具条按钮
         self.addQuitActions()
+        
+        
+        testShellTask()
         
     }
 
@@ -94,6 +97,77 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //       print("item action...")
 //   }
 
+    
+
+    
+    //test shell
+    func testShellTask(){
+//        print("testShellTask.....")
+//
+//        let unZipPath = Config.unzipPath
+//        var lastStr = ""
+//
+//        let url = URL(fileURLWithPath: "/bin/bash")
+//        let arguments = ["-c","java -jar \(Config.apktool) d \"\("path")\" -s -f -o \(unZipPath)"]
+//
+//        let task = Process()
+//        task.executableURL = url
+//        task.arguments = arguments
+//        task.terminationHandler = { proce in              // 执行结束的闭包(回调)
+//            ParserTool.log("apktool task执行完毕 proce:\(proce)")
+//        }
+//        print(task.environment)
+//        print("Config.apktool:\(Config.apktool)")
+//        print(ProcessInfo.processInfo.environment)
+//
+//        // 获取所有环境变量
+//        let environment = ProcessInfo.processInfo.environment
+//        // 打印所有环境变量
+//        for (key, value) in environment {
+//            print("\(key): \(value)")
+//        }
+//        // 获取特定环境变量，例如 PATH
+//        if let path = environment["PATH"] {
+//            print("PATH: \(path)")
+//        } else {
+//            print("PATH environment variable not found.")
+//        }
+        
+        
+//        print(ProcessTaskPlist.shared);
+//        print(ProcessInfo.processInfo.environment);
+//        let inputPath = "/Users/kimi/Desktop/Spotube-android-all-arch – 开源跨平台Spotify客户端.apk"
+//        let task = ProcessTask.shared.processApktool(filePath: inputPath)
+//        task.launch()
+//        task.waitUntilExit()
+//        ProcessTask.shared.clear()
+        
+        
+//        //Android
+//        let inputAndroidPath = "/Users/kimi/Desktop/Spotube-android-all-arch – 开源跨平台Spotify客户端.apk"
+//        let decompileAndroid = DecompileAndroid(filePath: inputAndroidPath)
+//        decompileAndroid.start()
+//        decompileAndroid.done()
+//        //校验decompileAndroid.appInfoModel的值是否有效
+//        let success = decompileAndroid.verifyAppInfoModel()
+
+        
+//        //ios
+//        let inputIOSPath = "/Users/kimi/Desktop/AppsManager_1.8.4_Crack.tipa.ipa"
+////        let inputIOSPath = "/Users/kimi/Desktop/AppsDump2.ipa"
+//        let decIOS = DecompileIOS(filePath: inputIOSPath)
+//        decIOS.start()
+//        decIOS.done()
+//        //校验
+//        let success = decIOS.verifyAppInfoModel()
+        
+        //所有数据构造完毕之后再清除。。
+//        if success {//解析成功，清除垃圾文件
+//            ProcessTask.shared.clear()
+//        }
+     
+        
+    }
 
 }
 

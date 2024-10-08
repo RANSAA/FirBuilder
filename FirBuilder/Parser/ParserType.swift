@@ -36,7 +36,7 @@ enum ParserType:Int,CustomStringConvertible,ConvertibleEnum{
      */
     static func checkType(path:String) -> ParserType{
         let android = ["apk"]
-        let ios = ["ipa"];
+        let ios = ["ipa","tipa"];
         guard FileManager.default.fileExists(atPath: path) else {
             return .unknown
         }

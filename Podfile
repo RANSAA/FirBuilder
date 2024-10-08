@@ -9,7 +9,7 @@ target 'FirBuilder' do
   use_frameworks!
 
   # Pods for FirBuilder
-  pod 'SSZipArchive'
+  pod 'SSZipArchive' #,'2.4.2'
   pod 'Zip', '~> 2.1'   # swift
   # pod 'DataCompression'
   # pod 'GzipSwift'
@@ -17,7 +17,7 @@ target 'FirBuilder' do
 
 
 #  pod 'WCDB'
-  pod 'WCDB.swift'
+  pod 'WCDB.swift'  ,'1.0.8.2'
 
   pod 'KakaJSON'
  # pod 'HandyJSON', '~> 5.0.2'
@@ -31,7 +31,7 @@ target 'FirBuilder' do
 #  pod 'SDWebImage'
 #  pod 'SDWebImageWebPCoder'
 
-  pod 'LYBProgressHUD'
+  pod 'LYBProgressHUD'  #,'1.1.0'
 
 
   pod 'Yaml'

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -661,11 +661,20 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
+                                        <menuItem isSeparatorItem="YES" id="vNe-6R-isr"/>
+                                        <menuItem title="Github" id="u09-UU-SPd">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="goGithubAction:" target="Voe-Tx-rLC" id="mo0-YZ-D6h"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kCj-qz-zXJ"/>
                                         <menuItem title="FirBuilder Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="6WV-br-mg7"/>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -679,7 +688,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="45" y="-80"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -746,7 +755,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6jQ-W3-Qdx">
-                                                <rect key="frame" x="86" y="66" width="516" height="21"/>
+                                                <rect key="frame" x="86" y="66" width="523" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="用于设置Coding(也可以是github仓库下载raw主地址)仓库下载主地址，用来提供资源的云存储地址，设置后需要执行重新生成H5" drawsBackground="YES" id="x1z-5F-Xcr">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -754,7 +763,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ler-fF-6LU">
-                                                <rect key="frame" x="616" y="59" width="67" height="32"/>
+                                                <rect key="frame" x="622" y="60" width="62" height="32"/>
                                                 <buttonCell key="cell" type="push" title="应用" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gYn-f0-fce">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -764,7 +773,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JJC-Fw-JDP">
-                                                <rect key="frame" x="570" y="3" width="113" height="32"/>
+                                                <rect key="frame" x="576" y="3" width="108" height="32"/>
                                                 <buttonCell key="cell" type="push" title="重新生成H5" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KKs-e2-Y9V">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -774,7 +783,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uT0-jb-seU">
-                                                <rect key="frame" x="6" y="6" width="25" height="25"/>
+                                                <rect key="frame" x="5" y="6" width="25" height="25"/>
                                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="99c-8Y-0m5">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -784,7 +793,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9em-8F-ipY">
-                                                <rect key="frame" x="408" y="3" width="110" height="32"/>
+                                                <rect key="frame" x="414" y="3" width="112" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5RS-s5-U7M"/>
                                                     <constraint firstAttribute="width" constant="98" id="5Wv-2b-rTH"/>
@@ -911,10 +920,10 @@
                                             <size key="minSize" width="692" height="429"/>
                                             <size key="maxSize" width="707" height="10000000"/>
                                             <attributedString key="textStorage">
-                                                <fragment content="hgvh">
+                                                <fragment content="简介说明">
                                                     <attributes>
                                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                        <font key="NSFont" size="14" name="Helvetica"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Regular"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -933,7 +942,7 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BtA-1m-WHF">
-                                <rect key="frame" x="14" y="446" width="72" height="55"/>
+                                <rect key="frame" x="13" y="446" width="74" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="30Y-mL-zwo"/>
                                     <constraint firstAttribute="width" constant="60" id="RYl-Mh-LKh"/>
@@ -985,7 +994,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="808" minWidth="40" maxWidth="1000" id="UaX-rQ-lZn">
+                                                <tableColumn width="799" minWidth="40" maxWidth="1000" id="UaX-rQ-lZn">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1031,7 +1040,7 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ah6-JF-t6e">
-                                <rect key="frame" x="18" y="249" width="72" height="55"/>
+                                <rect key="frame" x="17" y="249" width="74" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="4Qp-Zv-eJ4"/>
                                     <constraint firstAttribute="width" constant="60" id="SZ5-N9-J8q"/>
@@ -1045,7 +1054,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="edL-hT-aor">
-                                <rect key="frame" x="736" y="260" width="107" height="32"/>
+                                <rect key="frame" x="735" y="260" width="109" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="AD7-Ov-0CU"/>
                                     <constraint firstAttribute="width" constant="95" id="bJx-ip-i1s"/>

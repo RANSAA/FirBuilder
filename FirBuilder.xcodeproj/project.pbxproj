@@ -20,6 +20,10 @@
 		3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C62924D2970035DC53 /* ImageTool.swift */; };
 		3F27E4D82924F0F20035DC53 /* libs in Resources */ = {isa = PBXBuildFile; fileRef = 3F27E4D72924F0F20035DC53 /* libs */; };
 		3F31AFF629ACE39B0055624A /* ConfigPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AFF529ACE39B0055624A /* ConfigPlist.swift */; };
+		3F52246A2CB2CAB9000FD031 /* ProcessTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5224692CB2CAB9000FD031 /* ProcessTask.swift */; };
+		3F5A814D2CB3C1E2008257AE /* ProcessTaskPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5A814C2CB3C1E2008257AE /* ProcessTaskPlist.swift */; };
+		3F5A814F2CB3C97B008257AE /* ProcessTaskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5A814E2CB3C97B008257AE /* ProcessTaskConfig.swift */; };
+		3F5A81512CB3EEF6008257AE /* DecompileAndroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5A81502CB3EEF6008257AE /* DecompileAndroid.swift */; };
 		3F5EDC6F27B935C000853A5D /* IPAInfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */; };
 		3F65465327BA0064007EF422 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65465227BA0064007EF422 /* FileManager.swift */; };
 		3F7B9905292759B6005ABA5F /* MobileprovisionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */; };
@@ -41,9 +45,9 @@
 		3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */; };
 		3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */; };
 		3FE153E529264FC1007D738D /* ParserTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153E429264FC1007D738D /* ParserTool.swift */; };
-		3FE153E9292658CE007D738D /* UnZipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153E8292658CE007D738D /* UnZipApp.swift */; };
 		3FE153ED29266DA7007D738D /* ParserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153EC29266DA7007D738D /* ParserType.swift */; };
 		3FE153F029268974007D738D /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153EF29268974007D738D /* AppInfoModel.swift */; };
+		3FE775B42CB507C70089B579 /* DecompileIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE775B32CB507C60089B579 /* DecompileIOS.swift */; };
 		3FE9033827B0D036000BDEFE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033727B0D036000BDEFE /* Data.swift */; };
 		3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */; };
 		3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */; };
@@ -53,6 +57,7 @@
 		3FEC70E3279FD50B00234A67 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70E2279FD50B00234A67 /* Config.swift */; };
 		3FEC70E7279FDA8400234A67 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70E6279FDA8400234A67 /* String.swift */; };
 		3FEC70EE279FED6C00234A67 /* GeneratorID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70ED279FED6C00234A67 /* GeneratorID.swift */; };
+		3FF76EB42CB5A03D00016517 /* AppDelegate+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF76EB32CB5A03D00016517 /* AppDelegate+Action.swift */; };
 		8A7A69A79111929CCE11B8BD /* Pods_FirBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45B817BB912C90C38DA26EE /* Pods_FirBuilder.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +77,10 @@
 		3F27E4C62924D2970035DC53 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
 		3F27E4D72924F0F20035DC53 /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libs; sourceTree = "<group>"; };
 		3F31AFF529ACE39B0055624A /* ConfigPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlist.swift; sourceTree = "<group>"; };
+		3F5224692CB2CAB9000FD031 /* ProcessTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTask.swift; sourceTree = "<group>"; };
+		3F5A814C2CB3C1E2008257AE /* ProcessTaskPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTaskPlist.swift; sourceTree = "<group>"; };
+		3F5A814E2CB3C97B008257AE /* ProcessTaskConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTaskConfig.swift; sourceTree = "<group>"; };
+		3F5A81502CB3EEF6008257AE /* DecompileAndroid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecompileAndroid.swift; sourceTree = "<group>"; };
 		3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAInfoPlist.swift; sourceTree = "<group>"; };
 		3F65465227BA0064007EF422 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileprovisionFile.swift; sourceTree = "<group>"; };
@@ -93,9 +102,9 @@
 		3FA8A60127BCCEDE004B3E9D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3FB8D46B28C23F1F0068B20A /* KakaJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KakaJSON.swift; path = FirBuilder/extension/KakaJSON.swift; sourceTree = SOURCE_ROOT; };
 		3FE153E429264FC1007D738D /* ParserTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTool.swift; sourceTree = "<group>"; };
-		3FE153E8292658CE007D738D /* UnZipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnZipApp.swift; sourceTree = "<group>"; };
 		3FE153EC29266DA7007D738D /* ParserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserType.swift; sourceTree = "<group>"; };
 		3FE153EF29268974007D738D /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
+		3FE775B32CB507C60089B579 /* DecompileIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecompileIOS.swift; sourceTree = "<group>"; };
 		3FE9033727B0D036000BDEFE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Exit.swift"; sourceTree = "<group>"; };
 		3FEC70C9279FCB5B00234A67 /* FirBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +118,7 @@
 		3FEC70E6279FDA8400234A67 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3FEC70ED279FED6C00234A67 /* GeneratorID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorID.swift; sourceTree = "<group>"; };
 		3FEC713327A011DA00234A67 /* FirBuilder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirBuilder-Bridging-Header.h"; sourceTree = "<group>"; };
+		3FF76EB32CB5A03D00016517 /* AppDelegate+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Action.swift"; sourceTree = "<group>"; };
 		89108214971A3B7B506503F2 /* Pods-FirBuilder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirBuilder.debug.xcconfig"; path = "Target Support Files/Pods-FirBuilder/Pods-FirBuilder.debug.xcconfig"; sourceTree = "<group>"; };
 		949DA545FBBC669B950957A7 /* Pods-FirBuilder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirBuilder.release.xcconfig"; path = "Target Support Files/Pods-FirBuilder/Pods-FirBuilder.release.xcconfig"; sourceTree = "<group>"; };
 		C45B817BB912C90C38DA26EE /* Pods_FirBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +191,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		3F5224682CB2CA98000FD031 /* ProcessTask */ = {
+			isa = PBXGroup;
+			children = (
+				3F5224692CB2CAB9000FD031 /* ProcessTask.swift */,
+				3F5A814E2CB3C97B008257AE /* ProcessTaskConfig.swift */,
+				3F5A814C2CB3C1E2008257AE /* ProcessTaskPlist.swift */,
+			);
+			path = ProcessTask;
+			sourceTree = "<group>";
+		};
 		3F8A2EA327BB3148003EFFB4 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,9 +219,10 @@
 			children = (
 				3FE153E429264FC1007D738D /* ParserTool.swift */,
 				3FE153EC29266DA7007D738D /* ParserType.swift */,
-				3FE153E8292658CE007D738D /* UnZipApp.swift */,
 				3F7B9904292759B6005ABA5F /* MobileprovisionFile.swift */,
 				3F5EDC6E27B935C000853A5D /* IPAInfoPlist.swift */,
+				3F5A81502CB3EEF6008257AE /* DecompileAndroid.swift */,
+				3FE775B32CB507C60089B579 /* DecompileIOS.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -236,10 +257,12 @@
 				3FE153E729265881007D738D /* Parser */,
 				3F0B91DE27BA0C180002BDEB /* Builder */,
 				3F20FB3A27AFDE9600382D08 /* Controller */,
-				3FEC70D2279FCB6400234A67 /* Main.storyboard */,
+				3F5224682CB2CA98000FD031 /* ProcessTask */,
 				3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */,
 				3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */,
+				3FF76EB32CB5A03D00016517 /* AppDelegate+Action.swift */,
 				3F27E4C12924BE3F0035DC53 /* main.swift */,
+				3FEC70D2279FCB6400234A67 /* Main.storyboard */,
 				3FEC70D0279FCB6400234A67 /* Assets.xcassets */,
 				3FEC713327A011DA00234A67 /* FirBuilder-Bridging-Header.h */,
 				3FEC70D6279FCB6400234A67 /* FirBuilder.entitlements */,
@@ -430,25 +453,29 @@
 				3FEC70CF279FCB5B00234A67 /* ViewController.swift in Sources */,
 				3F7B990E29278BE4005ABA5F /* AppListTable.swift in Sources */,
 				3F15415727BBCF7D005F9A99 /* MacClickView.m in Sources */,
-				3FE153E9292658CE007D738D /* UnZipApp.swift in Sources */,
 				3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */,
 				3F80F76327A0395F00A6341E /* GeneratorIDTable.swift in Sources */,
 				3FE153F029268974007D738D /* AppInfoModel.swift in Sources */,
 				3F8A2EB527BB905E003EFFB4 /* ListCell.swift in Sources */,
 				3FEC70EE279FED6C00234A67 /* GeneratorID.swift in Sources */,
+				3FF76EB42CB5A03D00016517 /* AppDelegate+Action.swift in Sources */,
 				3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */,
+				3F5A81512CB3EEF6008257AE /* DecompileAndroid.swift in Sources */,
 				3F13760327B25BEA00266468 /* Description.swift in Sources */,
 				3F13760627B279C000266468 /* FileHash.swift in Sources */,
+				3FE775B42CB507C70089B579 /* DecompileIOS.swift in Sources */,
 				3F15415627BBCF7D005F9A99 /* MacProgressHUD.m in Sources */,
 				3F27E4C22924BE3F0035DC53 /* main.swift in Sources */,
 				3FA2023328B9D08500DD6390 /* BuilderTemplateFile.swift in Sources */,
 				3FE153E529264FC1007D738D /* ParserTool.swift in Sources */,
 				3FEC70E7279FDA8400234A67 /* String.swift in Sources */,
+				3F5A814D2CB3C1E2008257AE /* ProcessTaskPlist.swift in Sources */,
 				3F7B990B2927882F005ABA5F /* AppHomeTable.swift in Sources */,
 				3FA8A60227BCCEDE004B3E9D /* AboutViewController.swift in Sources */,
 				3F9E1B8027B004EC00A99391 /* AddViewController.swift in Sources */,
 				3F0B91E527BA0C720002BDEB /* BuilderAppHome.swift in Sources */,
 				3F8A2EB127BB87BB003EFFB4 /* DetatalsViewController.swift in Sources */,
+				3F52246A2CB2CAB9000FD031 /* ProcessTask.swift in Sources */,
 				3FEC70E3279FD50B00234A67 /* Config.swift in Sources */,
 				3F65465327BA0064007EF422 /* FileManager.swift in Sources */,
 				3F31AFF629ACE39B0055624A /* ConfigPlist.swift in Sources */,
@@ -457,6 +484,7 @@
 				3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */,
 				3F0B91EB27BA4A230002BDEB /* DateFormatter.swift in Sources */,
 				3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */,
+				3F5A814F2CB3C97B008257AE /* ProcessTaskConfig.swift in Sources */,
 				3FE153ED29266DA7007D738D /* ParserType.swift in Sources */,
 				3F0B91E027BA0C430002BDEB /* BuilderDetails.swift in Sources */,
 				3F0B91E827BA0C860002BDEB /* BuilderList.swift in Sources */,
