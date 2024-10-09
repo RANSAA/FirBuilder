@@ -128,9 +128,69 @@ extension DetatalsViewController{
 extension DetatalsViewController{
     
     func export(){
-        print("将当前App导出到指定路径.....")
-        print(self.pushItem.srcRoot ?? "error")
-        print(self.pushItem.appSavePath ?? "error")
+        ProcessTask.log("将当前App导出到指定路径.....")
+
+        
+//        ProcessTask.log(self.pushItem ?? "nil")
+        print(self.pushItem)
+        
+        let filePath = Config.appPath + "html/" + (self.pushItem.srcRoot ?? "") + (self.pushItem.appSavePath ?? "")
+        
+        let filename:String = (self.pushItem.name ?? "null") + "_v" + (self.pushItem.version ?? "null") + "." + (self.pushItem.appSavePath?.fileExtension ?? "")
+        
+        ProcessTask.log("filePath:\(filePath)")
+        ProcessTask.log("outFileName:\(filename)")
+        
+        
+        // 创建并配置 NSSavePanel
+        let savePanel = NSSavePanel()
+        
+        // 设置保存面板的属性
+        savePanel.title = "保存文件"
+        savePanel.message = "请选择保存文件的位置"
+        //savePanel.allowedFileTypes = ["txt"] // 限制文件类型，例如只能保存为 .txt
+        savePanel.canCreateDirectories = true // 允许创建新目录
+        savePanel.nameFieldStringValue = filename // 默认文件名
+        
+
+        // 以模态形式显示面板
+        let response = savePanel.runModal()
+        // 处理用户的选择
+        if response == .OK, let url = savePanel.url {
+            // 用户选择了保存路径，进行文件保存操作
+            do {
+                ProcessTask.log(url.relativeString)
+                ProcessTask.log(url.relativePath)
+                if FileManager.default.fileExists(atPath: url.relativePath){
+                    try FileManager.default.removeItem(atPath: url.relativePath)
+                }
+                try FileManager.default.copyItem(atPath: filePath, toPath: url.relativePath)
+            } catch  {
+                ProcessTask.log("文件导出失败 - error:\(error)")
+            }
+        } else {
+            // 用户点击了取消
+            ProcessTask.log("用户取消了保存操作")
+        }
+        
+        
+        
+//        // 显示保存面板，并处理用户选择的路径
+//        savePanel.begin { (result) in
+//            if result == NSApplication.ModalResponse.OK {
+//                if let url = savePanel.url {
+//                    // 用户选择了保存路径，进行文件保存操作
+//                    do {
+//                        try FileManager.default.copyItem(atPath: filePath, toPath: url.relativeString)
+//                    } catch  {
+//                        ProcessTask.log("文件导出失败 - error:\(error)")
+//                    }
+//                }
+//            }
+//        }
+        
+        
     }
+
     
 }

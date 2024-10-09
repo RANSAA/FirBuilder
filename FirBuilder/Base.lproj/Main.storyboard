@@ -793,7 +793,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9em-8F-ipY">
-                                                <rect key="frame" x="414" y="3" width="112" height="33"/>
+                                                <rect key="frame" x="430" y="3" width="112" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5RS-s5-U7M"/>
                                                     <constraint firstAttribute="width" constant="98" id="5Wv-2b-rTH"/>
@@ -806,6 +806,20 @@
                                                     <action selector="btnPreviewAction:" target="XfG-lQ-9wD" id="VcM-pB-RNG"/>
                                                 </connections>
                                             </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lqV-i6-MPa">
+                                                <rect key="frame" x="284" y="3" width="112" height="33"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="Qpk-0x-gOg"/>
+                                                    <constraint firstAttribute="width" constant="98" id="wZL-8i-azw"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="push" title="部署到Netlify" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EDu-2C-swt">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="btnSyncNetlifyAction:" target="XfG-lQ-9wD" id="XdX-PR-nc3"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Ler-fF-6LU" secondAttribute="trailing" constant="12" id="2TM-ZK-3J5"/>
@@ -813,7 +827,7 @@
                                             <constraint firstItem="OgL-Wa-Is9" firstAttribute="leading" secondItem="HhN-6Y-t81" secondAttribute="leading" constant="8" id="65d-f7-rJY"/>
                                             <constraint firstItem="JJC-Fw-JDP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HhN-6Y-t81" secondAttribute="leading" constant="20" symbolic="YES" id="Cgg-nE-WDK"/>
                                             <constraint firstItem="9em-8F-ipY" firstAttribute="centerY" secondItem="JJC-Fw-JDP" secondAttribute="centerY" id="Cql-nc-S16"/>
-                                            <constraint firstItem="JJC-Fw-JDP" firstAttribute="leading" secondItem="9em-8F-ipY" secondAttribute="trailing" constant="64" id="D5j-Ua-OOk"/>
+                                            <constraint firstItem="JJC-Fw-JDP" firstAttribute="leading" secondItem="9em-8F-ipY" secondAttribute="trailing" constant="48" id="D5j-Ua-OOk"/>
                                             <constraint firstAttribute="bottom" secondItem="6jQ-W3-Qdx" secondAttribute="bottom" constant="66" id="ICS-P8-oZG"/>
                                             <constraint firstAttribute="trailing" secondItem="JJC-Fw-JDP" secondAttribute="trailing" constant="12" id="MkX-BO-gsW"/>
                                             <constraint firstItem="6jQ-W3-Qdx" firstAttribute="top" secondItem="HhN-6Y-t81" secondAttribute="top" constant="9" id="Opy-UV-PRd"/>
@@ -822,6 +836,8 @@
                                             <constraint firstItem="6jQ-W3-Qdx" firstAttribute="leading" secondItem="OgL-Wa-Is9" secondAttribute="trailing" id="XvT-lx-9jJ"/>
                                             <constraint firstAttribute="bottom" secondItem="uT0-jb-seU" secondAttribute="bottom" constant="10" id="aOl-RF-bLm"/>
                                             <constraint firstItem="6jQ-W3-Qdx" firstAttribute="centerY" secondItem="OgL-Wa-Is9" secondAttribute="centerY" id="e9K-NE-YVr"/>
+                                            <constraint firstItem="9em-8F-ipY" firstAttribute="leading" secondItem="lqV-i6-MPa" secondAttribute="trailing" constant="48" id="eG4-vv-PEZ"/>
+                                            <constraint firstItem="lqV-i6-MPa" firstAttribute="centerY" secondItem="9em-8F-ipY" secondAttribute="centerY" id="nzz-0v-YrE"/>
                                             <constraint firstItem="uT0-jb-seU" firstAttribute="leading" secondItem="HhN-6Y-t81" secondAttribute="leading" constant="8" id="vUs-EK-tO5"/>
                                             <constraint firstAttribute="bottom" secondItem="JJC-Fw-JDP" secondAttribute="bottom" constant="10" id="xMp-tI-S5u"/>
                                         </constraints>
@@ -994,7 +1010,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="799" minWidth="40" maxWidth="1000" id="UaX-rQ-lZn">
+                                                <tableColumn width="770" minWidth="40" maxWidth="1000" id="UaX-rQ-lZn">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1007,11 +1023,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="vjD-Ds-tFO">
-                                                            <rect key="frame" x="1" y="1" width="808" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="779" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FzU-Tg-oWh">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="808" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="779" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="YjX-ai-ihG">
                                                                         <font key="font" usesAppearanceFont="YES"/>

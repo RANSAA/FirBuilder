@@ -18,6 +18,12 @@
 		<string>NO:以追加的方式添加该环境变量，即如果系统环境变量中已经存在该同名环境变量，那么就会把这个值添加带到系统同名环境变量的值中。 例如设置PATH的值。</string>
 		<key>environment-key-separator:</key>
 		<string>环境变量中值的拼接方式，例:如环境变量PATH就是使用“:”符号将values中的值拼接成一个字符串在赋值给PATH的。</string>
+		<key>exec</key>
+		<string>自定义执行程序列表</string>
+		<key>exec-key-name</key>
+		<string>自定义执行程序的名称</string>
+		<key>exec-key-path</key>
+		<string>自定义执行程序对应的路径</string>
 	</dict>
 	<key>environment</key>
 	<array>
@@ -48,6 +54,15 @@
 			<false/>
 			<key>separator</key>
 			<string>:</string>
+		</dict>
+	</array>
+	<key>exec</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>直接部署到Netlify</string>
+			<key>path</key>
+			<string>/Volumes/ExData/Remote-ExData/Z---本地工具集/Site-AppStore/直接部署到Netlify-Mac.command</string>
 		</dict>
 	</array>
 </dict>

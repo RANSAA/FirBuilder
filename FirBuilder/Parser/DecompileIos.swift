@@ -107,7 +107,7 @@ class DecompileIOS{
     func verifyAppInfoModel() -> Bool{
         let success = appInfoModel.verifyAppInfoModel()
         if success == false{
-            let msg = "AppInfoModel数据校验失败，中断解析任务。"
+            let msg = "DecompileIOS -> AppInfoModel数据校验失败，中断解析任务。"
             self.blockFail(msg)
         }
         return success
@@ -152,7 +152,7 @@ extension DecompileIOS{
     private func parserInfoPlist(appPath:String) -> Bool{
         let plistPath = appPath+"Info.plist"
         guard let plist = NSDictionary(contentsOfFile: plistPath) else {
-            let msg = "InfoPlist解析失败 -> info.plist加载失败。"
+            let msg = "DecompileIOS -> InfoPlist解析失败 -> info.plist加载失败。"
             self.blockFail(msg)
             return false
         }
@@ -167,7 +167,7 @@ extension DecompileIOS{
               let targetSdkVersion = obj.targetSdkVersion
         else{
             let msg = """
-            info.plist解析失败，IPAInfoPlist：\(obj)
+            DecompileIOS -> info.plist解析失败，IPAInfoPlist：\(obj)
             """
             self.blockFail(msg)
             return false
@@ -211,7 +211,6 @@ extension DecompileIOS{
             newIconName.append(name+"@2x~ipad.png")
             newIconName.append(name+"@3x~ipad.png")
         }
-//        ProcessTask.log(newIconName)
         
         var iconSize = 0
         var iconRealPath:String? = nil
@@ -289,7 +288,7 @@ extension DecompileIOS{
                     signType = .unknown
                 }
             }else{
-                let msg = "embedded.mobileprovision文件解析失败!"
+                let msg = "DecompileIOS -> embedded.mobileprovision文件解析失败!"
                 self.blockFail(msg)
                 return false
             }

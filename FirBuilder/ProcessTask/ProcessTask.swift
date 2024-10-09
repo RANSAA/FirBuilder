@@ -95,6 +95,7 @@ extension ProcessTask{
         let apktoolPath = config.apktoolPath
         let arguments = ["-c","java -jar \(apktoolPath) d \"\(filePath)\" -s -f -o \(unzipPath)"]
         process.arguments = arguments
+        ProcessTask.log("processApktool -> arguments:\(arguments)")
         return process
     }
 }
@@ -114,9 +115,47 @@ extension ProcessTask{
         process.executableURL = url
         let arguments = ["-i",filePath,"-o",ouputPath]
         process.arguments = arguments
+        ProcessTask.log("processAcextract -> arguments:\(arguments)")
         return process
     }
 }
+
+
+
+extension ProcessTask{
+    
+ /**
+  执行“直接部署到Netlify.command”脚本任务
+  */
+    func processSyncNetlify() -> Process{
+        var netlifyPath:String = "/Volumes/ExData/Remote-ExData/Z---本地工具集/Site-AppStore/直接部署到Netlify-Mac.command"
+        for item in ProcessTaskPlist.shared.exec {
+            if item["name"] == "直接部署到Netlify"{
+                let value = item["path"]!
+                netlifyPath = value
+                break
+            }
+        }
+        let process = process()
+        let arguments = ["-c","open \(netlifyPath)"]
+        process.arguments = arguments
+        ProcessTask.log("processSyncNetlify -> arguments:\(arguments)")
+        if !FileManager.default.fileExists(atPath: netlifyPath){
+            let msg = "部署失败！\n文件不存在:\(netlifyPath)"
+            ViewController.openPromptAlert(msg: msg)
+        }
+        return process
+    }
+    
+}
+
+
+
+
+
+
+
+
 
 
 //MARK: - Clear

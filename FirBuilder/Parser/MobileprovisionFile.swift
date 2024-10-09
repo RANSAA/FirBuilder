@@ -19,6 +19,8 @@ class MobileprovisionFile {
     var platform:[String] = [] //平台类型
     var hasValid:Bool = true //mobileprovision文件是否有效或存在
     
+    
+    
     /**
      签名类型：
      0: 未知
@@ -51,7 +53,7 @@ class MobileprovisionFile {
             let startInt = resultStr.findFirst("<?xml")
             let lastIndex = resultStr.findLast("</plist>")
             if  startInt == -1 || lastIndex == -1 {
-                ParserTool.log("mobileprovision文件解析失败！")
+                ProcessTask.log("mobileprovision文件解析失败！")
                 return nil
             }else{
                 let start = resultStr.index(resultStr.startIndex, offsetBy: startInt)
@@ -60,7 +62,7 @@ class MobileprovisionFile {
                 return str
             }
         }else{
-            ParserTool.log("mobileprovision文件解析失败！")
+            ProcessTask.log("mobileprovision文件解析失败！")
             return nil
         }
     }
@@ -73,9 +75,9 @@ class MobileprovisionFile {
             try? str.write(toFile: toPlistPath, atomically: true, encoding: .utf8)
             if let dic = NSDictionary(contentsOfFile: toPlistPath) {
                 
-                ParserTool.log("embedded filePath:\(path)")
-                ParserTool.log("embedded toPlistPath:\(toPlistPath)")
-                ParserTool.log("embedded:\n\(dic)\nembedded:")
+                ProcessTask.log("embedded filePath:\(path)")
+                ProcessTask.log("embedded toPlistPath:\(toPlistPath)")
+                ProcessTask.log("embedded:\n\(dic)\nembedded:")
                 
                 if let localProvision = dic["LocalProvision"] as? Bool  {
                     self.localProvision = localProvision
@@ -104,17 +106,17 @@ class MobileprovisionFile {
                 //处理，并判断类型
             }else{
                 self.hasValid = false
-                ParserTool.log("不是标准的smobileprovision文件")
+                ProcessTask.log("不是标准的mobileprovision文件")
             }
         }else{
             self.hasValid = false
-            ParserTool.log("mobileprovision文件不存在")
+            ProcessTask.log("mobileprovision文件不存在")
         }
     }
     
     
     init(filePath path:String){
-        let plistPath = Config.unzipPath + "embedded.plist"
+        let plistPath = ProcessTask.shared.unzipPath + "embedded.plist"
         self.readToSavePlist(filePath: path, toPlistPath: plistPath)
     }
     

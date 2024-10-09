@@ -18,6 +18,9 @@ class ProcessTaskPlist:CustomStringConvertible {
     //环境环境变量
     private(set) var environment:[String:String]
     
+    //可执行程序数组
+    private(set) var exec:[[String:String]]
+    
     private  init() {
         let config = ProcessTaskConfig.shared
         plist = NSDictionary(contentsOfFile: config.processTaskPath) ?? NSDictionary()
@@ -51,6 +54,8 @@ class ProcessTaskPlist:CustomStringConvertible {
             }
         }
         environment = systemEnv;
+        
+        exec = plist["exec"] as! [[String:String]]
         
     }
     

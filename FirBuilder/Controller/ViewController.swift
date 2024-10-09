@@ -157,6 +157,19 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         openBrowser()
     }
     
+    
+    /** 将数据同步到Netlify */
+    @IBAction func btnSyncNetlifyAction(_ sender: NSButton) {
+        let task = ProcessTask.shared.processSyncNetlify()
+        do {
+            try task.run()
+        } catch  {
+            let msg = "直接部署到Netlify.command脚本执行失败 - error:\(error)"
+            ProcessTask.log(msg)
+            ParserTool.shared.blockPrompt?(msg)
+        }
+    }
+    
 }
 
 
@@ -279,6 +292,16 @@ extension ViewController{
     }
     
     func openPromptAlert(msg:String){
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText = msg
+            alert.addButton(withTitle: "知道了")
+            alert.alertStyle = .warning
+            alert.runModal()
+        }
+    }
+    
+    static func openPromptAlert(msg:String){
         DispatchQueue.main.async {
             let alert = NSAlert()
             alert.messageText = msg
