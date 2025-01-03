@@ -1,0 +1,10 @@
+${PODS_ROOT}/Target Support Files/Pods-FirBuilder/Pods-FirBuilder-frameworks.sh
+${BUILT_PRODUCTS_DIR}/KakaJSON/KakaJSON.framework
+${BUILT_PRODUCTS_DIR}/LYBProgressHUD/LYBProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework
+${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework
+${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework
+${BUILT_PRODUCTS_DIR}/WCDB.swift/WCDBSwift.framework
+${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework
+${BUILT_PRODUCTS_DIR}/Yaml/Yaml.framework
+${BUILT_PRODUCTS_DIR}/Zip/Zip.framework

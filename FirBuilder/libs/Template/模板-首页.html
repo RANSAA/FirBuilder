@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<meta name="format-detection" content="telephone=no">
+<title>App分发平台</title>
+<link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="src/css/index.css">
+<script type="text/javascript" src="src/js/device.js"></script>
+</head>
+
+<body style="margin: 0px ;">
+
+
+<div class="nav-bar">
+    <br><br><br><br>
+    <h1>App分发平台</h1>
+    <br>
+    <h4>当前设备类型类型：<span id="deviceType" style="color: red;">other</span></h4>
+    <br>
+    
+    <div style="padding-bottom:12px;">
+        <button type="button" class="home-button-selected" onclick="window.location.href='index.html'">Home</button>
+        <button type="button" class="home-button-normal" onclick="window.location.href='ios.html'">iOS</button>
+        <button type="button" class="home-button-normal" onclick="window.location.href='android.html'">Android</button>
+    </div>
+    
+</div>
+
+
+
+
+<!-- grid开始 -->
+<div class="home-grid-container" >
+
+    <!-- 一个item开始 -->
+    <div class="home-grid-item ">
+        <!-- 右上角图标 -->
+        <div style="height: 48px;">
+            <img src="src/images/android.png"  class="top-img-right">
+        </div>
+
+        <div class="margin48">
+            <!-- logo icon -->
+             <div class="home-nav-logo-height">
+                <img src="src/images/AppIcon-Test.png" class="size100">
+            </div>
+            <!-- app name -->
+            <div class="home-nav-name-height">
+                <img src="src/images/user.png" class="size16">
+                <span>诸葛卡包</span>
+            </div>
+            <!-- text info -->
+            <div class="home-nav-line-height">
+                <span class="home-line-label ">短链接：</span>
+                <span class="home-line-text">http://127.0.0.1/xxx</span>
+            </div>
+            <div class="home-nav-line-height">
+                <span class="home-line-label ">包名：</span>
+                <span class="home-line-text">com.xxysappxx.yingshi</span>
+            </div>
+            <div class="home-nav-line-height">
+                <span class="home-line-label ">版本：</span>
+                <span class="home-line-text">2.8.8 ( Build 288 )</span>
+            </div>
+            <!-- button -->
+            <div style="margin-top:62px;">
+                <div>
+                    <button type="button" onclick="window.open('detalbe.html')" class ="home-button-left">列表</button>
+                    <button type="button" onclick="window.open('detalbe.html')" class ="home-button-right">预览</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 一个item结束 -->
+
+
+
+
+    <!-- 一个item开始 -->
+    <div class="home-grid-item ">
+        <!-- 右上角图标 -->
+        <div style="height: 48px;">
+            <img src="src/images/apple2.png"  class="top-img-right">
+        </div>
+
+        <div class="margin48">
+            <!-- logo icon -->
+             <div class="home-nav-logo-height">
+                <img src="src/images/AppIcon-Test.png" class="size100">
+            </div>
+            <!-- app name -->
+            <div class="home-nav-name-height">
+                <img src="src/images/user.png" class="size16">
+                <span>诸葛卡包</span>
+            </div>
+            <!-- text info -->
+            <div class="home-nav-line-height">
+                <span class="home-line-label ">短链接：</span>
+                <span class="home-line-text">http://127.0.0.1/xxx</span>
+            </div>
+            <div class="home-nav-line-height">
+                <span class="home-line-label ">包名：</span>
+                <span class="home-line-text">com.xxysappxx.yingshi</span>
+            </div>
+            <div class="home-nav-line-height">
+                <span class="home-line-label ">版本：</span>
+                <span class="home-line-text">2.8.8 ( Build 288 )</span>
+            </div>
+            <!-- button -->
+            <div style="margin-top:62px;">
+                <div>
+                    <button type="button" onclick="window.open('detalbe.html')" class ="home-button-left">列表</button>
+                    <button type="button" onclick="window.open('detalbe.html')" class ="home-button-right">预览</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 一个item结束 -->
+
+   <div class="home-grid-item ">
+        <!-- 右上角图标 -->
+        <div style="height: 48px;">
+            <img src="src/images/apple2.png"  class="top-img-right">
+        </div>
+    </div>
+
+   <div class="home-grid-item ">
+        <!-- 右上角图标 -->
+        <div style="height: 48px;">
+            <img src="src/images/apple2.png"  class="top-img-right">
+        </div>
+    </div>
+
+   <div class="home-grid-item ">
+        <!-- 右上角图标 -->
+        <div style="height: 48px;">
+            <img src="src/images/apple2.png"  class="top-img-right">
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+</body>
+</html>
+
+
+
+<script>
+    
+        //js赋值方式
+        document.getElementById("deviceType").innerHTML= getDeviceName();
+        // document.getElementById("deviceType").innerHTML= getDeviceType();
+
+        // document.getElementById("deviceType").innerText= getDeviceType();
+        // document.getElementById("deviceType").value= getDeviceType();
+        //jquary赋值方式
+        // $('#deviceType').html(getDeviceType())
+
+
+
+         // 定义事件侦听器函数
+        function watchWindowSize() {
+        // 获取窗口的宽度和高度，不包括滚动条
+            var w = document.documentElement.clientWidth;
+            var h = document.documentElement.clientHeight;
+      
+            var msg = "宽: " + w + ", " + "高: " + h
+            console.log(msg)
+            // alert(msg)
+        }
+        //监听窗口大小变化
+        // window.addEventListener("resize", watchWindowSize);
+        // watchWindowSize();
+
+</script>

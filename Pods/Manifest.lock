@@ -1,0 +1,49 @@
+PODS:
+  - KakaJSON (1.1.2)
+  - LYBProgressHUD (1.1.4)
+  - SQLiteRepairKit (1.2.2):
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - SSZipArchive (2.4.3)
+  - SWXMLHash (6.0.0)
+  - WCDB.swift (1.0.8.2):
+    - SQLiteRepairKit (~> 1.2.0)
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDBOptimizedSQLCipher (1.2.1)
+  - Yaml (3.4.4)
+  - Zip (2.1.2)
+
+DEPENDENCIES:
+  - KakaJSON
+  - LYBProgressHUD
+  - SSZipArchive
+  - SWXMLHash (~> 6.0.0)
+  - WCDB.swift (= 1.0.8.2)
+  - Yaml
+  - Zip (~> 2.1)
+
+SPEC REPOS:
+  trunk:
+    - KakaJSON
+    - LYBProgressHUD
+    - SQLiteRepairKit
+    - SSZipArchive
+    - SWXMLHash
+    - WCDB.swift
+    - WCDBOptimizedSQLCipher
+    - Yaml
+    - Zip
+
+SPEC CHECKSUMS:
+  KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
+  LYBProgressHUD: 8c8a9d8af5df225cde7010ebea122fa2cf69be90
+  SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+  SWXMLHash: 9d851ed3edf48ec2bd0db98f0cda0ad4136d75e3
+  WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
+  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
+  Yaml: 52831fc1d9ac2db4ddf6d7562993457127256ca6
+  Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
+
+PODFILE CHECKSUM: ea9081ccdfa7cd7a7c76a8923a9fc0d4f02cf844
+
+COCOAPODS: 1.15.2

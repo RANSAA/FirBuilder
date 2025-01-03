@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+     background-color: #F6F6F6;
+     color: #9B9B9B;
+}
+
+.pattern.left{
+    left: 0;
+}        
+
+.pattern.right{
+    right: 0;
+}
+.pattern {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    max-width: 312px;
+    width: 21.66%;
+    transition: all .5s;
+}
+
+.size125{
+    width: 125px;
+    height: 125px;
+    border-radius: 16px;
+    background: white;
+}
+
+.size36-details{
+    width: 36px;
+    height: 36px;
+    vertical-align: bottom;
+}
+
+.size36-details-apple{
+    width: 36px;
+    height: 36px;
+    vertical-align: bottom;
+    margin-bottom:2px
+}
+
+
+.info-button-down{
+    background-color: #53b3a8;
+    color: white;
+    font-size: 14px;
+    width: 200px;
+    height: 40px;
+    
+    border: 0px solid;
+    border-radius: 20px;
+    
+    margin: 0; /* 确保没有外边距 */
+    padding: 0; /* 确保没有内边距 */
+    lineHeight: 1; /* 确保行高不影响布局  */
+    outline: none; /* 移除可能的外部边框 */
+    display: 'block'; /* 设置为块级元素  */
+}
+.info-button-down:active ,
+.info-button-down:hover{
+    box-shadow: 0px 0px 12px #53b3a8;
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>参数说明</key>
+	<dict>
+		<key>environment</key>
+		<string>用于添加环境变量</string>
+		<key>environment-key-name:</key>
+		<string>环境变量的名称</string>
+		<key>environment-key-values:</key>
+		<string>环境变量的值</string>
+		<key>environment-key-replace:</key>
+		<string>环境环境变量添加方式</string>
+		<key>environment-key-replace-value-YES:</key>
+		<string>YES:以替换的方式添加该环境变量，即如果系环境变量中已经存在该同名环境变量，那么将会以该环境变量的值作为最终环境变量的值。例如设置JAVA_HOME的值。</string>
+		<key>environment-key-replace-value-NO:</key>
+		<string>NO:以追加的方式添加该环境变量，即如果系统环境变量中已经存在该同名环境变量，那么就会把这个值添加带到系统同名环境变量的值中。 例如设置PATH的值。</string>
+		<key>environment-key-separator:</key>
+		<string>环境变量中值的拼接方式，例:如环境变量PATH就是使用“:”符号将values中的值拼接成一个字符串在赋值给PATH的。</string>
+		<key>exec</key>
+		<string>自定义执行程序列表</string>
+		<key>exec-key-name</key>
+		<string>自定义执行程序的名称</string>
+		<key>exec-key-path</key>
+		<string>自定义执行程序对应的路径</string>
+	</dict>
+	<key>environment</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>JAVA_HOME</string>
+			<key>values</key>
+			<array>
+				<string>/Volumes/ExData/Applications/SDKManager/Java/AdoptOpenJDK/Current/Contents/Home/</string>
+			</array>
+			<key>replace</key>
+			<true/>
+			<key>separator</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>PATH</string>
+			<key>values</key>
+			<array>
+				<string>/bin</string>
+				<string>/usr/bin</string>
+				<string>/usr/local/bin</string>
+				<string>/usr/sbin/</string>
+				<string>/Library/Frameworks/Python.framework/Versions/Current/bin</string>
+			</array>
+			<key>replace</key>
+			<false/>
+			<key>separator</key>
+			<string>:</string>
+		</dict>
+	</array>
+	<key>exec</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>直接部署到Netlify</string>
+			<key>path</key>
+			<string>/Volumes/ExData/Remote-ExData/Z---本地工具集/Site-AppStore/直接部署到Netlify-Mac.command</string>
+		</dict>
+	</array>
+</dict>
+</plist>

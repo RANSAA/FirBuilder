@@ -1,0 +1,176 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+body{
+     background-color: #F6F6F6;
+     color: #9B9B9B;
+}
+
+.nav-bar{
+    background-color: white;
+    text-align:center;
+    box-shadow: 0px 0px  15px rgba(0, 0, 0, .2);
+    line-height: 6px;
+}
+
+.home-grid-container {
+    display: grid;
+
+    /*grid-template-columns: 1fr 1fr 1fr ;*/
+    /*grid-template-columns: auto auto auto;*/
+    /*可用于窗口自适应*/
+    place-content: center;
+    grid-template-columns: repeat(auto-fit, 20rem);  /*每列自动填充 宽度为20rem */
+    /*grid-template-rows: repeat(auto-fit, 10rem);  /*每行自动填充 高度为20rem */
+
+    margin: 96px;
+    /*padding: 48px;*/
+
+    grid-row-gap: 96px;
+    grid-column-gap: 126px;
+    background-color: #F6F6F6;
+    color: #9B9B9B;
+}
+
+
+
+/* 主页网格item样式 */
+.home-grid-item{
+    background-color: #ffffff;
+    width: 320px;
+    height: 460px;
+    /* 阴影水平向右偏移10px，垂直向下偏移10px 边缘模糊半径10px */
+    box-shadow: 0px 0px  15px rgba(0, 0, 0, .2);
+}
+
+/*右上角图标样式*/
+.top-img-right{
+    background-image: url("src/images/apple.png");
+    background: url("src/images/apple.png");
+    background-size: 20px 20px;
+    /*background-color: #e0e0e0;*/
+    width: 44px;
+    height: 44px;
+    float: right;
+    position: relative;
+    right: 0px;
+    z-index: 1
+}
+
+.home-button-left{
+    border: 1px solid;
+    background-color: white;
+    color: #9B9B9B;
+    font-size: 15px;
+    width: 100px;
+    height: 36px;
+    border-radius: 18px;
+}
+.home-button-left:active ,
+.home-button-left:hover{
+    background-color: #53b3a8;
+    color: white;
+}
+
+.home-button-right{
+    border: 1px solid;
+    background-color: white;
+    color: #9B9B9B;
+    font-size: 15px;
+    width: 100px;
+    height: 36px;
+    border-radius: 18px;
+    margin-left: 18px;
+}
+.home-button-right:active ,
+.home-button-right:hover{
+    background-color: #53b3a8;
+    color: white;
+}
+
+
+.home-button-normal{
+    border: 1px solid;
+    background-color: white;
+    color: #9B9B9B;
+    font-size: 15px;
+    width: 100px;
+    height: 36px;
+    border-radius: 18px;
+    margin-left: 18px;
+}
+.home-button-selected{
+    border: 1px solid;
+    background-color: #53b3a8;
+    color: white;
+    font-size: 15px;
+    width: 100px;
+    height: 36px;
+    border-radius: 18px;
+    margin-left: 18px;
+}
+
+
+.home-nav-logo-height{
+    height: 100px;
+    padding-bottom: 36px;
+}
+
+
+.home-nav-name-height{
+    line-height: 30px;
+    color:#9b9b9b;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.home-nav-line-height{
+    line-height:17px;
+    margin-top: 12px;
+}
+
+.home-line-label{
+    font-size: 12px;
+    color: #9b9b9b;
+}
+
+.home-line-text{
+    font-size: 12px;
+    color: #1a1a1a;
+}
+
+.margin48{
+    margin-left: 48px;
+    margin-right: 48px;
+}
+
+.size16{
+    width: 16px;
+    height: 16px;
+}
+
+.size100{
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+}
+
+.size125{
+    width: 125px;
+    height: 125px;
+    border-radius: 16px;
+}
+
+
+.size180{
+    width: 160px;
+    height: 160px;
+    /*border-radius: 16px;*/
+    padding: 10px;
+}
+
+
+
+
