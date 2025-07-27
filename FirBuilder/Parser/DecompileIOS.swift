@@ -191,6 +191,9 @@ extension DecompileIOS{
         if let iconFiles_1 = obj.iconFiles_1{
             iconNames += iconFiles_1
         }
+        if let iconFile_2 = obj.iconFile_2 {
+            iconNames.append(iconFile_2)
+        }
         iconNames = iconNames.map({ name in
             var name = name.replacingOccurrences(of: "@2x", with: "")
             name = name.replacingOccurrences(of: "@3x", with: "")

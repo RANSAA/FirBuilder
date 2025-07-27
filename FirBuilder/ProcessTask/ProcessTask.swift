@@ -128,7 +128,23 @@ extension ProcessTask{
   执行“直接部署到Netlify.command”脚本任务
   */
     func processSyncNetlify() -> Process{
-        var netlifyPath:String = "/Volumes/ExData/Remote-ExData/Z---本地工具集/Site-AppStore/直接部署到Netlify-Mac.command"
+        //bundlePath
+        let bundlePath = Bundle.main.bundlePath
+        ProcessTask.log("bundlePath:"+bundlePath)
+        //FirBuilder所在的目录
+        let FirBuilderPath = Bundle.main.bundleURL.deletingLastPathComponent().relativePath
+        ProcessTask.log("FirBuilderPath:"+FirBuilderPath)
+        //Site-AppStore所在的目录（FirBuilder工作目录的上一级）
+        let SiteAppStorePath = (FirBuilderPath as NSString).deletingLastPathComponent
+        ProcessTask.log("SiteAppStorePath:"+SiteAppStorePath)
+        
+        /**
+         部署到Netlify-Mac.command脚本的实际路径地址
+         如果要修改这个路径请直接在ProcessTask.plist文件中修改
+         */
+        //var netlifyPath:String = "/Volumes/ExData/Remote-ExData/Z---本地工具集/Site-AppStore/直接部署到Netlify-Mac.command"
+        var netlifyPath:String = SiteAppStorePath + "/" + "直接部署到Netlify-Mac.command"
+        
         for item in ProcessTaskPlist.shared.exec {
             if item["name"] == "直接部署到Netlify"{
                 let value = item["path"]!
