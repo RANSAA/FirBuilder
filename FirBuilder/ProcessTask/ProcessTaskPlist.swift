@@ -28,6 +28,7 @@ class ProcessTaskPlist:CustomStringConvertible {
         //配置环境变量
         //获取系统环境环境变量
         var systemEnv:[String:String] = ProcessInfo.processInfo.environment
+        ProcessTask.log("systemEnv:\(systemEnv)")
         //读取ProcessTask.plist文件中配置的环境变量
         let plistEnv:[[String:Any]] = plist["environment"] as? [[String:Any]] ?? []
         for dicItem in plistEnv {
@@ -36,7 +37,7 @@ class ProcessTaskPlist:CustomStringConvertible {
                   let replace:Bool = dicItem["replace"] as? Bool,
                   let separator:String = dicItem["separator"] as? String
             else {
-                print("ProcessTask.plist environment配置信息解析错误")
+                ProcessTask.log("ProcessTask.plist environment配置信息解析错误")
                 continue
             }
             //替换与体统同名的环境变量

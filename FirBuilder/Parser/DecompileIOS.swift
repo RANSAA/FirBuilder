@@ -191,8 +191,14 @@ extension DecompileIOS{
         if let iconFiles_1 = obj.iconFiles_1{
             iconNames += iconFiles_1
         }
-        if let iconFile_2 = obj.iconFile_2 {
-            iconNames.append(iconFile_2)
+        if let iconFile_1 = obj.iconFile_1 {
+            iconNames.append(iconFile_1)
+        }
+        if let iconFiles_ipad_2 = obj.iconFiles_ipad_2{
+            iconNames.append(iconFiles_ipad_2)
+        }
+        if let iconFiles_2 = obj.iconFiles_2 {
+            iconNames.append(iconFiles_2)
         }
         iconNames = iconNames.map({ name in
             var name = name.replacingOccurrences(of: "@2x", with: "")
@@ -213,14 +219,50 @@ extension DecompileIOS{
             newIconName.append(name+"@3x~iphone.png")
             newIconName.append(name+"@2x~ipad.png")
             newIconName.append(name+"@3x~ipad.png")
+            //可能会有更多的指定尺寸，现在只添加其中一部分
+            newIconName.append(name+"40x40@2x~iphone.png")
+            newIconName.append(name+"40x40@3x~iphone.png")
+            newIconName.append(name+"40x40@2x~ipad.png")
+            newIconName.append(name+"40x40@3x~ipad.png")
+            
+            newIconName.append(name+"60x60@2x~iphone.png")
+            newIconName.append(name+"60x60@3x~iphone.png")
+            newIconName.append(name+"60x60@2x~ipad.png")
+            newIconName.append(name+"60x60@3x~ipad.png")
+            
+            newIconName.append(name+"64x64@2x~iphone.png")
+            newIconName.append(name+"64x64@3x~iphone.png")
+            newIconName.append(name+"64x64@2x~ipad.png")
+            newIconName.append(name+"64x64@3x~ipad.png")
+            
+            newIconName.append(name+"76x76@2x~iphone.png")
+            newIconName.append(name+"76x76@3x~iphone.png")
+            newIconName.append(name+"76x76@2x~ipad.png")
+            newIconName.append(name+"76x76@3x~ipad.png")
+            
+            newIconName.append(name+"83x83@2x~iphone.png")
+            newIconName.append(name+"83x83@3x~iphone.png")
+            newIconName.append(name+"83x83@2x~ipad.png")
+            newIconName.append(name+"83x83@3x~ipad.png")
+            
+            newIconName.append(name+"90x90@2x~iphone.png")
+            newIconName.append(name+"90x90@3x~iphone.png")
+            newIconName.append(name+"90x90@2x~ipad.png")
+            newIconName.append(name+"90x90@3x~ipad.png")
+            
+            newIconName.append(name+"1024x1024~ipad.png")
+            newIconName.append(name+"1024x1024~iphone.png")
         }
+        //去重
+        let newIconNameSet:Set<String> = Set(newIconName)
+        newIconName = newIconNameSet.sorted()
         
         var iconSize = 0
         var iconRealPath:String? = nil
         var iconFind = false //是否找到有效的图标文件
         //查找符合条件的最大icon图标
-        ProcessTask.log("App Icon可能出现的路径：")
         let findMaxIconPath = {
+            ProcessTask.log("App Icon可能出现的路径 Began：")
             for name in newIconName{
                 let iconPath = appPath+name
                 ProcessTask.log(iconPath)
@@ -233,11 +275,14 @@ extension DecompileIOS{
                     }
                 }
             }
+            ProcessTask.log("App Icon可能出现的路径 End")
         }
+        
         findMaxIconPath()
         //没有找到icon图标，现在尝试解压Assets.car文件，然后再重试
         if !iconFind {
             //解析Assets.car到xxx.app主目录
+            ProcessTask.log("----------------- 尝试解析Assets.car文件 Began -----------------")
             let assetsPath = appPath + "Assets.car"
             let task = ProcessTask.shared.processAcextract(filePath: assetsPath, ouputPath: appPath)
             do {
@@ -247,6 +292,7 @@ extension DecompileIOS{
                 let msg = "Assets.car资源解析失败 -> error:\(error)"
                 ProcessTask.log(msg)
             }
+            ProcessTask.log("----------------- 尝试解析Assets.car文件 End -----------------")
             //再次查找
             findMaxIconPath()
         }

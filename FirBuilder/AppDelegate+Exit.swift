@@ -62,8 +62,10 @@ extension AppDelegate{
                 ParserTool.exitClean()
             }
             print("清理正在运行的任务....")
-
-
+            
+            //清除程序运行产生的垃圾
+            ProcessTask.shared.clearTmp()
+            ProcessTask.shared.clearLog()
         }
     }
 

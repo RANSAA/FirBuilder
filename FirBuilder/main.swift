@@ -122,6 +122,8 @@ if arguments.contains("-cli") {
 }
 
 
+
+
 //MARK: 窗口模式启动 或者 Command模式启动
 if winMode {
     ProcessTask.log("使用窗口模式启动程序!")

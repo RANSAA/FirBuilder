@@ -178,7 +178,7 @@ extension ProcessTask{
 extension ProcessTask{
     
     /** 只清除Process产生的垃圾文件，一般只在App添加成功之后清除 */
-    func clear(){
+    func clearTmp(){
         try? FileManager.default.removeItem(atPath: unzipPath)
 
         let user = ProcessTaskPlist.shared.environment["USER"] ?? "kimi"
@@ -186,9 +186,8 @@ extension ProcessTask{
         try? FileManager.default.removeItem(atPath: apktoolResourcePath)
     }
     
-    /** 清除Process产生的所有垃圾文件，日志文件等。*/
-    func clearAll(){
-        clear()
+    /** 清除程序上一次运行所产生的日志文件,通常在应用启动时清除*/
+    func clearLog(){
         try? FileManager.default.removeItem(atPath: ProcessTaskConfig.shared.taskLogPath)
         try? FileManager.default.removeItem(atPath: ProcessTaskConfig.shared.taskTmpPath)
     }

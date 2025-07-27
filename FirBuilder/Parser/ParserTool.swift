@@ -26,6 +26,9 @@ struct ParserTool {
     var blockPrompt:ParserBlock? //只提示，不中断 ⚠️：新版本中使用
     
     func parserStart(path:String){
+        //在解析之前清除上一个APP解析产生的垃圾文件
+        ProcessTask.shared.clearTmp()
+        
         let msg = "开始解析:\(path)"
         ProcessTask.log(msg)
         blockStart?(msg)
@@ -66,8 +69,8 @@ extension ParserTool{
             let builderRes = BuilderAppRes(appInfo: appInfoModel!)
             builderRes.start()
             
-            //清除垃圾
-            ProcessTask.shared.clear()
+            //在解析之前清除上一个APP解析产生的垃圾文件
+//            ProcessTask.shared.clearTmp()
         }else{
             let msg = "App添加失败!!！"
             ProcessTask.log(msg)
@@ -88,7 +91,9 @@ extension ParserTool{
        try? FileManager.default.removeItem(atPath: Config.unzipPath)
     }
     
-    /** 退出时：清理.unzip目录 */
+    /** 退出时：清理.unzip目录
+     PS: 未使用，直接使用ProcessTask.shared.clear相关方法清理垃圾
+     */
     static func exitClean(){
         let path = Config.appPath + ".unzip"
         do {

@@ -24,7 +24,11 @@ class IPAInfoPlist:Convertible{
     var iconFiles:[String]?
     var iconFiles_ipad:[String]?
     var iconFiles_1:[String]?
-    var iconFile_2:String?
+    
+    var iconFiles_ipad_2:String?
+    var iconFiles_2:String?
+    
+    var iconFile_1:String?
 
     required init(){}
 
@@ -42,7 +46,10 @@ class IPAInfoPlist:Convertible{
             case "iconFiles_ipad": return "CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconFiles"
             case "iconFiles_1": return "CFBundleIconFiles"
             
-            case "iconFile_2": return "CFBundleIconFile"
+            case "iconFiles_ipad_2": return "CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconName"
+            case "iconFiles_2": return"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconName"
+            
+            case "iconFile_1": return "CFBundleIconFile"
             
             default:return property.name
         }
