@@ -192,7 +192,8 @@ extension ListViewController
                 db.close()
             }
             let update = Date()
-            try db.update(table: AppListTable.tableName, on: AppListTable.Properties.updateDate, with: [update], where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.updateDate == model.updateDate)
+//            try db.update(table: AppListTable.tableName, on: AppListTable.Properties.updateDate, with: [update], where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.updateDate == model.updateDate)
+            try db.update(table: AppListTable.tableName, on: AppListTable.Properties.updateDate, with: [update], where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.createDate == model.createDate)
 
             loadData()
             

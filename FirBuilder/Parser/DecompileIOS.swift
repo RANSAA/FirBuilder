@@ -323,9 +323,11 @@ extension DecompileIOS{
         let embeddedPath = appPath+"embedded.mobileprovision"
         var signType:ParserBuildType = .unknown
         var signExpiration:String?  = "永久有效"
+        var devices:[String] = []
         if FileManager.default.fileExists(atPath: embeddedPath){
             let obj = MobileprovisionFile(filePath: embeddedPath)
             if obj.hasValid{
+                //签名类型
                 switch obj.signType{
                 case 1:
                     signType = .xcodeTest
@@ -336,6 +338,8 @@ extension DecompileIOS{
                 default:
                     signType = .unknown
                 }
+                //设备列表
+                devices = obj.provisionedDevices
             }else{
                 let msg = "DecompileIOS -> embedded.mobileprovision文件解析失败!"
                 self.blockFail(msg)
@@ -353,6 +357,8 @@ extension DecompileIOS{
         }
         self.appInfoModel.signType = signType
         self.appInfoModel.signExpiration = signExpiration
+        self.appInfoModel.devices = devices
+        
         return true
     }
     

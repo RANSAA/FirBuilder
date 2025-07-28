@@ -38,8 +38,10 @@ struct ParserTool {
             let msg = "解析错误，文件不存在或者不支持该格式。 file：\(path)"
             ProcessTask.log(msg)
             blockFail?(msg)
+            break
         case .ios, .android:
             parserApp(type: type, filePath: path)
+            break
         }
     }
 }
@@ -68,9 +70,6 @@ extension ParserTool{
             //构建资源
             let builderRes = BuilderAppRes(appInfo: appInfoModel!)
             builderRes.start()
-            
-            //在解析之前清除上一个APP解析产生的垃圾文件
-//            ProcessTask.shared.clearTmp()
         }else{
             let msg = "App添加失败!!！"
             ProcessTask.log(msg)

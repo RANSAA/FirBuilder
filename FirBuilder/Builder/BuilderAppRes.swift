@@ -130,6 +130,7 @@ struct BuilderAppRes {
 
         BuilderAppHome().builder()
 
+        //注意这儿还有一个错误，重新生成H5后list.html只有一项数据了
         BuilderList().builderAll()
 
         BuilderDetails().builderAll()

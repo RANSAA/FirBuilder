@@ -132,8 +132,8 @@ extension DetatalsViewController{
 
         
 //        ProcessTask.log(self.pushItem ?? "nil")
-        print(self.pushItem)
-        
+        ProcessTask.log(self.pushItem ?? "nil")
+    
         let filePath = Config.appPath + "html/" + (self.pushItem.srcRoot ?? "") + (self.pushItem.appSavePath ?? "")
         
         let filename:String = (self.pushItem.name ?? "null") + "_v" + (self.pushItem.version ?? "null") + "." + (self.pushItem.appSavePath?.fileExtension ?? "")

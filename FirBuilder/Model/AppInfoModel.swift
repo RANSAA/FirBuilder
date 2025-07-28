@@ -139,6 +139,7 @@ AppInfoModel:Start
             listPath:\(listPath ?? "Build失败")
             detailsPath:\(detailsPath ?? "Build失败")
             appSavePath:\(appSavePath ?? "Build失败")
+            devices:\(String(describing: devices) )
 AppInfoModel:End
 """
         ProcessTask.log(msg)

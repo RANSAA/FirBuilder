@@ -12,7 +12,7 @@ import KakaJSON
 /**
  首页对应的表
  */
-class AppHomeTable:TableCodable,Convertible{
+ final class AppHomeTable:TableCodable,Convertible{
     static let tableName = "AppHomeTable" //对应的表名
 
     var id:Int? = nil
@@ -62,6 +62,7 @@ class AppHomeTable:TableCodable,Convertible{
         }
     }
     
+    //TableCodable协议中的属性
     var isAutoIncrement: Bool = true // 用于定义是否使用自增的方式插入
     var lastInsertedRowID: Int64 = 0 // 用于获取自增插入后的主键值
     
@@ -73,3 +74,7 @@ extension AppHomeTable:CustomStringConvertible{
         return printAllIvars(self, false)
     }
 }
+
+
+
+

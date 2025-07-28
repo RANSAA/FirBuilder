@@ -12,7 +12,7 @@ import KakaJSON
 /**
  App详细数据列表
  */
-class AppListTable:TableCodable,Convertible{
+final class AppListTable:TableCodable,Convertible{
     static let tableName = "AppListTable" //对应的表名
 
     var id:Int? = nil
@@ -105,6 +105,6 @@ class AppListTable:TableCodable,Convertible{
 
 extension AppListTable:CustomStringConvertible{
     var description:String {
-        return printAllIvars(self, false)
+        return printAllIvars(self, false,isPrint: false)
     }
 }

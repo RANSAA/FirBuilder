@@ -13,7 +13,7 @@ import KakaJSON
 class BuilderDetails{
     let h5Headder:String = """
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="renderer" content="webkit">

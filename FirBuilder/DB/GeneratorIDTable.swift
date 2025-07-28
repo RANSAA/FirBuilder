@@ -12,7 +12,7 @@ import WCDBSwift
 
 //GeneratorID生成器ID记录表，用于保证生成的ID是唯一的
 //GeneratorIDTable
-class GeneratorIDTable: TableCodable {
+final class GeneratorIDTable: TableCodable {
     static let tableName = "GeneratorIDRecord" //对应的表名
 
     var id:Int? = nil

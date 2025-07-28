@@ -13,7 +13,7 @@ import KakaJSON
 class BuilderList{
     let bodyBegin:String = """
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="renderer" content="webkit">
@@ -21,7 +21,7 @@ class BuilderList{
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="white">
 <meta name="format-detection" content="telephone=no">
-<title>应用下载</title>
+<title>列表</title>
 <link rel="icon" type="image/x-icon" href="../../../src/images/favicon.ico">
 <link rel="stylesheet" type="text/css" href="../../../src/css/list.css">
 <script type="text/javascript" src="../../../src/js/device.js"></script>
@@ -30,7 +30,7 @@ class BuilderList{
 
 <div id="headerID" style="display: none;">
     <div style="text-align: center;">
-        <h4 id="navName">   </h4>
+        <h4 id="navName"> </h4>
     </div>
     <div style="background: #F6F6F6; height: 10px;"></div>
 </div>
@@ -46,7 +46,6 @@ class BuilderList{
 </body>
 </html>
 <script>
-
     function updateLabelStyle(){
         var list = document.getElementsByName("list")
         list.forEach((item,index,array)=>{
@@ -111,8 +110,6 @@ class BuilderList{
     //type icon
     let iosIcon = "../../../src/images/apple.png"
     let androidIcon = "../../../src/images/android.png"
-
-
 </script>
 
 """
@@ -125,6 +122,7 @@ class BuilderList{
 extension BuilderList{
 
     //生成所有APP 列表页面
+    /** 直接查询数据库，生成所有App对应的list.html页面 */
     func builderAll(){
         do {
             let db = DBService.shared.db
@@ -133,8 +131,10 @@ extension BuilderList{
             }
             var filters:[String:[AppListTable]] = [:]
             let array:[AppListTable] = try db.getObjects(fromTable: AppListTable.tableName)
+//            ProcessTask.log("HTML App List array:\(array)   count:\(array.count)")
+            //取出同一个App的所有版本
             for item in array {
-                let key = item.build! + "\(item.type)"
+                let key = item.bundleID! + "\(item.type)"
                 var value = filters[key]
                 if value == nil {
                     value = [];
@@ -142,17 +142,72 @@ extension BuilderList{
                 value?.append(item)
                 filters[key] = value
             }
-            for item in filters.values {
-                builder(list: item)
-            }
 
+            for (key, items) in filters {
+                builder(list: items)
+                ProcessTask.log("BuilderList： bundleID:\(key)  count:\(items.count)")
+            }
+            
         } catch  {
-            ParserTool.log(error)
+            ProcessTask.log(error)
         }
     }
     
     
-    func builder(list:[AppListTable]){
+    /** 根据AppInfoModel生成list.html */
+    func builder(_ appInfo:AppInfoModel){
+//        var success = false
+//        let bundleID = appInfo.bundleID!
+//        let type = appInfo.type
+//        var h5String:String = ""
+//        do {
+//            let db = DBService.shared.db
+//            defer {
+//                db.close()
+//            }
+//            let list:[AppListTable]? = try db.getObjects(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == bundleID && AppListTable.Properties.type == type, orderBy: [AppListTable.Properties.updateDate.asOrder(by: .descending)])
+//            if let h5 = builderListItem(list: list) {
+//                h5String = h5
+//                success = true
+//            }
+//        } catch  {
+//            ParserTool.log(error)
+//        }
+//        if success {
+//            let detailsData = h5String.data(using: .utf8)
+//            let path = Config.htmlPath+appInfo.srcRoot!+appInfo.listPath!
+//            ParserTool.save(detailsData, path: path)
+//        }
+        
+        
+
+        let bundleID = appInfo.bundleID!
+        let type = appInfo.type
+        do {
+            let db = DBService.shared.db
+            defer {
+                db.close()
+            }
+            let list:[AppListTable]? = try db.getObjects(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == bundleID && AppListTable.Properties.type == type, orderBy: [AppListTable.Properties.updateDate.asOrder(by: .descending)])
+            //构建
+            if let list = list {
+                builder(list: list)
+            }else{
+                ProcessTask.log("list.html页面构建失败，没有查询到bundleID为：\(bundleID) 的数据")
+            }
+        } catch  {
+            ProcessTask.log(error)
+        }
+    }
+
+}
+
+extension BuilderList{
+    
+    /** 构建一个App对应的list.html列表页面*/
+    private func builder(list:[AppListTable]){
+        //按更新时间降序
+        let list = list.sorted{$0.updateDate > $1.updateDate}
         if list.count > 0 {
             var h5String:String = ""
             if let h5 = builderListItem(list: list) {
@@ -166,41 +221,8 @@ extension BuilderList{
             ParserTool.save(detailsData, path: path)
         }
     }
-
-}
-
-extension BuilderList{
     
-    /** 生成list.html */
-    func builder(_ appInfo:AppInfoModel){
-        var success = false
-        let bundleID = appInfo.bundleID!
-        let type = appInfo.type
-        var h5String:String = ""
-        do {
-            let db = DBService.shared.db
-            defer {
-                db.close()
-            }
-            let list:[AppListTable]? = try db.getObjects(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == bundleID && AppListTable.Properties.type == type, orderBy: [AppListTable.Properties.updateDate.asOrder(by: .descending)])
-
-            if let h5 = builderListItem(list: list) {
-                h5String = h5
-                success = true
-            }
-        } catch  {
-            ParserTool.log(error)
-        }
-
-        if success {
-            let detailsData = h5String.data(using: .utf8)
-            
-            let path = Config.htmlPath+appInfo.srcRoot!+appInfo.listPath!
-            ParserTool.save(detailsData, path: path)
-
-        }
-    }
-    
+    /** 获取list.html列表页面的HTML数据 */
     private func builderListItem(list:[AppListTable]?) -> String?{
         if list != nil && list?.first != nil {
             let list:[AppListTable] = list!
@@ -227,10 +249,8 @@ extension BuilderList{
 <!-- 用于动态写入数据 -->
 <script type="text/javascript">
     let appType = "\(item.type)" // ios or android
-
     let appName = "\(item.name!)"
     let appVersion = "\(item.version!) ( Build \(item.build!) ) "
-
 </script>
 """
         return str
@@ -240,18 +260,14 @@ extension BuilderList{
         let node:String = """
     <!-- list item begin-->
     <div name="item" class="list-item-mob">
-
         <div class="list-item-left">
             <img src="\(item.logo512Path!)" class="list-img-size100 ">
         </div>
-
         <div name="item-center" class="list-item-center-mob">
-
             <div class="list-app-name">
                 <span><img name="appTypeIcon" src="../../../src/images/apple.png" class="list-app-img-size22"></span>
                 <span >\(item.name!)</span>
             </div>
-
             <div class="list-app-info">
                 <div>
                     <span>BundleID：</span>
@@ -265,14 +281,11 @@ extension BuilderList{
                     <span><img src="../../../src/images/update.png" class="list-app-update-img"></span>
                     <span >\(DateFormatter.dateStringWith(date: item.updateDate))</span>
                 </div>
-
             </div>
         </div>
-
         <div name="item-right" class="list-item-right-mob">
             <button class="list-btn-pre", onclick="window.open('\(item.detailsPath!)')"> 预览 </button>
         </div>
-
         <div class="list-item-space">
         </div>
     </div>

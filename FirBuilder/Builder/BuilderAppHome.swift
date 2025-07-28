@@ -13,7 +13,7 @@ import WCDBSwift
 class BuilderAppHome{
     let bodyBagin:String = """
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="renderer" content="webkit">
@@ -63,7 +63,7 @@ class BuilderAppHome{
     let androidClass = type == .android ? "home-button-selected" : "home-button-normal"
     let listBodyBagin:String = """
     <!DOCTYPE html>
-    <html lang="en-US">
+    <html lang="zh-CN">
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="renderer" content="webkit">
