@@ -31,7 +31,8 @@ FirBuilder H5是一款类似fir.im应用分发的静态网页生成器。通过�
 
 
 ## 参数解释:
-1.ServerRoot：服务器存放HTML等资源文件的根路径(或者git仓库)它主要用来为apk提供云存储路径，即：ServerRoot+index.html能正常访问。
+1.ServerRoot⚠️⚠️⚠️⚠️⚠️⚠️
+服务器存放HTML等资源文件的根路径(或者git仓库)它主要用来为apk提供云存储路径，即：ServerRoot+index.html能正常访问。
     例如：
     1. netlify部署站点:https://fir.netlify.app/
     2. coding仓库路径为：https://fir-im.coding.net/p/fir.im/d/AppStore/git/tree/master ,那么对应的仓库路径：
@@ -44,14 +45,16 @@ FirBuilder H5是一款类似fir.im应用分发的静态网页生成器。通过�
 
 3. 预览：在浏览器中预览生成的H5资源文件
 
-4. 部署到Netlify：这个功能是执行一个脚本，将应用的解析资源同步到Netlify站点。
+4. 部署到Netlify⚠️⚠️⚠️⚠️⚠️⚠️
+这个功能是执行一个脚本，将应用的解析资源同步到Netlify站点。
 该脚本的默认路径为：/Volumes/ExData/Remote-ExData/Z---本地工具集/Site-AppStore/直接部署到Netlify-Mac.command。
 如果想要修改位置，直接设置：ProcessTask.plist -> exec -> name =="直接部署到Netlify" 对应的path的值。
 用户也可以自定义这个脚本文件内容，来实现自己的具体事务
 
 
-## 日志
+## 日志⚠️⚠️⚠️⚠️⚠️⚠️
 如果想要查看具体的日志文件，请到"/tmp/ProcessTask/FirBuilder"中查找具体的日志。
+注意：程序退出时自动清除日志与解析时产生的缓存文件
 
 
 ## 使用:
@@ -60,7 +63,7 @@ FirBuilder会在当前目录下生成html和html-sync两个目录，html-sync是
 如果没有可以使用将html推送到git仓库，html-sync同步到静态托管网站即可
 
 
-## 警告⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+## 警告⚠️⚠️⚠️⚠️⚠️⚠️
 1.目前coding已经不能使用了，直接切换到Netlify即可。
 2.目前已经支持CLI模式，直接在终端执行程序，并输入：-h，即可查询使用方法。
 

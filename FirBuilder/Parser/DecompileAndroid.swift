@@ -42,7 +42,7 @@ class DecompileAndroid{
     func start(){
         let task = ProcessTask.shared.processApktool(filePath: filePath)
         task.terminationHandler = { proce in              // 执行结束的闭包(回调)
-            ParserTool.log("Apktool Task执行完毕! Process:\(proce)")
+            log("Apktool Task执行完毕! Process:\(proce)")
         }
         
         //创建管道
@@ -58,7 +58,7 @@ class DecompileAndroid{
                 self.lastStr = outputString
                 //5. 在主线程处理UI
                 DispatchQueue.main.async(execute: {
-                    ProcessTask.log("pipe:\(outputString)")
+                    log("pipe:\(outputString)")
                 })
             }
             //6. 继续等待新数据和通知
@@ -90,7 +90,7 @@ class DecompileAndroid{
             "I: Copying META-INF/services directory\n"
         ];
         if msgInfo.contains(self.lastStr) {
-            ProcessTask.log("Android unzip path: \(unZipPath)")
+            log("Android unzip path: \(unZipPath)")
             //开始解析所有数据
             parserFiles()
         }else{
@@ -106,28 +106,11 @@ class DecompileAndroid{
     func done(){
         if isApktoolXML && isAndroidXML {
             let msg = "App信息全部解析成功！"
-            ProcessTask.log(msg)
+            log(msg)
         }else{
             let msg = "App信息解析失败，整个添加操作失败！"
-            ProcessTask.log(msg)
+            log(msg)
         }
-        
-//        let msg = """
-//App解析信息:
-//        name:\(self.appInfoModel.name ?? "解析失败")
-//        bundleID:\(self.appInfoModel.bundleID ?? "解析失败")
-//        version:\(self.appInfoModel.version ?? "解析失败")
-//        build:\(self.appInfoModel.build ?? "解析失败")
-//        minSdkVersion:\(self.appInfoModel.minSdkVersion ?? "解析失败")
-//        targetSdkVersion:\(self.appInfoModel.targetSdkVersion ?? "解析失败")
-//        originalIconPath:\(self.appInfoModel.originalIconPath ?? "解析失败")
-//        originalAppPath:\(self.appInfoModel.originalAppPath ?? "解析失败")
-//        type:\(self.appInfoModel.type)
-//        signType:\(self.appInfoModel.signType)
-//        signExpiration:\(self.appInfoModel.signExpiration ?? "解析失败")
-//        fileSize:\(self.appInfoModel.fileSize ?? "解析失败")
-//"""
-//        ProcessTask.log(msg)
 
     }
     
@@ -150,14 +133,14 @@ extension DecompileAndroid{
     
     //操作失败 - 并且执行该方法时，会中断后面的反编译解析任务
     private func blockFail(_ msg:String){
-        ProcessTask.log(msg)
+        log(msg)
         //change
         ParserTool.shared.blockFail?(msg)
     }
     
     //需要给用户提示的回调操作
     private func blockPrompt(_ msg:String){
-        ProcessTask.log(msg)
+        log(msg)
         //change
         ParserTool.shared.blockPrompt?(msg)
     }
@@ -263,7 +246,7 @@ extension DecompileAndroid{
         }else if let tmpName = node.attribute(by: "n1:label")?.text {
             appName = tmpName
         }
-        ProcessTask.log("AndroidManifest.xml -> App References Name:\(appName)")
+        log("AndroidManifest.xml -> App References Name:\(appName)")
         //@string/a4 -> res/values/strig.xml->a4
         if appName.contains("@string") {//存在引用名称
             //优先解析中文环境下的App名称
@@ -278,7 +261,7 @@ extension DecompileAndroid{
                 if let realName = try? nameXML["resources"]["string"].withAttribute("name", referencesName).element?.text {
 //MARK: - App Name
                     self.appInfoModel.name = realName;
-                    ProcessTask.log("res/values/strings.xml -> App Real Name:\(realName)")
+                    log("res/values/strings.xml -> App Real Name:\(realName)")
                 }
             }
             //中文环境的App名称
@@ -289,7 +272,7 @@ extension DecompileAndroid{
                 //获取App的真实名称
                 if let realName = try? nameXML["resources"]["string"].withAttribute("name", referencesName).element?.text {
                     self.appInfoModel.name = realName;
-                    ProcessTask.log("res/values-zh-rCN/strings.xml -> App Real Name:\(realName)")
+                    log("res/values-zh-rCN/strings.xml -> App Real Name:\(realName)")
                 }
             }
         }else{//不存在，该值就是App的应用名称
@@ -306,7 +289,7 @@ extension DecompileAndroid{
             let msg = "AndroidManifest.xml -> App Icon References Name 在已知条件下不存在，提示：发现新的App Icon引用逻辑，请更新App!"
             self.blockPrompt(msg)
         }
-        ProcessTask.log("AndroidManifest.xml -> App Icon References Name:\(icon)")
+        log("AndroidManifest.xml -> App Icon References Name:\(icon)")
        
         /**
          icon资源路径引用类型:
@@ -357,9 +340,9 @@ extension DecompileAndroid{
         var iconSize = 0
         var iconRealPath:String? = nil
         var iconFind = false //是否找到有效的图标文件
-        ProcessTask.log("App Icon可能出现的路径：")
+        log("App Icon可能出现的路径：")
         for path in iconPaths {
-            ProcessTask.log(path)
+            log(path)
             if FileManager.default.fileExists(atPath: path){
                 iconFind = true
                 let size = FileManager.default.sizeForLocalFilePath(filePath: path)
@@ -373,7 +356,7 @@ extension DecompileAndroid{
 //MARK: - App Icon and OriginalIconPath
             self.appInfoModel.originalIconPath = iconRealPath
             let msg = "originalIconPath:\(iconRealPath)"
-            ProcessTask.log(msg)
+            log(msg)
         }else{//没有找到有效图标
             let msg = """
             App Icon 图标解析错误

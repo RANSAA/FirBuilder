@@ -284,7 +284,7 @@ extension BuilderDetails{
                 builderDetailsHTML(item)
             }
         } catch  {
-            ParserTool.log(error)
+            log(error)
         }
     }
 

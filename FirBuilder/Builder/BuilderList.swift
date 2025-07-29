@@ -132,6 +132,7 @@ extension BuilderList{
             var filters:[String:[AppListTable]] = [:]
             let array:[AppListTable] = try db.getObjects(fromTable: AppListTable.tableName)
 //            ProcessTask.log("HTML App List array:\(array)   count:\(array.count)")
+//            log("HTML App List array:\(array)   count:\(array.count)")
             //取出同一个App的所有版本
             for item in array {
                 let key = item.bundleID! + "\(item.type)"
@@ -145,42 +146,17 @@ extension BuilderList{
 
             for (key, items) in filters {
                 builder(list: items)
-                ProcessTask.log("BuilderList： bundleID:\(key)  count:\(items.count)")
+                log("BuilderList： bundleID:\(key)  count:\(items.count)")
             }
             
         } catch  {
-            ProcessTask.log(error)
+            log(error)
         }
     }
     
     
     /** 根据AppInfoModel生成list.html */
     func builder(_ appInfo:AppInfoModel){
-//        var success = false
-//        let bundleID = appInfo.bundleID!
-//        let type = appInfo.type
-//        var h5String:String = ""
-//        do {
-//            let db = DBService.shared.db
-//            defer {
-//                db.close()
-//            }
-//            let list:[AppListTable]? = try db.getObjects(fromTable: AppListTable.tableName, where: AppListTable.Properties.bundleID == bundleID && AppListTable.Properties.type == type, orderBy: [AppListTable.Properties.updateDate.asOrder(by: .descending)])
-//            if let h5 = builderListItem(list: list) {
-//                h5String = h5
-//                success = true
-//            }
-//        } catch  {
-//            ParserTool.log(error)
-//        }
-//        if success {
-//            let detailsData = h5String.data(using: .utf8)
-//            let path = Config.htmlPath+appInfo.srcRoot!+appInfo.listPath!
-//            ParserTool.save(detailsData, path: path)
-//        }
-        
-        
-
         let bundleID = appInfo.bundleID!
         let type = appInfo.type
         do {
@@ -193,10 +169,10 @@ extension BuilderList{
             if let list = list {
                 builder(list: list)
             }else{
-                ProcessTask.log("list.html页面构建失败，没有查询到bundleID为：\(bundleID) 的数据")
+                log("list.html页面构建失败，没有查询到bundleID为：\(bundleID) 的数据")
             }
         } catch  {
-            ProcessTask.log(error)
+            log(error)
         }
     }
 

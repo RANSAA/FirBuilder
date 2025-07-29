@@ -128,18 +128,18 @@ extension DetatalsViewController{
 extension DetatalsViewController{
     
     func export(){
-        ProcessTask.log("将当前App导出到指定路径.....")
+        log("将当前App导出到指定路径.....")
 
         
-//        ProcessTask.log(self.pushItem ?? "nil")
-        ProcessTask.log(self.pushItem ?? "nil")
+        log(self.pushItem ?? "nil")
     
         let filePath = Config.appPath + "html/" + (self.pushItem.srcRoot ?? "") + (self.pushItem.appSavePath ?? "")
         
         let filename:String = (self.pushItem.name ?? "null") + "_v" + (self.pushItem.version ?? "null") + "." + (self.pushItem.appSavePath?.fileExtension ?? "")
         
-        ProcessTask.log("filePath:\(filePath)")
-        ProcessTask.log("outFileName:\(filename)")
+
+        log("filePath:\(filePath)")
+        log("outFileName:\(filename)")
         
         
         // 创建并配置 NSSavePanel
@@ -159,18 +159,18 @@ extension DetatalsViewController{
         if response == .OK, let url = savePanel.url {
             // 用户选择了保存路径，进行文件保存操作
             do {
-                ProcessTask.log(url.relativeString)
-                ProcessTask.log(url.relativePath)
+                log(url.relativeString)
+                log(url.relativePath)
                 if FileManager.default.fileExists(atPath: url.relativePath){
                     try FileManager.default.removeItem(atPath: url.relativePath)
                 }
                 try FileManager.default.copyItem(atPath: filePath, toPath: url.relativePath)
             } catch  {
-                ProcessTask.log("文件导出失败 - error:\(error)")
+                log("文件导出失败 - error:\(error)")
             }
         } else {
             // 用户点击了取消
-            ProcessTask.log("用户取消了保存操作")
+            log("用户取消了保存操作")
         }
         
         
@@ -184,6 +184,7 @@ extension DetatalsViewController{
 //                        try FileManager.default.copyItem(atPath: filePath, toPath: url.relativeString)
 //                    } catch  {
 //                        ProcessTask.log("文件导出失败 - error:\(error)")
+//                        log("文件导出失败 - error:\(error)")
 //                    }
 //                }
 //            }

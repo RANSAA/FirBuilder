@@ -46,7 +46,7 @@ class DBService: NSObject {
         do {
             try self.db.insert(objects: objects, intoTable: table)
         } catch  {
-            ParserTool.log("insert error:\(error)")
+            log("insert error:\(error)")
         }
     }
 
@@ -54,7 +54,7 @@ class DBService: NSObject {
         do {
             try self.db.insert(objects: objects, intoTable: table)
         } catch  {
-            ParserTool.log("insert error:\(error)")
+            log("insert error:\(error)")
         }
     }
 
@@ -87,9 +87,9 @@ extension DBService{
             }
             BuilderAppHome().builder()
             
-            ParserTool.log("App删除成功！")
+            log("App删除成功！")
         } catch  {
-            ParserTool.log(error)
+            log(error)
         }
     }
     
@@ -114,7 +114,7 @@ extension DBService{
             BuilderList().builder(appInfo)
             
         }catch{
-            ParserTool.log(error)
+            log(error)
         }
     }
     
@@ -138,7 +138,7 @@ extension DBService{
 
             BuilderAppHome().builder()
         }catch{
-            ParserTool.log(error)
+            log(error)
         }
     }
     

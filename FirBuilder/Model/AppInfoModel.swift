@@ -109,7 +109,7 @@ extension AppInfoModel{
         let signExpiration = signExpiration,
         let fileSize = fileSize
         else{
-            ProcessTask.log("AppInfoModel数据校验失败，中断解析任务。")
+            log("AppInfoModel数据校验失败，中断解析任务。")
             return false
         }
         
@@ -142,7 +142,7 @@ AppInfoModel:Start
             devices:\(String(describing: devices) )
 AppInfoModel:End
 """
-        ProcessTask.log(msg)
+        log(msg)
         
         return true
     }

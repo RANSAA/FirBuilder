@@ -73,7 +73,7 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         panel.beginSheetModal(for: self.view.window!) { (result) in
             if result == .OK{
                 let path = panel.url!.path
-                ProcessTask.log("file path:\(path)")
+                log("file path:\(path)")
                 if ParserTool.shared.parsing == false {
                     DispatchQueue.global().async {
                         ParserTool.shared.blockStart = {msg in
@@ -165,7 +165,7 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
             try task.run()
         } catch  {
             let msg = "直接部署到Netlify.command脚本执行失败 - error:\(error)"
-            ProcessTask.log(msg)
+            log(msg)
             ParserTool.shared.blockPrompt?(msg)
         }
     }

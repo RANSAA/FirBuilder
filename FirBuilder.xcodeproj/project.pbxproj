@@ -48,6 +48,7 @@
 		3FE153ED29266DA7007D738D /* ParserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153EC29266DA7007D738D /* ParserType.swift */; };
 		3FE153F029268974007D738D /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE153EF29268974007D738D /* AppInfoModel.swift */; };
 		3FE775B42CB507C70089B579 /* DecompileIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE775B32CB507C60089B579 /* DecompileIOS.swift */; };
+		3FE89F732E3898F100474CB1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE89F722E3898F100474CB1 /* Log.swift */; };
 		3FE9033827B0D036000BDEFE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9033727B0D036000BDEFE /* Data.swift */; };
 		3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */; };
 		3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC70CC279FCB5B00234A67 /* AppDelegate.swift */; };
@@ -105,6 +106,7 @@
 		3FE153EC29266DA7007D738D /* ParserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserType.swift; sourceTree = "<group>"; };
 		3FE153EF29268974007D738D /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		3FE775B32CB507C60089B579 /* DecompileIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecompileIOS.swift; sourceTree = "<group>"; };
+		3FE89F722E3898F100474CB1 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		3FE9033727B0D036000BDEFE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3FEC39652840E847009E8036 /* AppDelegate+Exit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Exit.swift"; sourceTree = "<group>"; };
 		3FEC70C9279FCB5B00234A67 /* FirBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 				3F0B91EA27BA4A230002BDEB /* DateFormatter.swift */,
 				3F13760527B279C000266468 /* FileHash.swift */,
 				3F27E4C62924D2970035DC53 /* ImageTool.swift */,
+				3FE89F722E3898F100474CB1 /* Log.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				3F27E4C22924BE3F0035DC53 /* main.swift in Sources */,
 				3FA2023328B9D08500DD6390 /* BuilderTemplateFile.swift in Sources */,
 				3FE153E529264FC1007D738D /* ParserTool.swift in Sources */,
+				3FE89F732E3898F100474CB1 /* Log.swift in Sources */,
 				3FEC70E7279FDA8400234A67 /* String.swift in Sources */,
 				3F5A814D2CB3C1E2008257AE /* ProcessTaskPlist.swift in Sources */,
 				3F7B990B2927882F005ABA5F /* AppHomeTable.swift in Sources */,

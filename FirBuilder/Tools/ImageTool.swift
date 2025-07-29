@@ -12,11 +12,11 @@ struct ImageTool {
     /** 从指定路径加载图片，失败返回一个默认NSImage */
     static func loadImageFrom(path:String, placeholder:NSImage = NSImage(imageLiteralResourceName: "AppIcon")) -> NSImage{
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            ParserTool.log("ImageTool:图片加载失败, path: \(path)")
+            log("ImageTool:图片加载失败, path: \(path)")
             return placeholder
         }
         guard let ciImage = CIImage(data: data) else {
-            ParserTool.log("ImageTool:图片加载失败, path: \(path)")
+            log("ImageTool:图片加载失败, path: \(path)")
             return placeholder
         }
         let rep = NSCIImageRep(ciImage: ciImage)
@@ -71,7 +71,7 @@ struct ImageTool {
 //        let status = FileManager.default.createFile(atPath: path, contents: pngData, attributes: nil)
         let status = ParserTool.save(pngData, path: path)
         let ss = status ? "保存成功" : "保存失败"
-        ParserTool.log("ImageTool:PNGRepresentation \(ss) path：\(path)")
+        log("ImageTool:PNGRepresentation \(ss) path：\(path)")
         return status
     }
     
@@ -85,7 +85,7 @@ struct ImageTool {
 //        let status = FileManager.default.createFile(atPath: path, contents: pngData, attributes: nil)
         let status = ParserTool.save(pngData, path: path)
         let ss = status ? "保存成功" : "保存失败"
-        ParserTool.log("ImageTool:JPGRepresentation \(ss) path：\(path)")
+        log("ImageTool:JPGRepresentation \(ss) path：\(path)")
         return status
     }
 }

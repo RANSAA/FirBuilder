@@ -31,7 +31,7 @@ class BuilderManifest{
                 Self.builder(item)
             }
         } catch {
-            ParserTool.log(error)
+            log(error)
         }
     }
 

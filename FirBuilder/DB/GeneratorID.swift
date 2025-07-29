@@ -55,7 +55,7 @@ extension GeneratorID{
                     bindIDSets.insert(item.stringValue)
                 }
             }else{
-                print("loadBindIDSets操作失败")
+                log("loadBindIDSets操作失败")
             }
         }
     }

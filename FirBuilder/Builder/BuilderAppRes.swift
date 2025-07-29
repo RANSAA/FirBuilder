@@ -66,11 +66,11 @@ struct BuilderAppRes {
             try db.insertOrReplace(objects: releseModel, intoTable: AppListTable.tableName)
             
         } catch  {
-            ParserTool.log("updateAppInfo error:\(error)")
+            log("updateAppInfo error:\(error)")
             ParserTool.shared.blockFail?("updateAppInfo error:\(error)")
             return
         }
-        ParserTool.log("数据库信息更新成功!")
+        log("数据库信息更新成功!")
         
         builderRes()
     }
@@ -80,7 +80,7 @@ struct BuilderAppRes {
         builderManifest()
         builderHTML()
         
-        ParserTool.log("HTML构建完成!")
+        log("HTML构建完成!")
         ParserTool.shared.blockSuccess?("App 解析完毕!")
     }
     
@@ -130,7 +130,6 @@ struct BuilderAppRes {
 
         BuilderAppHome().builder()
 
-        //注意这儿还有一个错误，重新生成H5后list.html只有一项数据了
         BuilderList().builderAll()
 
         BuilderDetails().builderAll()

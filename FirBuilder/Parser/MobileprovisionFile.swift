@@ -53,7 +53,7 @@ class MobileprovisionFile {
             let startInt = resultStr.findFirst("<?xml")
             let lastIndex = resultStr.findLast("</plist>")
             if  startInt == -1 || lastIndex == -1 {
-                ProcessTask.log("mobileprovision文件解析失败！")
+                log("mobileprovision文件解析失败！")
                 return nil
             }else{
                 let start = resultStr.index(resultStr.startIndex, offsetBy: startInt)
@@ -62,7 +62,7 @@ class MobileprovisionFile {
                 return str
             }
         }else{
-            ProcessTask.log("mobileprovision文件解析失败！")
+            log("mobileprovision文件解析失败！")
             return nil
         }
     }
@@ -74,14 +74,13 @@ class MobileprovisionFile {
         if let str = self.readMobileprovisionFromFile(path: path) {
             try? str.write(toFile: toPlistPath, atomically: true, encoding: .utf8)
             if let dic = NSDictionary(contentsOfFile: toPlistPath) {
-                
-                ProcessTask.log("embedded filePath:\(path)")
-                ProcessTask.log("embedded toPlistPath:\(toPlistPath)")
-                ProcessTask.log("embedded:\n\(dic)\nembedded:")
+                log("embedded filePath:\(path)")
+                log("embedded toPlistPath:\(toPlistPath)")
+                log("embedded:\n\(dic)\nembedded:")
                 
                 if let localProvision = dic["LocalProvision"] as? Bool  {
                     self.localProvision = localProvision
-                    ParserTool.log("本地签名，不可上传")
+                    log("本地签名，不可上传")
                 }
                 if let provisionsAllDevices = dic["ProvisionsAllDevices"] as? Bool{ //Enterprise
                     self.provisionsAllDevices = provisionsAllDevices
@@ -106,11 +105,11 @@ class MobileprovisionFile {
                 //处理，并判断类型
             }else{
                 self.hasValid = false
-                ProcessTask.log("不是标准的mobileprovision文件")
+                log("不是标准的mobileprovision文件")
             }
         }else{
             self.hasValid = false
-            ProcessTask.log("mobileprovision文件不存在")
+            log("mobileprovision文件不存在")
         }
     }
     

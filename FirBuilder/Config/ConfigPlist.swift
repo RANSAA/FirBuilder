@@ -11,7 +11,7 @@ import KakaJSON
 
 class ConfigPlist:NSObject{
     var url:String = "https://fir-im.coding.net/p/fir.im/d/AppStore/git/raw/master/"
-    var isExitClean:Bool = false
+    var isExitClean:Bool = true
 
     var mark:[String:String] = [
         "url":"",

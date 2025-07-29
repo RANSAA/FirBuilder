@@ -18,7 +18,7 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         super.viewDidLoad()
         // Do view setup here.
         self.title = "列表-"+pushItem.name!
-        print("ListViewController")
+        log("ListViewController")
 
         setupUI()
         loadData()
@@ -160,7 +160,7 @@ extension ListViewController
 {
 
     func listCell(clickButton btn: NSButton, btnIndex: Int, cellRow: Int) {
-        print("click... index:\(btnIndex)   row:\(cellRow)")
+        log("click... index:\(btnIndex)   row:\(cellRow)")
         let model:AppListTable = self.dataAry[cellRow]
         let alert = NSAlert()
         alert.alertStyle = .critical
@@ -192,7 +192,6 @@ extension ListViewController
                 db.close()
             }
             let update = Date()
-//            try db.update(table: AppListTable.tableName, on: AppListTable.Properties.updateDate, with: [update], where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.updateDate == model.updateDate)
             try db.update(table: AppListTable.tableName, on: AppListTable.Properties.updateDate, with: [update], where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.createDate == model.createDate)
 
             loadData()

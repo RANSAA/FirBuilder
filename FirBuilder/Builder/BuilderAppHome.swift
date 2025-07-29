@@ -136,7 +136,7 @@ extension BuilderAppHome{
             builderIosList(list: list.filter({$0.type == .ios}) )
             builderAndroidList(list: list.filter({$0.type == .android}) )
         } catch  {
-            ParserTool.log(error)
+            log(error)
         }
     }
     

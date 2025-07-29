@@ -18,34 +18,13 @@ class ProcessTask{
     
     //解压目录
     private(set) var unzipPath:String
-    //日志文件
-    private(set) var logPath:String
-    //执行时间字符串
-    private let dayStr:String
-    
-    private var logFileHandle:FileHandle?
-    
+
     private init(){
         //确保ProcessTaskConfig初始化配置一定运行过
         //重置一下ProcessTaskConfig的环境
         ProcessTaskConfig.shared.resetConfig()
-        print(ProcessTaskConfig.shared)
         
-        let dateFormat:DateFormatter = DateFormatter()
-        dateFormat.dateFormat = "yyyyMMdd-HHmmss"
-        dayStr = dateFormat.string(from: Date())
-
-        unzipPath = ProcessTaskConfig.shared.taskTmpPath +  "unzip/" //解压目录
-        do {
-            try FileManager.default.createDirectory(atPath: unzipPath, withIntermediateDirectories: true)
-        } catch  {
-            print(error)
-        }
-        logPath = ProcessTaskConfig.shared.taskLogPath + dayStr + ".txt"
-        if !FileManager.default.fileExists(atPath: logPath){
-            FileManager.default.createFile(atPath: logPath, contents: nil)
-        }
-        logFileHandle = FileHandle(forWritingAtPath: logPath)
+        unzipPath = ProcessTaskConfig.shared.unzipPath  //解压目录
     }
     
     
@@ -53,18 +32,6 @@ class ProcessTask{
     private func reset(){
         //重置一下ProcessTaskConfig的环境
         ProcessTaskConfig.shared.resetConfig()
-        
-        unzipPath = ProcessTaskConfig.shared.taskTmpPath +  "unzip/" //解压目录
-        do {
-            try FileManager.default.createDirectory(atPath: unzipPath, withIntermediateDirectories: true)
-        } catch  {
-            print(error)
-        }
-        logPath = ProcessTaskConfig.shared.taskLogPath + dayStr + ".txt"
-        if !FileManager.default.fileExists(atPath: logPath){
-            FileManager.default.createFile(atPath: logPath, contents: nil)
-        }
-        logFileHandle = FileHandle(forWritingAtPath: logPath)
     }
     
     
@@ -95,7 +62,7 @@ extension ProcessTask{
         let apktoolPath = config.apktoolPath
         let arguments = ["-c","java -jar \(apktoolPath) d \"\(filePath)\" -s -f -o \(unzipPath)"]
         process.arguments = arguments
-        ProcessTask.log("processApktool -> arguments:\(arguments)")
+        log("processApktool -> arguments:\(arguments)")
         return process
     }
 }
@@ -115,7 +82,7 @@ extension ProcessTask{
         process.executableURL = url
         let arguments = ["-i",filePath,"-o",ouputPath]
         process.arguments = arguments
-        ProcessTask.log("processAcextract -> arguments:\(arguments)")
+        log("processAcextract -> arguments:\(arguments)")
         return process
     }
 }
@@ -130,13 +97,13 @@ extension ProcessTask{
     func processSyncNetlify() -> Process{
         //bundlePath
         let bundlePath = Bundle.main.bundlePath
-        ProcessTask.log("bundlePath:"+bundlePath)
+        log("bundlePath:"+bundlePath)
         //FirBuilder所在的目录
         let FirBuilderPath = Bundle.main.bundleURL.deletingLastPathComponent().relativePath
-        ProcessTask.log("FirBuilderPath:"+FirBuilderPath)
+        log("FirBuilderPath:"+FirBuilderPath)
         //Site-AppStore所在的目录（FirBuilder工作目录的上一级）
         let SiteAppStorePath = (FirBuilderPath as NSString).deletingLastPathComponent
-        ProcessTask.log("SiteAppStorePath:"+SiteAppStorePath)
+        log("SiteAppStorePath:"+SiteAppStorePath)
         
         /**
          部署到Netlify-Mac.command脚本的实际路径地址
@@ -155,7 +122,7 @@ extension ProcessTask{
         let process = process()
         let arguments = ["-c","open \(netlifyPath)"]
         process.arguments = arguments
-        ProcessTask.log("processSyncNetlify -> arguments:\(arguments)")
+        log("processSyncNetlify -> arguments:\(arguments)")
         if !FileManager.default.fileExists(atPath: netlifyPath){
             let msg = "部署失败！\n文件不存在:\(netlifyPath)"
             ViewController.openPromptAlert(msg: msg)
@@ -174,48 +141,3 @@ extension ProcessTask{
 
 
 
-//MARK: - Clear
-extension ProcessTask{
-    
-    /** 只清除Process产生的垃圾文件，一般只在App添加成功之后清除 */
-    func clearTmp(){
-        try? FileManager.default.removeItem(atPath: unzipPath)
-
-        let user = ProcessTaskPlist.shared.environment["USER"] ?? "kimi"
-        let apktoolResourcePath = "/Users/\(user)/Library/apktool/framework"
-        try? FileManager.default.removeItem(atPath: apktoolResourcePath)
-    }
-    
-    /** 清除程序上一次运行所产生的日志文件,通常在应用启动时清除*/
-    func clearLog(){
-        try? FileManager.default.removeItem(atPath: ProcessTaskConfig.shared.taskLogPath)
-        try? FileManager.default.removeItem(atPath: ProcessTaskConfig.shared.taskTmpPath)
-    }
-}
-
-
-//MARK: - 日志输出
-extension ProcessTask{
-    
-    static func log(_ msg:String...){
-        let info = msg.joined(separator: " ")
-        print(info)
-        let handle = ProcessTask.shared.logFileHandle
-        let data = info.data(using: .utf8)!
-        handle?.seekToEndOfFile()
-        handle?.write(data)
-        handle?.seekToEndOfFile()
-        handle?.write("\n".data(using: .utf8)!)
-    }
-    
-    static func log(_ msg:[Any]){
-        let info = "\(msg)"
-        log(info)
-    }
-    
-    static func log(_ msg:Any){
-        let info = "\(msg)"
-        log(info)
-    }
-    
-}

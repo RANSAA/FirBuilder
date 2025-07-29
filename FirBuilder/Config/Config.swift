@@ -11,8 +11,7 @@ struct Config {
     //测试目录
     static var appPath:String = getAppPath()
 
-//    static let configPath = appPath + "config/FirBuilderConfig.plist"
-//    static let dbPath = appPath + "config/FirBuilderData.db"
+
     static let configPath = appPath + "config/FirBuilder.plist"
     static let dbPath = appPath + "config/FirBuilder.db"
 
@@ -23,8 +22,6 @@ struct Config {
 
 
     static var deleteUnzipDir = true  //标记在解析成功之后是否删除Unzip目录
-    static let unzipPath = appPath+".unzip/"+random+"/"   //app资源解压路径
-//    static let unzipPath = appPath+".unzip/"
     static let htmlPath = appPath + "html/"   //生成的静态HTML资源路径
     static let htmlSyncPath = appPath + "html-sync/" //HTML 同步目录
     static var isSync = false // 是否生成同步目录
@@ -46,7 +43,6 @@ struct Config {
             self.serverRoot = serverRoot
         }
         self.isSync = isSync
-        ParserTool.resetLogPath()
         environment()
     }
 
@@ -61,15 +57,23 @@ struct Config {
         //初始化数据库存储信息
         DBService.shared.setup()
 
-
-        ParserTool.log("Config begin")
-        ParserTool.log("buildPath   :"+appPath)
-        ParserTool.log("htmlPath    :"+htmlPath)
-        ParserTool.log("htmlSyncPath:"+htmlSyncPath)
-        ParserTool.log("unzipPath   :\(unzipPath)")
-        ParserTool.log("configPath  :\(configPath)")
-        ParserTool.log("serverRoot  :"+serverRoot)
-        ParserTool.log("Config end")
+        
+        
+        
+        
+        log("\nProcessTaskConfig Began:")
+        log(ProcessTaskConfig.shared)
+        log("ProcessTaskConfig End\n")
+        
+        
+        log("Config begin")
+        log("buildPath   :"+appPath)
+        log("htmlPath    :"+htmlPath)
+        log("htmlSyncPath:"+htmlSyncPath)
+        log("configPath  :\(configPath)")
+        log("unzipPath   :\(ProcessTaskConfig.shared.unzipPath)")
+        log("serverRoot  :"+serverRoot)
+        log("Config end\n")
     }
 
 }
@@ -107,7 +111,7 @@ extension Config{
             path += "/"
         }
         path += "FirBuilder/"
-        print("AppPath:\(path)")
+        log("ApplicatonPath:\(path)")
         return path
     }
 
@@ -121,7 +125,7 @@ extension Config{
         ConfigPlist.shared.url = serverRoot;
         ConfigPlist.shared.save()
         Config.serverRoot = serverRoot
-        ParserTool.log("serverRoot:\(serverRoot)")
+        log("serverRoot:\(serverRoot)")
     }
 }
 

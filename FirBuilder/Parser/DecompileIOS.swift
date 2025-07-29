@@ -45,7 +45,7 @@ class DecompileIOS{
                 let subPaths = try FileManager.default.contentsOfDirectory(atPath: payloadPath).filter({
                     $0.fileExtension.lowercased() == "app" ? true : false
                 })
-                ProcessTask.log(subPaths)
+                log(subPaths)
                 if subPaths.count == 0 {
                     let msg = "解析错误:\(payloadPath)中不存在.app"
                     self.blockFail(msg)
@@ -53,7 +53,7 @@ class DecompileIOS{
                 }
                 let appPath = payloadPath+subPaths.first!+"/"
                 let msg = "DecompileIOS:Unzip iOS App Path:\(appPath)"
-                ProcessTask.log(msg)
+                log(msg)
                 //开始解析所有数据
                 self.parserFiles(appPath: appPath)
             } catch  {
@@ -76,29 +76,11 @@ class DecompileIOS{
     func done(){
         if isInfoPlist && isMobileProvision {
             let msg = "App信息全部解析成功！"
-            ProcessTask.log(msg)
+            log(msg)
         }else{
             let msg = "App信息解析失败，整个添加操作失败！"
-            ProcessTask.log(msg)
+            log(msg)
         }
-        
-//        let msg = """
-//App解析信息:
-//        name:\(self.appInfoModel.name ?? "解析失败")
-//        bundleID:\(self.appInfoModel.bundleID ?? "解析失败")
-//        version:\(self.appInfoModel.version ?? "解析失败")
-//        build:\(self.appInfoModel.build ?? "解析失败")
-//        minSdkVersion:\(self.appInfoModel.minSdkVersion ?? "解析失败")
-//        targetSdkVersion:\(self.appInfoModel.targetSdkVersion ?? "解析失败")
-//        originalIconPath:\(self.appInfoModel.originalIconPath ?? "解析失败")
-//        originalAppPath:\(self.appInfoModel.originalAppPath ?? "解析失败")
-//        type:\(self.appInfoModel.type)
-//        signType:\(self.appInfoModel.signType)
-//        signExpiration:\(self.appInfoModel.signExpiration ?? "解析失败")
-//        fileSize:\(self.appInfoModel.fileSize ?? "解析失败")
-//"""
-//        ProcessTask.log(msg)
-    
     }
     
     /**
@@ -119,14 +101,14 @@ extension DecompileIOS{
     
     //操作失败 - 并且执行该方法时，会中断后面的反编译解析任务
     private func blockFail(_ msg:String){
-        ProcessTask.log(msg)
+        log(msg)
         //change
         ParserTool.shared.blockFail?(msg)
     }
     
     //需要给用户提示的回调操作
     private func blockPrompt(_ msg:String){
-        ProcessTask.log(msg)
+        log(msg)
         //change
         ParserTool.shared.blockPrompt?(msg)
     }
@@ -158,7 +140,7 @@ extension DecompileIOS{
         }
         //解析info.plist文件
         let obj:IPAInfoPlist = KakaJSON.model(from: plist, type: IPAInfoPlist.self) as! IPAInfoPlist
-        ProcessTask.log(obj)
+        log(obj)
         guard let bundelName = obj.bundleName,
               let bundleID = obj.bundleID,
               let version = obj.version,
@@ -208,7 +190,7 @@ extension DecompileIOS{
             name = name.replacingOccurrences(of: ".png", with: "")
             return name
         })
-        ProcessTask.log(iconNames)
+        log(iconNames)
         //装载所有可能出现的文件名称数组
         var newIconName:[String] = []
         for name in iconNames {
@@ -262,10 +244,10 @@ extension DecompileIOS{
         var iconFind = false //是否找到有效的图标文件
         //查找符合条件的最大icon图标
         let findMaxIconPath = {
-            ProcessTask.log("App Icon可能出现的路径 Began：")
+            log("App Icon可能出现的路径 Began：")
             for name in newIconName{
                 let iconPath = appPath+name
-                ProcessTask.log(iconPath)
+                log(iconPath)
                 if FileManager.default.fileExists(atPath: iconPath){
                     iconFind = true
                     let size = FileManager.default.sizeForLocalFilePath(filePath: iconPath)
@@ -275,14 +257,14 @@ extension DecompileIOS{
                     }
                 }
             }
-            ProcessTask.log("App Icon可能出现的路径 End")
+            log("App Icon可能出现的路径 End")
         }
         
         findMaxIconPath()
         //没有找到icon图标，现在尝试解压Assets.car文件，然后再重试
         if !iconFind {
             //解析Assets.car到xxx.app主目录
-            ProcessTask.log("----------------- 尝试解析Assets.car文件 Began -----------------")
+            log("----------------- 尝试解析Assets.car文件 Began -----------------")
             let assetsPath = appPath + "Assets.car"
             let task = ProcessTask.shared.processAcextract(filePath: assetsPath, ouputPath: appPath)
             do {
@@ -290,9 +272,9 @@ extension DecompileIOS{
                 task.waitUntilExit()
             } catch  {
                 let msg = "Assets.car资源解析失败 -> error:\(error)"
-                ProcessTask.log(msg)
+                log(msg)
             }
-            ProcessTask.log("----------------- 尝试解析Assets.car文件 End -----------------")
+            log("----------------- 尝试解析Assets.car文件 End -----------------")
             //再次查找
             findMaxIconPath()
         }
@@ -301,7 +283,7 @@ extension DecompileIOS{
         if iconFind, let iconRealPath {
             self.appInfoModel.originalIconPath = iconRealPath
             let msg = "originalIconPath:\(iconRealPath)"
-            ProcessTask.log(msg)
+            log(msg)
         }else{//没有找到有效图标
             let msg = """
             App Icon 图标解析错误

@@ -9,9 +9,9 @@ import Foundation
 
 
 
-//print("argc:\(CommandLine.argc)")
-//print("arguments:\(CommandLine.arguments)")
-//print("unsafeArgv:\(CommandLine.unsafeArgv)")
+//log("argc:\(CommandLine.argc)")
+//log("arguments:\(CommandLine.arguments)")
+//log("unsafeArgv:\(CommandLine.unsafeArgv)")
 
 
 
@@ -33,7 +33,7 @@ if arguments.contains("-h") || arguments.contains("-help"){
 -d                 :删除指定BundleID对应的App，示例：-d=com.package.name
 -ios,-android      :删除应用时指定App的类型，如果没有该参数表示删除所有符合-d的应用，只有指定-d时该参数才有效。
 """
-    print(msg)
+    log(msg)
     exit(0)
 }
 
@@ -62,43 +62,43 @@ for item in arguments {
     switch item {
     case "-html":
         buildAllHTML = true
-        print("cli- 构建所有的HTML页面")
+        log("cli- 构建所有的HTML页面")
     case "-sync":
         isSync = true
-        print("cli- 生成同步目录")
+        log("cli- 生成同步目录")
     case let item where item.hasPrefix("-buildPath="):
         let subStr = block(item, "-buildPath=",true)
         do {
             try FileManager.default.createDirectory(atPath: subStr, withIntermediateDirectories: true, attributes: nil)
             buildPath = subStr
         } catch  {
-            print("cli- \(error)")
+            log("cli- \(error)")
         }
-        print("cli- 自定义解析资源输出目录:\(subStr)")
+        log("cli- 自定义解析资源输出目录:\(subStr)")
         
         
     case let item where item.hasPrefix("-serverRoot="):
         let subStr = block(item, "-serverRoot=",true)
         serverRoot = subStr
-        print("cli- 自定义serverRoot:\(subStr)")
+        log("cli- 自定义serverRoot:\(subStr)")
         
         
     case let item where item.hasPrefix("-inputPath="):
         let subStr = block(item, "-inputPath=",false)
         inputPath = subStr
-        print("cli- 解析文件路径:\(inputPath!)")
+        log("cli- 解析文件路径:\(inputPath!)")
         
     case let item where item.hasPrefix("-d="):
         let subStr = block(item, "-d=",false)
         delBundleID = subStr
-        print("cli- 删除BundleID为:\(delBundleID!)的应用")
+        log("cli- 删除BundleID为:\(delBundleID!)的应用")
     case let item where item.lowercased() == "-android":
         delType = .android
-        print("cli- 删除应用类型:Android")
+        log("cli- 删除应用类型:Android")
         
     case let item where item.lowercased() == "-ios":
         delType = .ios
-        print("cli- 删除应用类型:iOS")
+        log("cli- 删除应用类型:iOS")
     default:
         break
     }
@@ -126,43 +126,44 @@ if arguments.contains("-cli") {
 
 //MARK: 窗口模式启动 或者 Command模式启动
 if winMode {
-    ProcessTask.log("使用窗口模式启动程序!")
+    log("使用窗口模式启动程序!")
     _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 } else{
-    ProcessTask.log("使用Command模式启动程序!")
+    log("使用Command模式启动程序!")
     let semaphore = DispatchSemaphore(value: 0)
 
     //开始解析
     if let path = inputPath {
         ParserTool.shared.blockStart = {msg in
             ParserTool.shared.parsing = true
-            ProcessTask.log(msg)
+            log(msg)
+            log(msg)
         }
         ParserTool.shared.blockFail = { msg in
             ParserTool.shared.parsing = false
-            ProcessTask.log(msg)
-            ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
-            ProcessTask.log("CLI-ParserTool Parser Fail.")
+            log(msg)
+            log("CLI-ParserTool Parser ID:\(Config.random)")
+            log("CLI-ParserTool Parser Fail.")
             semaphore.signal()
         }
         ParserTool.shared.blockSuccess = {msg in
             ParserTool.shared.parsing = false
-            ProcessTask.log(msg)
-            ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
-            ProcessTask.log("CLI-ParserTool Parser Success.")
+            log(msg)
+            log("CLI-ParserTool Parser ID:\(Config.random)")
+            log("CLI-ParserTool Parser Success.")
             semaphore.signal()
         }
         ParserTool.shared.parserStart(path: path)
         semaphore.wait()
     }else if buildAllHTML == true { //重新构建所有HTML页面
         BuilderAppRes.rebuilderAllHTML()
-        ProcessTask.log("H5重新生成完成")
-        ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
-        ProcessTask.log("CLI-ParserTool Parser Success.")
+        log("H5重新生成完成")
+        log("CLI-ParserTool Parser ID:\(Config.random)")
+        log("CLI-ParserTool Parser Success.")
     }else if let bundleID = delBundleID {
         DBService.shared.deleteAppWith(bundleID: bundleID, type: delType)
-        ProcessTask.log("CLI-ParserTool Parser ID:\(Config.random)")
-        ProcessTask.log("CLI-ParserTool Parser Success.")
+        log("CLI-ParserTool Parser ID:\(Config.random)")
+        log("CLI-ParserTool Parser Success.")
     }
 }
 

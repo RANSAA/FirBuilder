@@ -18,8 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Insert code here to initialize your application
 
-        //配置
-//        Config.setup()
         
         // Add coder
 //        let WebPCoder = SDImageWebPCoder.shared
@@ -29,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.addQuitActions()
         
         
-        testShellTask()
+//        testShellTask()
         
     }
 
@@ -114,7 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        task.executableURL = url
 //        task.arguments = arguments
 //        task.terminationHandler = { proce in              // 执行结束的闭包(回调)
-//            ParserTool.log("apktool task执行完毕 proce:\(proce)")
+//            log("apktool task执行完毕 proce:\(proce)")
 //        }
 //        print(task.environment)
 //        print("Config.apktool:\(Config.apktool)")
