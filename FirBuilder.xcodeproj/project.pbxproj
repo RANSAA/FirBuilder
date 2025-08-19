@@ -20,6 +20,8 @@
 		3F27E4C72924D2970035DC53 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27E4C62924D2970035DC53 /* ImageTool.swift */; };
 		3F27E4D82924F0F20035DC53 /* libs in Resources */ = {isa = PBXBuildFile; fileRef = 3F27E4D72924F0F20035DC53 /* libs */; };
 		3F31AFF629ACE39B0055624A /* ConfigPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AFF529ACE39B0055624A /* ConfigPlist.swift */; };
+		3F4AE8EA2E546C1500B2742C /* NSView+EditableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AE8E92E546C1500B2742C /* NSView+EditableView.swift */; };
+		3F4AE8EC2E548DC200B2742C /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AE8EB2E548DC200B2742C /* NotificationName.swift */; };
 		3F52246A2CB2CAB9000FD031 /* ProcessTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5224692CB2CAB9000FD031 /* ProcessTask.swift */; };
 		3F5A814D2CB3C1E2008257AE /* ProcessTaskPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5A814C2CB3C1E2008257AE /* ProcessTaskPlist.swift */; };
 		3F5A814F2CB3C97B008257AE /* ProcessTaskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5A814E2CB3C97B008257AE /* ProcessTaskConfig.swift */; };
@@ -39,6 +41,8 @@
 		3F8A2EB227BB87BB003EFFB4 /* DetatalsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A2EB027BB87BB003EFFB4 /* DetatalsViewController.xib */; };
 		3F8A2EB527BB905E003EFFB4 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A2EB427BB905E003EFFB4 /* ListCell.swift */; };
 		3F8A2EBF27BB955E003EFFB4 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A2EBE27BB955E003EFFB4 /* ListCell.xib */; };
+		3F9322C62E5353BE00794FA9 /* SmartTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9322C52E5353BE00794FA9 /* SmartTextView.swift */; };
+		3F9322C82E53850E00794FA9 /* NSViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9322C72E53850E00794FA9 /* NSViewController+Alert.swift */; };
 		3F9E1B8027B004EC00A99391 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9E1B7F27B004EC00A99391 /* AddViewController.swift */; };
 		3FA2023328B9D08500DD6390 /* BuilderTemplateFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA2023228B9D08500DD6390 /* BuilderTemplateFile.swift */; };
 		3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */; };
@@ -78,6 +82,8 @@
 		3F27E4C62924D2970035DC53 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
 		3F27E4D72924F0F20035DC53 /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libs; sourceTree = "<group>"; };
 		3F31AFF529ACE39B0055624A /* ConfigPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPlist.swift; sourceTree = "<group>"; };
+		3F4AE8E92E546C1500B2742C /* NSView+EditableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+EditableView.swift"; sourceTree = "<group>"; };
+		3F4AE8EB2E548DC200B2742C /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		3F5224692CB2CAB9000FD031 /* ProcessTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTask.swift; sourceTree = "<group>"; };
 		3F5A814C2CB3C1E2008257AE /* ProcessTaskPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTaskPlist.swift; sourceTree = "<group>"; };
 		3F5A814E2CB3C97B008257AE /* ProcessTaskConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTaskConfig.swift; sourceTree = "<group>"; };
@@ -97,6 +103,8 @@
 		3F8A2EB027BB87BB003EFFB4 /* DetatalsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetatalsViewController.xib; sourceTree = "<group>"; };
 		3F8A2EB427BB905E003EFFB4 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		3F8A2EBE27BB955E003EFFB4 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
+		3F9322C52E5353BE00794FA9 /* SmartTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTextView.swift; sourceTree = "<group>"; };
+		3F9322C72E53850E00794FA9 /* NSViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Alert.swift"; sourceTree = "<group>"; };
 		3F9E1B7F27B004EC00A99391 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		3FA2023228B9D08500DD6390 /* BuilderTemplateFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuilderTemplateFile.swift; sourceTree = "<group>"; };
 		3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletaButton.swift; sourceTree = "<group>"; };
@@ -169,6 +177,7 @@
 				3F13760527B279C000266468 /* FileHash.swift */,
 				3F27E4C62924D2970035DC53 /* ImageTool.swift */,
 				3FE89F722E3898F100474CB1 /* Log.swift */,
+				3F4AE8EB2E548DC200B2742C /* NotificationName.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -184,6 +193,7 @@
 		3F20FB3A27AFDE9600382D08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3F9322C72E53850E00794FA9 /* NSViewController+Alert.swift */,
 				3FEC70CE279FCB5B00234A67 /* ViewController.swift */,
 				3F8A2EAA27BB7FBE003EFFB4 /* ListViewController.swift */,
 				3F8A2EAF27BB87BB003EFFB4 /* DetatalsViewController.swift */,
@@ -213,6 +223,8 @@
 				3F8A2EB427BB905E003EFFB4 /* ListCell.swift */,
 				3F8A2EBE27BB955E003EFFB4 /* ListCell.xib */,
 				3FA8A5A327BC8F32004B3E9D /* DeletaButton.swift */,
+				3F9322C52E5353BE00794FA9 /* SmartTextView.swift */,
+				3F4AE8E92E546C1500B2742C /* NSView+EditableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -454,6 +466,7 @@
 				3F8A2EA627BB3179003EFFB4 /* HomeImgItem.swift in Sources */,
 				3F7B9908292777B6005ABA5F /* BuilderAppRes.swift in Sources */,
 				3FEC70CF279FCB5B00234A67 /* ViewController.swift in Sources */,
+				3F9322C62E5353BE00794FA9 /* SmartTextView.swift in Sources */,
 				3F7B990E29278BE4005ABA5F /* AppListTable.swift in Sources */,
 				3F15415727BBCF7D005F9A99 /* MacClickView.m in Sources */,
 				3FEC70CD279FCB5B00234A67 /* AppDelegate.swift in Sources */,
@@ -469,9 +482,11 @@
 				3FE775B42CB507C70089B579 /* DecompileIOS.swift in Sources */,
 				3F15415627BBCF7D005F9A99 /* MacProgressHUD.m in Sources */,
 				3F27E4C22924BE3F0035DC53 /* main.swift in Sources */,
+				3F4AE8EC2E548DC200B2742C /* NotificationName.swift in Sources */,
 				3FA2023328B9D08500DD6390 /* BuilderTemplateFile.swift in Sources */,
 				3FE153E529264FC1007D738D /* ParserTool.swift in Sources */,
 				3FE89F732E3898F100474CB1 /* Log.swift in Sources */,
+				3F9322C82E53850E00794FA9 /* NSViewController+Alert.swift in Sources */,
 				3FEC70E7279FDA8400234A67 /* String.swift in Sources */,
 				3F5A814D2CB3C1E2008257AE /* ProcessTaskPlist.swift in Sources */,
 				3F7B990B2927882F005ABA5F /* AppHomeTable.swift in Sources */,
@@ -485,6 +500,7 @@
 				3F31AFF629ACE39B0055624A /* ConfigPlist.swift in Sources */,
 				3FB8D46C28C23F200068B20A /* KakaJSON.swift in Sources */,
 				3FA8A5A427BC8F32004B3E9D /* DeletaButton.swift in Sources */,
+				3F4AE8EA2E546C1500B2742C /* NSView+EditableView.swift in Sources */,
 				3F0B91F127BA7F140002BDEB /* BuilderManifest.swift in Sources */,
 				3F0B91EB27BA4A230002BDEB /* DateFormatter.swift in Sources */,
 				3FEC39662840E847009E8036 /* AppDelegate+Exit.swift in Sources */,

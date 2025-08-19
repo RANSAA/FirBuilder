@@ -16,8 +16,6 @@ final class AppListTable:TableCodable,Convertible{
     static let tableName = "AppListTable" //对应的表名
 
     var id:Int? = nil
-    var bindID: String? = nil
-    var isBind: Bool = false
     
     var type:ParserType = .ios
     var name:String? = nil
@@ -53,12 +51,16 @@ final class AppListTable:TableCodable,Convertible{
     var createDate:Date = Date()
     var updateDate:Date = Date()
     
+    
+    //用户附加的提示数据，用于标注当前App Store信息
+    var userMark:String = ""
+    
+    
     enum CodingKeys:String, CodingTableKey {
         typealias Root = AppListTable
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         
         case id
-        case bindID
         
         case type
         case name
@@ -88,6 +90,8 @@ final class AppListTable:TableCodable,Convertible{
 
         case createDate
         case updateDate
+        
+        case userMark
         
         static var columnConstraintBindings: [CodingKeys: ColumnConstraintBinding]? {
             let bindings = [

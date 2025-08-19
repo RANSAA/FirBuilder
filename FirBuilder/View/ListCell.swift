@@ -11,7 +11,8 @@ import Cocoa
 @objc protocol ListCellDelegate {
     @objc optional func listCell(clickButton btn:NSButton, btnIndex:Int, cellRow:Int)
 }
-
+//NSTableRowView
+//NSTableCellView
 class ListCell: NSTableCellView {
 
     @IBOutlet var labName: NSTextField!
@@ -35,8 +36,6 @@ class ListCell: NSTableCellView {
         super.draw(dirtyRect)
 
         // Drawing code here.
-
-
     }
 
 
@@ -44,14 +43,15 @@ class ListCell: NSTableCellView {
         super.awakeFromNib()
         btnDelete.title = "删除"
         btnTop.title = "置顶"
-//        let cor = NSColor(calibratedRed: 83/255.0, green: 179/255.0, blue: 168/255.0, alpha: 1.0)
 
         btnTop.target = self
         btnTop.action = #selector(clickTap)
         btnDelete.target = self
         btnDelete.action = #selector(clickDelete)
-
-
+        
+        self.wantsLayer = true
+        self.window?.backgroundColor = NSColor.red
+        
     }
 
     @objc func clickTap(){

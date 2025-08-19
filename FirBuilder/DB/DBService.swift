@@ -9,28 +9,41 @@ import Cocoa
 import WCDBSwift
 import KakaJSON
 
-class DBService: NSObject {
+final class DBService: NSObject {
     public let db:Database
 
     public static let shared = DBService()
 
     required override init() {
         db = Database(withPath:Config.dbPath)
+        super.init()
+        self.setup()
     }
 
-    func setup(){
-        if (try? db.isTableExists(GeneratorIDTable.tableName)) == false {
-            try? db.create(table: GeneratorIDTable.tableName, of: GeneratorIDTable.self)
-        }
+    //初始化表数据
+    private func setup(){
+        /**
+         注意：现在不校验isTableExists了，比如说在TableCodable中修改了表属性后，
+         如果验证了isTableExists那么表属性不会修改，db.create方法会创建更新表数据
+         */
         
-        if (try? db.isTableExists(AppHomeTable.tableName)) == false {
-            try? db.create(table: AppHomeTable.tableName, of: AppHomeTable.self)
-        }
+//        if (try? db.isTableExists(GeneratorIDTable.tableName)) == false {
+//            try? db.create(table: GeneratorIDTable.tableName, of: GeneratorIDTable.self)
+//        }
+//        if (try? db.isTableExists(AppHomeTable.tableName)) == false {
+//            try? db.create(table: AppHomeTable.tableName, of: AppHomeTable.self)
+//        }
+//        if (try? db.isTableExists(AppListTable.tableName)) == false {
+//            try? db.create(table: AppListTable.tableName, of: AppListTable.self)
+//        }
         
-        if (try? db.isTableExists(AppListTable.tableName)) == false {
-            try? db.create(table: AppListTable.tableName, of: AppListTable.self)
-        }
         
+        try? db.create(table: GeneratorIDTable.tableName, of: GeneratorIDTable.self)
+        try? db.create(table: AppHomeTable.tableName, of: AppHomeTable.self)
+        try? db.create(table: AppListTable.tableName, of: AppListTable.self)
+        
+        
+        //默认初始化标后关闭数据库，其它的数据库操作会自动检测数据库是否开启，如果没打开，将会自动打开
         close()
     }
 
@@ -86,7 +99,6 @@ extension DBService{
                 ParserTool.delete(atPath: delPath)
             }
             BuilderAppHome().builder()
-            
             log("App删除成功！")
         } catch  {
             log(error)

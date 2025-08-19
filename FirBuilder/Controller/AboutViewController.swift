@@ -86,16 +86,8 @@ extension AboutViewController{
         return vc
     }
 
-    func push(){
-        self.view.frame = lastVC.view.frame
-        NSApplication.shared.keyWindow?.contentViewController = self
-//        lastVC.presentAsModalWindow(self)
-//        lastVC.presentAsSheet(self)
-    }
-
     func goBack(){
-        lastVC.view.frame = self.view.frame
-        NSApplication.shared.keyWindow?.contentViewController = lastVC
+        dismissFromKeyWindow()
     }
 
 }

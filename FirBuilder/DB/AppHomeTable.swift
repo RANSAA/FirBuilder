@@ -16,8 +16,6 @@ import KakaJSON
     static let tableName = "AppHomeTable" //对应的表名
 
     var id:Int? = nil
-    var bindID: String? = nil
-    var isBind: Bool = false
     
     var type:ParserType = .ios
     var name:String? = nil
@@ -38,7 +36,6 @@ import KakaJSON
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         
         case id
-        case bindID
         
         case type
         case name

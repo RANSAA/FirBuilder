@@ -50,6 +50,10 @@ class AppInfoModel: Convertible{
         
     var isSelected:Bool = false
 
+    
+    //应用描述
+    var userMark:String = ""
+    
 
     /**
      合成内部资源
@@ -140,6 +144,7 @@ AppInfoModel:Start
             detailsPath:\(detailsPath ?? "Build失败")
             appSavePath:\(appSavePath ?? "Build失败")
             devices:\(String(describing: devices) )
+            userMark:\(userMark)
 AppInfoModel:End
 """
         log(msg)

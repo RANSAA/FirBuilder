@@ -7,6 +7,8 @@
 
 import Cocoa
 
+
+
 class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionViewDataSource {
 
     @IBOutlet var topView: NSView!
@@ -24,8 +26,17 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.3) {
             self.afterSetupUI()
         }
+        
+        //添加数据更新通知
+        NotificationCenter.default.addObserver(self, selector: #selector(loadDataArray), name: kNotificationNameUpdateHomeData, object: nil)
+    }
+    
+    deinit{
+        NotificationCenter.default.removeObserver(self)
     }
 
+    
+    
     // MARK: afterSetupUI
     /**
      由于不知道是什么原因viewDidLoad()要比AppDlegate中的applicationDidFinishLaunching：方法先调用
@@ -105,20 +116,23 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
 
     //应用coding url路径
     @IBAction func btnApplyCondingAction(_ sender: Any) {
-        let alert = NSAlert()
-        alert.messageText = "修改ServerRoot路径"
-        alert.informativeText = "修改地址后需要运行【重新生成H5】才会更改已经生成的静态文件"
-        alert.addButton(withTitle: "确定")
-        alert.addButton(withTitle: "取消")
-        alert.alertStyle = .critical
-        let action = alert.runModal()
-        if action == .alertFirstButtonReturn {
-            print("ok")
-            resetServerRoot()
-        }else{
-            print("cancel")
-        }
+//        let alert = NSAlert()
+//        alert.messageText = "修改ServerRoot路径"
+//        alert.informativeText = "修改地址后需要运行【重新生成H5】才会更改已经生成的静态文件"
+//        alert.addButton(withTitle: "确定")
+//        alert.addButton(withTitle: "取消")
+//        alert.alertStyle = .critical
+//        let action = alert.runModal()
+//        if action == .alertFirstButtonReturn {
+//            print("ok")
+//            resetServerRoot()
+//        }else{
+//            print("cancel")
+//        }
 
+        self.openConfirmAlert(title: "修改ServerRoot路径", msg: "修改地址后需要运行【重新生成H5】才会更改已经生成的静态文件", blockOK: { [weak self] in
+            self?.resetServerRoot()
+        }, blockCancel: nil)
     }
 
     func resetServerRoot(){
@@ -149,7 +163,7 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
 
     @IBAction func btnHelpAction(_ sender: Any) {
         let vc = AboutViewController.createVC(self)
-        vc.push()
+        presentToKeyWindow(controller: vc)
     }
 
     
@@ -172,6 +186,34 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
     
 }
 
+extension ViewController{
+    
+    func showLoadHUD(){
+        DispatchQueue.main.async {
+            MacProgressHUD.showWaiting(withPointColor: NSColor.white)
+            //MacProgressHUD.showWaiting(withTitle: "2324", time: 3)
+        }
+    }
+    
+    func openNewWindow(){
+        MacProgressHUD.removeAllHUD()
+        DispatchQueue.main.async {
+            let vc = AddViewController()
+            //self.controller.presentAsSheet(vc)
+            self.presentAsModalWindow(vc)
+        }
+    }
+    
+
+    func openBrowser(){
+        let path = Config.htmlPath + "index.html"
+        if FileManager.default.fileExists(atPath: path) {
+            let url = URL(fileURLWithPath: path)
+            NSWorkspace.shared.open(url)
+        }
+    }
+}
+
 
 extension ViewController{
     func loadCollectionView(){
@@ -191,7 +233,7 @@ extension ViewController{
         loadDataArray()
     }
 
-    func loadDataArray(){
+    @objc func loadDataArray(){
         dataArray.removeAll()
         let db = DBService.shared.db
         defer {
@@ -258,96 +300,10 @@ extension ViewController{
         let model = self.dataArray[row]
         let vc = ListViewController.createVC(self)
         vc.pushItem = model
-        vc.push()
+        self.presentToKeyWindow(controller: vc)
     }
 
 }
 
 
 
-//Alert
-extension ViewController{
-
-    func openErrorAlert(type:String){
-        DispatchQueue.main.async {
-            MacProgressHUD.removeAllHUD()
-            let alert = NSAlert()
-            alert.messageText = "警告,当前选中的不是标准的\(type)文件！"
-            alert.addButton(withTitle: "知道了")
-            alert.alertStyle = .critical
-            alert.runModal()
-        }
-    }
-
-
-    func openErrorAlert(msg:String){
-        DispatchQueue.main.async {
-            MacProgressHUD.removeAllHUD()
-            let alert = NSAlert()
-            alert.messageText = msg
-            alert.addButton(withTitle: "知道了")
-            alert.alertStyle = .critical
-            alert.runModal()
-        }
-    }
-    
-    func openPromptAlert(msg:String){
-        DispatchQueue.main.async {
-            let alert = NSAlert()
-            alert.messageText = msg
-            alert.addButton(withTitle: "知道了")
-            alert.alertStyle = .warning
-            alert.runModal()
-        }
-    }
-    
-    static func openPromptAlert(msg:String){
-        DispatchQueue.main.async {
-            let alert = NSAlert()
-            alert.messageText = msg
-            alert.addButton(withTitle: "知道了")
-            alert.alertStyle = .warning
-            alert.runModal()
-        }
-    }
-
-    func openParserSuccess(msg: String){
-        DispatchQueue.main.async {
-            MacProgressHUD.removeAllHUD()
-            let alert = NSAlert()
-            alert.messageText = msg
-            alert.addButton(withTitle: "知道了")
-            alert.alertStyle = .informational
-            alert.runModal()
-        }
-    }
-
-    
-    
-    
-    func showLoadHUD(){
-        DispatchQueue.main.async {
-            MacProgressHUD.showWaiting(withPointColor: NSColor.white)
-            //MacProgressHUD.showWaiting(withTitle: "2324", time: 3)
-        }
-    }
-    
-    func openNewWindow(){
-        MacProgressHUD.removeAllHUD()
-        DispatchQueue.main.async {
-            let vc = AddViewController()
-            //self.controller.presentAsSheet(vc)
-            self.presentAsModalWindow(vc)
-        }
-    }
-    
-
-    func openBrowser(){
-        let path = Config.htmlPath + "index.html"
-        if FileManager.default.fileExists(atPath: path) {
-            let url = URL(fileURLWithPath: path)
-            NSWorkspace.shared.open(url)
-        }
-    }
-    
-}

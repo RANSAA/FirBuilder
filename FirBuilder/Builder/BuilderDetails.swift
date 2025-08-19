@@ -71,11 +71,18 @@ class BuilderDetails{
     </div>
 
 
+    <!-- userMakr info -->
+    <div style="color: red; font-size:14px; white-space: pre-line; margin-top:0px; margin-bottom: -24px; margin-left: 10px;margin-right: 10px; display:none;" id="userMarkDIV">
+        <span id="userMark"> </span>
+    </div>
+
+
     <!-- qrcode -->
     <div style="width: 190px; height: 230px;  margin: auto; background: white; border-radius: 10px; margin-top: 44px;" >
         <div class="qrcode" id="qrcode" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;padding-bottom: 15px;"></div>
         <span >手机扫描二维码安装</span>
     </div>
+
 
     <!-- Button area -->
     <div style=" margin-bottom: 24px; margin-top: 48px; text-align: center; ">
@@ -205,6 +212,11 @@ class BuilderDetails{
            showWithID("btn-download")
            document.getElementById("downloadApp").innerHTML = "下载";
        }
+
+        //判断是否显示userMark
+       if (userMark.length > 1) {
+            showWithID("userMarkDIV")
+       }
     }
 
     function resize(){
@@ -227,6 +239,8 @@ class BuilderDetails{
         document.getElementById("appSize").innerHTML = appSize
         document.getElementById("appUpdateTime").innerHTML = appUpdateTime
         document.getElementById("bundleID").innerHTML = bundleID
+
+        document.getElementById("userMark").textContent = userMark
 
         if (appType == "\(ParserType.ios)" ) {
             document.getElementById("appTypeIconPath").src = iosIcon
@@ -352,8 +366,14 @@ extension BuilderDetails{
     let downloadFileName = "\(downloadFileName)"
 
 
+    //写入App应用描述
+    let userMark = `\(appInfo.userMark)`
+
+
     //动态写入设备列表
     let deivces = "\(devices)"
+
+
 </script>
 """
         return dymanic

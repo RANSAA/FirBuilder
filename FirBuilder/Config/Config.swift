@@ -55,7 +55,7 @@ struct Config {
 
         
         //初始化数据库存储信息
-        DBService.shared.setup()
+//        DBService.shared.setup()
 
         
         

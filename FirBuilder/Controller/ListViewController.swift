@@ -9,7 +9,7 @@ import Cocoa
 import WCDBSwift
 import KakaJSON
 
-class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource,ListCellDelegate {
+class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource {
     var lastVC:NSViewController!
     var pushItem:AppHomeTable!
 
@@ -22,8 +22,15 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
 
         setupUI()
         loadData()
+        
+        
+        //添加数据更新通知
+        NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: kNotificationNameUpdateSelectedAppList, object: nil)
     }
 
+    deinit{
+        NotificationCenter.default.removeObserver(self)
+    }
 
     func setupUI(){
         //https://www.cnblogs.com/xjf125/p/14754196.html
@@ -34,13 +41,14 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
 //        firstCol.title = "第一列"
 //        tableView.addTableColumn(firstCol)
 
+        
         tableView.rowHeight = 140
         tableView.delegate = self
         tableView.dataSource = self
     }
 
     var dataAry:[AppListTable] = []
-    func loadData(){
+    @objc func loadData(){
         let db = DBService.shared.db
         defer {
             db.close()
@@ -57,9 +65,6 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
         dataAry.count
     }
 
-//    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-//
-//    }
 
     func tableView(_ tableView1: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell:ListCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ListCell"), owner: self) as! ListCell
@@ -85,15 +90,19 @@ class ListViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSo
          return rowView
      }
 
+        
     //选中某一行
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = tableView.selectedRow
+        guard row > -1 && row < self.dataAry.count else { return }
         let model = self.dataAry[row]
         let vc:DetatalsViewController = DetatalsViewController.createVC(self)
-        vc.pushItem = model
-        vc.push()
+        vc.model = model
+        self.presentToKeyWindow(controller: vc)
+        
         tableView.reloadData()
-        print("tableViewSelectionDidChange row:\(row)")
+        ////注意：deselectAll取消选择操作会将selectedRow的值设置为-1，并且回出发tableViewSelectionDidChange通知
+        ////self.tableView.deselectAll(nil)
     }
 
     @IBAction func backAction(_ sender: NSButton) {
@@ -125,38 +134,16 @@ extension ListViewController{
         return vc
     }
 
-    func push(){
-        self.view.frame = lastVC.view.frame
-        NSApplication.shared.keyWindow?.contentViewController = self
-//        lastVC.presentAsModalWindow(self)
-//        lastVC.presentAsSheet(self)
-    }
 
     func goBack(){
-        lastVC.view.frame = self.view.frame
-        let vc:ViewController = lastVC as! ViewController
-        vc.loadDataArray()
-        NSApplication.shared.keyWindow?.contentViewController = lastVC
+        //返回上一级
+        dismissFromKeyWindow()
     }
 }
 
 
-extension ListViewController{
-    
-    //删除整个APP
-    func deleteApp(){
-        
-        DBService.shared.deleteAppWith(bundleID: pushItem.bundleID!, type: pushItem.type)
-        
-        goBack()
-        let homeVC:ViewController = lastVC as! ViewController
-        homeVC.loadDataArray()
-        
-    }
-}
 
-
-extension ListViewController
+extension ListViewController:ListCellDelegate
 {
 
     func listCell(clickButton btn: NSButton, btnIndex: Int, cellRow: Int) {
@@ -183,8 +170,12 @@ extension ListViewController
             }
         }else{
             print("cancel")
-        }    }
+        }
+        
+    }
 
+    
+    //置顶
     func topCellActin(_ model:AppListTable){
         do{
             let db = DBService.shared.db
@@ -194,25 +185,27 @@ extension ListViewController
             let update = Date()
             try db.update(table: AppListTable.tableName, on: AppListTable.Properties.updateDate, with: [update], where: AppListTable.Properties.bundleID == model.bundleID! && AppListTable.Properties.type == model.type && AppListTable.Properties.createDate == model.createDate)
 
-            loadData()
-            
+        
             let appInfo:AppInfoModel = model.kj_modelToModel(AppInfoModel.self)!
             
             //重新生成new.html
             BuilderDetails().builderNewHTML(appInfo)
-
             //重新生成list.html
             BuilderList().builder(appInfo)
             
+            
+            //刷新当业数据
+            loadData()
+            //更新首页数据
             updateAppHomeList(model, update: update)
-
         }catch{
 
         }
     }
 
+    
+    //删除cell item
     func deleteCellAction(_ model:AppListTable){
-
         DBService.shared.deleteAppCell(model: model)
         loadData()
 
@@ -228,11 +221,23 @@ extension ListViewController
         }
     }
 
+    
+    //更新首页数据
     func updateAppHomeList(_ model: AppListTable, update:Date){
         DBService.shared.updateAppHomeList(model: model, update: update)
+        //通知首页更新
+        NotificationCenter.default.post(name: kNotificationNameUpdateHomeData, object: nil)
     }
     
     
-    
+    //删除整个APP
+    func deleteApp(){
+        DBService.shared.deleteAppWith(bundleID: pushItem.bundleID!, type: pushItem.type)
+        
+        //通知首页更新
+        NotificationCenter.default.post(name: kNotificationNameUpdateHomeData, object: nil)
+        
+        goBack()
+    }
     
 }
