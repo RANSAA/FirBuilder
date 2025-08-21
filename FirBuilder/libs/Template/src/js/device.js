@@ -4,25 +4,25 @@ function getDeviceName(){
     console.log(agent)
 
     if ( isIPad() ) {
-        return "ipad"
+        return "iPad"
     }
     else if (/iphone|ipod/.test(agent) && /mobile/.test(agent)) {
-        return 'iphone';
+        return 'iPhone';
     }
     else if (/android/.test(agent) && /mobile/.test(agent)) {
-        return 'android';
+        return 'Android';
     }
     else if (/macintosh/.test(agent)) {
-        return 'mac';
+        return 'Mac';
     }
     else if (/windows/.test(agent)) {
-        return 'windows';
+        return 'Windows';
     }
     else if (/linux/.test(agent)) {
-        return 'linux';
+        return 'Linux';
     }
     else {
-        return 'other';
+        return 'Other';
     }
 }
 
@@ -41,19 +41,19 @@ function getDeviceType(){
         return 'iOS';
     }
     else if (/android/.test(agent) && /mobile/.test(agent)) {
-        return 'android';
+        return 'Android';
     }
     else if (/macintosh/.test(agent)) {
-        return 'mac';
+        return 'Mac';
     }
     else if (/windows/.test(agent)) {
-        return 'windows';
+        return 'Windows';
     }
     else if (/linux/.test(agent)) {
-        return 'linux';
+        return 'Linux';
     }
     else {
-        return 'other';
+        return 'Other';
     }
 }
 
@@ -209,3 +209,35 @@ function buildQRCodeWithUrl(qrcodeText, url) {
     });
     return qr
 }
+
+
+
+
+
+
+/**
+ * iOS & Androif禁用缩放
+ * <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ * 禁用缩放补充（增强 iOS 兼容性）
+ * iOS Safari 的特殊行为：
+ * 即使设置 user-scalable=no，仍可能通过双击或手势缩放。
+ * 需要额外阻止 touchstart和 gesturestart事件。
+ */
+function disableZoomSupplement(){
+    // <!-- 防止 iOS Safari 双击缩放 -->
+    document.addEventListener('touchstart', function(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    // 防止 iOS Safari 手势缩放
+    document.addEventListener('gesturestart', function(event) {
+      event.preventDefault();
+    });
+}
+
+
+
+
+

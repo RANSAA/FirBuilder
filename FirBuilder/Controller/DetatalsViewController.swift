@@ -50,7 +50,10 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
         self.markView.wantsLayer = true;
         self.markView.layer?.backgroundColor = NSColor.white.cgColor;
         
+        
+        labUserMark.maximumNumberOfLines = 4;
         labUserMark.stringValue = placeholder;
+
         
         textViewUserMark.wantsLayer = true;
         textViewUserMark.layer?.backgroundColor = NSColor.clear.cgColor;
@@ -106,6 +109,7 @@ class DetatalsViewController: NSViewController,NSTableViewDelegate,NSTableViewDa
         userMark = userMark.replacingOccurrences(of: " ", with: "")
         if userMark.count > 0 {
             textViewUserMark.string = model.userMark
+            labUserMark.stringValue = model.userMark
         }
     }
 

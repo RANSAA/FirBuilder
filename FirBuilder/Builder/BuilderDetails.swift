@@ -15,14 +15,15 @@ class BuilderDetails{
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <meta name="renderer" content="webkit">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucen">
 <meta name="format-detection" content="telephone=no">
 <title> </title>
 <link rel="icon" type="image/x-icon" href="../../../src/images/favicon.ico">
+<link rel="apple-touch-icon" href="../../../src/images/favicon.ico">
 <link rel="stylesheet" type="text/css" href="../../../src/css/details.css">
 <script type="text/javascript" src="../../../src/js/device.js"></script>
 <script type="text/javascript" src="../../../src/js/qrcode.js"></script>

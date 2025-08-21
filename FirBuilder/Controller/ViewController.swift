@@ -23,6 +23,16 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //设置窗体大小
+        var frame = self.view.frame
+        log(frame)
+        frame.size.width = 1300;
+        frame.size.height = 700;
+        self.view.frame = frame;
+        log(frame)
+        
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.3) {
             self.afterSetupUI()
         }
