@@ -2,10 +2,51 @@
 /* CSS Document */
 
 
+
 body{
-     background-color: #F6F6F6;
-     color: #9B9B9B;
-     padding-top: env(safe-area-inset-top); /* 适配刘海屏 */
+    margin: 0px;
+    min-height: 100vh;
+    position: relative;
+
+    /* 处理安全区域 */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    
+    color: #9B9B9B; /*默认全局字体颜色*/
+    background-color: #8c8eff;  /* 与 theme-color 保持一致 */
+    
+/*    background: linear-gradient(to bottom, #8c8eff,#f0f1ff);*/
+
+}
+
+
+/* 创建全屏背景层 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* 确保背景在内容后面 */
+
+/*    background: linear-gradient(to bottom, #9191ff,#ead9ff);
+    background: linear-gradient(to bottom, #a291ff,#e0e0ff);
+    background: linear-gradient(to bottom, #8c8eff,#f0f1ff);*/
+
+    background: linear-gradient(to bottom, #8c8eff,#f0f1ff);
+}
+
+
+
+/* 或者只为头部导航栏添加 */
+.header {
+    padding-top: env(safe-area-inset-top); /* 为iOS设备预留状态栏高度 */
+    padding-top: constant(safe-area-inset-top); /* 兼容旧版iOS */
+    background-color: #8c8eff;
+    color: white; /* 因为状态栏图标是白色的，所以头部文字最好也是浅色 */
 }
 
 
@@ -30,16 +71,16 @@ body{
 
 /* 右上角样式切换按钮 */
 .nav-bar-top-right{
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     position: absolute;
     top: 2px;
     right:2px;
     box-shadow: 0px 0px  8px rgba(0, 0, 0, .2);
 }
 .nav-bar-top-right-img{
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
 }
 
 
@@ -82,14 +123,25 @@ body{
     place-content: center;
     grid-template-columns: repeat(auto-fit, 20rem);  /*每列自动填充 宽度为20rem */
 
-    margin: 44px;
+/*    margin: 24px;
     margin-top: 24px;
-    margin-bottom: 64px;
+    margin-bottom: 64px;*/
+
+
+/*    border-radius: 8px;*/
+
+    padding:12px;
+    padding-top: 24px;
+    padding-bottom: 64px;
+
 
     grid-row-gap: 24px;
     grid-column-gap: 64px; /* 126px */
-    background-color: #F6F6F6;
+/*    background-color: #F6F6F6;*/
     color: #9B9B9B;
+
+
+/*    background-color: #19ff98;*/
 }
 
 
@@ -196,6 +248,8 @@ body{
 /* 首页table网格样式 */
 .home-table-container {
 /*    display: grid;*/
+/*    display: block;*/
+
 
 /*    grid-template-columns: 1fr 1fr 1fr ;*/
     /*grid-template-columns: auto auto auto;*/
@@ -207,24 +261,42 @@ body{
 /*    grid-template-columns: repeat(auto-fit, 20rem); */
 /*    grid-template-columns: 1;*/
 
-    margin: 0px;
-    margin-top: 24px;
-    margin-bottom: 64px;
+    
+   
 
-/*    grid-row-gap: 24px;
+/*    margin: 12px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+*/
+
+
+    padding:12px;
+    padding-top: 24px;
+    padding-bottom: 64px;
+
+
+/*    position: relative;
+/*    bottom: 20px;
+    top: 20px;*/
+
+/*    margin-top: 24px;
+    margin-bottom: 64px;*/
+
+/*
+    grid-row-gap: 24px;
     grid-column-gap: 64px;
 */
-    background-color: #F6F6F6;
+/*    background-color: #F6F6F6;*/
     color: #9B9B9B;
 
-    display: block;
+/*     background-color: #19ff98;*/
 }
 
 
 /* 首页列表 item样式 */
 .home-table-item{
     background-color: #ffffff;
-    width: 100%;
+/*    width: 100%;*/
     height: 130px;  /*420 460px*/
     /* 阴影水平向右偏移10px，垂直向下偏移10px 边缘模糊半径10px */
     box-shadow: 0px 0px  15px rgba(0, 0, 0, .2);
@@ -300,7 +372,7 @@ body{
 .home-table-item-buttonarea{
     /* 与父标签的底部对齐 */
     position: absolute;
-    right: 3%;
+    right: 1%;
     top: 23px;
 
     /*  水平方向上居中对齐  */

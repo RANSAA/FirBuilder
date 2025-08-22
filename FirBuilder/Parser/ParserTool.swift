@@ -98,7 +98,11 @@ extension ParserTool{
     static func save(_ data:Data?, path:String) -> Bool {
         let status = FileManager.default.createFile(atPath: path, contents: data, attributes: nil)
         if Config.isSync {
-            let syncPath = path.replacingOccurrences(of: htmlPath, with: htmlSyncPath)
+            let syncPath = path.replacingOccurrences(of: Config.htmlPath, with: Config.htmlSyncPath)
+            let syncLastPath = syncPath.deletingLastPathComponent + "/"
+            try? FileManager.default.createDirectory(atPath: syncLastPath, withIntermediateDirectories: true)
+            
+            //创建同步文件
             FileManager.default.createFile(atPath: syncPath, contents: data, attributes: nil)
         }
         return status
@@ -121,7 +125,11 @@ extension ParserTool{
         
         let status = dict.write(toFile: path, atomically: true)
         if Config.isSync {
-            let syncPath = path.replacingOccurrences(of: htmlPath, with: htmlSyncPath)
+            let syncPath = path.replacingOccurrences(of: Config.htmlPath, with: Config.htmlSyncPath)
+            let syncLastPath = syncPath.deletingLastPathComponent + "/"
+            try? FileManager.default.createDirectory(atPath: syncLastPath, withIntermediateDirectories: true)
+            
+            //写入同步数据
             dict.write(toFile: syncPath, atomically: true)
         }
         return status
@@ -131,7 +139,10 @@ extension ParserTool{
         do {
             try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             if Config.isSync {
-                let syncPath = path.replacingOccurrences(of: htmlPath, with: htmlSyncPath)
+                let syncPath = path.replacingOccurrences(of: Config.htmlPath, with: Config.htmlSyncPath)
+                let syncLastPath = syncPath.deletingLastPathComponent + "/"
+                try? FileManager.default.createDirectory(atPath: syncLastPath, withIntermediateDirectories: true)
+                
                 try FileManager.default.createDirectory(atPath: syncPath, withIntermediateDirectories: true, attributes: nil)
             }
         } catch  {
@@ -143,7 +154,10 @@ extension ParserTool{
         do {
             try FileManager.default.removeItem(atPath: path)
             if Config.isSync {
-                let syncPath = path.replacingOccurrences(of: htmlPath, with: htmlSyncPath)
+                let syncPath = path.replacingOccurrences(of: Config.htmlPath, with: Config.htmlSyncPath)
+                let syncLastPath = syncPath.deletingLastPathComponent + "/"
+                try? FileManager.default.createDirectory(atPath: syncLastPath, withIntermediateDirectories: true)
+                
                 try FileManager.default.removeItem(atPath: syncPath)
             }
         } catch  {
@@ -153,3 +167,29 @@ extension ParserTool{
 }
 
 
+
+
+//MARK: - 同步全部文件
+extension ParserTool{
+    
+    
+    /// 将html中的文件全部同步到html-sync文件夹中
+    static func syncAllHTML(){
+        
+        /**
+         注意这儿只需要同步图片和HTML等较小的文件，不能将应用包同步到该文件夹，应为这将没有任何意义。
+         */
+        if Config.isSync{
+            log("注意这儿只需要同步图片和HTML等较小的文件，不能将应用包同步到该文件夹，应为这将没有任何意义。");
+            
+//            try? FileManager.default.removeItem(atPath: Config.htmlSyncPath)
+//            do {
+//                try FileManager.default.copyItem(atPath: Config.htmlPath, toPath: Config.htmlSyncPath)
+//            } catch  {
+//                log(error)
+//            }
+        }
+        
+        
+    }
+}

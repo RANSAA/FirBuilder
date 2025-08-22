@@ -150,6 +150,21 @@ extension String{
             return name
         }
     }
+    
+    /**
+     删除最后一个路径组件
+     */
+    var deletingLastPathComponent:String{
+        let string = self as NSString
+        return string.deletingLastPathComponent as String
+    }
+    
+    /** 删除路径扩展名 */
+    var deletingPathExtension:String{
+        let string = self as NSString
+        return string.deletingPathExtension as String
+    }
+    
 
     func toNSString() ->NSString{
         return self as NSString

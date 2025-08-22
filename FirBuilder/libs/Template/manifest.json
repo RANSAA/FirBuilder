@@ -1,0 +1,25 @@
+{
+  "name": "App分发平台 - 自托管平台",
+  "short_name": "App分发平台",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#8c8eff",
+  "description": "应用的描述",
+  "icons": [
+    {
+      "src": "src/images/logo-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "src/images/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "src/images/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

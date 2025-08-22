@@ -17,13 +17,19 @@ class BuilderDetails{
 <head>
 <meta charset="UTF-8">
 <meta name="renderer" content="webkit">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+
+<!-- PWA 状态栏设置 -->
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucen">
-<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#8c8eff">
+
 <title> </title>
-<link rel="icon" type="image/x-icon" href="../../../src/images/favicon.ico">
-<link rel="apple-touch-icon" href="../../../src/images/favicon.ico">
+<link rel="icon" type="image/x-icon" href="/src/images/favicon.ico"/>
+<link rel="apple-touch-icon" href="/src/images/favicon.png">
+<link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" type="text/css" href="../../../src/css/details.css">
 <script type="text/javascript" src="../../../src/js/device.js"></script>
 <script type="text/javascript" src="../../../src/js/qrcode.js"></script>
@@ -124,6 +130,9 @@ class BuilderDetails{
 
 
 <script type="application/javascript">
+    //iOS 禁用缩放补充
+    disableZoomSupplement();
+
     //安装APP
     function installApp(){
         // ios value="itms-services://?action=download-manifest&amp;url=https%3A%2F%2F127.0.0.1%3A8080%2Fm%2Fff8080817ee744b8017ee746e5810011"

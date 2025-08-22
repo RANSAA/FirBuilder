@@ -168,6 +168,9 @@ class ViewController: NSViewController, NSCollectionViewDelegate, NSCollectionVi
     //重新生成所有的H5网页
     @IBAction func btnBuilderAllH5Action(_ sender: Any) {
         BuilderAppRes.rebuilderAllHTML()
+        log("HTML资源文件重新生成完毕.....")
+        ParserTool.syncAllHTML()
+        log("HTML资源文件同步完毕!")
         openParserSuccess(msg: "H5重新生成完成")
     }
 
