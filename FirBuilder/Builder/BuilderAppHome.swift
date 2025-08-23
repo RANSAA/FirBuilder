@@ -27,9 +27,13 @@ class BuilderAppHome{
 <meta name="theme-color" content="#8c8eff">
 
 <title>App分发平台</title>
+<!-- iOS Clip Web启动图片 测试 -->
+<link rel="apple-touch-startup-image" href="/src/images/launch.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+
 <link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
 <link rel="apple-touch-icon" href="src/images/favicon.png">
 <link rel="manifest" href="/manifest.json">
+
 <link rel="stylesheet" type="text/css" href="src/css/index.css">
 <script type="text/javascript" src="src/js/device.js"></script>
 </head>
@@ -252,6 +256,10 @@ class BuilderAppHome{
     <meta name="theme-color" content="#8c8eff">
     
     <title>\(type) 列表</title>
+    
+    <!-- iOS Clip Web启动图片 测试 -->
+    <link rel="apple-touch-startup-image" href="/src/images/launch.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+    
     <link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
     <link rel="apple-touch-icon" href="src/images/favicon.png">
     <link rel="manifest" href="/manifest.json">
