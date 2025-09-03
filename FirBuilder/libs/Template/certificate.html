@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+
+<!-- PWA 状态栏设置 -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucen">
+<meta name="theme-color" content="#8c8eff">
+
+<title>设备设置信任证书</title>
+<!-- iOS Clip Web启动图片 测试 -->
+<link rel="apple-touch-startup-image" href="/src/images/launch-750x1624.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 2)">
+
+<link rel="icon" type="image/x-icon" href="src/images/favicon.ico" />
+<link rel="apple-touch-icon" href="src/images/favicon.png">
+<link rel="manifest" href="/manifest.json">
+
+<!-- <link rel="stylesheet" type="text/css" href="src/css/index.css"> -->
+
+<style type="text/css">
+	.nav-bar{
+	    background-color: white;
+	    text-align:center;
+	    box-shadow: 0px 0px  15px rgba(0, 0, 0, .2);
+	    line-height: 6px;
+	}
+	body{
+		margin: 0px;
+		min-height: 100vh;
+		position: relative;
+
+
+		/* 处理安全区域 */
+		padding-top: env(safe-area-inset-top);
+		padding-bottom: env(safe-area-inset-bottom);
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
+
+
+		color: #9B9B9B; 
+		color: #53b3a8;
+		
+	}
+/*	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+		background: linear-gradient(to bottom, #8c8eff,#f0f1ff);
+	}
+*/
+
+	.img{
+		width: 100%;
+		height: auto;
+	}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="nav-bar">
+    <br><br><br><br><br><br>
+    <h2>iOS9 设备设置信任证书</h2>
+    <br><br><br><br><br><br>
+    <br>
+</div>
+
+	
+	<div style="text-align: center;margin-top: 40px;margin-bottom: 10px;">
+		<p>iOS9 以后的系统，苹果改变了 InHouse 安装包的信任方式，不再弹出提示框，让用户点击“信任”后直接打开应用了，而是需要在设置中选择对应的描述文件，点击“信任”后才可以使用。<br>
+		详细的设置方法和教程如下：</p>
+
+		<h4>第一步：打开“设置”—“通用”</h4>
+		<img class="img" src="/src/images/udid-1.png"></img>
+	</div>
+
+
+	<div style="text-align: center;margin-top: 10px;margin-bottom: 10px;">
+		<h4>第二步：打开—“通用”-“描述文件”</h4>
+		<img class="img" src="/src/images/udid-2.png"></img>
+	</div>
+
+
+	<div style="text-align: center;margin-top: 10px;margin-bottom: 10px;">
+		<p>(注：iOS9 在进入“设置-通用”时有时会不显示描述文件选项，多进几次就可以了)</p>
+		<h4>第三步：选择对应的描述文件</h4>
+		<img class="img" src="/src/images/udid-3.png"></img>
+	</div>
+
+
+	<div style="text-align: center;margin-top: 10px;margin-bottom: 40px;">
+		<h4>第四步：点击“信任”，即可完成</h4>
+		<img class="img" src="/src/images/udid-4.png"></img>
+	</div>
+	
+
+
+	<div style="text-align:center; color: #53b3a8; margin-top: 44px;margin-bottom: 84px;">
+		<h4>
+			<a onclick="window.open('https://www.betaqr.com.cn/support/articles/faq/ios9_certificate')">设备设置信任证书</a>
+			<br><br>
+			<a onclick="window.open('https://www.betaqr.com.cn/udid')">UDID获取</a>
+		</h4>
+	</div>
+
+</body>
+</html>

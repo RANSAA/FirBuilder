@@ -1,29 +1,47 @@
 //获取设备类型
 function getDeviceName(){
-    let agent = navigator.userAgent.toLowerCase();
-    console.log(agent)
+    // let agent = navigator.userAgent.toLowerCase();
+    // console.log(agent)
+    // if ( isIPad() ) {
+    //     return "iPad"
+    // }
+    // else if (/iphone|ipod/.test(agent) && /mobile/.test(agent)) {
+    //     return 'iPhone';
+    // }
+    // else if (/android/.test(agent) && /mobile/.test(agent)) {
+    //     return 'Android';
+    // }
+    // else if (/macintosh/.test(agent)) {
+    //     return 'Mac';
+    // }
+    // else if (/windows/.test(agent)) {
+    //     return 'Windows';
+    // }
+    // else if (/linux/.test(agent)) {
+    //     return 'Linux';
+    // }
+    // else {
+    //     return 'Other';
+    // }
 
-    if ( isIPad() ) {
-        return "iPad"
+
+    const agent = navigator.userAgent.toLowerCase();
+    // 设备检测规则表（按优先级排序）
+    const rules = [
+        { test: () => isIPad(agent), name: 'iPad' },
+        { test: () => /(iphone|ipod).*mobile/.test(agent), name: 'iPhone' },
+        { test: () => /android.*mobile/.test(agent), name: 'Android' },
+        { test: () => /macintosh/.test(agent), name: 'Mac' },
+        { test: () => /windows/.test(agent), name: 'Windows' },
+        { test: () => /linux/.test(agent), name: 'Linux' }
+    ];
+    // 查找匹配的第一个规则
+    for (const rule of rules) {
+        if (rule.test()) {
+            return rule.name;
+        }
     }
-    else if (/iphone|ipod/.test(agent) && /mobile/.test(agent)) {
-        return 'iPhone';
-    }
-    else if (/android/.test(agent) && /mobile/.test(agent)) {
-        return 'Android';
-    }
-    else if (/macintosh/.test(agent)) {
-        return 'Mac';
-    }
-    else if (/windows/.test(agent)) {
-        return 'Windows';
-    }
-    else if (/linux/.test(agent)) {
-        return 'Linux';
-    }
-    else {
-        return 'Other';
-    }
+    return 'Other';
 }
 
 
@@ -31,30 +49,48 @@ function getDeviceName(){
  * 获取设备类型：iOS，Android，macOS，Windows，Linux
  **/
 function getDeviceType(){
-    const agent = navigator.userAgent.toLowerCase();
-    console.log(agent)
+    // const agent = navigator.userAgent.toLowerCase();
+    // console.log(agent)
+    // if ( isIPad() ) {
+    //     return 'iOS';
+    // }
+    // else if (/iphone|ipod/.test(agent) && /mobile/.test(agent)) {
+    //     return 'iOS';
+    // }
+    // else if (/android/.test(agent) && /mobile/.test(agent)) {
+    //     return 'Android';
+    // }
+    // else if (/macintosh/.test(agent)) {
+    //     return 'Mac';
+    // }
+    // else if (/windows/.test(agent)) {
+    //     return 'Windows';
+    // }
+    // else if (/linux/.test(agent)) {
+    //     return 'Linux';
+    // }
+    // else {
+    //     return 'Other';
+    // }
 
-    if ( isIPad() ) {
-        return 'iOS';
+
+    const agent = navigator.userAgent.toLowerCase();
+    // 设备检测规则表（按优先级排序）
+    const rules = [
+        { test: () => isIPad(agent), type: 'iOS' },
+        { test: () => /(iphone|ipod).*mobile/.test(agent), type: 'iOS' },
+        { test: () => /android.*mobile/.test(agent), type: 'Android' },
+        { test: () => /macintosh/.test(agent), type: 'macOS' },
+        { test: () => /windows/.test(agent), type: 'Windows' },
+        { test: () => /linux/.test(agent), type: 'Linux' }
+    ];
+    // 查找匹配的第一个规则
+    for (const rule of rules) {
+        if (rule.test()) {
+            return rule.type;
+        }
     }
-    else if (/iphone|ipod/.test(agent) && /mobile/.test(agent)) {
-        return 'iOS';
-    }
-    else if (/android/.test(agent) && /mobile/.test(agent)) {
-        return 'Android';
-    }
-    else if (/macintosh/.test(agent)) {
-        return 'Mac';
-    }
-    else if (/windows/.test(agent)) {
-        return 'Windows';
-    }
-    else if (/linux/.test(agent)) {
-        return 'Linux';
-    }
-    else {
-        return 'Other';
-    }
+    return 'Other';
 }
 
 
@@ -236,6 +272,109 @@ function disableZoomSupplement(){
       event.preventDefault();
     });
 }
+
+
+
+
+/**
+ * 禁用文本选择功能，包括：
+ * 1. 禁用文本选择（除了CSS方法外，添加JS增强）
+ * 2. 禁用右键菜单
+ * 3. 禁用复制
+ * 4. 禁用剪切
+ * 5. 禁用拖拽
+ * 6. 禁用Ctrl+C
+ * 7. 禁用Ctrl+U（查看源代码）
+ * 8. 禁用F12和Ctrl+Shift+I（开发者工具）
+ **/
+function disableTextSelect(){
+document.addEventListener('DOMContentLoaded', function() {
+        // 禁用文本选择（除了CSS方法外，添加JS增强）
+        document.body.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 禁用右键菜单
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showMessage('右键菜单已被禁用');
+            return false;
+        });
+        
+        // 禁用复制
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            showMessage('复制功能已被禁用');
+            return false;
+        });
+        
+        // 禁用剪切
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 禁用拖拽
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 拦截Ctrl+C、Ctrl+U、Ctrl+Shift+I等快捷键
+        document.addEventListener('keydown', function(e) {
+            // 禁用Ctrl+C
+            if (e.ctrlKey && e.keyCode === 67) {
+                e.preventDefault();
+                showMessage('复制快捷键(Ctrl+C)已被禁用');
+                return false;
+            }
+            
+            // 禁用Ctrl+U（查看源代码）
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                showMessage('查看源代码功能已被禁用');
+                return false;
+            }
+            
+            // 禁用F12和Ctrl+Shift+I（开发者工具）
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+                e.preventDefault();
+                showMessage('开发者工具已被禁用');
+                return false;
+            }
+        });
+        
+        function showMessage(msg) {
+            console.log(msg)
+            // return;
+
+            // 创建消息提示元素
+            let messageEl = document.createElement('div');
+            messageEl.style.position = 'fixed';
+            messageEl.style.top = '20px';
+            messageEl.style.left = '50%';
+            messageEl.style.transform = 'translateX(-50%)';
+            messageEl.style.backgroundColor = 'rgba(255, 71, 87, 0.9)';
+            messageEl.style.color = 'white';
+            messageEl.style.padding = '10px 20px';
+            messageEl.style.borderRadius = '5px';
+            messageEl.style.zIndex = '10000';
+            messageEl.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            messageEl.textContent = msg;
+            document.body.appendChild(messageEl);
+            // 2秒后消失
+            setTimeout(function() {
+                document.body.removeChild(messageEl);
+            }, 1000);
+        }
+    });
+}
+
+
+
+
+
 
 
 

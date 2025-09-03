@@ -35,20 +35,18 @@ class BuilderList{
 </head>
 <body>
 
-<div id="headerID" style="display: none;">
-    <div style="text-align: center; line-height: 64px;">
-        <h2 id="navName"> </h2>
-    </div>
-    <div style="background: #F6F6F6; height: 10px;"></div>
+
+<div class="nav-bar">
+    <br><br><br><br>
+    <h2 id="navName">App分发平台</h2>
+    <br>
 </div>
 
-<div id="list" name="list" class="list-mob" style="display: none;" >
-
-
+<!-- grid开始 -->
+<div class="home-table-container">
 """
 
     let bodyEnd:String = """
-
 </div>
 </body>
 </html>
@@ -244,38 +242,38 @@ extension BuilderList{
 
     func dymainItem(_ item:AppListTable) -> String{
         let node:String = """
-    <!-- list item begin-->
-    <div name="item" class="list-item-mob">
-        <div class="list-item-left">
-            <img src="\(item.logo512Path!)" class="list-img-size100 ">
-        </div>
-        <div name="item-center" class="list-item-center-mob">
-            <div class="list-app-name">
-                <span><img name="appTypeIcon" src="../../../src/images/apple.png" class="list-app-img-size22"></span>
-                <span >\(item.name!)</span>
+    <!-- 一个item开始 -->
+    <div class="home-table-item">
+        <!-- logo icon -->
+        <img class="home-table-item-logo" src="\(item.logo512Path!)">
+        <!-- 文字显示区域 -->
+        <div class="home-table-item-textarea">
+            <!-- app name -->
+            <div class="home-table-item-text-name">
+                <img  class="img-user-size16" name="appTypeIcon" src="/src/images/apple.png">
+                <span>\(item.name!)</span>
             </div>
-            <div class="list-app-info">
-                <div>
-                    <span>BundleID：</span>
-                    <span>\(item.bundleID!)</span>
-                </div>
-                <div>
-                    <span >版本：</span>
-                    <span>\(item.version!) (Build \(item.build!))</span>
-                </div>
-                <div class="list-app-update">
-                    <span><img src="../../../src/images/update.png" class="list-app-update-img"></span>
-                    <span >\(DateFormatter.dateStringWith(date: item.updateDate))</span>
-                </div>
+            <!-- text info -->
+            <div class="home-table-item-text-line">
+                <span>BundleID：</span>
+                <span class="home-table-item-text-info">\(item.bundleID!)</span>
+            </div>
+            <div class="home-table-item-text-line">
+                <span>版本：</span>
+                <span class="home-table-item-text-info">\(item.version!) (Build \(item.build!))</span>
+            </div>
+            <div class="home-table-item-text-line">
+                <span>更新时间：</span>
+                <span class="home-table-item-text-info">\(DateFormatter.dateStringWith(date: item.updateDate))</span>
             </div>
         </div>
-        <div name="item-right" class="list-item-right-mob">
-            <button class="list-btn-pre", onclick="window.open('\(item.detailsPath!)')"> 预览 </button>
-        </div>
-        <div class="list-item-space">
+        <!-- button -->
+        <div class="home-table-item-buttonarea" >
+            <button class ="button-selected" onclick="window.open('\(item.detailsPath!)')" >预览</button>
         </div>
     </div>
-    <!-- list item end-->
+    <!-- 一个item结束 -->
+
 """
         return node
     }

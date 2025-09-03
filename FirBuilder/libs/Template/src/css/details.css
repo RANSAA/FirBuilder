@@ -4,11 +4,12 @@
 body{
      background-color: #F6F6F6;
      color: #9B9B9B;
+     padding-bottom: 44px;
 }
 
 .pattern.left{
     left: 0;
-}        
+}
 
 .pattern.right{
     right: 0;

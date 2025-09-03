@@ -17,8 +17,10 @@ body{
     color: #9B9B9B; /*默认全局字体颜色*/
     background-color: #8c8eff;  /* 与 theme-color 保持一致 */
     
-/*    background: linear-gradient(to bottom, #8c8eff,#f0f1ff);*/
 
+    /*  禁止文本选择  */
+    user-select: none;
+    -webkit-user-select: none;  /* 针对iOS Safari */
 }
 
 

@@ -36,11 +36,19 @@ struct BuilderTemplateFile {
         }
 
         
-        
         //拷贝manifest.json文件
-        let manifestPath = Config.templatePath + "manifest.json"
-        let manifestToPath = Config.htmlPath + "manifest.json"
-        let manifestToSyncPath = Config.htmlSyncPath + "manifest.json"
+        copyTemplateItem(filename: "manifest.json")
+        copyTemplateItem(filename: "certificate.html")
+    }
+    
+    
+    
+    
+    /* 拷贝模板中的自定文件 */
+    private static func copyTemplateItem(filename:String){
+        let manifestPath = Config.templatePath + filename
+        let manifestToPath = Config.htmlPath + filename
+        let manifestToSyncPath = Config.htmlSyncPath + filename
         
         do {
             try? FileManager.default.removeItem(atPath: manifestToPath)
@@ -53,8 +61,6 @@ struct BuilderTemplateFile {
         } catch  {
             log(error)
         }
-        
-        
     }
 
 }

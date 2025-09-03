@@ -5,149 +5,182 @@ body{
      background: white;
      color: #9B9B9B;
      margin-left: 0px;
-     margin-right: 0px; 
+     margin-right: 0px;
      margin-top: 0px;
-}
 
-.list{
-    background:white;
-    height: 100px;
-    margin-left: 15%;
-}
+    color: #9B9B9B; /*默认全局字体颜色*/
+    background-color: #8c8eff;  /* 与 theme-color 保持一致 */
 
-.list-mob{
-    background:white;
-    height: 100px;
-    margin-left: 0px;
-    margin-right: 0px;
-}
-
-.list-item{
-    background:white; 
-    height:100px;
-    width:100%;
-    float:left;
-
-    white-space:nowrap;
-    word-break:break-all;
-    display: inline-block;
-
-    min-width: 480px;
-
-    padding-bottom: 10px;
-}
-
-.list-item-mob{
-    background: white;
-    height:100px;
-    width:100%;
-    float:left;
-
-    white-space:nowrap;
-    word-break:break-all;
-    display: inline-block;
-
-    min-width: 320px;
-    padding-bottom: 10px;
-
-}
-
-.list-item-left{
-    float:left;
-    position:relative;
-}
-
-.list-item-center{
-    background:white;
-    height: 100%;
-    width: 55%; 
-    float: left;
-    margin-left: 48px;
-}
-
-.list-item-center-mob{
-    background:white;
-    height: 100%;
-    /*width: 55%; */
-    float: left;
-    margin-left: 4px;
+     /*  禁止文本选择  */
+    user-select: none;
+    -webkit-user-select: none;  /* 针对iOS Safari */
 }
 
 
-.list-item-right{
-    /*background:purple;*/
-    height: 100%;
-    width: 10%;
-    float:left;
+/* 创建全屏背景层 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* 确保背景在内容后面 */
+
+    background: linear-gradient(to bottom, #8c8eff,#f0f1ff);
+}
+
+
+
+/* 导航条样式 */
+.nav-bar{
+    background-color: white;
+    text-align:center;
+    box-shadow: 0px 0px  15px rgba(0, 0, 0, .2);
+    line-height: 6px;
+    height: 92px;
+    margin: 0px;
+}
+
+
+
+/*-----------------------------------------------------------首页布局为列表样式时需要用到的CSS样式-----------------------------------------------------------*/
+/* 首页table网格样式 */
+.home-table-container {
+    padding:12px;
+    padding-top: 24px;
+    padding-bottom: 64px;
+
+
+    color: #9B9B9B;
+}
+
+
+/* 首页列表 item样式 */
+.home-table-item{
+    background-color: #ffffff;
+    height: 110px;  /*420 460px*/
+    /* 阴影水平向右偏移10px，垂直向下偏移10px 边缘模糊半径10px */
+    box-shadow: 0px 0px  15px rgba(0, 0, 0, .2);
+    border-radius: 8px;
+    margin-bottom: 12px;
+
+    /* 设置该属性才能让home-grid-item-buttonarea中的下对齐有效 */
     position: relative;
 }
 
-.list-item-right-mob{
-    /*background:purple;*/
-    height: 100%;
-    /*width: 10%;*/
-    float:right;
-    position: relative;
-    margin-left: -88px;
+
+/* 首页列表item中应用类型样式图标 */
+.home-table-item-icon{
+    right: 2px;
+    top: 2px;
+    position: absolute;
+}
+/* 首页列表item中应用类型样式图标 设置具体大小并固定样式*/
+.home-table-item-icon-fixsize{
+    width: 20px;
+    height: 20px;
 }
 
-.list-btn-pre{
-    border: 0px solid;
-    background-color: #53b3a8;
-    color: white;
-    font-size: 14px;
-    width: 88px;
+/*首页列表中应用logo*/
+.home-table-item-logo{
+    height: 68px;
+    width: 68px;
+    border-radius: 16px;
+    margin-top: 23px;
+    margin-left: 2%;
+    float: left;
+}
+
+
+/*首页列表item中所有文字所在的区域*/
+.home-table-item-textarea{
+    margin-left: 2%;
+    width: 80%;
+
+    position: absolute;
+
+    white-space: nowrap;
+    word-break: break-all;
+    display: inline-block;
+}
+
+
+/*首页列表item应用名称显示样式样式*/
+.home-table-item-text-name{
+    color: #9b9b9b;
+    color: #f8ba0b;
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 10px;
+}
+
+
+/*首页列表item中包名行显示样式*/
+.home-table-item-text-line{
+    line-height: 17px;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #9b9b9b;
+}
+
+/*首页列表item中包名等具体数据显示样式*/
+.home-table-item-text-info{
+    font-size: 12px;
+    color: #1a1a1a;
+}
+
+
+/*首页列表item中按钮所在的区域*/
+.home-table-item-buttonarea{
+    /* 与父标签的底部对齐 */
+    position: absolute;
+    right: 1%;
+    top: 37px;
+
+    /*  水平方向上居中对齐  */
+    text-align: center;
+
+/*    display: flex;
+    justify-content: center; /* 垂直居中 */*/
+}
+
+/*-----------------------------------------------------------首页布局为列表样式时需要用到的CSS样式-----------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------IMG-----------------------------------------------------------*/
+/*首页item中APP名称旁边的用户图标*/
+.img-user-size16{
+    width: 20px;
+    height: 20px;
+
+    float: left;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+
+
+.button-smail{
+    width: 100px;
     height: 36px;
     border-radius: 18px;
-    margin-top: 32px;
-    margin-right: 10px;
-}
-
-.list-img-size100{
-    width: 68px;
-    height:68px;
-    background: white;
-    border-radius: 10px;
-    margin-left: 8px;
-    margin-top: 17px;
-}
-
-.list-app-name{
-    line-height: 22px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    color: #f8ba0b;
-}
-
-.list-app-img-size22{
-    width: 22px;
-    height: 22px; 
-    vertical-align: bottom;
+    font-size: 15px;
+    background-color: #53b3a8;
+    color: white;
 }
 
 
-.list-app-info{
-    line-height:18px;
-    font-size: 10px;
-    margin-left:6px;
+/* 按钮点击选中样式 */
+.button-selected{
+    background-color: #53b3a8;
+    color: white;
+    font-size: 15px;
+    width: 100px;
+    height: 36px;
+    border: 1px solid;
+    border-radius: 18px;
 }
 
 
-.list-app-update{
-    line-height: 12px;
-    margin-top:1px;
-}
 
-.list-app-update-img{
-    vertical-align: bottom;
-    width: 12px;
-    height:12px;
-    margin-top:0px
-}
-
-.list-item-space{
-    background: #F6F6F6; 
-    margin-top: 100px;
-    height: 10px; 
-    margin-left:-50%
-}
